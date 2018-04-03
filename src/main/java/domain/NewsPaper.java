@@ -43,7 +43,6 @@ public class NewsPaper extends DomainEntity {
         this.title = title;
     }
 
-    @NotBlank
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getPublicationDate() {
@@ -54,6 +53,7 @@ public class NewsPaper extends DomainEntity {
         this.publicationDate = publicationDate;
     }
 
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getDescription() {
         return description;
@@ -115,6 +115,7 @@ public class NewsPaper extends DomainEntity {
     }
 
     @Valid
+    @NotNull
     @ManyToMany(mappedBy = "newsPapers")
     public Collection<Customer> getCustomers() {
         return customers;
@@ -125,6 +126,7 @@ public class NewsPaper extends DomainEntity {
     }
 
     @Valid
+    @NotNull
     @OneToMany(cascade = CascadeType.ALL)
     public Collection<Article> getArticles() {
         return articles;
