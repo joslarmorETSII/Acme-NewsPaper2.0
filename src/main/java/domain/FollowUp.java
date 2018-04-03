@@ -1,5 +1,6 @@
 package domain;
 
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
@@ -73,6 +74,7 @@ public class FollowUp extends DomainEntity {
     @NotNull
     @URL
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    @ElementCollection
     public Collection<String> getPictures() {
         return pictures;
     }
