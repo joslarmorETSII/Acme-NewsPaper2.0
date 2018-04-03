@@ -13,6 +13,7 @@ import security.Authority;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -87,6 +88,7 @@ public class NewsPaperService {
         for(Article a:articles){
             if(a.getFinalMode()){
                 res=true;
+                newsPaper.setPublicationDate(new Date());
             }else{
                 res=false;
             }
