@@ -29,6 +29,7 @@ import utilities.internal.SchemaPrinter;
 import utilities.internal.ThrowablePrinter;
 import domain.DomainEntity;
 
+
 public class PopulateDatabase {
 
 	public static void main(final String[] args) {

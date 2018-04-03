@@ -41,8 +41,8 @@ public class NewsPaperService {
         User publisher= null;
         Collection<Article> articles= new ArrayList<>();
         Collection<Customer> customers= new ArrayList<>();
-
         publisher=userService.findByPrincipal();
+        res= new NewsPaper();
         res.setPublisher(publisher);
         res.setArticles(articles);
         res.setCustomers(customers);

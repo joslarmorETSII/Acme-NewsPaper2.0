@@ -59,7 +59,7 @@ public class FollowUp extends DomainEntity {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
+}
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
