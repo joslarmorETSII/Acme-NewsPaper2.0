@@ -87,6 +87,7 @@ public class NewsPaperService {
             if(a.getFinalMode()){
                 res=true;
                 newsPaper.setPublicationDate(new Date());
+                a.setMoment(new Date());
             }else{
                 res=false;
             }

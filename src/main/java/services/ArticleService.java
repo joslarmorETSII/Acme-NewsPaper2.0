@@ -29,6 +29,9 @@ public class ArticleService {
     @Autowired
     private AdministratorService administratorService;
 
+    @Autowired
+    private FollowUpService followUpService;
+
     // Constructors -----------------------------------------------------------
 
     public ArticleService() { super();
@@ -75,6 +78,10 @@ public class ArticleService {
     public void delete(Article article){
         Assert.isTrue(checkByPrincipalAdmin(article));
         articleRepository.delete(article);
+        Collection<FollowUp> followUps = article.getFollowUps();
+        followUpService.deleteAll(followUps);
+
+
     }
 
 
