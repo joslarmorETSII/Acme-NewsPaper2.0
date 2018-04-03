@@ -204,7 +204,6 @@
 		<property name="articles">
 			<list>
 				<ref bean="article1"/>
-				<ref bean="article2"/>
  			</list>
 		</property>
 		<property name="customers">
@@ -226,7 +225,7 @@
 
 		<property name="articles">
 			<list>
-				<null/>
+				<ref bean="article2"/>
 			</list>
 		</property>
 		<property name="customers">
@@ -300,6 +299,40 @@
 		</property>
 	</bean>
 
+	<!-- Articles -->
+
+	<bean id="article1" class="domain.Article">
+	<property name="title" value="Titulo del articulo1"/>
+	<property name="moment" value="01/04/2018"/>
+	<property name="summary" value="Summary del articulo1"/>
+	<property name="body" value="Cuerpo del articulo1"/>
+	<property name="picture" value="https://www.imagen.com"/>
+	<property name="finalMode" value="true"/>
+	<property name="taboo" value="false"/>
+	<property name="newsPaper" ref="newsPaper1" />
+		<property name="followUps">
+			<list>
+				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="article2" class="domain.Article">
+		<property name="title" value="Titulo del articulo2"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="Summary del articulo"/>
+		<property name="body" value="Cuerpo del articulo"/>
+		<property name="picture" value="https://www.imagen.com"/>
+		<property name="finalMode" value="false"/>
+		<property name="taboo" value="false"/>
+		<property name="newsPaper" ref="newsPaper2" />
+		<property name="followUps">
+			<list>
+				<ref bean="followUp1"/>
+			</list>
+		</property>
+	</bean>
+
 	<!-- FollowUps -->
 
 	<bean id="followUp1" class="domain.FollowUp">
@@ -316,41 +349,5 @@
 		<property name="article" ref="article2" />
 
 	</bean>
-
-	<!-- Articles -->
-
-	<bean id="article1" class="domain.Article">
-	<property name="title" value="Titulo del articulo1"/>
-	<property name="moment"><null /></property>
-	<property name="summary" value="Summary del articulo1"/>
-	<property name="body" value="Cuerpo del articulo1"/>
-	<property name="picture" value="https://www.imagen.com"/>
-	<property name="finalMode" value="false"/>
-	<property name="taboo" value="false"/>
-	<property name="newsPaper" ref="newsPaper1" />
-		<property name="followUps">
-			<list>
-				<null/>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="article2" class="domain.Article">
-		<property name="title" value="Titulo del articulo2"/>
-		<property name="moment" value="01/04/2018 23:00"/>
-		<property name="summary" value="Summary del articulo"/>
-		<property name="body" value="Cuerpo del articulo"/>
-		<property name="picture" value="https://www.imagen.com"/>
-		<property name="finalMode" value="true"/>
-		<property name="taboo" value="false"/>
-		<property name="newsPaper" ref="newsPaper1" />
-		<property name="followUps">
-			<list>
-				<ref bean="followUp1"/>
-			</list>
-		</property>
-	</bean>
-
-
 
 </beans>
