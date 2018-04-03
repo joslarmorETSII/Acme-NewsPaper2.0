@@ -28,9 +28,9 @@ public class NewsPaper extends DomainEntity {
     private Date publicationDate;
     private String description;
     private String picture;
-    private Boolean published;
-    private Boolean taboo;
-    private Boolean isPrivate;
+    private boolean published;
+    private boolean taboo;
+    private boolean isPrivate;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -43,6 +43,7 @@ public class NewsPaper extends DomainEntity {
         this.title = title;
     }
 
+    @NotBlank
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getPublicationDate() {
@@ -72,27 +73,27 @@ public class NewsPaper extends DomainEntity {
         this.picture = picture;
     }
 
-    public Boolean getPublished() {
+    public boolean getPublished() {
         return published;
     }
 
-    public void setPublished(Boolean published) {
+    public void setPublished(boolean published) {
         this.published = published;
     }
 
-    public Boolean getTaboo() {
+    public boolean getTaboo() {
         return taboo;
     }
 
-    public void setTaboo(Boolean taboo) {
+    public void setTaboo(boolean taboo) {
         this.taboo = taboo;
     }
 
-    public Boolean getPrivate() {
+    public boolean getPrivate() {
         return isPrivate;
     }
 
-    public void setPrivate(Boolean aPrivate) {
+    public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
     }
 
