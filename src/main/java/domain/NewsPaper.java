@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import javax.validation.Valid;

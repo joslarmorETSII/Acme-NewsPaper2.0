@@ -18,10 +18,24 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.ArticleToStringConverter" />
+		<bean class="converters.StringToArticleConverter" />
+		<bean class="converters.AuthorityToStringConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+		<bean class="converters.CustomerToStringConverter" />
+		<bean class="converters.StringToCustomerConverter" />
+		<bean class="converters.FollowUpToStringConverter" />
+		<bean class="converters.StringToFollowUpConverter" />
+		<bean class="converters.NewsPaperToStringConverter" />
+		<bean class="converters.StringToNewsPaperConverter" />
+		<bean class="converters.UserAccountToStringConverter" />
+		<bean class="converters.StringToUserAccountConverter" />
 	</util:list>
 	
 </beans>

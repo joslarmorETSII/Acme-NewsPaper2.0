@@ -3,8 +3,8 @@ package services;
 import domain.Administrator;
 import domain.Article;
 import domain.NewsPaper;
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.NewsPaperRepository;
@@ -76,7 +76,7 @@ public class NewsPaperService {
     public void delete(NewsPaper newsPaper){
         NewsPaper res= null;
         Assert.notNull(newsPaper);
-        Assert.isTrue(checkByPrincipalAdmin);
+        Assert.isTrue(checkByPrincipalAdmin(newsPaper));
         this.newsPaperRepository.delete(newsPaper);
     }
 

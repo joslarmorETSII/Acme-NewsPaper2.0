@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -69,9 +70,10 @@ public class FollowUp extends DomainEntity {
         this.text = text;
     }
 
+    @NotNull
     @URL
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-     public Collection<String> getPictures() {
+    public Collection<String> getPictures() {
         return pictures;
     }
 
