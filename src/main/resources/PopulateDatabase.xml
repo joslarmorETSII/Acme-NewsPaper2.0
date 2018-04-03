@@ -19,12 +19,12 @@
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="username" value="administrator" />
+		<property name="password" value="200ceb26807d6bf99fd6f4f0d1ca54d4" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
+					<property name="authority" value="ADMINISTRATOR" />
 				</bean>
 			</list>
 		</property>
@@ -43,20 +43,16 @@
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
-	
+p
 </beans>

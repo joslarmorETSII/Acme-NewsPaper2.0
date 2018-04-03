@@ -21,7 +21,7 @@ public class Customer extends Actor {
 
     @Valid
     @NotNull
-    @ManyToMany(mappedBy = "newsPapers")
+    @ManyToMany
     public Collection<NewsPaper> getNewsPapers() {
         return newsPapers;
     }

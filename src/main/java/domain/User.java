@@ -1,8 +1,5 @@
 package domain;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;

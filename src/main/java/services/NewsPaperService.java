@@ -1,9 +1,6 @@
 package services;
 
-import domain.Administrator;
-import domain.Article;
-import domain.NewsPaper;
-import domain.User;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -77,6 +74,7 @@ public class NewsPaperService {
         NewsPaper res= null;
         Assert.notNull(newsPaper);
         Assert.isTrue(checkByPrincipalAdmin(newsPaper));
+        //TODO: Comprobar si falla a la hora de borrarlo eliminar los follow-up asocidados a los articles.
         this.newsPaperRepository.delete(newsPaper);
     }
 

@@ -86,7 +86,7 @@ public class FollowUp extends DomainEntity {
     private Collection<Article> articles;
 
     @Valid
-    @ManyToMany(mappedBy = "followUps")
+    @ManyToMany
     public Collection<Article> getArticles() {
         return articles;
     }

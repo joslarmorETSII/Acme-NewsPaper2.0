@@ -92,7 +92,7 @@ public class ActorService {
     public boolean isAdministrator() {
         boolean result;
 
-        result = this.checkRole(Authority.ADMIN);
+        result = this.checkRole(Authority.ADMINISTRATOR);
 
         return result;
     }
