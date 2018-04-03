@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -50,6 +51,7 @@ public class Article extends DomainEntity {
         this.moment = moment;
     }
 
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getSummary() {
         return summary;
@@ -59,6 +61,7 @@ public class Article extends DomainEntity {
         this.summary = summary;
     }
 
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getBody() {
         return body;
@@ -69,6 +72,7 @@ public class Article extends DomainEntity {
     }
 
     @URL
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getPicture() {
         return picture;
@@ -78,19 +82,19 @@ public class Article extends DomainEntity {
         this.picture = picture;
     }
 
-    public Boolean getFinalMode() {
+    public boolean getFinalMode() {
         return finalMode;
     }
 
-    public void setFinalMode(Boolean finalMode) {
+    public void setFinalMode(boolean finalMode) {
         this.finalMode = finalMode;
     }
 
-    public Boolean getTaboo() {
+    public boolean getTaboo() {
         return taboo;
     }
 
-    public void setTaboo(Boolean taboo) {
+    public void setTaboo(boolean taboo) {
         this.taboo = taboo;
     }
 
@@ -100,6 +104,7 @@ public class Article extends DomainEntity {
     private Collection<FollowUp> followUps;
 
     @Valid
+    @NotNull
     @ManyToMany(mappedBy = "articles")
     public Collection<FollowUp> getFollowUps() {
         return followUps;
@@ -110,6 +115,7 @@ public class Article extends DomainEntity {
     }
 
     @Valid
+    @NotNull
     @ManyToOne(optional = false)
     public NewsPaper getNewsPaper() {
         return newsPaper;
