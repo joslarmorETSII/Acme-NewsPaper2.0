@@ -26,7 +26,7 @@ public class FollowUp extends DomainEntity {
     private Date moment;
     private String summary;
     private String text;
-    private String picture;
+    private Collection<String> pictures;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -38,6 +38,7 @@ public class FollowUp extends DomainEntity {
         this.title = title;
     }
 
+    @NotBlank
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
@@ -57,6 +58,7 @@ public class FollowUp extends DomainEntity {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getText() {
@@ -69,12 +71,12 @@ public class FollowUp extends DomainEntity {
 
     @URL
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    public String getPicture() {
-        return picture;
+     public Collection<String> getPictures() {
+        return pictures;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPictures(Collection<String> pictures) {
+        this.pictures = pictures;
     }
 
     // Relationships -----------------------------------------------------------------------
