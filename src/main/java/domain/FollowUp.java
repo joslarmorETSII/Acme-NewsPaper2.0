@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.persistence.ElementCollection;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -40,7 +41,7 @@ public class FollowUp extends DomainEntity {
         this.title = title;
     }
 
-    @NotBlank
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     public Date getMoment() {
@@ -71,10 +72,10 @@ public class FollowUp extends DomainEntity {
         this.text = text;
     }
 
-    @NotNull
+    @ElementCollection
     @URL
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    @ElementCollection
+    @NotNull
     public Collection<String> getPictures() {
         return pictures;
     }
@@ -85,15 +86,15 @@ public class FollowUp extends DomainEntity {
 
     // Relationships -----------------------------------------------------------------------
 
-    private Collection<Article> articles;
+    private Article article;
 
     @Valid
-    @ManyToMany
-    public Collection<Article> getArticles() {
-        return articles;
+    @ManyToOne(optional = true)
+    public Article getArticle() {
+        return article;
     }
 
-    public void setArticles(Collection<Article> articles) {
-        this.articles = articles;
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }

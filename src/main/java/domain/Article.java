@@ -105,7 +105,7 @@ public class Article extends DomainEntity {
 
     @Valid
     @NotNull
-    @ManyToMany(mappedBy = "articles")
+    @OneToMany(mappedBy = "article")
     public Collection<FollowUp> getFollowUps() {
         return followUps;
     }

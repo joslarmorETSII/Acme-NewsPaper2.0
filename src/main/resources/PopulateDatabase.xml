@@ -31,8 +31,8 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="customer1" />
+		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -53,6 +53,304 @@
 			</list>
 		</property>
 	</bean>
-	
+
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="user4" />
+		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Admins -->
+
+	<bean id="administrator" class="domain.Administrator">
+		<property name="name" value="José Manuel"/>
+		<property name="surname" value="Lara Morilla"/>
+		<property name="email" value="joslarmor@alum.us.es"/>
+		<property name="phone" value="+34 618030683"/>
+		<property name="postalAddresses" value="C\ Tarfia Bloque 7 Piso 6B"/>
+		<property name="userAccount" ref="userAccount1"/>
+	</bean>
+
+	<!-- Customers -->
+
+	<bean id="customer1" class="domain.Customer">
+		<property name="name" value="José Félix"/>
+		<property name="surname" value="Gómez Rodríguez"/>
+		<property name="email" value="josgomrod3@alum.us.es"/>
+		<property name="phone" value="+34 695395229"/>
+		<property name="postalAddresses" value="C\ Reina Mercedes Bloque 25"/>
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="newsPapers">
+			<list>
+				<ref bean="newsPaper2"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Users -->
+
+	<bean id="user1" class="domain.User">
+		<property name="name" value="Khawla"/>
+		<property name="surname" value="Al Alsfar"/>
+		<property name="email" value="khaala@alum.us.es"/>
+		<property name="phone" value="+34 640661936"/>
+		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="userAccount" ref="userAccount3"/>
+
+		<property name="chirps">
+			<list>
+				<ref bean="chirp1"/>
+			</list>
+		</property>
+		<property name="newsPapers">
+			<list>
+				<ref bean="newsPaper1"/>
+
+			</list>
+		</property>
+		<property name="followers">
+			<list>
+				<ref bean="follower1"/>
+			</list>
+		</property>
+		<property name="followings">
+			<list>
+				<ref bean="following1"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="user2" class="domain.User">
+		<property name="name" value="Feliciano"/>
+		<property name="surname" value="Blanco Castaño"/>
+		<property name="email" value="feliciano@alum.us.es"/>
+		<property name="phone" value="+34 666666666"/>
+		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="userAccount" ref="userAccount4"/>
+
+		<property name="chirps">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="newsPapers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="followers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="followings">
+			<list>
+				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Chirps -->
+
+	<bean id="chirp1" class="domain.Chirp">
+	<property name="title" value="Primer chirp"/>
+	<property name="moment" value="01/04/2018 11:00"/>
+	<property name="description" value="Esto es un chirp de prueba"/>
+	<property name="user" ref="user1"/>
+	</bean>
+
+	<!-- NewsPapers -->
+
+	<bean id="newsPaper1" class="domain.NewsPaper">
+		<property name="title" value="Titulo de newspaper 1"/>
+		<property name="publicationDate" value="01/04/2018"/>
+		<property name="description" value="Esto es un newspaper de prueba"/>
+		<property name="picture" value="https://www.imagen.com"/>
+		<property name="published" value="true"/>
+		<property name="taboo" value="false"/>
+		<property name="modePrivate" value="false"/>
+		<property name="publisher" ref="user1"/>
+
+		<property name="articles">
+			<list>
+				<ref bean="article1"/>
+				<ref bean="article2"/>
+ 			</list>
+		</property>
+		<property name="customers">
+			<list>
+				<ref bean="customer1"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="newsPaper2" class="domain.NewsPaper">
+		<property name="title" value="Titulo de newspaper 2"/>
+		<property name="publicationDate" value="01/04/2018"/>
+		<property name="description" value="Esto es un newspaper de prueba"/>
+		<property name="picture" value="https://www.imagen.com"/>
+		<property name="published" value="false"/>
+		<property name="taboo" value="false"/>
+		<property name="modePrivate" value="true"/>
+		<property name="publisher" ref="user1"/>
+
+		<property name="articles">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="customers">
+			<list>
+				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Followers -->
+
+	<bean id="follower1" class="domain.User">
+		<property name="name" value="User follower"/>
+		<property name="surname" value="Surname follower"/>
+		<property name="email" value="follower@alum.us.es"/>
+		<property name="phone" value="+34 666666666"/>
+		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="userAccount" ref="userAccount5"/>
+
+		<property name="chirps">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="newsPapers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="followers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="followings">
+			<list>
+				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Followings -->
+
+	<bean id="following1" class="domain.User">
+		<property name="name" value="User following"/>
+		<property name="surname" value="Surname following"/>
+		<property name="email" value="following@alum.us.es"/>
+		<property name="phone" value="+34 666666666"/>
+		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="userAccount" ref="userAccount6"/>
+
+		<property name="chirps">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="newsPapers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="followers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="followings">
+			<list>
+				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- FollowUps -->
+
+	<bean id="followUp1" class="domain.FollowUp">
+		<property name="title" value="Titulo del articulo2"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="Summary del articulo"/>
+		<property name="text" value="Cuerpo del articulo"/>
+
+		<property name="pictures">
+			<list>
+				<value>http://www.imagen.com</value>
+			</list>
+		</property>
+		<property name="article" ref="article2" />
+
+	</bean>
+
+	<!-- Articles -->
+
+	<bean id="article1" class="domain.Article">
+	<property name="title" value="Titulo del articulo1"/>
+	<property name="moment"><null /></property>
+	<property name="summary" value="Summary del articulo1"/>
+	<property name="body" value="Cuerpo del articulo1"/>
+	<property name="picture" value="https://www.imagen.com"/>
+	<property name="finalMode" value="false"/>
+	<property name="taboo" value="false"/>
+	<property name="newsPaper" ref="newsPaper1" />
+		<property name="followUps">
+			<list>
+				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="article2" class="domain.Article">
+		<property name="title" value="Titulo del articulo2"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="Summary del articulo"/>
+		<property name="body" value="Cuerpo del articulo"/>
+		<property name="picture" value="https://www.imagen.com"/>
+		<property name="finalMode" value="true"/>
+		<property name="taboo" value="false"/>
+		<property name="newsPaper" ref="newsPaper1" />
+		<property name="followUps">
+			<list>
+				<ref bean="followUp1"/>
+			</list>
+		</property>
+	</bean>
+
+
 
 </beans>
