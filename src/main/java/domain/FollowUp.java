@@ -72,10 +72,10 @@ public class FollowUp extends DomainEntity {
         this.text = text;
     }
 
-    @ElementCollection
-    @URL
-    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    //@URL
+    //@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     @NotNull
+    @ElementCollection
     public Collection<String> getPictures() {
         return pictures;
     }

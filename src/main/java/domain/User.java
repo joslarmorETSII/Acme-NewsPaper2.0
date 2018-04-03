@@ -1,9 +1,6 @@
 package domain;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -22,6 +19,8 @@ public class User extends Actor{
     private Collection<NewsPaper> newsPapers;
     private Collection<User> followers;
     private Collection<User> followings;
+    private User follower;
+    private User followed;
 
     // Relationships ----------------------------------------------------------------------
 
@@ -42,14 +41,14 @@ public class User extends Actor{
 
     @Valid
     @NotNull
-    @OneToMany
+    @OneToMany(mappedBy = "follower")
     public Collection<User> getFollowers() {
         return followers;
     }
 
     @NotNull
     @Valid
-    @OneToMany
+    @OneToMany(mappedBy = "follower")
     public Collection<User> getFollowings() {
         return followings;
     }
@@ -68,5 +67,23 @@ public class User extends Actor{
 
     public void setFollowings(Collection<User> followings) {
         this.followings = followings;
+    }
+
+    @ManyToOne
+    public User getFollower() {
+        return follower;
+    }
+
+    public void setFollower(User follower) {
+        this.follower = follower;
+    }
+
+    @ManyToOne
+    public User getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(User followed) {
+        this.followed = followed;
     }
 }
