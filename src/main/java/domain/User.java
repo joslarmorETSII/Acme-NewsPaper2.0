@@ -15,15 +15,16 @@ public class User extends Actor{
 
     // Attributes ------------------------------------------------------------------------
 
+
+
+    // Relationships ----------------------------------------------------------------------
+
     private Collection<Chirp> chirps;
     private Collection<NewsPaper> newsPapers;
     private Collection<User> followers;
     private Collection<User> followings;
     private User follower;
     private User followed;
-
-    // Relationships ----------------------------------------------------------------------
-
 
     @Valid
     @NotNull
