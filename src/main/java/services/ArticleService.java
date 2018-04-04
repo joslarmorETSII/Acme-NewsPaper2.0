@@ -84,12 +84,7 @@ public class ArticleService {
 
     }
 
-
-
-
-
     // Other business methods -------------------------------------------------
-
 
     public boolean checkByPrincipal(Article article) {
         Boolean res = null;
