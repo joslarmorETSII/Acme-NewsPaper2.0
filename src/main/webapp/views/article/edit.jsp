@@ -32,9 +32,14 @@
 	<acme:textbox path="picture" code="article.picture"/>
 	<acme:checkbox path="finalMode" code="article.finalMode"/>
 
+	<jstl:if test="${article.finalMode == false}" >
+		<acme:submit name="save" code="article.save"/>
+	</jstl:if>
 
-	<acme:submit name="save" code="article.save"/>
-	<acme:submit name="delete" code="article.delete"/>
+	<jstl:if test="${article.id != 0}" >
+		<acme:submit name="delete" code="article.delete"/>
+	</jstl:if>
+
 	<acme:cancel code="article.cancel" url="welcome/index.do"/>
 
 </form:form>
