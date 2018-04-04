@@ -73,7 +73,7 @@ public class NewsPaperService {
     public void delete(NewsPaper newsPaper){
         NewsPaper res= null;
         Assert.notNull(newsPaper);
-        Assert.isTrue(checkByPrincipalAdmin(newsPaper));
+        Assert.isTrue(checkByPrincipalAdmin(newsPaper) || checkByPrincipal(newsPaper));
         //TODO: Comprobar si falla a la hora de borrarlo eliminar los follow-up asocidados a los articles.
         this.newsPaperRepository.delete(newsPaper);
     }

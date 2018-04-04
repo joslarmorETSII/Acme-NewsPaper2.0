@@ -41,9 +41,13 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 
-		<!-- Articles -->
+		<!-- Article -->
 		<security:intercept-url pattern="/article/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/article/actor/**" access="isAuthenticated()" />
+
+		<!-- NewsPaper -->
+		<security:intercept-url pattern="/newsPaper/user/**" access="hasRole('USER')" />
+
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

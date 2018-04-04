@@ -35,7 +35,9 @@
 			<ul>
 					<li class="arrow"></li>
 					<li><a href="article/user/list.do"><spring:message code="master.page.user.article.list" /></a></li>
-				</ul>
+				<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
+
+			</ul>
 			</li>
 		</security:authorize>
 
