@@ -28,22 +28,22 @@ public class NewsPaperCustomerController extends AbstractController{
 
     // Listing  --------------------------------------------------------------
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
-
-        ModelAndView result;
-
-        Collection<NewsPaper> newsPapers= customerService.findByPrincipal().getNewsPapers();
-        Collection<NewsPaper> newsPapersPrivate= newsPaperService.findNewsPapersPrivate(customerService.findByPrincipal().getId());
-
-        result = new ModelAndView("customer/list");
-        result.addObject("newsPapers", newsPapers);
-        result.addObject("newsPapersPrivate", newsPapersPrivate);
-
-        result.addObject("requestURI", "customer/newsPaper/list.do");
-        return result;
-
-    }
+//    @RequestMapping(value = "/list", method = RequestMethod.GET)
+//    public ModelAndView list() {
+//
+//        ModelAndView result;
+//
+//        Collection<NewsPaper> newsPapers= customerService.findByPrincipal().getNewsPapers();
+//        Collection<NewsPaper> newsPapersPrivate= newsPaperService.findNewsPapersPrivate(customerService.findByPrincipal().getId());
+//
+//        result = new ModelAndView("customer/list");
+//        result.addObject("newsPapers", newsPapers);
+//        result.addObject("newsPapersPrivate", newsPapersPrivate);
+//
+//        result.addObject("requestURI", "customer/newsPaper/list.do");
+//        return result;
+//
+//    }
 
 
 }

@@ -13,6 +13,6 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
 
 
 
-    @Query("select n from Newspaper n where n.userAccount.id = ?1 AND n.modePrivate = true")
-    Collection<NewsPaper>findNewsPapersPrivate(int customerId);
+//    @Query("select n from Newspaper n where n.userAccount.id = ?1 AND n.modePrivate = true")
+//    Collection<NewsPaper>findNewsPapersPrivate(int customerId);
 }
