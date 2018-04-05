@@ -123,12 +123,12 @@ public class NewsPaperService {
 
     }
 
-//    public Collection<NewsPaper> findNewsPapersPrivate(int customerId){
-//
-//        Collection<NewsPaper> result;
-//        result = newsPaperRepository.findNewsPapersPrivate(customerId);
-//        return result;
-//    }
+    public Collection<NewsPaper> findNewsPapersPrivate(int customerId){
+
+        Collection<NewsPaper> result;
+        result = newsPaperRepository.findNewsPapersPrivate(customerId);
+        return result;
+    }
 
     public Collection<NewsPaper> findPublishedNewsPaper(){
         return newsPaperRepository.findPublishedNewsPaper();
