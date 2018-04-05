@@ -22,6 +22,7 @@
     <form:hidden path="version"/>
     <form:hidden path="customers"/>
     <form:hidden path="articles"/>
+    <form:hidden path="publisher"/>
 
     <acme:textbox path="title" code="newsPaper.name"/>
     <acme:textarea path="description" code="newsPaper.description" />
@@ -47,6 +48,6 @@
     </security:authorize>
             
 
-    <acme:cancel code="newsPaper.cancel" url="newsPaper/user/list.do"/>
+    <acme:button code="newsPaper.cancel" url="newsPaper/user/list.do"/>
 
 </form:form>

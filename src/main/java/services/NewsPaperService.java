@@ -46,7 +46,7 @@ public class NewsPaperService {
         res.setPublisher(publisher);
         res.setArticles(articles);
         res.setCustomers(customers);
-        publisher.getNewsPapers().add(res);
+       // publisher.getNewsPapers().add(res);
 
         return res;
     }
@@ -67,6 +67,13 @@ public class NewsPaperService {
     public NewsPaper findOne(int newsPaperId){
         NewsPaper res= null;
         res= this.newsPaperRepository.findOne(newsPaperId);
+        return  res;
+    }
+    public NewsPaper findOneToEdit(int newsPaperId){
+        NewsPaper res= null;
+        res= this.newsPaperRepository.findOne(newsPaperId);
+        Assert.isTrue(checkByPrincipal(res) || checkByPrincipalAdmin(res));
+
         return  res;
     }
 
@@ -124,4 +131,9 @@ public class NewsPaperService {
 //        result = newsPaperRepository.findNewsPapersPrivate(customerId);
 //        return result;
 //    }
+
+    public Collection<NewsPaper> findPublishedNewsPaper(){
+        return newsPaperRepository.findPublishedNewsPaper();
+    }
+
 }

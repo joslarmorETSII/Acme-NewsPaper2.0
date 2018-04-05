@@ -26,4 +26,6 @@
 		<put-attribute name="body" value="/views/customer/list.jsp" />
 	</definition>
 
+
+
 </tiles-definitions>

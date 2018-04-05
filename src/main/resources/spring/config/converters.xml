@@ -36,6 +36,9 @@
 		<bean class="converters.StringToNewsPaperConverter" />
 		<bean class="converters.UserAccountToStringConverter" />
 		<bean class="converters.StringToUserAccountConverter" />
+		<bean class="converters.StringToUserConverter" />
+		<bean class="converters.UserToStringConverter" />
+
 	</util:list>
 	
 </beans>

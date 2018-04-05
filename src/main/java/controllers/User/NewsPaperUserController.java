@@ -75,15 +75,15 @@ public class NewsPaperUserController extends AbstractController {
 
     }
 
-   /* // Creation ------------------------------------------------------
+    // Creation ------------------------------------------------------
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView result;
-        Rendezvous rendezvous;
+        NewsPaper newsPaper= null ;
 
-        rendezvous = this.rendezvousService.create();
-        result = this.createEditModelAndView(rendezvous);
+        newsPaper = this.newsPaperService.create();
+        result = this.createEditModelAndView(newsPaper);
 
         return result;
     }
@@ -94,15 +94,15 @@ public class NewsPaperUserController extends AbstractController {
     // Display ----------------------------------------------------------------
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam final int rendezvousId) {
+    public ModelAndView display(@RequestParam final int newsPaperId) {
         ModelAndView result;
-        Rendezvous rendezvous;
+        NewsPaper newsPaper;
 
-        rendezvous = this.rendezvousService.findOne(rendezvousId);
-        result = new ModelAndView("rendezvous/display");
-        result.addObject("rendezvous", rendezvous);
-        result.addObject("cancelURI", "rendezvous/user/list.do");
-        result.addObject("associated",rendezvous.getAssociated());
+        newsPaper = this.newsPaperService.findOne(newsPaperId);
+        result = new ModelAndView("newsPaper/display");
+        result.addObject("newsPaper", newsPaper);
+        result.addObject("cancelURI", "newsPaper/user/list.do");
+
 
         return result;
     }
@@ -111,82 +111,41 @@ public class NewsPaperUserController extends AbstractController {
     //  Edition ----------------------------------------------------------------
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam  int rendezvousId) {
+    public ModelAndView edit(@RequestParam  int newsPaperId) {
         final ModelAndView result;
-        Rendezvous rendezvous;
-        rendezvous = this.rendezvousService.findOneToEdit(rendezvousId);
-        Assert.notNull(rendezvous);
-        result = this.createEditModelAndView(rendezvous);
+        NewsPaper newsPaper;
+        newsPaper = this.newsPaperService.findOneToEdit(newsPaperId);
+        Assert.notNull(newsPaper);
+        result = this.createEditModelAndView(newsPaper);
         return result;
     }
 
-    @RequestMapping(value = "/associate", method = RequestMethod.GET)
-    public ModelAndView associate(@RequestParam  int rendezvousId,@RequestParam(required= false) String message) {
-        ModelAndView result;
-        User user = userService.findByPrincipal();
-        Rendezvous rendezvous =rendezvousService.findOne(rendezvousId);
-        Assert.isTrue(rendezvous.getCreator().equals(user));
-        AssociatForm associatForm = new AssociatForm();
-        associatForm.setFormid(rendezvousId);
-        Collection<Rendezvous> notAssociated = user.getRendezvouses();
-        notAssociated.removeAll(rendezvous.getAssociated());
-        result = new ModelAndView("rendezvous/associate");
-        result.addObject("associatForm", associatForm);
-        result.addObject("allRendezvous", notAssociated);
-        result.addObject("emptyCollection",notAssociated.size()==0);
-        result.addObject("message",message);
-        return result;
-    }
-    @RequestMapping(value = "/associate", method = RequestMethod.POST, params = "save")
-    public ModelAndView associate( AssociatForm associatForm, HttpServletRequest request) {
-        ModelAndView result;
-        Collection<Rendezvous> rendezvousToAssociate = new HashSet<>();
-        Rendezvous rendezvous = rendezvousService.findOne(associatForm.getFormid());
 
-        String[] rendezvousesToAssociateId = request.getParameterValues("rendezvous");
-        if(request.getParameterValues("rendezvous")==null){
-            return associate(rendezvous.getId(),"rendezvous.select.error");
-        }
-        for (int i = 0; i <= rendezvousesToAssociateId.length - 1; i++) {
-            Rendezvous aux = rendezvousService.findOne(new Integer(rendezvousesToAssociateId[i]));
-            rendezvousToAssociate.add(aux);
-        }
-
-        rendezvous.getAssociated().addAll(rendezvousToAssociate);
-        try {
-            rendezvousService.associate(rendezvous,rendezvousToAssociate);
-        }catch (Throwable oops){
-            result = associate(rendezvous.getId(),oops.getCause().getMessage());
-        }
-        result = new ModelAndView("redirect:display.do?rendezvousId="+rendezvous.getId());
-
-        return result;
-    }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid Rendezvous rendezvous, final BindingResult binding) {
+    public ModelAndView save(@Valid NewsPaper newsPaper, final BindingResult binding) {
         ModelAndView result;
         if (binding.hasErrors())
-            result = this.createEditModelAndView(rendezvous);
+            result = this.createEditModelAndView(newsPaper);
         else
             try {
-                this.rendezvousService.save(rendezvous);
+                this.newsPaperService.save(newsPaper);
                 result = new ModelAndView("redirect:list.do");
             } catch (final Throwable oops) {
-                result = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
+                result = this.createEditModelAndView(newsPaper, "newsPaper.commit.error");
             }
         return result;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST,params = "delete")
-    public ModelAndView edit(Rendezvous rendezvous){
+    public ModelAndView edit(NewsPaper newsPaper){
         ModelAndView result;
 
         try{
-            rendezvousService.delete(rendezvous);
+            newsPaperService.delete(newsPaper);
             result = new ModelAndView("redirect:list.do");
         }catch (Throwable oops){
-            result = createEditModelAndView(rendezvous,"rendezvous.delete.error");
+            result = createEditModelAndView(newsPaper,"newsPaper.commit.error");
         }
 
         return result;
@@ -195,20 +154,21 @@ public class NewsPaperUserController extends AbstractController {
 
     // Ancillary methods ------------------------------------------------------
 
-    protected ModelAndView createEditModelAndView(final Rendezvous rendezvous) {
+    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper) {
         ModelAndView result;
 
-        result = this.createEditModelAndView(rendezvous, null);
+        result = this.createEditModelAndView(newsPaper, null);
         return result;
     }
 
-    protected ModelAndView createEditModelAndView(final Rendezvous rendezvous, final String messageCode) {
+    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper, final String messageCode) {
         ModelAndView result;
-        result = new ModelAndView("rendezvous/edit");
-        result.addObject("rendezvous", rendezvous);
+        result = new ModelAndView("newsPaper/edit");
+        result.addObject("newsPaper", newsPaper);
         result.addObject("message", messageCode);
+        result.addObject("actionUri","newsPaper/user/edit.do");
 
         return result;
-    }*/
+    }
 }
 

@@ -31,14 +31,16 @@
 
 		<security:authorize access="hasRole('USER')">
 			<li><a class="fNiv"><spring:message	code="master.page.user" /></a>
-			<li><a class="fNiv" href="article/actor/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
+
 			<ul>
 					<li class="arrow"></li>
 					<li><a href="article/user/list.do"><spring:message code="master.page.user.article.list" /></a></li>
-				<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
+					<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
+
 
 			</ul>
 			</li>
+			<li><a class="fNiv" href="article/actor/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">
@@ -51,6 +53,8 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.newsPaper.listAll" /></a></li>
+
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

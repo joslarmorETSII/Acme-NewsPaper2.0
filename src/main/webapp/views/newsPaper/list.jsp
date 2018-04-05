@@ -55,6 +55,12 @@
         <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
     </display:column>
 
-    <acme:cancel code="newsPaper.cancel" url="welcome/index.do"/>
+
 
 </display:table>
+
+<security:authorize access="hasRole('USER')">
+    <acme:button code="newsPaper.create" url="newsPaper/user/create.do"/>
+</security:authorize>
+
+<acme:button code="newsPaper.cancel" url="welcome/index.do"/>
