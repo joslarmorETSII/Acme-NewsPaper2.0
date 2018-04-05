@@ -46,8 +46,7 @@
             <acme:submit name="delete" code="newsPaper.delete"/>
         </jstl:if>
     </security:authorize>
-            
-
-    <acme:button code="newsPaper.cancel" url="newsPaper/user/list.do"/>
 
 </form:form>
+
+<acme:button code="newsPaper.cancel" url="newsPaper/user/list.do"/>
