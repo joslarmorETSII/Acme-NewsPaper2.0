@@ -40,6 +40,19 @@ public class NewsPaperUserController extends AbstractController {
         super();
     }
 
+    // Creation ------------------------------------------------------
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView create() {
+        ModelAndView result;
+        NewsPaper newsPaper= null ;
+
+        newsPaper = this.newsPaperService.create();
+        result = this.createEditModelAndView(newsPaper);
+
+        return result;
+    }
+
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -75,39 +88,6 @@ public class NewsPaperUserController extends AbstractController {
 
     }
 
-    // Creation ------------------------------------------------------
-
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create() {
-        ModelAndView result;
-        NewsPaper newsPaper= null ;
-
-        newsPaper = this.newsPaperService.create();
-        result = this.createEditModelAndView(newsPaper);
-
-        return result;
-    }
-
-
-
-
-    // Display ----------------------------------------------------------------
-
-    @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam final int newsPaperId) {
-        ModelAndView result;
-        NewsPaper newsPaper;
-
-        newsPaper = this.newsPaperService.findOne(newsPaperId);
-        result = new ModelAndView("newsPaper/display");
-        result.addObject("newsPaper", newsPaper);
-        result.addObject("cancelURI", "newsPaper/user/list.do");
-
-
-        return result;
-    }
-
-
     //  Edition ----------------------------------------------------------------
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -119,8 +99,6 @@ public class NewsPaperUserController extends AbstractController {
         result = this.createEditModelAndView(newsPaper);
         return result;
     }
-
-
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
     public ModelAndView save(@Valid NewsPaper newsPaper, final BindingResult binding) {
@@ -151,6 +129,33 @@ public class NewsPaperUserController extends AbstractController {
         return result;
     }
 
+    @RequestMapping(value = "/publish", method = RequestMethod.GET)
+    public ModelAndView publish(@RequestParam  int newsPaperId) {
+        final ModelAndView result;
+        NewsPaper newsPaper;
+        NewsPaper res;
+        newsPaper = this.newsPaperService.findOneToEdit(newsPaperId);
+        Assert.notNull(newsPaper);
+        this.newsPaperService.findOneToPublish(newsPaper);
+        result = new ModelAndView("redirect:list.do");
+        return result;
+    }
+
+    // Display ----------------------------------------------------------------
+
+    @RequestMapping(value = "/display", method = RequestMethod.GET)
+    public ModelAndView display(@RequestParam final int newsPaperId) {
+        ModelAndView result;
+        NewsPaper newsPaper;
+
+        newsPaper = this.newsPaperService.findOne(newsPaperId);
+        result = new ModelAndView("newsPaper/display");
+        result.addObject("newsPaper", newsPaper);
+        result.addObject("cancelURI", "newsPaper/user/list.do");
+
+
+        return result;
+    }
 
     // Ancillary methods ------------------------------------------------------
 

@@ -24,11 +24,11 @@
     <form:hidden path="articles"/>
     <form:hidden path="publisher"/>
     <form:hidden path="publicationDate" />
+    <form:hidden path="published" />
 
     <acme:textbox path="title" code="newsPaper.name"/>
     <acme:textarea path="description" code="newsPaper.description" />
     <acme:textbox path="picture" code="newsPaper.picture"/>
-    <acme:checkbox path="published" code="newsPaper.published"/>
     <acme:checkbox path="modePrivate" code="newsPaper.modePrivate"/>
 
     <security:authorize access="hasRole('USER')">

@@ -87,19 +87,17 @@ public class NewsPaperService {
 
     // Other business methods -------------------------------------------------
 
-    public NewsPaper findOneToPublish(NewsPaper newsPaper){
+    public void findOneToPublish(NewsPaper newsPaper){
         Collection<Article> articles= newsPaper.getArticles();
-        Boolean res= newsPaper.getPublished();
         for(Article a:articles){
             if(a.getFinalMode()){
-                res=true;
+                newsPaper.setPublished(true);
                 newsPaper.setPublicationDate(new Date());
                 a.setMoment(new Date());
             }else{
-                res=false;
+                newsPaper.setPublished(false);
             }
         }
-        return newsPaper;
     }
 
     public boolean checkByPrincipal(NewsPaper newsPaper) {
