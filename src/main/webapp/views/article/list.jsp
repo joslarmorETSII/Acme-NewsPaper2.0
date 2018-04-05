@@ -45,7 +45,7 @@
 	</security:authorize>
 
 	<security:authorize access="isAuthenticated()" >
-		<acme:columnButton url="article/actor/display.do?articleId=${row.id}" codeButton="article.display" />
+		<acme:columnButton url="article/display.do?articleId=${row.id}" codeButton="article.display" />
 	</security:authorize>
 
 </display:table>

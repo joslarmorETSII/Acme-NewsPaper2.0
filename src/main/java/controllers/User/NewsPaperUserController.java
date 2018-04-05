@@ -56,7 +56,7 @@ public class NewsPaperUserController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list(@RequestParam(required= false, defaultValue = "0") Integer userId ) {
+    public ModelAndView list() {
         ModelAndView result;
         User user;
         Collection<NewsPaper> newsPapers=null;
@@ -66,9 +66,9 @@ public class NewsPaperUserController extends AbstractController {
         String momentEs;
         String momentEn;
 
-        formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
         momentEs = formatterEs.format(new Date());
-        formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
 
         user = userService.findByPrincipal();

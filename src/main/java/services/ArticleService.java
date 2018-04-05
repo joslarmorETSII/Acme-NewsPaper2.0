@@ -75,6 +75,13 @@ public class ArticleService {
         return res;
     }
 
+    public Article findOneToEdit(int articleId){
+        Article res= null;
+        res= articleRepository.findOne(articleId);
+        Assert.isTrue(checkByPrincipal(res) || checkByPrincipalAdmin(res));
+        return res;
+    }
+
     public void delete(Article article){
         Assert.isTrue(checkByPrincipalAdmin(article));
         articleRepository.delete(article);
@@ -107,6 +114,10 @@ public class ArticleService {
         res= authority.equals("ADMINISTRATOR");
         return res;
 
+    }
+
+    public Collection<Article> findArticleByUser(User user){
+        return this.articleRepository.findArticlesByUser(user);
     }
 
 }

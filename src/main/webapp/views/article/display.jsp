@@ -47,4 +47,4 @@
 <b><spring:message code="article.taboo"/>:&nbsp;</b><jstl:out value="${article.taboo}"/>
 <br/>
 
-<acme:cancel code="article.cancel" url="article/actor/listAll.do"/>
+<acme:cancel code="article.cancel" url="article/listAll.do"/>

@@ -45,9 +45,9 @@ public class NewsPaperController {
         String momentEs;
         String momentEn;
 
-        formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
         momentEs = formatterEs.format(new Date());
-        formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
         newsPapers=newsPaperService.findPublishedNewsPaper();
 
