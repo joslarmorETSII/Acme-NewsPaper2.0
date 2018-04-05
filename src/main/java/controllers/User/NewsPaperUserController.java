@@ -71,10 +71,8 @@ public class NewsPaperUserController extends AbstractController {
         formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         momentEn = formatterEn.format(new Date());
 
-
-            user = userService.findByPrincipal();
-            newsPapers=user.getNewsPapers();
-
+        user = userService.findByPrincipal();
+        newsPapers=user.getNewsPapers();
 
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapers);

@@ -32,12 +32,12 @@
     <acme:checkbox path="modePrivate" code="newsPaper.modePrivate"/>
 
     <security:authorize access="hasRole('USER')">
-    <acme:submit name="save" code="newsPaper.save"/>
+        <acme:submit name="save" code="newsPaper.save"/>
     </security:authorize>
-    
+
     <security:authorize access="hasRole('ADMINISTRATOR')">
         <jstl:if test="${ row.taboo ne false }">
-        <acme:submit name="delete" code="newsPaper.delete"/>
+            <acme:submit name="delete" code="newsPaper.delete"/>
         </jstl:if>
     </security:authorize>
 
@@ -47,6 +47,8 @@
         </jstl:if>
     </security:authorize>
 
+    <input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />" onclick="javascript: relativeRedir('newsPaper/user/list.do');" />
+
 </form:form>
 
-<acme:button code="newsPaper.cancel" url="newsPaper/user/list.do"/>
+

@@ -15,6 +15,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="jstt" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jstl:if test="${pageContext.response.locale.language == 'es' }">
     <jstl:set value="{0,date,dd/MM/yyyy HH:mm}" var="formatDate"/>
@@ -25,6 +26,13 @@
 </jstl:if>
 
 <display:table name="newsPapers" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
+
+    <jstl:set var="forPublish" value="false" />
+    <jstl:forEach var="item" items="${row.articles}" >
+        <jstl:if test="${item.finalMode == true}" >
+            <jstl:set var="forPublish" value="true" />
+        </jstl:if>
+    </jstl:forEach>
 
     <display:column>
         <security:authorize access="hasRole('USER')" >
@@ -45,8 +53,11 @@
 
     <security:authorize access="hasRole('USER')">
         <display:column >
-            <jstl:if test="${ row.published ne true  }">
+            <jstl:if test="${ row.published ne true && !empty row.articles && forPublish ne false}">
                 <acme:button url="newsPaper/user/publish.do?newsPaperId=${row.id}" code="newsPaper.publish"/>
+            </jstl:if>
+            <jstl:if test="${row.published eq true}">
+                <spring:message code="newsPaper.publicado" var="publicado"/> <jstl:out value="${publicado}" />
             </jstl:if>
         </display:column>
     </security:authorize>
