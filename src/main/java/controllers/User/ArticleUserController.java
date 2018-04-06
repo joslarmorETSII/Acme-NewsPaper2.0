@@ -124,8 +124,6 @@ public class ArticleUserController {
         return result;
     }
 
-
-
     // Ancillary methods ------------------------------------------------------
 
     protected ModelAndView createEditModelAndView(final Article article) {
