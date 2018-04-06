@@ -28,6 +28,7 @@
 		<value>/views/termAndCondition/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
 		<value>/views/newsPaper/tiles.xml</value>
+		<value>/views/configuration/tiles.xml</value>
 	</util:list>
 
 </beans>
