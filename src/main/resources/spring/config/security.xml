@@ -44,7 +44,7 @@
 
 		<!-- Article -->
 		<security:intercept-url pattern="/article/user/**" access="hasRole('USER')" />
-		<security:intercept-url pattern="/article/actor/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/article/**" access="permitAll()" />
 
 		<!-- NewsPaper -->
 

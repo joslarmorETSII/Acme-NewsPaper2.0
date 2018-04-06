@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -13,17 +13,22 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
 
 	<definition name="followUp/list" extends="master.page">
-		<put-attribute name="title" value="Lista de revisiones" />
+		<put-attribute name="title" value="List of followUp" />
 		<put-attribute name="body" value="/views/followUp/list.jsp" />
 	</definition>
-
+	
 	<definition name="article/edit" extends="master.page">
-		<put-attribute name="title" value="Edición de una revisión" />
+		<put-attribute name="title" value="Edition of followUp" />
 		<put-attribute name="body" value="/views/followUp/edit.jsp" />
+	</definition>
+
+	<definition name="article/display" extends="master.page">
+		<put-attribute name="title" value="Display of followUp" />
+		<put-attribute name="body" value="/views/followUp/display.jsp" />
 	</definition>
 	
 </tiles-definitions>

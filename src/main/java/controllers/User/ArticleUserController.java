@@ -31,6 +31,8 @@ public class ArticleUserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private NewsPaperService newsPaperService;
 
     // Constructor --------------------------------------------
 
@@ -44,7 +46,6 @@ public class ArticleUserController {
     public ModelAndView create() {
         ModelAndView result;
         Article article= null ;
-
         article = this.articleService.create();
         result = this.createEditModelAndView(article);
 
@@ -90,19 +91,20 @@ public class ArticleUserController {
         final ModelAndView result;
         Article article;
         article = this.articleService.findOneToEdit(articleId);
+        Assert.isTrue(!article.getFinalMode());
         Assert.notNull(article);
         result = this.createEditModelAndView(article);
         return result;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid Article article, final BindingResult binding) {
+    public ModelAndView save(@Valid Article article, @RequestParam NewsPaper newsPaper, final BindingResult binding) {
         ModelAndView result;
         if (binding.hasErrors())
             result = this.createEditModelAndView(article);
         else
             try {
-                this.articleService.save(article);
+                this.articleService.save(article, newsPaper);
                 result = new ModelAndView("redirect:list.do");
             } catch (final Throwable oops) {
                 result = this.createEditModelAndView(article, "article.commit.error");
@@ -135,8 +137,14 @@ public class ArticleUserController {
 
     protected ModelAndView createEditModelAndView(final Article article, final String messageCode) {
         ModelAndView result;
+        User user = userService.findByPrincipal();
+
+        Collection<NewsPaper> newsPapers = this.newsPaperService.findAllNewsPaperByUserAndNotPublished(user.getId());
+
         result = new ModelAndView("article/edit");
         result.addObject("article", article);
+        result.addObject("newsPapers", newsPapers);
+        result.addObject("actionUri","article/user/edit.do");
         result.addObject("message", messageCode);
 
         return result;

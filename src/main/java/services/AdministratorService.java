@@ -52,17 +52,13 @@ public class AdministratorService {
         UserAccount userAccount;
 
         userAccount = LoginService.getPrincipal();
-        Assert.notNull(userAccount);
-
         result = this.findByUserAccount(userAccount);
-        Assert.notNull(result);
 
         return result;
     }
 
     public Administrator findByUserAccount(final UserAccount userAccount) {
 
-        Assert.notNull(userAccount);
         Administrator result;
         result = this.administratorRepository.findByUserAccountId(userAccount.getId());
         return result;

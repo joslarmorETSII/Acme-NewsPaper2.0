@@ -126,7 +126,7 @@ public class NewsPaper extends DomainEntity {
 
     @Valid
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "newsPaper")
     public Collection<Article> getArticles() {
         return articles;
     }

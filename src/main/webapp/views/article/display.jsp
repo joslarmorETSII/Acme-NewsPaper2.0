@@ -47,4 +47,6 @@
 <b><spring:message code="article.taboo"/>:&nbsp;</b><jstl:out value="${article.taboo}"/>
 <br/>
 
-<acme:cancel code="article.cancel" url="article/listAll.do"/>
+<br>
+<input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
+	   onclick="javascript: relativeRedir('article/listAll.do');" />

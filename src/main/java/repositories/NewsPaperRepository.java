@@ -16,5 +16,7 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
     @Query("select n,c from NewsPaper n join n.customers c where c.id = 27 AND n.modePrivate = TRUE")
     Collection<NewsPaper>findNewsPapersPrivate(int customerId);
 
+    @Query("select n from NewsPaper n where n.publisher.id=?1 AND n.published = FALSE")
+    Collection<NewsPaper> findAllNewsPaperByUserAndNotPublished(int userId);
 
 }

@@ -46,21 +46,20 @@ public class ArticleService {
         publisher= userService.findByPrincipal();
         Collection<FollowUp> followUps= new ArrayList<>();
         res= new Article();
-        res.getNewsPaper().setPublisher(publisher);
         res.setFollowUps(followUps);
         return res;
     }
 
-    public Article save (Article article){
+    public Article save (Article article, NewsPaper newsPaper){
         Article res= null;
+
         Assert.notNull(article);
         Assert.isTrue(checkByPrincipal(article));
         Assert.isTrue(!article.getNewsPaper().getPublished());
-        Assert.isTrue(!article.getFinalMode());
-
-        NewsPaper newsPaper=article.getNewsPaper();
-        newsPaper.getArticles().add(article);
-        res= articleRepository.save(article);
+        if(article.getId() == 0) {
+            newsPaper.getArticles().add(article);
+        }
+        res = articleRepository.save(article);
         return res;
 
     }
@@ -83,12 +82,20 @@ public class ArticleService {
     }
 
     public void delete(Article article){
-        Assert.isTrue(checkByPrincipalAdmin(article));
-        articleRepository.delete(article);
+        Assert.isTrue(checkByPrincipalAdmin(article) || checkByPrincipal(article));
+
         Collection<FollowUp> followUps = article.getFollowUps();
         followUpService.deleteAll(followUps);
 
+        articleRepository.delete(article);
+    }
 
+    public void deleteAll(Collection<Article> articles){
+        for(Article a: articles){
+            Collection<FollowUp> followUps = a.getFollowUps();
+            followUpService.deleteAll(followUps);
+            this.articleRepository.delete(articles);
+        }
     }
 
     // Other business methods -------------------------------------------------
@@ -109,9 +116,11 @@ public class ArticleService {
     public boolean checkByPrincipalAdmin(Article article){
         Boolean res= false;
         Administrator administrator = administratorService.findByPrincipal();
-        Collection<Authority> authorities= administrator.getUserAccount().getAuthorities();
-        String authority= authorities.toArray()[0].toString();
-        res= authority.equals("ADMINISTRATOR");
+        if(administrator!=null) {
+            Collection<Authority> authorities = administrator.getUserAccount().getAuthorities();
+            String authority = authorities.toArray()[0].toString();
+            res = authority.equals("ADMINISTRATOR");
+        }
         return res;
 
     }

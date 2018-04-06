@@ -28,6 +28,9 @@ public class NewsPaperService {
     @Autowired
     private AdministratorService administratorService;
 
+    @Autowired
+    private ArticleService articleService;
+
     // Constructors -----------------------------------------------------------
 
     public NewsPaperService() {
@@ -73,15 +76,13 @@ public class NewsPaperService {
         NewsPaper res= null;
         res= this.newsPaperRepository.findOne(newsPaperId);
         Assert.isTrue(checkByPrincipal(res) || checkByPrincipalAdmin(res));
-
         return  res;
     }
 
     public void delete(NewsPaper newsPaper){
-        NewsPaper res= null;
         Assert.notNull(newsPaper);
         Assert.isTrue(checkByPrincipalAdmin(newsPaper) || checkByPrincipal(newsPaper));
-        //TODO: Comprobar si falla a la hora de borrarlo eliminar los follow-up asocidados a los articles.
+        this.articleService.deleteAll(newsPaper.getArticles());
         this.newsPaperRepository.delete(newsPaper);
     }
 
@@ -116,9 +117,11 @@ public class NewsPaperService {
     public boolean checkByPrincipalAdmin(NewsPaper newsPaper){
         Boolean res= false;
         Administrator administrator = administratorService.findByPrincipal();
-        Collection<Authority> authorities= administrator.getUserAccount().getAuthorities();
-        String authority= authorities.toArray()[0].toString();
-        res= authority.equals("ADMINISTRATOR");
+        if(administrator!=null) {
+            Collection<Authority> authorities = administrator.getUserAccount().getAuthorities();
+            String authority = authorities.toArray()[0].toString();
+            res = authority.equals("ADMINISTRATOR");
+        }
         return res;
 
     }
@@ -134,4 +137,7 @@ public class NewsPaperService {
         return newsPaperRepository.findPublishedNewsPaper();
     }
 
+    public Collection<NewsPaper> findAllNewsPaperByUserAndNotPublished(int userId) {
+        return this.newsPaperRepository.findAllNewsPaperByUserAndNotPublished(userId);
+    }
 }

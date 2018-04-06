@@ -66,8 +66,6 @@
         <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
     </display:column>
 
-
-
 </display:table>
 
 <security:authorize access="hasRole('USER')">

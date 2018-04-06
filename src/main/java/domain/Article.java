@@ -28,8 +28,8 @@ public class Article extends DomainEntity {
     private String summary;
     private String body;
     private String picture;
-    private Boolean finalMode;
-    private Boolean taboo;
+    private boolean finalMode;
+    private boolean taboo;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
