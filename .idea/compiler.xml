@@ -9,5 +9,8 @@
         <module name="Acme-NewsPaper" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Acme-NewsPaper" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
