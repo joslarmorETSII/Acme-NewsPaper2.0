@@ -27,6 +27,7 @@
 					<li><a href="article/actor/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('USER')">

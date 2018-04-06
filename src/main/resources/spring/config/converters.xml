@@ -38,6 +38,8 @@
 		<bean class="converters.StringToUserAccountConverter" />
 		<bean class="converters.StringToUserConverter" />
 		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.ConfigurationToStringConverter" />
+		<bean class="converters.StringToConfigurationConverter" />
 
 	</util:list>
 	
