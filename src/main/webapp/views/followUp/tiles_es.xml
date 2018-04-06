@@ -16,19 +16,19 @@
       
 <tiles-definitions>
 
-	<definition name="article/list" extends="master.page">
-		<put-attribute name="title" value="Lista de artículos" />
-		<put-attribute name="body" value="/views/article/list.jsp" />
+	<definition name="followUp/list" extends="master.page">
+		<put-attribute name="title" value="Lista de revisiones" />
+		<put-attribute name="body" value="/views/followUp/list.jsp" />
 	</definition>
 
-	<definition name="article/edit" extends="master.page">
-		<put-attribute name="title" value="Edición de artículo" />
-		<put-attribute name="body" value="/views/article/edit.jsp" />
+	<definition name="followUp/edit" extends="master.page">
+		<put-attribute name="title" value="Crear revisión" />
+		<put-attribute name="body" value="/views/followUp/edit.jsp" />
 	</definition>
 
-	<definition name="article/display" extends="master.page">
-		<put-attribute name="title" value="Mostrar artículo" />
-		<put-attribute name="body" value="/views/article/display.jsp" />
+	<definition name="followUp/display" extends="master.page">
+		<put-attribute name="title" value="Mostrar revisión" />
+		<put-attribute name="body" value="/views/followUp/display.jsp" />
 	</definition>
 	
 </tiles-definitions>

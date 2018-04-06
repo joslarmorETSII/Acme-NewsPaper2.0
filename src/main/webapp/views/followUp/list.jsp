@@ -25,41 +25,26 @@
 	<jstl:set value="{0,date,yyyy/MM/dd HH:mm}" var="formatDate"/>
 </jstl:if>
 
-<display:table name="articles" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
+<display:table name="followUps" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
 
-	<security:authorize access="hasRole('USER')" >
-		<display:column>
-		<jstl:if test="${row.finalMode eq false}" >
-			<acme:button url="article/user/edit.do?articleId=${row.id}" code="article.edit" />
-		</jstl:if>
-		</display:column>
-	</security:authorize>
+	<acme:column code="followUp.title" value="${row.title}" />
 
-	<acme:column code="article.title" value="${row.title}" />
-
-	<spring:message var="moment" code="article.moment"/>
+	<spring:message var="moment" code="followUp.moment"/>
 	<spring:message var="formatDate" code="event.format.date"/>
 	<display:column property="moment" title="${moment}" format="${formatDate}" sortable="true" />
 
-	<acme:column code="article.summary" value="${row.summary}" sortable="true"/>
-	<acme:column code="article.finalMode" value="${row.finalMode}"/>
-
-	<security:authorize access="hasRole('ADMINISTRATOR')" >
-		<display:column>
-			<acme:button url="article/administrator/edit.do?articleId=${row.id}" code="article.delete" />
-		</display:column>
-	</security:authorize>
+	<acme:column code="followUp.summary" value="${row.summary}" sortable="true"/>
 
 	<security:authorize access="isAuthenticated()" >
 		<display:column>
-			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+			<acme:button url="followUp/display.do?followUpId=${row.id}" code="followUp.display" />
 		</display:column>
 	</security:authorize>
 
 </display:table>
 
 <security:authorize access="hasRole('USER')">
-	<acme:button code="article.create" url="article/user/create.do"/>
+	<acme:button code="followUp.create" url="followUp/user/create.do"/>
 </security:authorize>
 
 

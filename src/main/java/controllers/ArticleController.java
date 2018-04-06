@@ -64,6 +64,7 @@ public class ArticleController {
         formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         momentEn = formatterEn.format(new Date());
 
+        //TODO: Solo mostrar los que estan en final mode
         articles=this.articleService.findAll();
 
         result = new ModelAndView("article/list");

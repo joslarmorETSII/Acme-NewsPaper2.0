@@ -12,6 +12,7 @@ import repositories.FollowUpRepository;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -52,6 +53,7 @@ public class FollowUpService {
         Assert.isTrue(checkByPrincipal(followUp));
         Assert.isTrue(followUp.getArticle().getFinalMode());
         Assert.isTrue(followUp.getArticle().getNewsPaper().getPublished());
+        followUp.setMoment(new Date());
         return followUpRepository.save(followUp);
     }
 

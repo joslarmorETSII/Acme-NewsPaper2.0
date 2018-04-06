@@ -19,36 +19,28 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h3><b><spring:message code="article.title"/>:&nbsp;</b><jstl:out value="${article.title}"/></h3>
+<h3><b><spring:message code="followUp.title"/>:&nbsp;</b><jstl:out value="${followUp.title}"/></h3>
 
 <jstl:if test="${pageContext.response.locale.language == 'es'}">
 
-	<b><spring:message code="article.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
+	<b><spring:message code="followUp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
 	<br/>
 </jstl:if>
 
 <jstl:if test="${pageContext.response.locale.language == 'en'}">
-	<b><spring:message code="article.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
+	<b><spring:message code="followUp.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
 	<br/>
 </jstl:if>
 
-<b><spring:message code="article.summary"/>:&nbsp;</b><jstl:out value="${article.summary}"/>
+<b><spring:message code="followUp.summary"/>:&nbsp;</b><jstl:out value="${followUp.summary}"/>
 <br/>
 
-<b><spring:message code="article.body"/>:&nbsp;</b><jstl:out value="${article.body}"/>
+<b><spring:message code="followUp.text"/>:&nbsp;</b><jstl:out value="${followUp.text}"/>
 <br/>
 
-<b><spring:message code="article.picture"/>:&nbsp;</b><jstl:out value="${article.picture}"/>
+<b><spring:message code="followUp.pictures"/>:&nbsp;</b><jstl:out value="${followUp.pictures}"/>
 <br/>
 
-<b><spring:message code="article.finalMode"/>:&nbsp;</b><jstl:out value="${article.finalMode}"/>
-<br/>
-
-<b><spring:message code="article.taboo"/>:&nbsp;</b><jstl:out value="${article.taboo}"/>
-<br/>
-
-<a href="followUp/list.do?articleId=${article.id}"><spring:message code="article.listFollowUps"/></a>
-<br/>
-
-<input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
-	   onclick="javascript: relativeRedir('article/listAll.do');" />
+<br>
+<input type="button" name="cancel" value="<spring:message code="followUp.cancel" />"
+	   onclick="javascript: relativeRedir('followUp/listAll.do');" />

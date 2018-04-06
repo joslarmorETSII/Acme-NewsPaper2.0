@@ -18,37 +18,28 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${actionUri}" modelAttribute="article" >
+<form:form action="${actionUri}" modelAttribute="followUp" >
 
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<form:hidden path="followUps" />
-	<form:hidden path="taboo" />
 	<form:hidden path="moment" />
 
-	<form:label path="newsPaper"><spring:message code="article.newsPaper"/></form:label>
-	<form:select path="newsPaper">
+	<form:label path="article"><spring:message code="followUp.article"/></form:label>
+	<form:select path="article">
 		<form:option label="----" value="0"/>
-		<form:options items="${newsPapers}" itemLabel="title" itemValue="id"/>
+		<form:options items="${articles}" itemLabel="title" itemValue="id"/>
 	</form:select>
-	<form:errors path="newsPaper" cssClass="error"/>
+	<form:errors path="article" cssClass="error"/>
 	<br/>
 
-	<acme:textbox path="title" code="article.title"/>
-	<acme:textbox path="summary" code="article.summary" />
-	<acme:textarea path="body" code="article.body" />
-	<acme:textbox path="picture" code="article.picture"/>
-	<acme:checkbox path="finalMode" code="article.finalMode"/>
+	<acme:textbox path="title" code="followUp.title"/>
+	<acme:textbox path="summary" code="followUp.summary" />
+	<acme:textarea path="text" code="followUp.text" />
+	<acme:textbox path="pictures" code="followUp.pictures"/>
 
-	<jstl:if test="${article.finalMode eq false}" >
-		<acme:submit name="save" code="article.save"/>
-	</jstl:if>
+	<acme:submit name="save" code="followUp.save"/>
 
-	<jstl:if test="${article.id != 0}" >
-		<acme:submit name="delete" code="article.delete"/>
-	</jstl:if>
-
-	<acme:cancel code="article.cancel" url="article/listAll.do"/>
+	<acme:cancel code="followUp.cancel" url="followUp/listAll.do"/>
 
 </form:form>
 

@@ -44,6 +44,8 @@
 <b><spring:message code="newsPaper.taboo"/>:&nbsp;</b><jstl:out value="${newsPaper.taboo}"/>
 <br/>
 
-<br>
+<a href="article/listAll.do?newsPaperId=${newsPaper.id}"><spring:message code="newsPaper.listArticles"/></a>
+<br/>
+
 <input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
        onclick="javascript: relativeRedir('${cancelURI}');" />
