@@ -64,6 +64,7 @@ public class ArticleUserController {
         String momentEs;
         String momentEn;
 
+
         formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         momentEs = formatterEs.format(new Date());
         formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
