@@ -1,5 +1,6 @@
 package controllers.User;
 
+import controllers.AbstractController;
 import domain.Article;
 import domain.NewsPaper;
 import domain.User;
@@ -22,7 +23,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/article/user")
-public class ArticleUserController {
+public class ArticleUserController extends AbstractController{
     // Services --------------------------------------------
 
     @Autowired
@@ -98,13 +99,13 @@ public class ArticleUserController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid Article article, @RequestParam NewsPaper newsPaper, final BindingResult binding) {
+    public ModelAndView save(@Valid Article article, BindingResult binding) {
         ModelAndView result;
         if (binding.hasErrors())
             result = this.createEditModelAndView(article);
         else
             try {
-                this.articleService.save(article, newsPaper);
+                this.articleService.save(article, article.getNewsPaper());
                 result = new ModelAndView("redirect:list.do");
             } catch (final Throwable oops) {
                 result = this.createEditModelAndView(article, "article.commit.error");
