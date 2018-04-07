@@ -147,21 +147,18 @@
 		<property name="newsPapers">
 			<list>
 				<ref bean="newsPaper1"/>
-
 			</list>
 		</property>
-
-		<property name="followers">
-			<list>
-				<ref bean="follower1"/>
-			</list>
-		</property>
-
 		<property name="followings">
 			<list>
 				<ref bean="following1"/>
 			</list>
 		</property>
+        <property name="followers">
+            <list>
+            </list>
+        </property>
+
 	</bean>
 
 	<bean id="user2" class="domain.User">
@@ -182,11 +179,7 @@
 				<null/>
 			</list>
 		</property>
-		<property name="followers">
-			<list>
-				<null/>
-			</list>
-		</property>
+
 		<property name="followings">
 			<list>
 				<null/>
@@ -269,11 +262,7 @@
 				<null/>
 			</list>
 		</property>
-		<property name="followers">
-			<list>
-				<null/>
-			</list>
-		</property>
+
 		<property name="followings">
 			<list>
 				<ref bean="user1"/>
@@ -301,16 +290,16 @@
 				<null/>
 			</list>
 		</property>
-		<property name="followers">
-			<list>
-				<ref bean="user1"/>
-			</list>
-		</property>
+
 		<property name="followings">
 			<list>
 				<null/>
 			</list>
 		</property>
+        <property name="followers">
+            <list>
+            </list>
+        </property>
 	</bean>
 
 	<!-- Articles -->
@@ -361,8 +350,8 @@
 			</list>
 		</property>
 		<property name="article" ref="article2" />
-
 	</bean>
+
 
 	<!-- Configuration -->
 

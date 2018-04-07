@@ -32,10 +32,8 @@ public class UserService {
     // Supporting services ----------------------------------------------------
 
     @Autowired
-    private ActorService actorService;
-
-    @Autowired
     private UserAccountService userAccountService;
+
 
     // Constructors -----------------------------------------------------------
 
@@ -135,5 +133,38 @@ public class UserService {
         return result;
     }
 
+
+    public Collection<User> follow(int userId){
+        Assert.notNull(userId);
+        User principal;
+        User userToFollow;
+
+        principal = findByPrincipal();
+        userToFollow = userRepository.findOne(userId);
+        Assert.isTrue(!principal.getFollowings().contains(userToFollow));
+        principal.getFollowings().add(userToFollow);
+
+        save(principal);
+        save(userToFollow);
+
+        return principal.getFollowings();
+    }
+
+    public Collection<User> unfollow(int userId){
+        Assert.notNull(userId);
+        User principal;
+        User userToUnFollow;
+
+        principal = findByPrincipal();
+        userToUnFollow = userRepository.findOne(userId);
+        Assert.isTrue(principal.getFollowings().contains(userToUnFollow));
+        principal.getFollowings().remove(userToUnFollow);
+        userToUnFollow.getFollowers().remove(principal);
+
+        save(principal);
+        save(userToUnFollow);
+
+        return principal.getFollowings();
+    }
 
 }

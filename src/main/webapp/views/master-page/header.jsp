@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Acme NewsPaper Co., Inc." />
+	<img src="images/logo.png" height="200" width="450" alt="Acme NewsPaper Co., Inc." />
 </div>
 
 <div>
@@ -38,9 +38,13 @@
 					<li><a href="article/user/list.do"><spring:message code="master.page.user.article.list" /></a></li>
 					<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
 
-
 			</ul>
 			</li>
+			<li><a class="fNiv" href="user/list-followers.do"><spring:message code="master.page.user.followers" /></a></li>
+			<li><a class="fNiv" href="user/list-following.do"><spring:message code="master.page.user.following" /></a></li>
+			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
+
+
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">
@@ -55,6 +59,8 @@
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.newsPaper.listAll" /></a></li>
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
+			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.user.register" /></a></li>
+
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

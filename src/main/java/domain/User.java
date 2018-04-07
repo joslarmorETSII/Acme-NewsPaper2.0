@@ -21,10 +21,8 @@ public class User extends Actor{
 
     private Collection<Chirp> chirps;
     private Collection<NewsPaper> newsPapers;
-    private Collection<User> followers;
     private Collection<User> followings;
-    private User follower;
-    private User followed;
+    private Collection<User> followers;
 
     @Valid
     @NotNull
@@ -41,18 +39,27 @@ public class User extends Actor{
     }
 
     @Valid
-    @NotNull
-    @OneToMany(mappedBy = "follower")
+    @ManyToMany(mappedBy = "followings",fetch= FetchType.EAGER)
     public Collection<User> getFollowers() {
-        return followers;
+        return this.followers;
     }
 
-    @NotNull
-    @Valid
-    @OneToMany(mappedBy = "follower")
-    public Collection<User> getFollowings() {
-        return followings;
+    public void setFollowers(Collection<User> followers) {
+        this.followers = followers;
     }
+
+    @Valid
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch= FetchType.EAGER)
+    public Collection<User> getFollowings() {
+        return this.followings;
+    }
+
+    public void setFollowings(Collection<User> following) {
+        this.followings = following;
+    }
+
+
+
 
     public void setChirps(Collection<Chirp> chirps) {
         this.chirps = chirps;
@@ -62,29 +69,6 @@ public class User extends Actor{
         this.newsPapers = newsPapers;
     }
 
-    public void setFollowers(Collection<User> followers) {
-        this.followers = followers;
-    }
 
-    public void setFollowings(Collection<User> followings) {
-        this.followings = followings;
-    }
 
-    @ManyToOne
-    public User getFollower() {
-        return follower;
-    }
-
-    public void setFollower(User follower) {
-        this.follower = follower;
-    }
-
-    @ManyToOne
-    public User getFollowed() {
-        return followed;
-    }
-
-    public void setFollowed(User followed) {
-        this.followed = followed;
-    }
 }

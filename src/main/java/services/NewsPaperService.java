@@ -31,6 +31,9 @@ public class NewsPaperService {
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private CustomerService customerService;
+
     // Constructors -----------------------------------------------------------
 
     public NewsPaperService() {
@@ -82,6 +85,14 @@ public class NewsPaperService {
     public void delete(NewsPaper newsPaper){
         Assert.notNull(newsPaper);
         Assert.isTrue(checkByPrincipalAdmin(newsPaper) || checkByPrincipal(newsPaper));
+        Collection<Customer> customers =newsPaper.getCustomers();
+        if(customers.size()>0) {
+            for(Customer c : customers){
+                c.getNewsPapers().remove(newsPaper);
+                customerService.save(c);
+            }
+        }
+
         this.articleService.deleteAll(newsPaper.getArticles());
         this.newsPaperRepository.delete(newsPaper);
     }

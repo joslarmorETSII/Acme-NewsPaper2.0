@@ -55,6 +55,15 @@
 		<security:intercept-url pattern="/configuration/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
 
+		<!-- User -->
+
+		<security:intercept-url pattern="/user/display.do" access="permitAll" />
+		<security:intercept-url pattern="/user/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/user/list-followers.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/list-following.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/editProfile.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/**" access="hasRole('USER')"/>
+
 
 
 
