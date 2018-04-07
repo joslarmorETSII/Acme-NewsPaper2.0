@@ -66,6 +66,9 @@ public class NewsPaperService {
     public NewsPaper save(NewsPaper newsPaper){
         NewsPaper res= null;
         Assert.isTrue(checkByPrincipal(newsPaper));
+        if(isTabooNewsPaper(newsPaper)){
+            newsPaper.setTaboo(true);
+        }
         res= newsPaperRepository.save(newsPaper);
         return res;
     }
@@ -83,7 +86,9 @@ public class NewsPaperService {
     }
     public NewsPaper findOneToEdit(int newsPaperId){
         NewsPaper res= null;
+
         res= this.newsPaperRepository.findOne(newsPaperId);
+        Assert.isTrue(!res.getPublished());
         Assert.isTrue(checkByPrincipal(res) || checkByPrincipalAdmin(res));
         return  res;
     }
@@ -107,8 +112,10 @@ public class NewsPaperService {
 
     public void findOneToPublish(NewsPaper newsPaper){
         Collection<Article> articles= newsPaper.getArticles();
+        Assert.isTrue(!newsPaper.getTaboo());
         for(Article a:articles){
-            if(a.getFinalMode()){
+            Assert.isTrue(!a.getTaboo());
+            if(a.getFinalMode() && !a.getTaboo()){
                 newsPaper.setPublished(true);
                 newsPaper.setPublicationDate(new Date());
                 a.setMoment(new Date());
@@ -199,6 +206,8 @@ public class NewsPaperService {
         for(NewsPaper n:newsPapers){
             if(isTabooNewsPaper(n)) {
                 res.add(n);
+                n.setTaboo(true);
+                newsPaperRepository.save(n);
             }
             }
         return res;

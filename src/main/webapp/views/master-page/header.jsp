@@ -67,6 +67,7 @@
 		
 		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
+			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 

@@ -43,7 +43,7 @@ public class ArticleAdministratorController extends AbstractController {
     public ModelAndView list() {
         ModelAndView result;
         User user;
-        Collection<Article> articlesTaboo = articleService.artticleTaboo();
+        Collection<Article> articlesTaboo = articleService.articleTaboo();
 
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
@@ -59,7 +59,7 @@ public class ArticleAdministratorController extends AbstractController {
 
 
         result = new ModelAndView("article/list");
-        result.addObject("articlesTaboo", articlesTaboo);
+        result.addObject("articles", articlesTaboo);
         result.addObject("Administrator",administrator);
         result.addObject("requestUri","article/administrator/list.do");
 

@@ -64,6 +64,9 @@ public class ArticleService {
         if(article.getId() == 0) {
             newsPaper.getArticles().add(article);
         }
+        if(isTabooArticle(article)){
+            article.setTaboo(true);
+        }
         res = articleRepository.save(article);
         return res;
 
@@ -171,7 +174,7 @@ public class ArticleService {
         return result;
     }
 
-    public Collection<Article> artticleTaboo(){
+    public Collection<Article> articleTaboo(){
         Collection<Article> res= new ArrayList<>();
         Collection<Article> articles= articleRepository.findAll();
         for(Article a:articles){
@@ -180,5 +183,10 @@ public class ArticleService {
             }
         }
         return res;
+    }
+
+    public Collection<Article> findPublishArticles() {
+
+        return articleRepository.findPublishArticles();
     }
 }

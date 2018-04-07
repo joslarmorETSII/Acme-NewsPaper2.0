@@ -29,14 +29,14 @@
 
     <jstl:set var="forPublish" value="false" />
     <jstl:forEach var="item" items="${row.articles}" >
-        <jstl:if test="${item.finalMode == true}" >
+        <jstl:if test="${item.finalMode == true and item.taboo eq false}" >
             <jstl:set var="forPublish" value="true" />
         </jstl:if>
     </jstl:forEach>
 
     <display:column>
         <security:authorize access="hasRole('USER')" >
-            <jstl:if test="${row.publisher eq user}">
+            <jstl:if test="${row.publisher eq user and row.published eq false}">
                 <acme:button url="newsPaper/user/edit.do?newsPaperId=${row.id}" code="newsPaper.edit" />
             </jstl:if>
         </security:authorize>
@@ -53,7 +53,7 @@
 
     <security:authorize access="hasRole('USER')">
         <display:column >
-            <jstl:if test="${ row.published ne true && !empty row.articles && forPublish ne false}">
+            <jstl:if test="${ row.published ne true && !empty row.articles && forPublish ne false && row.taboo eq false}">
                 <acme:button url="newsPaper/user/publish.do?newsPaperId=${row.id}" code="newsPaper.publish"/>
             </jstl:if>
             <jstl:if test="${row.published eq true}">
