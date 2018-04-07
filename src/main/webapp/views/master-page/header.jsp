@@ -28,6 +28,8 @@
 				</ul>
 			</li>
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
+			<li><a class="fNiv" href="newsPaper/administrator/list.do"><spring:message code="master.page.newsPaper.administrator.list" /></a></li>
+            <li><a class="fNiv" href="article/administrator/list.do"><spring:message code="master.page.article.administrator.list" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('USER')">

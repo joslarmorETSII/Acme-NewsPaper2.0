@@ -11,6 +11,9 @@ import security.Authority;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @Transactional
@@ -31,6 +34,8 @@ public class ArticleService {
 
     @Autowired
     private FollowUpService followUpService;
+
+    @Autowired ConfigurationService configurationService;
 
     // Constructors -----------------------------------------------------------
 
@@ -129,4 +134,51 @@ public class ArticleService {
         return this.articleRepository.findArticlesByUser(user);
     }
 
+    private boolean isTabooArticle(final Article article) {
+        boolean result = false;
+        Pattern p;
+        Matcher isAnyMatcherTitle;
+        Matcher isAnyMatcherSummary;
+        Matcher isAnyMatcherBody;
+
+        p = this.tabooWords();
+        isAnyMatcherBody = p.matcher(article.getBody());
+        isAnyMatcherSummary = p.matcher(article.getSummary());
+        isAnyMatcherTitle = p.matcher(article.getTitle());
+
+        if (isAnyMatcherTitle.find() || isAnyMatcherBody.find() || isAnyMatcherSummary.find())
+            result = true;
+
+        return result;
+    }
+
+    public Pattern tabooWords() {
+        Pattern result;
+        List<String> tabooWords;
+
+        final Collection<String> taboolist = this.configurationService.findAll().iterator().next().getTabooWords();
+        tabooWords = new ArrayList<>(taboolist);
+
+        String str = ".*\\b(";
+        for (int i = 0; i <= tabooWords.size(); i++)
+            if (i < tabooWords.size())
+                str += tabooWords.get(i) + "|";
+            else
+                str += tabooWords.iterator().next() + ")\\b.*";
+
+        result = Pattern.compile(str, Pattern.CASE_INSENSITIVE);
+
+        return result;
+    }
+
+    public Collection<Article> artticleTaboo(){
+        Collection<Article> res= new ArrayList<>();
+        Collection<Article> articles= articleRepository.findAll();
+        for(Article a:articles){
+            if(isTabooArticle(a)) {
+                res.add(a);
+            }
+        }
+        return res;
+    }
 }

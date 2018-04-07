@@ -44,12 +44,15 @@
 
 		<!-- Article -->
 		<security:intercept-url pattern="/article/user/**" access="hasRole('USER')" />
+        <security:intercept-url pattern="/article/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/article/**" access="permitAll()" />
 
 		<!-- NewsPaper -->
 
 		<security:intercept-url pattern="/newsPaper/user/**" access="hasRole('USER')" />
+		<security:intercept-url pattern="/newsPaper/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/newsPaper/**" access="permitAll()" />
+
 
 		<!-- Configuration -->
 		<security:intercept-url pattern="/configuration/administrator/**" access="hasRole('ADMINISTRATOR')" />

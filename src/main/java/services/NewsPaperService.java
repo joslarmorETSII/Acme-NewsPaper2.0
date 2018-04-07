@@ -11,6 +11,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @Transactional
@@ -33,6 +36,9 @@ public class NewsPaperService {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private ConfigurationService configurationService;
 
     // Constructors -----------------------------------------------------------
 
@@ -150,5 +156,51 @@ public class NewsPaperService {
 
     public Collection<NewsPaper> findAllNewsPaperByUserAndNotPublished(int userId) {
         return this.newsPaperRepository.findAllNewsPaperByUserAndNotPublished(userId);
+    }
+
+    private boolean isTabooNewsPaper(final NewsPaper newsPaper) {
+        boolean result = false;
+        Pattern p;
+        Matcher isAnyMatcherTitle;
+        Matcher isAnyMatcherDescription;
+
+        p = this.tabooWords();
+        isAnyMatcherTitle = p.matcher(newsPaper.getTitle());
+        isAnyMatcherDescription = p.matcher(newsPaper.getDescription());
+
+        if (isAnyMatcherTitle.find() || isAnyMatcherDescription.find())
+            result = true;
+
+        return result;
+    }
+
+    public Pattern tabooWords() {
+        Pattern result;
+        List<String> tabooWords;
+
+        final Collection<String> taboolist = this.configurationService.findAll().iterator().next().getTabooWords();
+        tabooWords = new ArrayList<>(taboolist);
+
+        String str = ".*\\b(";
+        for (int i = 0; i <= tabooWords.size(); i++)
+            if (i < tabooWords.size())
+                str += tabooWords.get(i) + "|";
+            else
+                str += tabooWords.iterator().next() + ")\\b.*";
+
+        result = Pattern.compile(str, Pattern.CASE_INSENSITIVE);
+
+        return result;
+    }
+
+    public Collection<NewsPaper> newsPapersTaboo(){
+        Collection<NewsPaper> res= new ArrayList<>();
+        Collection<NewsPaper> newsPapers= newsPaperRepository.findAll();
+        for(NewsPaper n:newsPapers){
+            if(isTabooNewsPaper(n)) {
+                res.add(n);
+            }
+            }
+        return res;
     }
 }
