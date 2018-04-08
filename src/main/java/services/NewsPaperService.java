@@ -58,8 +58,6 @@ public class NewsPaperService {
         res.setPublisher(publisher);
         res.setArticles(articles);
         res.setCustomers(customers);
-       // publisher.getNewsPapers().add(res);
-
         return res;
     }
 

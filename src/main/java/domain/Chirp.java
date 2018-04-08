@@ -22,6 +22,8 @@ public class Chirp extends DomainEntity{
     private String title;
     private Date moment;
     private String description;
+    private Boolean posted;
+    private Boolean taboo;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -52,6 +54,22 @@ public class Chirp extends DomainEntity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getPosted() {
+        return posted;
+    }
+
+    public void setPosted(Boolean posted) {
+        this.posted = posted;
+    }
+
+    public Boolean getTaboo() {
+        return taboo;
+    }
+
+    public void setTaboo(Boolean taboo) {
+        this.taboo = taboo;
     }
 
     // Relationships ---------------------------------------------------------------------
