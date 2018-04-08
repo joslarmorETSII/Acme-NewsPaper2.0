@@ -19,11 +19,14 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+
+
+
 <h3><b><spring:message code="followUp.title"/>:&nbsp;</b><jstl:out value="${followUp.title}"/></h3>
 
 <jstl:if test="${pageContext.response.locale.language == 'es'}">
 
-	<b><spring:message code="followUp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
+		<b><spring:message code="followUp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
 	<br/>
 </jstl:if>
 

@@ -15,4 +15,7 @@ public interface ArticleRepository extends JpaRepository<Article,Integer> {
     Collection<Article> findArticlesByUser(User user);
     @Query("select a from Article a where a.newsPaper.published = true")
     Collection<Article> findPublishArticles();
+
+    @Query("select n.articles from NewsPaper n where n.publisher.id = ?1 and n.published=true")
+    Collection<Article> findArticlesByUserId(int id);
 }

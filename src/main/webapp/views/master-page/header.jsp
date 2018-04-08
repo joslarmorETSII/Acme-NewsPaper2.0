@@ -24,7 +24,6 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="article/actor/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
@@ -39,12 +38,14 @@
 					<li class="arrow"></li>
 					<li><a href="article/user/list.do"><spring:message code="master.page.user.article.list" /></a></li>
 					<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
+					<li><a href="followUp/user/list.do"><spring:message code="master.page.user.followUp.list" /></a></li>
 
 			</ul>
 			</li>
 			<li><a class="fNiv" href="user/list-followers.do"><spring:message code="master.page.user.followers" /></a></li>
 			<li><a class="fNiv" href="user/list-following.do"><spring:message code="master.page.user.following" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
+
 
 
 		</security:authorize>

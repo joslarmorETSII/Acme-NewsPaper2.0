@@ -44,7 +44,7 @@ public class FollowUpService {
         User publisher= userService.findByPrincipal();
 
         res= new FollowUp();
-        res.getArticle().getNewsPaper().setPublisher(publisher);
+        //res.getArticle().getNewsPaper().setPublisher(publisher);
          return res;
     }
 
@@ -87,4 +87,7 @@ public class FollowUpService {
         return res;
     }
 
+    public Collection<FollowUp> findFollowupsByUserId(int id) {
+        return followUpRepository.findFollowupsByUserId(id);
+    }
 }

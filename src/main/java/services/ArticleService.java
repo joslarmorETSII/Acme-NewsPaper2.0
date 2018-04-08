@@ -189,4 +189,8 @@ public class ArticleService {
 
         return articleRepository.findPublishArticles();
     }
+
+    public Collection<Article> findPublishArticlesByUserId(int id) {
+        return articleRepository.findArticlesByUserId(id);
+    }
 }

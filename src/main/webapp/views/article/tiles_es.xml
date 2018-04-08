@@ -16,7 +16,7 @@
       
 <tiles-definitions>
 
-	<<definition name="article/list" extends="master.page">
+	<definition name="article/list" extends="master.page">
 	<put-attribute name="title" value="Lista de articulos" />
 	<put-attribute name="body" value="/views/article/list.jsp" />
 </definition>
