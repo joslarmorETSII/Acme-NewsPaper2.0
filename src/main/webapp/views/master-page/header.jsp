@@ -56,8 +56,10 @@
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="/newsPaper/customer/list.do"><spring:message code="master.page.newspaper.customer.list" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="/newsPaper/customer/listNewsPaperCustomer.do"><spring:message code="master.page.newspaper.customerNewsPaper" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
@@ -66,6 +68,7 @@
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
 			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.user.register" /></a></li>
+			<li><a class="fNiv" href="customer/register.do"><spring:message code="master.page.customer.register" /></a></li>
 
 		</security:authorize>
 		

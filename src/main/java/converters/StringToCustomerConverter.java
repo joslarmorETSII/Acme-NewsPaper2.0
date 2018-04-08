@@ -9,7 +9,7 @@ import repositories.CustomerRepository;
 public class StringToCustomerConverter implements Converter<String, Customer>{
 
     @Autowired
-    private CustomerRepository managerRepository;
+    private CustomerRepository customerRepository;
 
     @Override
     public Customer convert(final String text) {
@@ -21,7 +21,7 @@ public class StringToCustomerConverter implements Converter<String, Customer>{
                 result = null;
             else {
                 id = Integer.valueOf(text);
-                result = managerRepository.findOne(id);
+                result = customerRepository.findOne(id);
             }
         } catch (final Throwable oops) {
             throw new IllegalArgumentException(oops);

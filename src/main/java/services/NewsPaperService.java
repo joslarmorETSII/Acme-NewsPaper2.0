@@ -1,9 +1,13 @@
 package services;
 
 import domain.*;
+import forms.CustomerForm;
+import forms.SubscribeForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import repositories.NewsPaperRepository;
 import security.Authority;
 
@@ -214,4 +218,5 @@ public class NewsPaperService {
     public Collection<NewsPaper> searchNewspapers(String keyword) {
         return newsPaperRepository.searchNewspapers(keyword,keyword);
     }
+
 }

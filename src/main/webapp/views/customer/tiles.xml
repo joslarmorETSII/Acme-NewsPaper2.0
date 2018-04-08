@@ -16,14 +16,19 @@
 
 <tiles-definitions>
 
-	<definition name="manager/editProfile" extends="master.page">
+	<definition name="customer/editProfile" extends="master.page">
 		<put-attribute name="title" value="Edition of an customer" />
-		<put-attribute name="body" value="/views/customer/editProfile.jsp" />
+		<put-attribute name="body" value="/views/customer/edit.jsp" />
 	</definition>
 
-	<definition name="manager/list" extends="master.page">
+	<definition name="customer/list" extends="master.page">
 		<put-attribute name="title" value="List Newspapers by Customer" />
-		<put-attribute name="body" value="/views/customer/list.jsp" />
+		<put-attribute name="body" value="/views/newsPaper/listNewsPaperCustomer.jsp" />
+	</definition>
+
+	<definition name="customer/editForm" extends="master.page">
+		<put-attribute name="title" value="Register of a user" />
+		<put-attribute name="body" value="/views/customer/editForm.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -57,6 +57,10 @@
 		<!-- Configuration -->
 		<security:intercept-url pattern="/configuration/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
+		<!-- Customer -->
+
+		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/customer/**" access="hasRole('CUSTOMER')"/>
 
 		<!-- Profile -->
 		<security:intercept-url pattern="/everyone/profile/display.do" access="isAnonymous()" />

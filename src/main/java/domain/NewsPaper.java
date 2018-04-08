@@ -28,8 +28,9 @@ public class NewsPaper extends DomainEntity {
     private String description;
     private String picture;
     private boolean published;
-    private boolean taboo;
     private boolean modePrivate;
+    private boolean taboo;
+
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)

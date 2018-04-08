@@ -62,6 +62,14 @@
         </display:column>
     </security:authorize>
 
+    <security:authorize access="hasRole('CUSTOMER')">
+        <jstl:if test="${ row.modePrivate eq true}">
+        <display:column >
+                <acme:button url="newsPaper/customer/subscribe.do?newsPaperId=${row.id}" code="newsPaper.subscribe"/>
+        </display:column>
+        </jstl:if>
+    </security:authorize>
+
     <display:column >
         <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
     </display:column>

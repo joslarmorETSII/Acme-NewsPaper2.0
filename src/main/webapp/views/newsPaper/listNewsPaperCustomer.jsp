@@ -29,31 +29,42 @@
     <display:table id="newspaper" name="newsPapers" requestURI="${requestURI}"
                    pagesize="5">
 
-        <acme:column code="newspaper.customer" value="${newspaper.customer}" />
-        <acme:column code="newspaper.description" value="${newspaper.description}" />
-        <acme:column code="newspaper.picture" value="${newspaper.picture}"/>
-        <acme:column code="newspaper.published" value="${newspaper.published}"/>
-        <acme:column code="newspaper.taboo" value="${newspaper.taboo}"/>
+        <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
+        <acme:column code="newsPaper.title" value="${newspaper.title}"/>
+        <acme:column code="newsPaper.description" value="${newspaper.description}"/>
+        <acme:column code="newsPaper.picture" value="${newspaper.picture}"/>
 
-        <spring:message var="publicationDate" code="newspaper.publicationDate"/>
+        <spring:message var="publicationDate" code="newsPaper.publicationDate"/>
         <spring:message var="formatDate" code="event.format.date"/>
         <display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
 
-    </display:table>
-</jstl:if>
+        <display:column >
+            <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+        </display:column>
 
-<display:table id="newspaper" name="newsPapersPrivate" requestURI="${requestURI}"
+    </display:table>
+
+
+
+<display:table id="newsPapers" name="newsPapersPrivate" requestURI="${requestURI}"
                pagesize="5">
 
-    <acme:column code="newspaper.customer" value="${newspaper.customer}" />
-    <acme:column code="newspaper.description" value="${newspaper.description}" />
-    <acme:column code="newspaper.picture" value="${newspaper.picture}"/>
-    <acme:column code="newspaper.published" value="${newspaper.published}"/>
-    <acme:column code="newspaper.taboo" value="${newspaper.taboo}"/>
+    <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
+    <acme:column code="newsPaper.title" value="${newspaper.title}"/>
+    <acme:column code="newsPaper.description" value="${newspaper.description}"/>
+    <acme:column code="newsPaper.picture" value="${newspaper.picture}"/>
 
-    <spring:message var="publicationDate" code="newspaper.publicationDate"/>
+    <spring:message var="publicationDate" code="newsPaper.publicationDate"/>
     <spring:message var="formatDate" code="event.format.date"/>
     <display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
+
+    <display:column >
+        <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+    </display:column>
+
+    <display:column >
+        <spring:message code="newsPaper.subscribed" var="subscribed"/> <jstl:out value="${subscribed}" />
+    </display:column>
 
 </display:table>
 
