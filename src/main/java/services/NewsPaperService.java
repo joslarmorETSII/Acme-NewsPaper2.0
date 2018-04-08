@@ -210,4 +210,8 @@ public class NewsPaperService {
             }
         return res;
     }
+
+    public Collection<NewsPaper> searchNewspapers(String keyword) {
+        return newsPaperRepository.searchNewspapers(keyword,keyword);
+    }
 }

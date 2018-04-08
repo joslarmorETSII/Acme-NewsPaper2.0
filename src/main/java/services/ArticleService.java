@@ -193,4 +193,8 @@ public class ArticleService {
     public Collection<Article> findPublishArticlesByUserId(int id) {
         return articleRepository.findArticlesByUserId(id);
     }
+
+   public Collection<Article> findbyTitleAndBodyAndSummary(String keyword){
+        return articleRepository.findByTitleOrSummaryOrBody(keyword,keyword,keyword);
+    }
 }

@@ -24,10 +24,14 @@
     <acme:column code="user.name" value="${row.name}" />
     <acme:column code="user.surname" value="${row.surname}" />
     <acme:column code="user.email" value="${row.email}"/>
-    <acme:column code="user.phone" value="${urow.phone}"/>
+    <acme:column code="user.phone" value="${row.phone}"/>
     <acme:column code="user.postalAddresses" value="${row.postalAddresses}"/>
-    <acme:columnButton url="user/display.do?userId=${row.id}" codeButton="general.display"/>
-
+    <security:authorize access="isAuthenticated()">
+         <acme:columnButton url="user/display.do?userId=${row.id}" codeButton="general.display"/>
+    </security:authorize>
+    <security:authorize access="isAnonymous()">
+        <acme:columnButton url="profile/display.do?userId=${row.id}" codeButton="general.display"/>
+    </security:authorize>
 
 </display:table>
 

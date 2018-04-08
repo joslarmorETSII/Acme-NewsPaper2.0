@@ -10,41 +10,109 @@
 
 package controllers;
 
+import domain.Article;
+import domain.NewsPaper;
+import domain.Search;
+import domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import services.ArticleService;
+import services.NewsPaperService;
+import services.UserService;
+
+import javax.validation.Valid;
+import java.util.Collection;
 
 @Controller
-@RequestMapping("/profile")
+@RequestMapping("/everyone")
 public class ProfileController extends AbstractController {
 
-	// Action-1 ---------------------------------------------------------------		
 
-	@RequestMapping("/action-1")
-	public ModelAndView action1() {
+
+	// Services --------------------------------------------------------------
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private ArticleService articleService;
+
+	@Autowired
+	private NewsPaperService newsPaperService;
+
+	// Display ---------------------------------------------------------------
+
+	@RequestMapping(value = "/profile/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam Integer userId) {
 		ModelAndView result;
+		User user;
+		Collection<Article> articles;
 
-		result = new ModelAndView("profile/action-1");
+		user = userService.findOne(userId);
+		articles = articleService.findPublishArticlesByUserId(userId);
+		result = new ModelAndView("user/display");
+		result.addObject("user", user);
+		result.addObject("articles", articles);
+		result.addObject("requestURI", "user/display.do");
 
 		return result;
 	}
+	// Search ---------------------------------------------------------------
 
-	// Action-2 ---------------------------------------------------------------		
+	@RequestMapping(value = "/search", method = RequestMethod.POST, params = "search")
+	public ModelAndView action2(@Valid Search search, BindingResult bindingResult) {
+		ModelAndView result;
+        Collection<Article> articles;
+        Collection<NewsPaper> newsPapers;
 
-	@RequestMapping("/action-2")
+        if(bindingResult.hasErrors()){
+            return createmodelAndView(search);
+        }else try {
+
+            result = new ModelAndView("article/search");
+            articles = articleService.findbyTitleAndBodyAndSummary(search.getKeyword());
+            newsPapers = newsPaperService.searchNewspapers(search.getKeyword());
+
+            result.addObject("articles", articles);
+			result.addObject("newsPapers",newsPapers);
+			result.addObject("requestURI", "everyone/search.do");
+        }catch (Throwable oops){
+            return createmodelAndView(search,"general.error");
+        }
+		return result;
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView action2() {
 		ModelAndView result;
 
-		result = new ModelAndView("profile/action-2");
+		result = new ModelAndView("article/search");
+		Search search = new Search();
+
+		result.addObject("search",search);
+		result.addObject("requestURI", "everyone/article/search.do");
 
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------		
 
-	@RequestMapping("/action-3")
-	public ModelAndView action3() {
-		throw new RuntimeException("Oops! An *expected* exception was thrown. This is normal behaviour.");
-	}
+    // Ancillary methods  ---------------------------------------------------------------
 
+
+    protected ModelAndView createmodelAndView(Search search) {
+	    return createmodelAndView(search,null);
+    }
+
+    protected ModelAndView createmodelAndView(Search search, String messageCode){
+        ModelAndView result;
+        result =new ModelAndView("article/search");
+        result.addObject("message",messageCode);
+        result.addObject("search",search);
+        return result;
+    }
 }

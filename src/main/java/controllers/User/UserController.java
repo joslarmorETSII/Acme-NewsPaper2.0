@@ -1,6 +1,7 @@
 package controllers.User;
 
 import controllers.AbstractController;
+import domain.Article;
 import domain.User;
 import forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ArticleService;
 import services.UserService;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/user")
@@ -23,6 +26,9 @@ public class UserController extends AbstractController{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ArticleService articleService;
 
     // Constructor -----------------------------------------
     public UserController() {
@@ -101,11 +107,15 @@ public class UserController extends AbstractController{
         ModelAndView result;
         User user;
         User principal;
+        Collection<Article> articles;
 
         user = userService.findOne(userId);
         principal = userService.findByPrincipal();
+        articles=articleService.findPublishArticlesByUserId(userId);
         result = new ModelAndView("user/display");
         result.addObject("user", user);
+        result.addObject("articles", articles);
+        result.addObject("requestURI","user/display.do");
         result.addObject("esSeguido", principal.getFollowings().contains(user));
 
         return result;

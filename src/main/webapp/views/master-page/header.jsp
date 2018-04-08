@@ -12,6 +12,8 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 
 <div>
 	<img src="images/logo.png" height="200" width="450" alt="Acme NewsPaper Co., Inc." />
@@ -62,6 +64,7 @@
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.newsPaper.listAll" /></a></li>
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
+			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
 			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.user.register" /></a></li>
 
 		</security:authorize>
@@ -79,12 +82,14 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
-
 		</security:authorize>
+		<li><a class="fNiv" href="everyone/search.do"><spring:message code="master.page.search" /></a></li>
+
 	</ul>
 </div>
 
 <div>
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>
 </div>
+
 
