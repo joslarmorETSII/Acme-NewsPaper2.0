@@ -40,7 +40,7 @@
 	<acme:textbox path="picture" code="article.picture"/>
 	<acme:checkbox path="finalMode" code="article.finalMode"/>
 
-	<jstl:if test="${article.finalMode eq false}" >
+	<jstl:if test="${article.finalMode eq false or article.id eq 0}" >
 		<acme:submit name="save" code="article.save"/>
 	</jstl:if>
 

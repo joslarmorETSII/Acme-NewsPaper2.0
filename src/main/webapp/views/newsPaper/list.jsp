@@ -66,6 +66,12 @@
         <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
     </display:column>
 
+    <security:authorize access="hasRole('ADMINISTRATOR')" >
+        <display:column>
+            <acme:button url="newsPaper/administrator/edit.do?newsPaperId=${row.id}" code="newsPaper.delete" />
+        </display:column>
+    </security:authorize>
+
 </display:table>
 
 <security:authorize access="hasRole('USER')">

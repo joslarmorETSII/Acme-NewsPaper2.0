@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.AdministratorService;
 import services.ArticleService;
 import services.NewsPaperService;
+import services.UserService;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -29,6 +31,12 @@ public class ArticleAdministratorController extends AbstractController {
 
     @Autowired
     private AdministratorService administratorService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private  NewsPaperService newsPaperService;
 
 
     // Constructor --------------------------------------------
@@ -68,5 +76,44 @@ public class ArticleAdministratorController extends AbstractController {
 
         return result;
 
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam int articleId){
+        ModelAndView result;
+        Article article= articleService.findOne(articleId);
+        try{
+
+            articleService.delete(article);
+            result = new ModelAndView("redirect:list.do");
+        }catch (Throwable oops){
+            result = createEditModelAndView(article,"article.commit.error");
+        }
+
+        return result;
+    }
+
+    // Ancillary methods ------------------------------------------------------
+
+    protected ModelAndView createEditModelAndView(final Article article) {
+        ModelAndView result;
+
+        result = this.createEditModelAndView(article, null);
+        return result;
+    }
+
+    protected ModelAndView createEditModelAndView(final Article article, final String messageCode) {
+        ModelAndView result;
+        User user = userService.findByPrincipal();
+
+        Collection<NewsPaper> newsPapers = this.newsPaperService.findAllNewsPaperByUserAndNotPublished(user.getId());
+
+        result = new ModelAndView("article/edit");
+        result.addObject("article", article);
+        result.addObject("newsPapers", newsPapers);
+        result.addObject("actionUri","article/administrator/edit.do");
+        result.addObject("message", messageCode);
+
+        return result;
     }
 }
