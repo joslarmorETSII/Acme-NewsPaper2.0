@@ -11,6 +11,7 @@ import security.Authority;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,11 +52,12 @@ public class ChirpService  {
         user=userService.findByPrincipal();
         res= new Chirp();
         res.setUser(user);
+
         return res;
     }
 
     public Chirp save(Chirp chirp){
-        Chirp res= null;
+       Chirp res = null;
         Assert.isTrue(checkByPrincipal(chirp));
         if(isTabooChirp(chirp)){
             chirp.setTaboo(true);
@@ -155,5 +157,23 @@ public class ChirpService  {
         }
         return res;
 
+    }
+
+    public Collection<Chirp> findChirpsByUserId(int userId){
+        return chirpRepository.findChirpsByUserId(userId);
+    }
+
+    public Collection<Chirp> findAllChirpsByFollowings(int userId){
+        return chirpRepository.findAllChirpsByFollowings(userId);
+    }
+
+    public void findOneToPublish(Chirp chirp){
+
+        Assert.isTrue(!chirp.getTaboo());
+
+            if(!chirp.getPosted() && !chirp.getTaboo()){
+                chirp.setPosted(true);
+                chirp.setMoment(new Date());
+            }
     }
 }

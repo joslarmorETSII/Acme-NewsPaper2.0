@@ -41,6 +41,7 @@
 					<li><a href="article/user/list.do"><spring:message code="master.page.user.article.list" /></a></li>
 					<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
 					<li><a href="followUp/user/list.do"><spring:message code="master.page.user.followUp.list" /></a></li>
+				<li><a href="chirp/user/list.do"><spring:message code="master.page.user.chirp.list" /></a></li>
 
 			</ul>
 			</li>

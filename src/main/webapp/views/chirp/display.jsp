@@ -1,12 +1,15 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: khawla
-  Date: 04/04/2018
-  Time: 18:14
-  To change this template use File | Settings | File Templates.
---%>
+ * edit.jsp
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ *
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
+ * http://www.tdg-seville.info/License.html
+ --%>
+
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
-        pageEncoding="ISO-8859-1"%>
+		pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -20,19 +23,19 @@
 
 <jstl:if test="${pageContext.response.locale.language == 'es'}">
 
-    <b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
-    <br/>
+	<b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
+	<br/>
 </jstl:if>
 
 <jstl:if test="${pageContext.response.locale.language == 'en'}">
-    <b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
-    <br/>
+	<b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
+	<br/>
 </jstl:if>
 
 <b><spring:message code="chirp.description"/>:&nbsp;</b><jstl:out value="${chirp.description}"/>
 <br/>
 
-<b><spring:message code="chirp.posted"/>:&nbsp;</b><jstl:out value="${chirp.posted}"/>
+<b><spring:message code="chirp.publicado"/>:&nbsp;</b><jstl:out value="${chirp.posted}"/>
 <br/>
 
 <b><spring:message code="chirp.taboo"/>:&nbsp;</b><jstl:out value="${chirp.taboo}"/>
@@ -40,8 +43,5 @@
 
 
 
-<a href="chirp/listAll.do?chirpId=${chirp.id}"><spring:message code="chirp.listChirps"/></a>
-<br/>
-
-<input type="button" name="cancel" value="<spring:message code="chirp.cancel" />"
-       onclick="javascript: relativeRedir('${cancelURI}');" />
+<input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
+	   onclick="javascript: relativeRedir('chirp/user/list.do');" />

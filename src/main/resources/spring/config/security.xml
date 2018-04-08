@@ -39,8 +39,10 @@
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
-		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 
+
+		<!-- Chirp -->
+		<security:intercept-url pattern="/chirp/user/**" access="hasRole('USER')" />
 
 		<!-- Article -->
 		<security:intercept-url pattern="/article/user/**" access="hasRole('USER')" />
