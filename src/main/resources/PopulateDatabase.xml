@@ -193,6 +193,8 @@
 	<property name="title" value="Primer chirp"/>
 	<property name="moment" value="01/04/2018 11:00"/>
 	<property name="description" value="Esto es un chirp de prueba"/>
+	<property name="posted" value="false"/>
+	<property name="taboo" value="false" />
 	<property name="user" ref="user1"/>
 	</bean>
 

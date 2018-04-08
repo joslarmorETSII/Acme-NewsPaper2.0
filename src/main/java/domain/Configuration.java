@@ -74,8 +74,10 @@ public class Configuration extends DomainEntity {
     public void setSpanishWelcome(final String spanishWelcome) {
         this.spanishWelcome = spanishWelcome;
     }
+
     @NotNull
     @ElementCollection
+    //TODO: @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public Collection<String> getTabooWords() {
         return this.tabooWords;
     }
