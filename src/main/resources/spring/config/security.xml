@@ -79,6 +79,8 @@
 		<security:intercept-url pattern="/user/list-followers.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/list-following.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/editProfile.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/display.do" access="hasRole('CUSTOMER')" />
+
 		<security:intercept-url pattern="/user/**" access="hasRole('USER')"/>
 
 		<!-- FollowUp -->
