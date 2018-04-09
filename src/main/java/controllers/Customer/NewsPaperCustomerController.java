@@ -46,11 +46,9 @@ public class NewsPaperCustomerController extends AbstractController{
         ModelAndView result;
 
         Collection<NewsPaper> newsPapers= customerService.findByPrincipal().getNewsPapers();
-        Collection<NewsPaper> newsPapersPrivate= newsPaperService.findNewsPapersPrivate(customerService.findByPrincipal().getId());
 
         result = new ModelAndView("newsPaper/listNewsPaperCustomer");
         result.addObject("newsPapers", newsPapers);
-        result.addObject("newsPapersPrivate", newsPapersPrivate);
 
         result.addObject("requestURI", "newsPaper/customer/listNewsPaperCustomer.do");
         return result;
@@ -87,8 +85,9 @@ public class NewsPaperCustomerController extends AbstractController{
         SubscribeForm subscribeForm = new SubscribeForm();
         subscribeForm.setNewspaper(newsPaper);
 
-        result = new ModelAndView("customer/subscribeForm");
+        result = new ModelAndView("customer/subscribeForm.do");
         result.addObject("subscribeForm", subscribeForm);
+
         return result;
     }
 

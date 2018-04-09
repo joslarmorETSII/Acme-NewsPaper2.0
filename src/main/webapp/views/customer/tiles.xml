@@ -31,4 +31,9 @@
 		<put-attribute name="body" value="/views/customer/editForm.jsp" />
 	</definition>
 
+	<definition name="customer/subscribeForm" extends="master.page">
+		<put-attribute name="title" value="Register of a user" />
+		<put-attribute name="body" value="/views/customer/subscribeForm.jsp" />
+	</definition>
+
 </tiles-definitions>

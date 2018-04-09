@@ -77,6 +77,7 @@ public class NewsPaper extends DomainEntity {
         return published;
     }
 
+
     public void setPublished(boolean published) {
         this.published = published;
     }

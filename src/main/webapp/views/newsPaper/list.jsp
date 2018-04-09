@@ -63,11 +63,11 @@
     </security:authorize>
 
     <security:authorize access="hasRole('CUSTOMER')">
-        <jstl:if test="${ row.modePrivate eq true}">
         <display:column >
-                <acme:button url="newsPaper/customer/subscribe.do?newsPaperId=${row.id}" code="newsPaper.subscribe"/>
+            <jstl:if test="${ row.modePrivate ne false}">
+                <acme:button url="newsPaper/cutomer/subscribe.do?newsPaperId=${row.id}" code="newsPaper.subscribe"/>
+            </jstl:if>
         </display:column>
-        </jstl:if>
     </security:authorize>
 
     <display:column >
@@ -79,6 +79,8 @@
             <acme:button url="newsPaper/administrator/edit.do?newsPaperId=${row.id}" code="newsPaper.delete" />
         </display:column>
     </security:authorize>
+
+
 
 </display:table>
 
