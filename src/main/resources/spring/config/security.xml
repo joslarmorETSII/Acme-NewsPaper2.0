@@ -71,17 +71,20 @@
 
 		<!-- Profile -->
 		<security:intercept-url pattern="/everyone/profile/display.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/everyone/profile/display.do" access="hasRole('CUSTOMER')" />
+
 
 		<!-- User -->
 
+		<security:intercept-url pattern="/user/**" access="hasRole('USER')"/>
 		<security:intercept-url pattern="/user/list.do" access="permitAll" />
 		<security:intercept-url pattern="/user/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/user/list-followers.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/list-following.do" access="hasRole('USER')" />
 		<security:intercept-url pattern="/user/editProfile.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/display.do" access="hasAnyRole('USER','ADMINISTRATOR')" />
 		<security:intercept-url pattern="/user/display.do" access="hasRole('CUSTOMER')" />
 
-		<security:intercept-url pattern="/user/**" access="hasRole('USER')"/>
 
 		<!-- FollowUp -->
 
