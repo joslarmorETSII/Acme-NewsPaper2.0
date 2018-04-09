@@ -79,13 +79,13 @@ public class NewsPaperCustomerController extends AbstractController{
         final ModelAndView result;
         NewsPaper newsPaper;
 
-        newsPaper = this.newsPaperService.findOneToEdit(newsPaperId);
+        newsPaper = this.newsPaperService.findOne(newsPaperId);
         Assert.notNull(newsPaper);
 
         SubscribeForm subscribeForm = new SubscribeForm();
-        subscribeForm.setNewspaper(newsPaper);
+        subscribeForm.setNewsPaper(newsPaper);
 
-        result = new ModelAndView("customer/subscribeForm.do");
+        result = new ModelAndView("customer/subscribeForm");
         result.addObject("subscribeForm", subscribeForm);
 
         return result;
@@ -97,22 +97,28 @@ public class NewsPaperCustomerController extends AbstractController{
     public ModelAndView save(@Valid final SubscribeForm subscribeForm, final BindingResult binding) {
         ModelAndView result;
         Customer customer;
-        NewsPaper newsPaper = new NewsPaper();
+        NewsPaper newsPaper;
 
         try {
-            customer = customerService.reconstructSubscribe(subscribeForm, binding);
+            CreditCard creditCard = customerService.reconstructSubscribe(subscribeForm, binding);
 
             if (binding.hasErrors())
                 result = this.createEditModelAndView2(subscribeForm, "subscribe.save.error");
             else {
-                result = new ModelAndView("redirect:newsPaper/list.do");
+                result = new ModelAndView("redirect:list.do");
+                customer = customerService.findByPrincipal();
+                newsPaper = subscribeForm.getNewsPaper();
                 newsPaper.getCustomers().add(customer);
+                customer.getNewsPapers().add(newsPaper);
+                 CreditCard saved=creditCardService.save(creditCard);
+                customer.setCreditCard(saved);
                 this.customerService.save(customer);
                 this.newsPaperService.save(newsPaper);
 
+
             }
         } catch (final Throwable oops) {
-            result = this.createEditModelAndView2(subscribeForm, "subscribe.save.error");
+            result = this.createEditModelAndView2(subscribeForm, "subscribe.commit.error");
         }
 
         return result;
@@ -128,7 +134,8 @@ public class NewsPaperCustomerController extends AbstractController{
         CreditCard creditCard;
 
         customer = customerService.findByPrincipal();
-        creditCard = customer.getCreditCard();result = new ModelAndView("request/edit");
+        creditCard = customer.getCreditCard();
+        result = new ModelAndView("customer/subscribeForm");
         result.addObject("subscribeForm", subscribeForm);
         result.addObject("message", messageCode);
 

@@ -27,12 +27,12 @@
 	</definition>
 
 	<definition name="customer/editForm" extends="master.page">
-		<put-attribute name="title" value="Register of a user" />
+		<put-attribute name="title" value="Register of a customer" />
 		<put-attribute name="body" value="/views/customer/editForm.jsp" />
 	</definition>
 
 	<definition name="customer/subscribeForm" extends="master.page">
-		<put-attribute name="title" value="Register of a user" />
+		<put-attribute name="title" value="Subscribe to a newsPaper" />
 		<put-attribute name="body" value="/views/customer/subscribeForm.jsp" />
 	</definition>
 

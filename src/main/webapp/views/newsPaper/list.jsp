@@ -65,7 +65,7 @@
     <security:authorize access="hasRole('CUSTOMER')">
         <display:column >
             <jstl:if test="${ row.modePrivate ne false}">
-                <acme:button url="newsPaper/cutomer/subscribe.do?newsPaperId=${row.id}" code="newsPaper.subscribe"/>
+                <acme:button url="newsPaper/customer/subscribe.do?newsPaperId=${row.id}" code="newsPaper.subscribe"/>
             </jstl:if>
         </display:column>
     </security:authorize>
@@ -88,4 +88,5 @@
     <acme:button code="newsPaper.create" url="newsPaper/user/create.do"/>
 </security:authorize>
 
-<acme:button code="newsPaper.cancel" url="welcome/index.do"/>
+<input type="button" name="cancel" value="<spring:message code="customer.cancel" />"
+       onclick="javascript: relativeRedir('/welcome/index.do');" />

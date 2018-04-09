@@ -17,7 +17,7 @@ public class SubscribeForm {
         super();
     }
 
-    private NewsPaper newspaper;
+    private NewsPaper newsPaper;
     private String	    holder;
     private String	    brand;
     private String	    number;
@@ -29,12 +29,12 @@ public class SubscribeForm {
 
     @NotNull
     @Valid
-    public NewsPaper getNewspaper() {
-        return newspaper;
+    public NewsPaper getNewsPaper() {
+        return newsPaper;
     }
 
-    public void setNewspaper(NewsPaper newspaper) {
-        this.newspaper = newspaper;
+    public void setNewsPaper(NewsPaper newsPaper) {
+        this.newsPaper = newsPaper;
     }
 
     @NotBlank

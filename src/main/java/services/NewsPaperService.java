@@ -67,7 +67,7 @@ public class NewsPaperService {
 
     public NewsPaper save(NewsPaper newsPaper){
         NewsPaper res= null;
-        Assert.isTrue(checkByPrincipal(newsPaper));
+        Assert.isTrue(checkByPrincipal(newsPaper) || checkByPrincipalCustomer());
         if(isTabooNewsPaper(newsPaper)){
             newsPaper.setTaboo(true);
         }
@@ -136,6 +136,19 @@ public class NewsPaperService {
 
         if (newsPaper.getPublisher().equals(principal))
             res = true;
+
+        return res;
+    }
+
+    public boolean checkByPrincipalCustomer() {
+        Boolean res = null;
+        Customer principal = null;
+        principal= customerService.findByPrincipal();
+        if(principal!=null) {
+            Collection<Authority> authorities = principal.getUserAccount().getAuthorities();
+            String authority = authorities.toArray()[0].toString();
+            res = authority.equals("CUSTOMER");
+        }
 
         return res;
     }

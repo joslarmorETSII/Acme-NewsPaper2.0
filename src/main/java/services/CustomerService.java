@@ -35,6 +35,9 @@ public class CustomerService {
     @Autowired
     private UserAccountService userAccountService;
 
+    @Autowired
+    private CreditCardService creditCardService;
+
     // Constructors -----------------------------------------------------------
 
     public CustomerService() {
@@ -101,23 +104,17 @@ public class CustomerService {
     }
 
 
-    public Customer reconstructSubscribe(SubscribeForm subscribeForm, final BindingResult binding) {
-
-        CreditCard creditCard = new CreditCard();
-        Customer result = this.findByPrincipal();
-
-        NewsPaper newsPaper = subscribeForm.getNewspaper();
+    public CreditCard reconstructSubscribe(SubscribeForm subscribeForm, final BindingResult binding) {
+        CreditCard creditCard = creditCardService.create();
 
         creditCard.setBrand(subscribeForm.getBrand());
         creditCard.setCvv(subscribeForm.getCvv());
         creditCard.setExpirationMonth(subscribeForm.getExpirationMonth());
         creditCard.setExpirationYear(subscribeForm.getExpirationYear());
         creditCard.setHolder(subscribeForm.getHolder());
+        creditCard.setNumber(subscribeForm.getNumber());
 
-        result.setCreditCard(creditCard);
-        result.getNewsPapers().add(newsPaper);
-
-        return result;
+        return creditCard;
     }
 
     public Customer reconstruct(CustomerForm customerForm, final BindingResult binding) {

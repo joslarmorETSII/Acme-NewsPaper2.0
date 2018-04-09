@@ -31,6 +31,8 @@
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
 			<li><a class="fNiv" href="newsPaper/administrator/list.do"><spring:message code="master.page.newsPaper.administrator.list" /></a></li>
             <li><a class="fNiv" href="article/administrator/list.do"><spring:message code="master.page.article.administrator.list" /></a></li>
+			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
+
 		</security:authorize>
 
 		<security:authorize access="hasRole('USER')">
@@ -43,8 +45,11 @@
 					<li><a href="followUp/user/list.do"><spring:message code="master.page.user.followUp.list" /></a></li>
 				<li><a href="chirp/user/list.do"><spring:message code="master.page.user.chirp.list" /></a></li>
 
+
 			</ul>
 			</li>
+			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
+
 			<li><a class="fNiv" href="user/list-followers.do"><spring:message code="master.page.user.followers" /></a></li>
 			<li><a class="fNiv" href="user/list-following.do"><spring:message code="master.page.user.following" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
@@ -75,7 +80,6 @@
 		
 		<security:authorize access="isAuthenticated()">
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
-			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 

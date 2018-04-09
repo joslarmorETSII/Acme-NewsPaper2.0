@@ -19,6 +19,7 @@
     <form:form  action="newsPaper/customer/subscribe.do" modelAttribute="subscribeForm">
 
     <form:hidden path="newsPaper"/>
+
     <div class="form-group">
         <acme:textbox code="customer.holder" path="holder" />
         <br/>

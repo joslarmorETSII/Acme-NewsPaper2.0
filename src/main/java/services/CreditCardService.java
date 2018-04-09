@@ -52,7 +52,7 @@ public class CreditCardService {
     public CreditCard save(final CreditCard creditCard) {
 
         Assert.notNull(creditCard);
-        Assert.isTrue(this.actorService.isCustomer());
+        //Assert.isTrue(this.actorService.isCustomer());
         //  Assert.isTrue(creditCard.getActor().equals(this.actorService.findByPrincipal()));
 
         CreditCard result;
