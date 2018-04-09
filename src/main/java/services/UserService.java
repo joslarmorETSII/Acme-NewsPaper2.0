@@ -167,4 +167,8 @@ public class UserService {
         return principal.getFollowings();
     }
 
+
+    public void flush() {
+        userRepository.flush();
+    }
 }
