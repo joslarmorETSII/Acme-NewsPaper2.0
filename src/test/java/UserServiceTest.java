@@ -150,25 +150,18 @@ public class UserServiceTest extends AbstractTest {
                {
                         null, null, null, null, null, null, null, null, ConstraintViolationException.class
                 },
-                // Las contraseñas no coinciden -> false
-                //{
-                      //  "userTest22", "userTest22", "12345", "userTestName22", "userTestSurname22", "+34 123456789", "userTest@userTest.com", "addressUser", null
-               // },
                 // Todos los campos completados, excepto la direccion postal -> true
-               // {
-                      //  "userTest3", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34 123456789", "userTest@userTest.com", "",  null
-                //},*/
-                // Patrón del telefono erroneo -> false
-               // {
-                       // "userTest44", "userTest44", "userTest44", "userTestName44", "userTestSurname44", "57635", "userTest@userTest.com", "12345",  IllegalArgumentException.class
-             //   },
-                // Todos los campos correctos excepto cumpleaños-> false
-                //{
-                      //  "userTest5", "userTest5", "userTest5", "userTestName5", "userTestSurname5", "57635", "userTest@userTest.com", "12345",  IllegalArgumentException.class
-              //  },
+                {
+                        "userTest3", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34 123456789", "userTest@userTest.com", "",  null
+                },
+                // Username size menor que 5-> false
+                {
+                        "use", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34 123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
+                },
+
                 // Todos los campos completados, introduciendo un <script> en el nombre -> false
                {
-                       "<script>", "user343", "user343", "userTestName43", "userTestSurname43","+34 123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
+                       "user343", "user343", "user343", "<script>", "userTestSurname43","+34 123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
                 },
 
         };
