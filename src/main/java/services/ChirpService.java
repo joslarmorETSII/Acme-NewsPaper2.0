@@ -176,4 +176,12 @@ public class ChirpService  {
                 chirp.setMoment(new Date());
             }
     }
+
+    public Collection<Chirp> findTabooChirps() {
+        return chirpRepository.findfindTabooChirps();
+    }
+
+    public Collection<Chirp> findPublishedChirps() {
+        return chirpRepository.findPublishedChirps();
+    }
 }

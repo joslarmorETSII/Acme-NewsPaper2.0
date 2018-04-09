@@ -24,65 +24,74 @@
 <jstl:if test="${pageContext.response.locale.language == 'en' }">
 	<jstl:set value="{0,date,yyyy/MM/dd HH:mm}" var="formatDate"/>
 </jstl:if>
+<fieldset>
+	<display:table name="chirps" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
 
-<display:table name="chirps" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
+		<security:authorize access="hasRole('USER')" >
+			<display:column>
+			<jstl:if test="${row.posted eq false}" >
+				<acme:button url="chirp/user/edit.do?chirpId=${row.id}" code="chirp.edit" />
+			</jstl:if>
+			</display:column>
+		</security:authorize>
 
-	<security:authorize access="hasRole('USER')" >
-		<display:column>
-		<jstl:if test="${row.posted eq false}" >
-			<acme:button url="chirp/user/edit.do?chirpId=${row.id}" code="chirp.edit" />
-		</jstl:if>
-		</display:column>
-	</security:authorize>
+		<security:authorize access="hasRole('USER')">
+			<display:column >
+				<jstl:if test="${ row.posted ne true  && row.taboo eq false}">
+					<acme:button url="chirp/user/post.do?chirpId=${row.id}" code="chirp.post"/>
+				</jstl:if>
+				<jstl:if test="${row.posted eq true}">
+					<spring:message code="chirp.publicado" var="publicado"/> <jstl:out value="${publicado}" />
+				</jstl:if>
+			</display:column>
+		</security:authorize>
+
+		<acme:column code="chirp.title" value="${row.title}" />
+
+		<spring:message var="moment" code="chirp.moment"/>
+		<spring:message var="formatDate" code="event.format.date"/>
+		<display:column property="moment" title="${moment}" format="${formatDate}" sortable="true" />
+
+		<acme:column code="chirp.description" value="${row.description}" sortable="true"/>
+
+
+		<security:authorize access="hasRole('ADMINISTRATOR')" >
+			<display:column>
+				<acme:button url="chirp/administrator/edit.do?chirpId=${row.id}" code="chirp.delete" />
+			</display:column>
+		</security:authorize>
+
+		<security:authorize access="isAuthenticated()" >
+			<display:column>
+				<acme:button url="chirp/user/display.do?chirpId=${row.id}" code="chirp.display" />
+			</display:column>
+		</security:authorize>
+
+	</display:table>
 
 	<security:authorize access="hasRole('USER')">
-		<display:column >
-			<jstl:if test="${ row.posted ne true  && row.taboo eq false}">
-				<acme:button url="chirp/user/post.do?chirpId=${row.id}" code="chirp.post"/>
-			</jstl:if>
-			<jstl:if test="${row.posted eq true}">
-				<spring:message code="chirp.publicado" var="publicado"/> <jstl:out value="${publicado}" />
-			</jstl:if>
-		</display:column>
+		<acme:button code="chirp.create" url="chirp/user/create.do"/>
 	</security:authorize>
-
-	<acme:column code="chirp.title" value="${row.title}" />
-
-	<spring:message var="moment" code="chirp.moment"/>
-	<spring:message var="formatDate" code="event.format.date"/>
-	<display:column property="moment" title="${moment}" format="${formatDate}" sortable="true" />
-
-	<acme:column code="chirp.description" value="${row.description}" sortable="true"/>
-
-
-	<security:authorize access="hasRole('ADMINISTRATOR')" >
+</fieldset>
+<br/>
+<security:authorize access="!hasRole('ADMINISTRATOR')">
+<fieldset>
+	<h1><b><spring:message code="chirp.following.user"/>
+	</b></h1>
+	<display:table name="chirpsFollowing" id="chirp" pagesize="5" class="displaytag" requestURI="${requestURI}">
+		<acme:column code="chirp.user" value="${chirp.user.name}" />
+		<acme:column code="chirp.title" value="${chirp.title}" />
+		<acme:column code="chirp.description" value="${chirp.description}" />
 		<display:column>
-			<acme:button url="chirp/administrator/edit.do?chirpId=${row.id}" code="chirp.delete" />
+			<acme:button url="chirp/user/display.do?chirpId=${chirp.id}" code="chirp.display" />
 		</display:column>
-	</security:authorize>
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<acme:button code="general.delete" url="chirp/administrator/delete.do?chirpId?=${chirp.id}"/>
+		</security:authorize>
 
-	<security:authorize access="isAuthenticated()" >
-		<display:column>
-			<acme:button url="chirp/user/display.do?chirpId=${row.id}" code="chirp.display" />
-		</display:column>
-	</security:authorize>
-
-</display:table>
-
-<security:authorize access="hasRole('USER')">
-	<acme:button code="chirp.create" url="chirp/user/create.do"/>
+	</display:table>
+</fieldset>
 </security:authorize>
-
-<h1><b><spring:message code="chirp.following.user"/>
-</b></h1>
-<display:table name="chirpsFollowing" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
-	<acme:column code="chirp.user" value="${row.user.name}" />
-	<acme:column code="chirp.title" value="${row.title}" />
-	<display:column>
-		<acme:button url="chirp/user/display.do?chirpId=${row.id}" code="chirp.display" />
-	</display:column>
-</display:table>
-
 
 
 

@@ -30,7 +30,7 @@
          <acme:columnButton url="user/display.do?userId=${row.id}" codeButton="general.display"/>
     </security:authorize>
     <security:authorize access="isAnonymous()">
-        <acme:columnButton url="profile/display.do?userId=${row.id}" codeButton="general.display"/>
+        <acme:columnButton url="everyone/profile/display.do?userId=${row.id}" codeButton="general.display"/>
     </security:authorize>
 
 </display:table>

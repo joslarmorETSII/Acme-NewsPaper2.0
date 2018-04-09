@@ -204,7 +204,7 @@
 		<property name="title" value="Titulo de newspaper 1"/>
 		<property name="publicationDate" value="01/04/2018"/>
 		<property name="description" value="Esto es un newspaper de prueba"/>
-		<property name="picture" value="https://www.imagen.com"/>
+		<property name="picture" value="https://thumb1.shutterstock.com/display_pic_with_logo/2679097/485390743/stock-vector-old-newspaper-vintage-design-retro-background-vector-template-with-text-and-images-485390743.jpg"/>
 		<property name="published" value="true"/>
 		<property name="taboo" value="false"/>
 		<property name="modePrivate" value="false"/>

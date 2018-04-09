@@ -58,7 +58,8 @@ public class ProfileController extends AbstractController {
 		result = new ModelAndView("user/display");
 		result.addObject("user", user);
 		result.addObject("articles", articles);
-		result.addObject("requestURI", "user/display.do");
+		result.addObject("chirps",user.getChirps());
+		result.addObject("requestURI", "everyone/profile/display.do");
 
 		return result;
 	}

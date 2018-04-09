@@ -66,7 +66,7 @@ public class NewsPaperController {
     // Display ----------------------------------------------------------------
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam final int newsPaperId) {
+    public ModelAndView display(@RequestParam int newsPaperId) {
         ModelAndView result;
         NewsPaper newsPaper;
 

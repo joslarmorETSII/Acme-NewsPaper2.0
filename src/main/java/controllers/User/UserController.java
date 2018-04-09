@@ -116,6 +116,7 @@ public class UserController extends AbstractController{
         result.addObject("user", user);
         result.addObject("articles", articles);
         result.addObject("requestURI","user/display.do");
+        result.addObject("chirps",user.getChirps());
         result.addObject("esSeguido", principal.getFollowings().contains(user));
 
         return result;

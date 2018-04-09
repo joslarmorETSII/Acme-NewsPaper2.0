@@ -16,31 +16,35 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h3><b><spring:message code="chirp.title"/>:&nbsp;</b><jstl:out value="${chirp.title}"/></h3>
+<h3><b><spring:message code="newsPaper.title"/>:&nbsp; </b><jstl:out value="${newsPaper.title}"/></h3>
 
-<jstl:if test="${pageContext.response.locale.language == 'es'}">
 
-    <b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
+<b><spring:message code="newsPaper.description"/>:&nbsp; </b><jstl:out value="${newsPaper.description}"/>
+<br/>
+
+<img src="${newsPaper.picture}" width="500px" height="100%" />
+<br/>
+
+<%--TABLE OF CONTENT --%>
+<fieldset>
+    <legend>Table of Contents</legend>
+<jstl:forEach items="${newsPaper.articles}" var="article">
+    <b><spring:message code="newsPaper.publisher"/>:&nbsp;</b><a href="user/display.do?userId=${newsPaper.publisher.id}"><jstl:out value="${newsPaper.publisher.userAccount.username}"/></a>
     <br/>
-</jstl:if>
-
-<jstl:if test="${pageContext.response.locale.language == 'en'}">
-    <b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
     <br/>
-</jstl:if>
+    <b> <spring:message code="article.title"/>:&nbsp;</b><a href="article/display.do?articleId=${article.id}"><jstl:out value="${article.title}"/></a>
+    <br/>
+    <br/>
+    <b> <spring:message code="article.summary"/>:&nbsp;</b>
+    <details>
+        <summary>
+        </summary>
+            <jstl:out value="${article.summary}"/>
+    </details>
+</jstl:forEach>
+</fieldset>
 
-<b><spring:message code="chirp.description"/>:&nbsp;</b><jstl:out value="${chirp.description}"/>
-<br/>
 
-<b><spring:message code="chirp.posted"/>:&nbsp;</b><jstl:out value="${chirp.posted}"/>
-<br/>
-
-<b><spring:message code="chirp.taboo"/>:&nbsp;</b><jstl:out value="${chirp.taboo}"/>
-<br/>
-
-
-
-<a href="chirp/listAll.do?chirpId=${chirp.id}"><spring:message code="chirp.listChirps"/></a>
 <br/>
 
 <input type="button" name="cancel" value="<spring:message code="chirp.cancel" />"

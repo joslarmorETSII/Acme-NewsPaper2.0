@@ -26,6 +26,9 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="chirp/administrator/list.do"><spring:message code="master.page.chirp.list-taboo" /></a></li>
+					<li><a href="chirp/administrator/listAll.do"><spring:message code="master.page.chirp.listAll" /></a></li>
+
 				</ul>
 			</li>
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>

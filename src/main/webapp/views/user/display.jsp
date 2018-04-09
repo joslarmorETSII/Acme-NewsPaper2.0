@@ -61,6 +61,36 @@
         </security:authorize>
     </display:table>
 </fieldset>
+
+<br/>
+<fieldset>
+    <b><spring:message code="user.postedChirps"/></b>
+
+    <display:table name="chirps" id="chirp" pagesize="5" class="displaytag" requestURI="${requestURI}">
+
+        <acme:column code="chirp.title" value="${chirp.title}" />
+
+        <spring:message var="moment" code="chirp.moment"/>
+        <spring:message var="formatDate2" code="event.format.date"/>
+        <display:column property="moment" title="${moment}" format="${formatDate2}" sortable="true" />
+
+        <acme:column code="chirp.description" value="${chirp.description}" sortable="true"/>
+
+
+        <security:authorize access="hasRole('ADMINISTRATOR')" >
+            <display:column>
+                <acme:button url="chirp/administrator/edit.do?chirpId=${chirp.id}" code="chirp.delete" />
+            </display:column>
+        </security:authorize>
+
+        <security:authorize access="isAuthenticated()" >
+            <display:column>
+                <acme:button url="chirp/user/display.do?chirpId=${chirp.id}" code="chirp.display" />
+            </display:column>
+        </security:authorize>
+
+    </display:table>
+</fieldset>
 <br/>
 <security:authorize access="hasRole('USER')">
     <jstl:if test="${!esSeguido}">
@@ -70,5 +100,6 @@
         <acme:button code="user.unfollow" url="user/unfollow.do?userId=${user.id}"/>
     </jstl:if>
 </security:authorize>
+
 <input type="button" name="cancel" value="<spring:message code="general.cancel" />"
        onclick="javascript: relativeRedir('user/list.do');" />

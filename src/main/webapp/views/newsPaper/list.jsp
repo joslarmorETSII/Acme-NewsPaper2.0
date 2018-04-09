@@ -45,7 +45,11 @@
     <acme:column code="newsPaper.publisher" value="${row.publisher.name} " />
     <acme:column code="newsPaper.title" value="${row.title}"/>
     <acme:column code="newsPaper.description" value="${row.description}"/>
-    <acme:column code="newsPaper.picture" value="${row.picture}"/>
+    <spring:message code="newsPaper.picture" var="pic"/>
+    <display:column title="${pic}"><img src="${row.picture}" alt="no image" width="130" height="100"></display:column>
+
+
+
 
     <spring:message var="publicationDate" code="newsPaper.publicationDate"/>
     <spring:message var="formatDate" code="event.format.date"/>
