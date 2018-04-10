@@ -151,9 +151,9 @@ public class UserServiceTest extends AbstractTest {
                 {
                         null, "user1", IllegalArgumentException.class
                 },
-                // Usuario logueado y el resto a null -> true
+                // User1 sigue a user1-> false
 //                {
-//                        "user1", null, IllegalArgumentException.class
+//                        "user1", "user1, IllegalArgumentException.class
 //                },
 
 
