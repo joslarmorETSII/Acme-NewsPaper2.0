@@ -27,10 +27,10 @@
 
 <display:table name="newsPapers" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
 
-    <jstl:set var="forPublish" value="false" />
+    <jstl:set var="forPublish" value="true" />
     <jstl:forEach var="item" items="${row.articles}" >
-        <jstl:if test="${item.finalMode eq true and item.taboo eq false}" >
-            <jstl:set var="forPublish" value="true" />
+        <jstl:if test="${item.taboo eq true or item.finalMode eq false}" >
+                <jstl:set var="forPublish" value="false" />
         </jstl:if>
     </jstl:forEach>
 
@@ -57,7 +57,7 @@
 
     <security:authorize access="hasRole('USER')">
         <display:column >
-            <jstl:if test="${ row.published ne true && !empty row.articles && forPublish ne false && row.taboo eq false}">
+            <jstl:if test="${ row.published ne true && !empty row.articles && forPublish eq true && row.taboo eq false}">
                 <acme:button url="newsPaper/user/publish.do?newsPaperId=${row.id}" code="newsPaper.publish"/>
             </jstl:if>
             <jstl:if test="${row.published eq true}">
