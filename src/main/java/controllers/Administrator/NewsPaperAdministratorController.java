@@ -48,7 +48,7 @@ public class NewsPaperAdministratorController extends AbstractController {
     public ModelAndView list() {
         ModelAndView result;
         User user;
-        Collection<NewsPaper> newsPapersTaboo = newsPaperService.newsPapersTaboo();
+        Collection<NewsPaper> newsPapersTaboo = newsPaperService.findNewsPaperByTabooIsTrue();
 
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;

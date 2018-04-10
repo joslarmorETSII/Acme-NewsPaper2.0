@@ -178,7 +178,30 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
+    /*  FUNCTIONAL REQUIREMENT:
+       * An actor who is authenticated as an administrator must be able to:
+               - List the newsPaper that contain taboo words.
+    */
 
+    public void listNewsPaperTabooWords(final String username,final Class<?> expected){
+        Class<?> caught = null;
+        startTransaction();
+        try {
+            this.authenticate(username);
+
+            this.newsPaperService.findNewsPaperByTabooIsTrue();
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
 
     //Drivers
     // ===================================================
@@ -279,5 +302,27 @@ public class NewsPaperServiceTest extends AbstractTest {
         };
         for (int i = 0; i < testingData.length; i++)
             this.deleteNewsPaperTest((String) testingData[i][0], (String) testingData[i][1],(Boolean) testingData[i][2], (Class<?>) testingData[i][3]);
+    }
+
+    @Test
+    public void driverListNewsPaperTabooWordsTest() {
+
+        final Object testingData[][] = {
+                // Intentando ver los newspapers taboo como administrator -> true
+                {
+                        "administrator", null
+                },
+                // Intentando ver los newspaper taboo como user2 -> false
+                {
+                        "user2", IllegalArgumentException.class
+                },
+                // Intentando ver los newspaper taboo como customer1 -> false
+                {
+                        "customer1", IllegalArgumentException.class
+                }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.listNewsPaperTabooWords((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
 }

@@ -1,5 +1,6 @@
 package repositories;
 
+import domain.Article;
 import domain.NewsPaper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,7 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
 
     @Query("select n from NewsPaper n where n.title like %?1% or n.description like %?2%")
     Collection<NewsPaper> searchNewspapers(String title,String description);
+
+    @Query("select n from NewsPaper n where n.taboo =true")
+    Collection<NewsPaper> findNewsPaperByTabooIsTrue();
 }

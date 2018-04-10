@@ -142,6 +142,7 @@ public class ArticleServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
         rollbackTransaction();
     }
+
     //Drivers
     // ===================================================
     @Test

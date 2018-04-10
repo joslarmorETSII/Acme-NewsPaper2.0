@@ -44,6 +44,9 @@ public class NewsPaperService {
     @Autowired
     private ConfigurationService configurationService;
 
+    @Autowired
+    private ActorService actorService;
+
     // Constructors -----------------------------------------------------------
 
     public NewsPaperService() {
@@ -208,17 +211,9 @@ public class NewsPaperService {
         return result;
     }
 
-    public Collection<NewsPaper> newsPapersTaboo(){
-        Collection<NewsPaper> res= new ArrayList<>();
-        Collection<NewsPaper> newsPapers= newsPaperRepository.findAll();
-        for(NewsPaper n:newsPapers){
-            if(isTabooNewsPaper(n)) {
-                res.add(n);
-                n.setTaboo(true);
-                newsPaperRepository.save(n);
-            }
-            }
-        return res;
+    public Collection<NewsPaper> findNewsPaperByTabooIsTrue(){
+        Assert.isTrue(actorService.isAdministrator());
+        return this.newsPaperRepository.findNewsPaperByTabooIsTrue();
     }
 
     public Collection<NewsPaper> searchNewspapers(String keyword) {
