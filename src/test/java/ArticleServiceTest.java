@@ -117,6 +117,31 @@ public class ArticleServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
         rollbackTransaction();
     }
+
+    /*  FUNCTIONAL REQUIREMENT:
+       * An actor who is authenticated as an administrator must be able to:
+               - List the articles that contain taboo words.
+    */
+
+    public void listArticleTabooWords(final String username,final Class<?> expected){
+        Class<?> caught = null;
+        startTransaction();
+        try {
+            this.authenticate(username);
+
+            this.articleService.findArticleByTabooIsTrue();
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
     //Drivers
     // ===================================================
     @Test
@@ -164,5 +189,27 @@ public class ArticleServiceTest extends AbstractTest {
         };
         for (int i = 0; i < testingData.length; i++)
             this.deleteArticleTest((String) testingData[i][0], (String) testingData[i][1],(Boolean) testingData[i][2], (Class<?>) testingData[i][3]);
+    }
+
+    @Test
+    public void driverListArticlesTabooWordsTest() {
+
+        final Object testingData[][] = {
+                // Intentando ver los articulos taboo como administrator -> true
+                {
+                        "administrator", null
+                },
+                // Intentando ver los articulos taboo como user2 -> false
+                {
+                        "user2", IllegalArgumentException.class
+                },
+                // Intentando ver los articulos taboo como customer1 -> false
+                {
+                        "customer1", IllegalArgumentException.class
+                }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.listArticleTabooWords((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
 }

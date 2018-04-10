@@ -235,6 +235,7 @@
 		<property name="articles">
 			<list>
 				<ref bean="article2"/>
+				<ref bean="article3" />
 			</list>
 		</property>
 		<property name="customers">
@@ -334,6 +335,22 @@
 		<property name="followUps">
 			<list>
 				<ref bean="followUp1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="article3" class="domain.Article">
+		<property name="title" value="Titulo del articulo 3"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="Summary del articulo"/>
+		<property name="body" value="Cuerpo del articulo"/>
+		<property name="picture" value="https://www.imagen.com"/>
+		<property name="finalMode" value="false"/>
+		<property name="taboo" value="true"/>
+		<property name="newsPaper" ref="newsPaper2" />
+		<property name="followUps">
+			<list>
+				<null/>
 			</list>
 		</property>
 	</bean>

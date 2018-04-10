@@ -35,7 +35,11 @@ public class ArticleService {
     @Autowired
     private FollowUpService followUpService;
 
-    @Autowired ConfigurationService configurationService;
+    @Autowired
+    ConfigurationService configurationService;
+
+    @Autowired
+    private ActorService actorService;
 
     // Constructors -----------------------------------------------------------
 
@@ -174,17 +178,6 @@ public class ArticleService {
         return result;
     }
 
-    public Collection<Article> articleTaboo(){
-        Collection<Article> res= new ArrayList<>();
-        Collection<Article> articles= articleRepository.findAll();
-        for(Article a:articles){
-            if(isTabooArticle(a)) {
-                res.add(a);
-            }
-        }
-        return res;
-    }
-
     public Collection<Article> findPublishArticles() {
 
         return articleRepository.findPublishArticles();
@@ -197,4 +190,9 @@ public class ArticleService {
    public Collection<Article> findbyTitleAndBodyAndSummary(String keyword){
         return articleRepository.findByTitleOrSummaryOrBody(keyword,keyword,keyword);
     }
+
+   public Collection<Article> findArticleByTabooIsTrue(){
+        Assert.isTrue(actorService.isAdministrator());
+        return articleRepository.findArticleByTabooIsTrue();
+   }
 }

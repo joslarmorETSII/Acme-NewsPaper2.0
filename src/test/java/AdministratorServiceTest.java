@@ -66,7 +66,7 @@ public class AdministratorServiceTest extends AbstractTest{
     public void driverListConfigurationTabooWordsTest() {
 
         final Object testingData[][] = {
-                // Integnado ver las palabras taboo como administrator -> true
+                // Intentando ver las palabras taboo como administrator -> true
                 {
                         "administrator", null
                 },

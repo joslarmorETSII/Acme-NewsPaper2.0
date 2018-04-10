@@ -51,7 +51,7 @@ public class ArticleAdministratorController extends AbstractController {
     public ModelAndView list() {
         ModelAndView result;
         User user;
-        Collection<Article> articlesTaboo = articleService.articleTaboo();
+        Collection<Article> articlesTaboo = articleService.findArticleByTabooIsTrue();
 
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
