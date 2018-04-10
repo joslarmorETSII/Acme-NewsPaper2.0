@@ -82,6 +82,37 @@ public class ChirpServiceTest extends AbstractTest{
         rollbackTransaction();
     }
 
+     /*  FUNCTIONAL REQUIREMENT:
+            * An actor who is authenticated as a admin must be able to:
+                -.Remove an article that he or she thinks is inappropriate.
+
+    */
+
+
+    public void deleteChirpInappropiateTest(final String username, final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+
+        try {
+
+            this.authenticate(username);
+
+            Chirp result= chirpService.findAll().iterator().next();
+
+            this.chirpService.delete(result);
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
     // Drivers
     // ===================================================
 
@@ -131,6 +162,28 @@ public class ChirpServiceTest extends AbstractTest{
         };
         for (int i = 0; i < testingData.length; i++)
             this.listChirpsTabooWords((String) testingData[i][0], (Class<?>) testingData[i][1]);
+    }
+
+    @Test
+    public void driverDeleteChirpInappropiateTest() {
+
+        final Object testingData[][] = {
+                // Borrar un chirp que considere inapropiado como admin -> true
+                {
+                        "administrator", null
+                },
+                // Borrar un chirp que considere inapropiado como null -> false
+                {
+                        null, IllegalArgumentException.class
+                },
+                // Borrar un chirp que considere inapropiado como customer -> false
+                {
+                        "customer1", IllegalArgumentException.class
+                },
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.deleteChirpInappropiateTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
 
 }
