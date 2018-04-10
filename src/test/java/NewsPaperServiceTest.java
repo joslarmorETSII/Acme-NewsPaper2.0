@@ -183,7 +183,7 @@ public class NewsPaperServiceTest extends AbstractTest {
                - List the newsPaper that contain taboo words.
     */
 
-    public void listNewsPaperTabooWords(final String username,final Class<?> expected){
+    public void listNewsPaperTabooWords(final String username,final Class<?> expected) {
         Class<?> caught = null;
         startTransaction();
         try {
@@ -194,13 +194,53 @@ public class NewsPaperServiceTest extends AbstractTest {
             this.unauthenticate();
 
         } catch (final Throwable oops) {
+            caught = oops.getClass();
+
+        }
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
+     /*  FUNCTIONAL REQUIREMENT:
+            * An actor who is authenticated as a user must be able to:
+               -.Decide on whether a newspaper that he or she?s created is public or private.
+
+    */
+
+    public void editNewsPaperTest(final String username, final String title,String description1,String publicationDate1,String picture1,Boolean res1,Boolean res2,Boolean res3,String newsPaperBean, final Class<?> expected) {
+        Class<?> caught = null;
+
+        try {
+
+            this.authenticate(username);
+
+            NewsPaper result= newsPaperService.findOne(super.getEntityId(newsPaperBean));
+
+
+
+            result.setTitle(title);
+            result.setDescription(description1);
+
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            result.setPublicationDate(formatter.parse(publicationDate1));
+            result.setPicture(picture1);
+
+            result.setPublished(res1);
+            result.setTaboo(res2);
+            result.setModePrivate(res3);
+
+
+            NewsPaper n= this.newsPaperService.save(result);
+            n = result;
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
 
             caught = oops.getClass();
 
         }
 
         this.checkExceptions(expected, caught);
-        rollbackTransaction();
     }
 
     //Drivers
@@ -324,5 +364,30 @@ public class NewsPaperServiceTest extends AbstractTest {
         };
         for (int i = 0; i < testingData.length; i++)
             this.listNewsPaperTabooWords((String) testingData[i][0], (Class<?>) testingData[i][1]);
+    }
+
+    @Test
+    public void driverNewsPaperEditTest() {
+
+
+        final Object testingData[][] = {
+                // Crear un newsPaper estando logueado como user -> true
+                {
+                        "user1", "name1","description1","12/03/2020 12:00","www.picture.com",false,false,true,"newsPaper1", null
+                },
+                // Crear un newsPaper sin estar logueado --> false
+                {
+                        null,"name1","description1","12/03/2020 12:00","www.picture.com",false,false,false,"newsPaper1", IllegalArgumentException.class
+                },
+                // Crear un newsPaper logueado como manager  -> false
+                {
+                        "manager1","name1","description1","12/03/2020 12:00","www.picture.com",false,false,false,"newsPaper1", IllegalArgumentException.class
+                },
+
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.editNewsPaperTest((String) testingData[i][0], (String) testingData[i][1],(String) testingData[i][2],(String)testingData[i][3] , (String)testingData[i][4],(Boolean) testingData[i][5],(Boolean) testingData[i][6],(Boolean) testingData[i][7],(String)testingData[i][8], (Class<?>) testingData[i][9]);
+
     }
 }

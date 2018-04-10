@@ -154,4 +154,8 @@ public class CustomerService {
 
         return result;
     }
+
+    public void flush() {
+        customerRepository.flush();
+    }
 }
