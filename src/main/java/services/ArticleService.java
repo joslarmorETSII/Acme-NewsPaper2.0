@@ -57,8 +57,8 @@ public class ArticleService {
 
     public Article save (Article article, NewsPaper newsPaper){
         Article res= null;
-
         Assert.notNull(article);
+        article.setNewsPaper(newsPaper);
         Assert.isTrue(checkByPrincipal(article));
         Assert.isTrue(!article.getNewsPaper().getPublished());
         if(article.getId() == 0) {
