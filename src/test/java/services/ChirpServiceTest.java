@@ -57,6 +57,31 @@ public class ChirpServiceTest extends AbstractTest{
         rollbackTransaction();
     }
 
+    /*  FUNCTIONAL REQUIREMENT:
+       * An actor who is authenticated as an administrator must be able to:
+               - List the chirps that contain taboo words.
+    */
+
+    public void listChirpsTabooWords(final String username,final Class<?> expected){
+        Class<?> caught = null;
+        startTransaction();
+        try {
+            this.authenticate(username);
+
+            this.chirpService.findTabooChirps();
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
     // Drivers
     // ===================================================
 
@@ -86,5 +111,26 @@ public class ChirpServiceTest extends AbstractTest{
                     (Boolean)testingData[i][5],(Class<?>) testingData[i][6]);
     }
 
+    @Test
+    public void driverListChirpsTabooWordsTest() {
+
+        final Object testingData[][] = {
+                // Intentando ver los chirps taboo como administrator -> true
+                {
+                        "administrator", null
+                },
+                // Intentando ver los chirps taboo como user2 -> false
+                {
+                        "user2", IllegalArgumentException.class
+                },
+                // Intentando ver los chirps taboo como customer1 -> false
+                {
+                        "customer1", IllegalArgumentException.class
+                }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.listChirpsTabooWords((String) testingData[i][0], (Class<?>) testingData[i][1]);
+    }
 
 }

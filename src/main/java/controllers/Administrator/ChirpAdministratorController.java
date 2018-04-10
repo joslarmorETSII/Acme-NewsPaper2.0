@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @Controller
 @RequestMapping("/chirp/administrator")
-public class ChirpAdministrator {
+public class ChirpAdministratorController {
 
     // Services --------------------------------------------
 
@@ -23,7 +23,7 @@ public class ChirpAdministrator {
     // Constructor --------------------------------------------
 
 
-    public ChirpAdministrator() { super();}
+    public ChirpAdministratorController() { super();}
 
     // Listing -------------------------------------------------------
 

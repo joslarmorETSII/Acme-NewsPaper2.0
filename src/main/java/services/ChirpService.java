@@ -33,7 +33,8 @@ public class ChirpService  {
     @Autowired
     private AdministratorService administratorService;
 
-
+    @Autowired
+    private ActorService actorService;
 
     @Autowired
     private ConfigurationService configurationService;
@@ -178,6 +179,7 @@ public class ChirpService  {
     }
 
     public Collection<Chirp> findTabooChirps() {
+        Assert.isTrue(actorService.isAdministrator());
         return chirpRepository.findfindTabooChirps();
     }
 
