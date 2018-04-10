@@ -76,6 +76,30 @@ public class UserServiceTest extends AbstractTest {
 
     }
 
+    public void followOrUnFollowUser(final String username, String userBean,
+                                     final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+        try {
+
+
+            authenticate(username);
+
+            User userToFollow = userService.findOne(getEntityId(userBean));
+
+            userService.follow(userToFollow.getId());
+
+            this.userService.save(userToFollow);
+            userService.flush();
+
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
     //Drivers
     // ===================================================
 
@@ -111,6 +135,32 @@ public class UserServiceTest extends AbstractTest {
         for (int i = 0; i < testingData.length; i++)
             this.userRegisterTest((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
                     (String) testingData[i][7], (Class<?>) testingData[i][8]);
+    }
+
+    @Test
+    public void driverFollowOrUnFollowUser() {
+
+
+
+        final Object testingData[][] = {
+                // User1 sigue a user2 -> true
+                {
+                        "user1","user2",  null
+                },
+                // El usuario a null --> false
+                {
+                        null, "user1", IllegalArgumentException.class
+                },
+                // Usuario logueado y el resto a null -> true
+//                {
+//                        "user1", null, IllegalArgumentException.class
+//                },
+
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.followOrUnFollowUser((String) testingData[i][0],(String) testingData[i][1],
+                    (Class<?>) testingData[i][2]);
     }
 
 
