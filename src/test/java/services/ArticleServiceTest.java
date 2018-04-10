@@ -1,3 +1,5 @@
+package services;
+
 import domain.*;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;

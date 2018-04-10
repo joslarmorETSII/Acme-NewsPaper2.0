@@ -1,3 +1,5 @@
+package services;
+
 import controllers.AbstractController;
 import domain.*;
 import org.junit.Test;
