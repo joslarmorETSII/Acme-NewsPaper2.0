@@ -96,6 +96,7 @@ public class ArticleServiceTest extends AbstractTest {
 
     public void deleteArticleTest(final String username, String articleBean,Boolean finalMode, final Class<?> expected) {
         Class<?> caught = null;
+        startTransaction();
 
         try {
             Article result= articleService.findOne(super.getEntityId(articleBean));
@@ -114,6 +115,7 @@ public class ArticleServiceTest extends AbstractTest {
         }
 
         this.checkExceptions(expected, caught);
+        rollbackTransaction();
     }
     //Drivers
     // ===================================================
@@ -146,22 +148,17 @@ public class ArticleServiceTest extends AbstractTest {
     public void driverDeleteArticleTest() {
 
         final Object testingData[][] = {
-                // Borrar un articulo estando logueado como user -> false
-                {
-                        "user1", "article1",false, IllegalArgumentException.class
-                },
-
                 // Borrar un articulo estando logueado como admin -> true
                 {
-                        "administrator", "article1",false, null
+                        "administrator", "article1",true, null
                 },
                 // Borrar un articulo sin estar logueado -> false
                 {
-                        null, "rendezvous1",false, IllegalArgumentException.class
+                        null, "article1",true, IllegalArgumentException.class
                 },
                 // Borrar un articulo que no esta en modo final -> false
                 {
-                        "user1","article1",true, IllegalArgumentException.class
+                        "administrator1","article1",false, IllegalArgumentException.class
                 },
 
         };
