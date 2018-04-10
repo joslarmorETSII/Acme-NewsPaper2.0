@@ -1,5 +1,6 @@
 
 import domain.Actor;
+import domain.Article;
 import domain.NewsPaper;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
@@ -146,6 +147,38 @@ public class NewsPaperServiceTest extends AbstractTest {
     }
 
 
+      /*  FUNCTIONAL REQUIREMENT:
+            * An actor who is authenticated as a admin must be able to:
+                -.Remove an article that he or she thinks is inappropriate.
+
+    */
+
+
+    public void deleteNewsPaperTest(final String username, String newsPaperBean,Boolean published, final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+
+        try {
+            NewsPaper result= newsPaperService.findOne(super.getEntityId(newsPaperBean));
+
+            this.authenticate(username);
+
+
+            this.newsPaperService.delete(result);
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
+
 
     //Drivers
     // ===================================================
@@ -224,5 +257,27 @@ public class NewsPaperServiceTest extends AbstractTest {
         for (int i = 0; i < testingData.length; i++)
             this.newsPaperCreateTest((String) testingData[i][0], (String) testingData[i][1],(String) testingData[i][2],(String)testingData[i][3] , (String)testingData[i][4],(Boolean) testingData[i][5],(Boolean) testingData[i][6],(Boolean) testingData[i][7], (Class<?>) testingData[i][8]);
 
+    }
+
+    @Test
+    public void driverDeleteNewsPaperTest() {
+
+        final Object testingData[][] = {
+                // Borrar un newsPaper estando logueado como admin -> true
+                {
+                        "administrator", "newsPaper1",true, null
+                },
+                // Borrar un newsPaper sin estar logueado -> false
+                {
+                        null, "newsPaper1",true, IllegalArgumentException.class
+                },
+                // Borrar un newsPaper que no esta publicado -> false
+                {
+                        "administrator1","newsPaper1",false, IllegalArgumentException.class
+                },
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.deleteNewsPaperTest((String) testingData[i][0], (String) testingData[i][1],(Boolean) testingData[i][2], (Class<?>) testingData[i][3]);
     }
 }
