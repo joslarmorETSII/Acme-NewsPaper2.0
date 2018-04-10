@@ -29,7 +29,7 @@
 
     <jstl:set var="forPublish" value="false" />
     <jstl:forEach var="item" items="${row.articles}" >
-        <jstl:if test="${item.finalMode == true and item.taboo eq false}" >
+        <jstl:if test="${item.finalMode eq true and item.taboo eq false}" >
             <jstl:set var="forPublish" value="true" />
         </jstl:if>
     </jstl:forEach>
