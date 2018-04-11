@@ -96,8 +96,12 @@ public class UserServiceTest extends AbstractTest {
 
             userService.flush();
 
+            //List the users who he or she follows
+
             final Collection<User> following = userService.findOne(userToFollow.getId()).getFollowers();
             Assert.isTrue(following.contains(this.userService.findOne(userToFollow.getId())));
+
+            //List the users who follow him or her.
 
             final Collection<User> followers = this.userService.findOne(userToFollow.getId()).getFollowers();
             Assert.isTrue(followers.contains(this.userService.findByUserAccountId(LoginService.getPrincipal().getId())));
@@ -133,8 +137,12 @@ public class UserServiceTest extends AbstractTest {
             userService.save(userToUnFollow);
             userService.flush();
 
+            //List the users who he or she follows
+
             final Collection<User> following = userService.findOne(userToUnFollow.getId()).getFollowers();
             Assert.isTrue(following.contains(this.userService.findOne(userToUnFollow.getId())));
+
+            //List the users who follow him or her.
 
             final Collection<User> followers = this.userService.findOne(userToUnFollow.getId()).getFollowers();
             Assert.isTrue(followers.contains(this.userService.findByUserAccountId(LoginService.getPrincipal().getId())));
