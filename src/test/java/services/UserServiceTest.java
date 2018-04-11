@@ -1,5 +1,6 @@
 package services;
 
+import domain.Chirp;
 import domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,9 @@ public class UserServiceTest extends AbstractTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ChirpService chirpService;
 
 
     /*  FUNCTIONAL REQUIREMENT:
@@ -78,8 +82,6 @@ public class UserServiceTest extends AbstractTest {
      *
      *   An actor who is authenticated as a user must be able to:
      *      -  Follow or unfollow another user.
-     *      -  List the users who he or she follows.
-            -  List the users who follow him or her.
      */
 
     public void followUser(final String username, String userBean,
@@ -96,15 +98,6 @@ public class UserServiceTest extends AbstractTest {
 
             userService.flush();
 
-            //List the users who he or she follows
-
-            final Collection<User> following = userService.findOne(userToFollow.getId()).getFollowers();
-            Assert.isTrue(following.contains(this.userService.findOne(userToFollow.getId())));
-
-            //List the users who follow him or her.
-
-            final Collection<User> followers = this.userService.findOne(userToFollow.getId()).getFollowers();
-            Assert.isTrue(followers.contains(this.userService.findByUserAccountId(LoginService.getPrincipal().getId())));
 
         } catch (final Throwable oops) {
             caught = oops.getClass();
@@ -118,8 +111,7 @@ public class UserServiceTest extends AbstractTest {
      *
      *  An actor who is authenticated as a user must be able to:
      *    -  Follow or unfollow another user.
-     *    -  List the users who he or she follows.
-          -  List the users who follow him or her.
+
      */
 
     public void unFollowUser(final String username, String userBean,
@@ -137,16 +129,6 @@ public class UserServiceTest extends AbstractTest {
             userService.save(userToUnFollow);
             userService.flush();
 
-            //List the users who he or she follows
-
-            final Collection<User> following = userService.findOne(userToUnFollow.getId()).getFollowers();
-            Assert.isTrue(following.contains(this.userService.findOne(userToUnFollow.getId())));
-
-            //List the users who follow him or her.
-
-            final Collection<User> followers = this.userService.findOne(userToUnFollow.getId()).getFollowers();
-            Assert.isTrue(followers.contains(this.userService.findByUserAccountId(LoginService.getPrincipal().getId())));
-
         } catch (final Throwable oops) {
             caught = oops.getClass();
         }
@@ -155,7 +137,35 @@ public class UserServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *  An actor who is authenticated as a user must be able to:
+     *    -   Display a stream with the chirps posted by all of the users that he or she follows.
+     */
 
+    public void displayStream(final String username, String userBean,
+                           final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+        try {
+
+            authenticate(username);
+
+            User user = userService.findOne(getEntityId(userBean));
+            chirpService.findAllChirpsByFollowings(user.getId());
+
+            this.userService.save(user);
+
+            userService.flush();
+
+
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
 
 
     //Drivers
@@ -195,11 +205,11 @@ public class UserServiceTest extends AbstractTest {
                     (String) testingData[i][7], (Class<?>) testingData[i][8]);
     }
 
-    @Test
+   @Test
     public void driverFollowUser() {
 
         final Object testingData[][] = {
-                // User1 sigue a user2 -> true
+                // User1 follow user2 -> true
                 {
                         "user1","user2",  null
                 },
@@ -207,7 +217,7 @@ public class UserServiceTest extends AbstractTest {
                 {
                         null, "user1", IllegalArgumentException.class
                 },
-                // User1 sigue a user1-> false
+                // User1 follow  user1-> false
                 {
                         "user1", "user1", IllegalArgumentException.class
                 }
@@ -222,7 +232,7 @@ public class UserServiceTest extends AbstractTest {
     public void driverUnFollowUser() {
 
         final Object testingData[][] = {
-                // User1 no sigue a following1 -> true
+                // User1 unfollow a following1 -> true
                 {
                         "user1","following1",  null
                 },
@@ -240,6 +250,30 @@ public class UserServiceTest extends AbstractTest {
             this.unFollowUser((String) testingData[i][0],(String) testingData[i][1],
                     (Class<?>) testingData[i][2]);
     }
+
+    @Test
+    public void driverDisplayStream() {
+
+        final Object testingData[][] = {
+                // User1 no sigue a following1 -> true
+                {
+                        "user1","user1",  null
+                },
+//                // El usuario a null --> false
+//                {
+//                        null, "user1", IllegalArgumentException.class
+//                },
+//                // User1 deja de seguir a user1-> false
+//                {
+//                        "user1", "user1", IllegalArgumentException.class
+//                }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.displayStream((String) testingData[i][0],(String) testingData[i][1],
+                    (Class<?>) testingData[i][2]);
+    }
+
 
 
 }
