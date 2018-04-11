@@ -9,12 +9,16 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
+import security.LoginService;
+import security.UserAccount;
 import services.UserService;
 import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Transactional
 @ContextConfiguration(locations = {
@@ -34,7 +38,7 @@ public class UserServiceTest extends AbstractTest {
     /*  FUNCTIONAL REQUIREMENT:
      *
      *   An actor who is not authenticated must be able to:
-     * - Register to the system as a user creating them.
+     *      - Register to the system as a user creating them.
      */
 
 
@@ -72,7 +76,10 @@ public class UserServiceTest extends AbstractTest {
 
     /*  FUNCTIONAL REQUIREMENT:
      *
-     *   Follow or unfollow another user.
+     *   An actor who is authenticated as a user must be able to:
+     *      -  Follow or unfollow another user.
+     *      -  List the users who he or she follows.
+            -  List the users who follow him or her.
      */
 
     public void followUser(final String username, String userBean,
@@ -89,6 +96,12 @@ public class UserServiceTest extends AbstractTest {
 
             userService.flush();
 
+            final Collection<User> following = userService.findOne(userToFollow.getId()).getFollowers();
+            Assert.isTrue(following.contains(this.userService.findOne(userToFollow.getId())));
+
+            final Collection<User> followers = this.userService.findOne(userToFollow.getId()).getFollowers();
+            Assert.isTrue(followers.contains(this.userService.findByUserAccountId(LoginService.getPrincipal().getId())));
+
         } catch (final Throwable oops) {
             caught = oops.getClass();
         }
@@ -96,6 +109,14 @@ public class UserServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
         rollbackTransaction();
     }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *  An actor who is authenticated as a user must be able to:
+     *    -  Follow or unfollow another user.
+     *    -  List the users who he or she follows.
+          -  List the users who follow him or her.
+     */
 
     public void unFollowUser(final String username, String userBean,
                                      final Class<?> expected) {
@@ -112,6 +133,12 @@ public class UserServiceTest extends AbstractTest {
             userService.save(userToUnFollow);
             userService.flush();
 
+            final Collection<User> following = userService.findOne(userToUnFollow.getId()).getFollowers();
+            Assert.isTrue(following.contains(this.userService.findOne(userToUnFollow.getId())));
+
+            final Collection<User> followers = this.userService.findOne(userToUnFollow.getId()).getFollowers();
+            Assert.isTrue(followers.contains(this.userService.findByUserAccountId(LoginService.getPrincipal().getId())));
+
         } catch (final Throwable oops) {
             caught = oops.getClass();
         }
@@ -119,6 +146,9 @@ public class UserServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
         rollbackTransaction();
     }
+
+
+
 
     //Drivers
     // ===================================================
