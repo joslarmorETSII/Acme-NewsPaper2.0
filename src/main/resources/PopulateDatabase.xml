@@ -96,7 +96,7 @@
 		<property name="name" value="José Manuel"/>
 		<property name="surname" value="Lara Morilla"/>
 		<property name="email" value="joslarmor@alum.us.es"/>
-		<property name="phone" value="+34 618030683"/>
+		<property name="phone" value="+34618030683"/>
 		<property name="postalAddresses" value="C\ Tarfia Bloque 7 Piso 6B"/>
 		<property name="userAccount" ref="userAccount1"/>
 	</bean>
@@ -107,7 +107,7 @@
 		<property name="name" value="José Félix"/>
 		<property name="surname" value="Gómez Rodríguez"/>
 		<property name="email" value="josgomrod3@alum.us.es"/>
-		<property name="phone" value="+34 695395229"/>
+		<property name="phone" value="+34695395229"/>
 		<property name="postalAddresses" value="C\ Reina Mercedes Bloque 25"/>
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="creditCard" ref="creditCard1" />
@@ -135,7 +135,7 @@
 		<property name="name" value="Khawla"/>
 		<property name="surname" value="Al Alsfar"/>
 		<property name="email" value="khaala@alum.us.es"/>
-		<property name="phone" value="+34 640661936"/>
+		<property name="phone" value="+34640661936"/>
 		<property name="postalAddresses" value="Barriada la Oliva"/>
 		<property name="userAccount" ref="userAccount3"/>
 
@@ -165,7 +165,7 @@
 		<property name="name" value="Feliciano"/>
 		<property name="surname" value="Blanco Castaño"/>
 		<property name="email" value="feliciano@alum.us.es"/>
-		<property name="phone" value="+34 666666666"/>
+		<property name="phone" value="+34666666666"/>
 		<property name="postalAddresses" value="Barriada la Oliva"/>
 		<property name="userAccount" ref="userAccount4"/>
 
@@ -251,7 +251,7 @@
 		<property name="name" value="User follower"/>
 		<property name="surname" value="Surname follower"/>
 		<property name="email" value="follower@alum.us.es"/>
-		<property name="phone" value="+34 666666666"/>
+		<property name="phone" value="+34666666666"/>
 		<property name="postalAddresses" value="Barriada la Oliva"/>
 		<property name="userAccount" ref="userAccount5"/>
 
@@ -279,7 +279,7 @@
 		<property name="name" value="User following"/>
 		<property name="surname" value="Surname following"/>
 		<property name="email" value="following@alum.us.es"/>
-		<property name="phone" value="+34 666666666"/>
+		<property name="phone" value="+34666666666"/>
 		<property name="postalAddresses" value="Barriada la Oliva"/>
 		<property name="userAccount" ref="userAccount6"/>
 

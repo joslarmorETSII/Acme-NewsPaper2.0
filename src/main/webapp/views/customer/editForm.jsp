@@ -16,7 +16,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <div class="input-group">
-    <form:form  action="customer/register.do" modelAttribute="customerForm" onsubmit="return validatePhone()">
+    <form:form  action="customer/register.do" modelAttribute="customerForm">
 
     <div class="form-group">
         <acme:textbox code="customer.username" path="username" />
@@ -64,18 +64,7 @@
 
         </form:form>
     </div>
-    <script>
 
-        function validatePhone() {
-            <spring:message code="customer.phone.ask" var="ask"/>
-            var x = document.getElementById("phoneId").value;
-            var patt = new RegExp("^\\+([3][4])( )(\\d{9})|()$");
-            if(x != "" && !patt.test(x)){
-                return confirm('<jstl:out value="${ask}"/>');
-            }
-        }
-
-    </script>
 
     <script>
 
