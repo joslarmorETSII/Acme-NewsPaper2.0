@@ -49,7 +49,7 @@ public abstract class Actor extends DomainEntity {
         this.surname = surname;
     }
 
-    //@Pattern(regexp = "(^\\+?[0-9]{0,15}$)")
+    @Pattern(regexp = "(^\\+?[0-9]{0,15}$)")
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getPhone() {
         return phone;

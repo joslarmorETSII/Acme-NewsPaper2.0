@@ -73,7 +73,7 @@ public class UserForm {
         this.surname = surname;
     }
 
-    @Pattern(regexp = "^\\+([3][4])( )(\\d{9})|()$")
+    @Pattern(regexp = "^\\+?([0-9]{0,15}$)")
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getPhone() {
         return this.phone;

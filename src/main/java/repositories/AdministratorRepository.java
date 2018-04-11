@@ -71,4 +71,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     // @Query("select r from User r join r.chirps rc where count(select ) > (select count(rc.posted= true)*1.1 from User r1)")
     //Collection<User> ratioUsersWith75PercentMoreChirpsPostedThanAVG();
 
+
+    // (select avg(r1.articles.size)*1.1 from NewsPaper r1)
+    //select count(c),u from Chirp c, User u where c.posted=true and c.user = u group by u);
 }
