@@ -25,7 +25,7 @@
 	<jstl:set value="{0,date,yyyy/MM/dd HH:mm}" var="formatDate"/>
 </jstl:if>
 
-<form:form action="/everyone/search.do" modelAttribute="search">
+<form:form action="user/search.do" modelAttribute="search">
 	<form:input path="keyword"/>
 	<acme:submit name="search" code="master.page.search"/>
 </form:form>

@@ -49,7 +49,7 @@ public class NewsPaperAdministratorController extends AbstractController {
         ModelAndView result;
         User user;
         Collection<NewsPaper> newsPapersTaboo = newsPaperService.findNewsPaperByTabooIsTrue();
-
+        Collection<NewsPaper> allNewsPapers = newsPaperService.findPublishedNewsPaper();
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
         String momentEs;
@@ -60,14 +60,10 @@ public class NewsPaperAdministratorController extends AbstractController {
         formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
 
-        Administrator administrator= administratorService.findByPrincipal();
-
-
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapersTaboo);
-        result.addObject("Administrator",administrator);
+        result.addObject("allNewsPapers", allNewsPapers);
         result.addObject("requestUri","newsPaper/administrator/list.do");
-
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
 

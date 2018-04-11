@@ -26,18 +26,14 @@
     <acme:column code="user.email" value="${row.email}"/>
     <acme:column code="user.phone" value="${row.phone}"/>
     <acme:column code="user.postalAddresses" value="${row.postalAddresses}"/>
-    <security:authorize access="isAuthenticated()">
-         <acme:columnButton url="user/display.do?userId=${row.id}" codeButton="general.display"/>
+    <security:authorize access="hasRole('USER')">
+         <acme:columnButton url="user/user/display.do?userId=${row.id}" codeButton="general.display"/>
     </security:authorize>
-    <security:authorize access="isAnonymous()">
-        <acme:columnButton url="everyone/profile/display.do?userId=${row.id}" codeButton="general.display"/>
+    <security:authorize access="!hasRole('USER')">
+        <acme:columnButton url="user/display.do?userId=${row.id}" codeButton="general.display"/>
     </security:authorize>
 
 </display:table>
 
-<input type="button" value="<spring:message code="general.cancel" /> " onclick="goBack()">
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+       onclick="javascript: relativeRedir('welcome/index.do');" />

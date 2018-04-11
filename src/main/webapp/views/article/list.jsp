@@ -25,6 +25,10 @@
 	<jstl:set value="{0,date,yyyy/MM/dd HH:mm}" var="formatDate"/>
 </jstl:if>
 
+<fieldset>
+	<security:authorize access="hasRole('ADMINISTRATOR')" >
+	<b><spring:message code="article.allTaboo"/></b>
+	</security:authorize>
 <display:table name="articles" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
 
 	<security:authorize access="hasRole('USER')" >
@@ -57,10 +61,42 @@
 	</security:authorize>
 
 </display:table>
+</fieldset>
+
+<security:authorize access="hasRole('ADMINISTRATOR')" >
+
+	<fieldset>
+		<b><spring:message code="article.all"/></b>
+
+
+<display:table name="allArticles" id="row2" pagesize="5" class="displaytag" requestURI="${requestURI}">
+
+	<acme:column code="article.title" value="${row2.title}" />
+
+	<spring:message var="moment" code="article.moment"/>
+	<spring:message var="formatDate" code="event.format.date"/>
+	<display:column property="moment" title="${moment}" format="${formatDate}" sortable="true" />
+
+	<acme:column code="article.summary" value="${row2.summary}" sortable="true"/>
+	<acme:column code="article.finalMode" value="${row2.finalMode}"/>
+
+	<display:column>
+		<acme:button url="article/administrator/edit.do?articleId=${row2.id}" code="article.delete" />
+	</display:column>
+
+	<display:column>
+		<acme:button url="article/display.do?articleId=${row2.id}" code="article.display" />
+	</display:column>
+
+</display:table>
+	</fieldset>
+</security:authorize>
 
 <security:authorize access="hasRole('USER')">
 	<acme:button code="article.create" url="article/user/create.do"/>
 </security:authorize>
+
+
 
 
 

@@ -24,7 +24,12 @@
 <jstl:if test="${pageContext.response.locale.language == 'en' }">
 	<jstl:set value="{0,date,yyyy/MM/dd HH:mm}" var="formatDate"/>
 </jstl:if>
+
+
 <fieldset>
+		<security:authorize access="hasRole('ADMINISTRATOR')" >
+			<b><spring:message code="chirps.allTaboo"/></b>
+		</security:authorize>
 	<display:table name="chirps" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
 
 		<security:authorize access="hasRole('USER')" >
@@ -37,7 +42,7 @@
 
 		<security:authorize access="hasRole('USER')">
 			<display:column >
-				<jstl:if test="${ row.posted ne true  && row.taboo eq false}">
+				<jstl:if test="${ row.posted ne true}">
 					<acme:button url="chirp/user/post.do?chirpId=${row.id}" code="chirp.post"/>
 				</jstl:if>
 				<jstl:if test="${row.posted eq true}">
@@ -57,7 +62,7 @@
 
 		<security:authorize access="hasRole('ADMINISTRATOR')" >
 			<display:column>
-				<acme:button url="chirp/administrator/edit.do?chirpId=${row.id}" code="chirp.delete" />
+				<acme:button code="general.delete" url="chirp/administrator/edit.do?chirpId=${row.id}"/>
 			</display:column>
 		</security:authorize>
 
@@ -91,6 +96,27 @@
 
 	</display:table>
 </fieldset>
+</security:authorize>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<fieldset>
+		<b><spring:message code="chirp.all"/>
+		</b>
+		<display:table name="allChirps" id="chirp2" pagesize="5" class="displaytag" requestURI="${requestURI}">
+			<acme:column code="chirp.user" value="${chirp2.user.name}" />
+			<acme:column code="chirp.title" value="${chirp2.title}" />
+			<acme:column code="chirp.description" value="${chirp2.description}" />
+
+			<display:column>
+				<acme:button code="general.delete" url="chirp/administrator/edit.do?chirpId=${chirp2.id}"/>
+			</display:column>
+
+			<display:column>
+				<acme:button url="chirp/user/display.do?chirpId=${chirp2.id}" code="chirp.display" />
+			</display:column>
+
+		</display:table>
+	</fieldset>
 </security:authorize>
 
 

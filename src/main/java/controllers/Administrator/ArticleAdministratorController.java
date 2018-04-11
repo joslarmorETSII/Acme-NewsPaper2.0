@@ -52,7 +52,7 @@ public class ArticleAdministratorController extends AbstractController {
         ModelAndView result;
         User user;
         Collection<Article> articlesTaboo = articleService.findArticleByTabooIsTrue();
-
+        Collection<Article> allArticles = articleService.findPublishArticles();
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
         String momentEs;
@@ -68,7 +68,7 @@ public class ArticleAdministratorController extends AbstractController {
 
         result = new ModelAndView("article/list");
         result.addObject("articles", articlesTaboo);
-        result.addObject("Administrator",administrator);
+        result.addObject("allArticles", allArticles);
         result.addObject("requestUri","article/administrator/list.do");
 
         result.addObject("momentEs", momentEs);

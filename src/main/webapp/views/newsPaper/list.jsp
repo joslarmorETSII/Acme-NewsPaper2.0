@@ -25,6 +25,12 @@
     <jstl:set value="{0,date,yyyy/MM/dd HH:mm}" var="formatDate"/>
 </jstl:if>
 
+
+<fieldset>
+    <security:authorize access="hasRole('ADMINISTRATOR')" >
+    <b><spring:message code="newsPapers.allTaboo"/></b>
+    </security:authorize>
+
 <display:table name="newsPapers" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
 
     <jstl:set var="forPublish" value="true" />
@@ -47,9 +53,6 @@
     <acme:column code="newsPaper.description" value="${row.description}"/>
     <spring:message code="newsPaper.picture" var="pic"/>
     <display:column title="${pic}"><img src="${row.picture}" alt="no image" width="130" height="100"></display:column>
-
-
-
 
     <spring:message var="publicationDate" code="newsPaper.publicationDate"/>
     <spring:message var="formatDate" code="event.format.date"/>
@@ -84,13 +87,40 @@
         </display:column>
     </security:authorize>
 
+</display:table>
+</fieldset>
+<br/>
 
+<security:authorize access="hasRole('ADMINISTRATOR')">
+<fieldset>
+    <b><spring:message code="newsPaper.all"/></b>
+<display:table name="allNewsPapers" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
+
+    <acme:column code="newsPaper.publisher" value="${row.publisher.name} " />
+    <acme:column code="newsPaper.title" value="${row.title}"/>
+    <acme:column code="newsPaper.description" value="${row.description}"/>
+    <spring:message code="newsPaper.picture" var="pic"/>
+    <display:column title="${pic}"><img src="${row.picture}" alt="no image" width="130" height="100"></display:column>
+
+    <spring:message var="publicationDate" code="newsPaper.publicationDate"/>
+    <spring:message var="formatDate" code="event.format.date"/>
+    <display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
+
+    <display:column >
+        <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+    </display:column>
+
+    <display:column>
+        <acme:button url="newsPaper/administrator/edit.do?newsPaperId=${row.id}" code="newsPaper.delete" />
+    </display:column>
 
 </display:table>
+</fieldset>
+</security:authorize>
 
 <security:authorize access="hasRole('USER')">
     <acme:button code="newsPaper.create" url="newsPaper/user/create.do"/>
 </security:authorize>
 
-<input type="button" name="cancel" value="<spring:message code="customer.cancel" />"
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
        onclick="javascript: relativeRedir('/welcome/index.do');" />

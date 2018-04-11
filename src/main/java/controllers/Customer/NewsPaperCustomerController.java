@@ -103,7 +103,7 @@ public class NewsPaperCustomerController extends AbstractController{
             CreditCard creditCard = customerService.reconstructSubscribe(subscribeForm, binding);
 
             if (binding.hasErrors())
-                result = this.createEditModelAndView2(subscribeForm, "subscribe.save.error");
+                result = this.createEditModelAndView2(subscribeForm, "commit.save.error");
             else {
                 result = new ModelAndView("redirect:list.do");
                 customer = customerService.findByPrincipal();
@@ -118,7 +118,7 @@ public class NewsPaperCustomerController extends AbstractController{
 
             }
         } catch (final Throwable oops) {
-            result = this.createEditModelAndView2(subscribeForm, "subscribe.commit.error");
+            result = this.createEditModelAndView2(subscribeForm, "commit.save.error");
         }
 
         return result;

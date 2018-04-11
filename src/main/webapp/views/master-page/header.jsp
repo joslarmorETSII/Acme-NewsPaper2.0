@@ -26,15 +26,12 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="chirp/administrator/list.do"><spring:message code="master.page.chirp.list-taboo" /></a></li>
-					<li><a href="chirp/administrator/listAll.do"><spring:message code="master.page.chirp.listAll" /></a></li>
-
 				</ul>
 			</li>
+			<li><a class="fNiv" href="chirp/administrator/list.do"><spring:message code="master.page.chirp.list-taboo" /></a></li>
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
-			<li><a class="fNiv" href="newsPaper/administrator/list.do"><spring:message code="master.page.newsPaper.administrator.list" /></a></li>
-            <li><a class="fNiv" href="article/administrator/list.do"><spring:message code="master.page.article.administrator.list" /></a></li>
-			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
+			<li><a class="fNiv" href="newsPaper/administrator/list.do"><spring:message code="master.page.newsPaper.administrator" /></a></li>
+            <li><a class="fNiv" href="article/administrator/list.do"><spring:message code="master.page.article.administrator" /></a></li>
 
 		</security:authorize>
 
@@ -52,9 +49,9 @@
 			</ul>
 			</li>
 			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
-
-			<li><a class="fNiv" href="user/list-followers.do"><spring:message code="master.page.user.followers" /></a></li>
-			<li><a class="fNiv" href="user/list-following.do"><spring:message code="master.page.user.following" /></a></li>
+			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
+			<li><a class="fNiv" href="user/user/list-followers.do"><spring:message code="master.page.user.followers" /></a></li>
+			<li><a class="fNiv" href="user/user/list-following.do"><spring:message code="master.page.user.following" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
 
 
@@ -68,6 +65,7 @@
 					<li><a href="/newsPaper/customer/list.do"><spring:message code="master.page.newspaper.customer.list" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 			<li><a class="fNiv" href="/newsPaper/customer/listNewsPaperCustomer.do"><spring:message code="master.page.newspaper.customerNewsPaper" /></a></li>
 		</security:authorize>
 		
@@ -82,7 +80,6 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
-			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
@@ -94,7 +91,7 @@
 				</ul>
 			</li>
 		</security:authorize>
-		<li><a class="fNiv" href="everyone/search.do"><spring:message code="master.page.search" /></a></li>
+		<li><a class="fNiv" href="user/search.do"><spring:message code="master.page.search" /></a></li>
 
 	</ul>
 </div>

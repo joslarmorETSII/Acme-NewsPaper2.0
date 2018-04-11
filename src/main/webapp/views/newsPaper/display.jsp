@@ -33,10 +33,10 @@
     <b><spring:message code="newsPaper.publisher"/>:&nbsp;</b><a href="user/display.do?userId=${newsPaper.publisher.id}"><jstl:out value="${newsPaper.publisher.userAccount.username}"/></a>
     </security:authorize>
     <security:authorize access="hasRole('CUSTOMER')">
-        <b><spring:message code="newsPaper.publisher"/>:&nbsp;</b><a href="everyone/profile/display.do?userId=${newsPaper.publisher.id}"><jstl:out value="${newsPaper.publisher.userAccount.username}"/></a>
+        <b><spring:message code="newsPaper.publisher"/>:&nbsp;</b><a href="user/display.do?userId=${newsPaper.publisher.id}"><jstl:out value="${newsPaper.publisher.userAccount.username}"/></a>
     </security:authorize>
     <security:authorize access="isAnonymous()">
-        <b><spring:message code="newsPaper.publisher"/>:&nbsp;</b><a href="everyone/profile/display.do?userId=${newsPaper.publisher.id}"><jstl:out value="${newsPaper.publisher.userAccount.username}"/></a>
+        <b><spring:message code="newsPaper.publisher"/>:&nbsp;</b><a href="user/display.do?userId=${newsPaper.publisher.id}"><jstl:out value="${newsPaper.publisher.userAccount.username}"/></a>
     </security:authorize>
     <br/>
     <a href="article/display.do?articleId=${article.id}"><jstl:out value="${article.title}"/></a>

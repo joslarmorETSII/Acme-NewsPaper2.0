@@ -31,21 +31,13 @@ public class ChirpAdministratorController {
     public ModelAndView list() {
         ModelAndView result;
         Collection<Chirp> tabooChirps;
+        Collection<Chirp> allChirps;
 
         result = new ModelAndView("chirp/list");
         tabooChirps = chirpService.findTabooChirps();
-        result.addObject("chirps",tabooChirps);
+        allChirps = chirpService.findPublishedChirps();
 
-        return result;
-    }
-
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    public ModelAndView listAll() {
-        ModelAndView result;
-        Collection<Chirp> tabooChirps;
-
-        result = new ModelAndView("chirp/list");
-        tabooChirps = chirpService.findPublishedChirps();
+        result.addObject("allChirps", allChirps);
         result.addObject("chirps",tabooChirps);
 
         return result;
