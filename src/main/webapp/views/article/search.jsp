@@ -48,11 +48,9 @@
 		</display:column>
 	</security:authorize>
 
-	<security:authorize access="isAuthenticated()" >
 		<display:column>
 			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
 		</display:column>
-	</security:authorize>
 </display:table>
 </fieldset>
 <br/>
@@ -62,7 +60,9 @@
 	<acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
 	<acme:column code="newsPaper.title" value="${newspaper.title}"/>
 	<acme:column code="newsPaper.description" value="${newspaper.description}"/>
-	<acme:column code="newsPaper.picture" value="${newspaper.picture}"/>
+
+	<spring:message code="newsPaper.picture" var="pic"/>
+	<display:column title="${pic}"><img src="${newspaper.picture}" alt="no image" width="130" height="100"></display:column>
 	<spring:message var="publicationDate" code="newsPaper.publicationDate"/>
 	<spring:message var="formatDate2" code="event.format.date"/>
 	<display:column property="publicationDate" title="${publicationDate}" format="${formatDate2}" sortable="true" />

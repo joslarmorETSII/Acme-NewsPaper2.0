@@ -79,6 +79,7 @@ public class UserUserController extends AbstractController{
         articles=articleService.findPublishArticlesByUserId(userId);
         result = new ModelAndView("user/display");
         result.addObject("user", user);
+        result.addObject("principal",principal);
         result.addObject("articles", articles);
         result.addObject("requestURI","user/display.do");
         result.addObject("chirps",user.getChirps());

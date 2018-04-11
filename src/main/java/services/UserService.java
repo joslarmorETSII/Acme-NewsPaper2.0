@@ -142,6 +142,7 @@ public class UserService {
         principal = findByPrincipal();
         userToFollow = userRepository.findOne(userId);
         Assert.isTrue(!principal.getFollowings().contains(userToFollow));
+
         principal.getFollowings().add(userToFollow);
 
         Assert.isTrue(principal.getId() != userId);

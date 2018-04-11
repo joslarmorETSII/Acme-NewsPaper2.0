@@ -93,11 +93,11 @@
 </fieldset>
 <br/>
 <security:authorize access="hasRole('USER')">
-    <jstl:if test="${!esSeguido}">
-        <acme:button code="user.follow" url="user/follow.do?userId=${user.id}"/>
+    <jstl:if test="${!esSeguido && principal.id ne user.id}">
+        <acme:button code="user.follow" url="user/user/follow.do?userId=${user.id}"/>
     </jstl:if>
     <jstl:if test="${esSeguido}">
-        <acme:button code="user.unfollow" url="user/unfollow.do?userId=${user.id}"/>
+        <acme:button code="user.unfollow" url="user/user/unfollow.do?userId=${user.id}"/>
     </jstl:if>
 </security:authorize>
 

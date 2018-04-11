@@ -81,6 +81,7 @@
 		<security:intercept-url pattern="/followUp/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/followUp/user/list.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/followUp/user/display.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/followUp/**" access="permitAll()" />
 
         <!-- Search -->
         <security:intercept-url pattern="/everyone/search.do" access="permitAll()" />

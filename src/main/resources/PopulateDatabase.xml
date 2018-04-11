@@ -375,13 +375,13 @@
 	<!-- Configuration -->
 
 	<bean id="configuration1" class="domain.Configuration">
-		<property name="name" value="Adventure meetups" />
+		<property name="name" value="Interesting NewsPaper" />
 		<property name="banner"
-				  value="http://www.theadventuretravelsite.com/blog-data/themes/theadventuretravelsite/images/main/banner.png" />
+				  value="http://westernpulp.com/images/uploads/main/news-banner.jpg" />
 		<property name="englishWelcome"
-				  value="Your place to organise your adventure meetups!" />
+				  value="Your web of NewsPaper!" />
 		<property name="spanishWelcome"
-				  value="Tu sitio para organizar quedadas de aventura" />
+				  value="Tu Página de revistas" />
 		<property name="tabooWords">
 			<list>
 				<value>viagra</value>

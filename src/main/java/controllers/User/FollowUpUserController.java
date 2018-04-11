@@ -107,34 +107,6 @@ public class FollowUpUserController extends AbstractController {
         return result;
     }
 
-    // Display ----------------------------------------------------------------
-
-    @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam  int followUpId) {
-        ModelAndView result;
-        FollowUp followUp;
-        SimpleDateFormat formatterEs;
-        SimpleDateFormat formatterEn;
-        String momentEs;
-        String momentEn;
-
-        followUp = followUpService.findOne(followUpId);
-        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
-        momentEs = formatterEs.format(followUp.getMoment());
-        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
-        momentEn = formatterEn.format(followUp.getMoment());
-
-        result = new ModelAndView("followUp/display");
-        result.addObject("followUp", followUp);
-        result.addObject("cancelURI", "followUp/user/list.do");
-
-        result.addObject("momentEs", momentEs);
-        result.addObject("momentEn", momentEn);
-
-
-        return result;
-    }
-
 
     // Ancillary methods ------------------------------------------------------
 
