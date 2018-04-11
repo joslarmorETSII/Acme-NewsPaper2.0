@@ -45,13 +45,7 @@ public class UserServiceTest extends AbstractTest {
 
             final User result;
 
-
             result = this.userService.create();
-
-
-
-
-
 
             result.getUserAccount().setUsername(username);
             result.setName(name);
@@ -76,20 +70,46 @@ public class UserServiceTest extends AbstractTest {
 
     }
 
-    public void followOrUnFollowUser(final String username, String userBean,
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   Follow or unfollow another user.
+     */
+
+    public void followUser(final String username, String userBean,
                                      final Class<?> expected) {
         Class<?> caught = null;
         startTransaction();
         try {
 
-
             authenticate(username);
 
             User userToFollow = userService.findOne(getEntityId(userBean));
-
             userService.follow(userToFollow.getId());
-
             this.userService.save(userToFollow);
+
+            userService.flush();
+
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
+    public void unFollowUser(final String username, String userBean,
+                                     final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+        try {
+
+            authenticate(username);
+
+            User userToUnFollow = userService.findOne(getEntityId(userBean));
+
+            userService.unfollow(userToUnFollow.getId());
+
+            userService.save(userToUnFollow);
             userService.flush();
 
         } catch (final Throwable oops) {
@@ -138,9 +158,7 @@ public class UserServiceTest extends AbstractTest {
     }
 
     @Test
-    public void driverFollowOrUnFollowUser() {
-
-
+    public void driverFollowUser() {
 
         final Object testingData[][] = {
                 // User1 sigue a user2 -> true
@@ -152,17 +170,38 @@ public class UserServiceTest extends AbstractTest {
                         null, "user1", IllegalArgumentException.class
                 },
                 // User1 sigue a user1-> false
-//                {
-//                        "user1", "user1, IllegalArgumentException.class
-//                },
-
+                {
+                        "user1", "user1", IllegalArgumentException.class
+                }
 
         };
         for (int i = 0; i < testingData.length; i++)
-            this.followOrUnFollowUser((String) testingData[i][0],(String) testingData[i][1],
+            this.followUser((String) testingData[i][0],(String) testingData[i][1],
                     (Class<?>) testingData[i][2]);
     }
 
+    @Test
+    public void driverUnFollowUser() {
+
+        final Object testingData[][] = {
+                // User1 no sigue a following1 -> true
+                {
+                        "user1","following1",  null
+                },
+                // El usuario a null --> false
+                {
+                        null, "user1", IllegalArgumentException.class
+                },
+                // User1 deja de seguir a user1-> false
+                {
+                        "user1", "user1", IllegalArgumentException.class
+                }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.unFollowUser((String) testingData[i][0],(String) testingData[i][1],
+                    (Class<?>) testingData[i][2]);
+    }
 
 
 }

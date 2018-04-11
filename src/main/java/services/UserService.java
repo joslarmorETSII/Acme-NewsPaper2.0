@@ -144,6 +144,8 @@ public class UserService {
         Assert.isTrue(!principal.getFollowings().contains(userToFollow));
         principal.getFollowings().add(userToFollow);
 
+        Assert.isTrue(principal.getId() != userId);
+
         save(principal);
         save(userToFollow);
 
@@ -160,6 +162,8 @@ public class UserService {
         Assert.isTrue(principal.getFollowings().contains(userToUnFollow));
         principal.getFollowings().remove(userToUnFollow);
         userToUnFollow.getFollowers().remove(principal);
+
+        Assert.isTrue(principal.getId() != userId);
 
         save(principal);
         save(userToUnFollow);
