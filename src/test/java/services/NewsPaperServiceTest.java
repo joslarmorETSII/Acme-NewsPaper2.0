@@ -43,6 +43,7 @@ public class NewsPaperServiceTest extends AbstractTest {
 
     public void listOfNewsPaperTest(final String username,final Class<?> expected){
         Class<?> caught = null;
+
         startTransaction();
         try {
             this.authenticate(username);
