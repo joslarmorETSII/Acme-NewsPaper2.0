@@ -16,3 +16,4 @@
 <button onclick="javascript:window.close();"><spring:message code="welcome.close" /></button>
 
 </html>
+
