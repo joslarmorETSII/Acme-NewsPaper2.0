@@ -137,36 +137,6 @@ public class UserServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    /*  FUNCTIONAL REQUIREMENT:
-     *
-     *  An actor who is authenticated as a user must be able to:
-     *    -   Display a stream with the chirps posted by all of the users that he or she follows.
-     */
-
-    public void displayStream(final String username, String userBean,
-                           final Class<?> expected) {
-        Class<?> caught = null;
-        startTransaction();
-        try {
-
-            authenticate(username);
-
-            User user = userService.findOne(getEntityId(userBean));
-            chirpService.findAllChirpsByFollowings(user.getId());
-
-            this.userService.save(user);
-
-            userService.flush();
-
-
-        } catch (final Throwable oops) {
-            caught = oops.getClass();
-        }
-
-        this.checkExceptions(expected, caught);
-        rollbackTransaction();
-    }
-
 
     //Drivers
     // ===================================================
@@ -251,28 +221,7 @@ public class UserServiceTest extends AbstractTest {
                     (Class<?>) testingData[i][2]);
     }
 
-    @Test
-    public void driverDisplayStream() {
 
-        final Object testingData[][] = {
-                // User1 no sigue a following1 -> true
-                {
-                        "user1","user1",  null
-                },
-//                // El usuario a null --> false
-//                {
-//                        null, "user1", IllegalArgumentException.class
-//                },
-//                // User1 deja de seguir a user1-> false
-//                {
-//                        "user1", "user1", IllegalArgumentException.class
-//                }
-
-        };
-        for (int i = 0; i < testingData.length; i++)
-            this.displayStream((String) testingData[i][0],(String) testingData[i][1],
-                    (Class<?>) testingData[i][2]);
-    }
 
 
 

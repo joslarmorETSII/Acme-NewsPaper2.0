@@ -7,6 +7,8 @@ import org.springframework.util.Assert;
 import repositories.ChirpRepository;
 import repositories.NewsPaperRepository;
 import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -165,6 +167,7 @@ public class ChirpService  {
     }
 
     public Collection<Chirp> findAllChirpsByFollowings(int userId){
+        Assert.isTrue(actorService.isUser());
         return chirpRepository.findAllChirpsByFollowings(userId);
     }
 

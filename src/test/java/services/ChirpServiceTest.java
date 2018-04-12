@@ -2,6 +2,7 @@ package services;
 
 import domain.Chirp;
 import domain.NewsPaper;
+import domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class ChirpServiceTest extends AbstractTest{
     // The SUT ---------------------------------
     @Autowired
     private ChirpService chirpService;
+
+    @Autowired
+    private UserService userService;
 
      /*  FUNCTIONAL REQUIREMENT:
        * Post a chirp. Chirps may not be changed or deleted once they are posted.  */
@@ -85,7 +89,6 @@ public class ChirpServiceTest extends AbstractTest{
      /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a admin must be able to:
                 -.Remove an article that he or she thinks is inappropriate.
-
     */
 
 
@@ -107,6 +110,34 @@ public class ChirpServiceTest extends AbstractTest{
 
             caught = oops.getClass();
 
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *  An actor who is authenticated as a user must be able to:
+     *    -   Display a stream with the chirps posted by all of the users that he or she follows.
+     */
+
+    public void displayStream(final String username, String userBean,
+                              final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+        try {
+
+            authenticate(username);
+
+            User user = userService.findOne(getEntityId(userBean));
+            chirpService.findAllChirpsByFollowings(user.getId());
+
+            userService.flush();
+
+
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
         }
 
         this.checkExceptions(expected, caught);
@@ -184,6 +215,29 @@ public class ChirpServiceTest extends AbstractTest{
         };
         for (int i = 0; i < testingData.length; i++)
             this.deleteChirpInappropiateTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
+    }
+
+    @Test
+    public void driverDisplayStream() {
+
+        final Object testingData[][] = {
+                // Stream de chirp de user2 -> true
+                {
+                        "user1","user2",  null
+                },
+                // El usuario a null --> false
+                {
+                        null, "user1", IllegalArgumentException.class
+                },
+                // Stream de chirp logueado como admin-> false
+                {
+                        "admin", "user1", IllegalArgumentException.class
+                }
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.displayStream((String) testingData[i][0],(String) testingData[i][1],
+                    (Class<?>) testingData[i][2]);
     }
 
 }
