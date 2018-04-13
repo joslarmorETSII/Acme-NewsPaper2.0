@@ -110,7 +110,7 @@ public class NewsPaperCustomerController extends AbstractController{
                 newsPaper = subscribeForm.getNewsPaper();
                 newsPaper.getCustomers().add(customer);
                 customer.getNewsPapers().add(newsPaper);
-                 CreditCard saved=creditCardService.save(creditCard);
+                CreditCard saved=creditCardService.save(creditCard);
                 customer.setCreditCard(saved);
                 this.customerService.save(customer);
                 this.newsPaperService.save(newsPaper);

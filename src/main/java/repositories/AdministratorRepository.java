@@ -23,9 +23,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     Collection<Double> avgStdOfNewspapersPerUser();
 
     // 2- The average and the standard deviation of articles written by writer.
-    // TODO
-   // @Query("select avg(u.newsPapers.size),sqrt(sum(u.newsPapers.size *u.newsPapers.size)/ count(u) - (avg(u.newsPapers.size) *avg(u.newsPapers.size))) from  User u")
-   // Collection<Article> avgStdOfArticles();
+    @Query("select avg(u.newsPapers.size),sqrt(sum(u.newsPapers.size *u.newsPapers.size)/ count(u) - (avg(u.newsPapers.size) *avg(u.newsPapers.size))) from  User u")
+    Collection<Article> avgStdOfArticles();
 
     // 3- The average and the standard deviation of articles per newspaper.
     @Query("select avg(u.articles.size),sqrt(sum(u.articles.size *u.articles.size)/ count(u) - (avg(u.articles.size) *avg(u.articles.size))) from  NewsPaper u")
@@ -46,32 +45,56 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     Double ratioOfUsersThatCreatedNewspaper();
 
     // 7- The ratio of users who have ever written an article.
-    // TODO
-   // Double ratioOfUserCreatingArticle();
+    @Query("select count(distinct u)*1.0 / (select count(u1)*1.0 from User u1)from User u join u.newsPapers p where p.publisher = u and p.articles.size>0")
+    Double ratioOfUserCreatingArticle();
+
 
     // ########################  QUERIES LEVEL B  ################################
 
 
     // 8- The average number of follow-ups per article.
-   // @Query("select avg(a.followUps.size) from Article a ")
-   // Double avgFollowUpsPerArticle();
+    @Query("select avg(a.followUps.size) from Article a ")
+    Double avgFollowUpsPerArticle();
 
     // 9- The average number of follow-ups per article up to one week after the corresponding newspaper?s been published.
-   // @Query("select avg(a.followUps.size) from Article a where CURRENT_TIMESTAMP - a.newsPaper.publicationDate >=604800")
-    //Double avgFollowUpsPerArticleAfter1weekNewspaprerPublished();
+    @Query("select count(a1)*1.0/(select count(a2)*1.0 from FollowUp a2 ) from FollowUp a1 where datediff(a1.moment, a1.article.newsPaper.publicationDate)<=7")
+    Double avgFollowUpsPerArticleAfter1weekNewspaprerPublished();
 
     // 10- The average number of follow-ups per article up to two weeks after the corresponding newspaper?s been published.
+     @Query("select count(a1)*1.0/(select count(a2)*1.0 from FollowUp a2 ) from FollowUp a1 where datediff(a1.moment, a1.article.newsPaper.publicationDate)<=14")
+     Double avgFollowUpsPerArticleAfter2weekNewspaprerPublished();
 
     // 11- The average and the standard deviation of the number of chirps per user.
-    //@Query("select avg(u.chirps.size),sqrt(sum(u.chirps.size *u.chirps.size)/ count(u) - (avg(u.chirps.size) *avg(u.chirps.size))) from  User u")
-    //Collection<Double> avgStdChirpsPerUser();
+    @Query("select avg(u.chirps.size),sqrt(sum(u.chirps.size *u.chirps.size)/ count(u) - (avg(u.chirps.size) *avg(u.chirps.size))) from  User u")
+    Collection<Double> avgStdChirpsPerUser();
 
     // 12- The ratio of users who have posted above 75% the average number of chirps per user.
-    // TODO
-    // @Query("select r from User r join r.chirps rc where count(select ) > (select count(rc.posted= true)*1.1 from User r1)")
-    //Collection<User> ratioUsersWith75PercentMoreChirpsPostedThanAVG();
+    //          select u from User u where u.chirps.size > (select avg(u1.chirps.size)*1.75 from User u1)
+    @Query("select 1.0*(select count(u1) from User u1 where (select count(c) from User u join u.chirps c where c.posted = true and c.user = u1) >= ( select avg(r1.chirps.size)*1.75 from User r1))/(count(f)) from User f")
+    Collection<User> ratioUsersWith75PercentMoreChirpsPostedThanAVG();
 
+    // ########################  QUERIES LEVEL A  ################################
 
-    // (select avg(r1.articles.size)*1.1 from NewsPaper r1)
-    //select count(c),u from Chirp c, User u where c.posted=true and c.user = u group by u);
+    // 13- The ratio of public versus private newspapers.
+
+    @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.modePrivate = false) from NewsPaper n1 where n1.modePrivate = true")
+    Double ratioPublicVSPrivateNewspapers();
+
+    // 14- The average number of articles per private newspapers.
+
+    @Query("select avg(n.articles.size) from NewsPaper n where n.modePrivate = true")
+    Double avgArticlesPerNewsPapersPrivate();
+
+    // 15- The average number of articles per public newspapers.
+
+    @Query("select avg(n.articles.size) from NewsPaper n where n.modePrivate = false")
+    Double avgArticlesPerNewsPapersPublic();
+
+    // 16- The ratio of subscribers per private newspaper versus the total number of customers.
+    @Query("select count(c1.newsPapers.size)*1.0 /(select count(c2)*1.0 from Customer c2) from Customer c1 where c1.newsPapers.size > 0")
+    Double ratioPrivateNewsPapersVsCustomers();
+
+    // 17- The ratio of users who have posted above 75% the average number of chirps per user.
+    @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.modePrivate = false) from NewsPaper n1 where n1.modePrivate = true group by n1.publisher")
+    Double ratioPrivateNewsPapersVsPublicPerPublisher();
 }
