@@ -172,10 +172,8 @@ public class ChirpService  {
     }
 
     public void findOneToPublish(Chirp chirp){
-
-        Assert.isTrue(!chirp.getTaboo());
-
-            if(!chirp.getPosted() && !chirp.getTaboo()){
+            Assert.isTrue(!chirp.getPosted());
+            if(!chirp.getPosted()){
                 chirp.setPosted(true);
                 chirp.setMoment(new Date());
             }
