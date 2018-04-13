@@ -37,7 +37,7 @@
 
 	<security:authorize access="isAuthenticated()" >
 		<display:column>
-			<acme:button url="followUp/user/display.do?followUpId=${row.id}" code="general.display" />
+			<acme:button url="followUp/display.do?followUpId=${row.id}" code="general.display" />
 		</display:column>
 	</security:authorize>
 
