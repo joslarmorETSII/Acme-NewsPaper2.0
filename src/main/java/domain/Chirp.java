@@ -11,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
+
 public class Chirp extends DomainEntity{
 
     // Constructors ----------------------------------------------------------------------

@@ -15,6 +15,9 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+        @Index(columnList = "newsPaper_id")
+})
 public class Article extends DomainEntity {
     // Constructors -----------------------------------------------------------
 
