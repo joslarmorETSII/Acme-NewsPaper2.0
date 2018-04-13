@@ -37,9 +37,12 @@
 
 <b><spring:message code="article.body"/>:&nbsp;</b><jstl:out value="${article.body}"/>
 <br/>
+<b><spring:message code="article.picture"/></b>
 
-<b><spring:message code="article.picture"/>:&nbsp;</b><jstl:out value="${article.picture}"/>
-<br/>
+<jstl:forEach items="${article.pictures}" var="picture">
+	<img src="${picture.url}" width="500px" height="100%" />
+	<br/>
+</jstl:forEach>
 
 <b><spring:message code="article.finalMode"/>:&nbsp;</b><jstl:out value="${article.finalMode}"/>
 <br/>

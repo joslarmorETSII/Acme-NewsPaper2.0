@@ -25,6 +25,8 @@
 	<form:hidden path="followUps" />
 	<form:hidden path="taboo" />
 	<form:hidden path="moment" />
+	<form:hidden path="pictures" />
+
 
 	<form:label path="newsPaper"><spring:message code="article.newsPaper"/></form:label>
 	<form:select path="newsPaper">
@@ -37,7 +39,6 @@
 	<acme:textbox path="title" code="article.title"/>
 	<acme:textbox path="summary" code="article.summary" />
 	<acme:textarea path="body" code="article.body" />
-	<acme:textbox path="picture" code="article.picture"/>
 	<acme:checkbox path="finalMode" code="article.finalMode"/>
 
 	<jstl:if test="${article.finalMode eq false or article.id eq 0}" >

@@ -40,8 +40,11 @@
 
 <b><spring:message code="followUp.text"/>:&nbsp;</b><jstl:out value="${followUp.text}"/>
 <br/>
-
-<b><spring:message code="followUp.pictures"/>:&nbsp;</b><jstl:out value="${followUp.pictures}"/>
+<b><spring:message code="article.picture"/></b>
+<jstl:forEach items="${followUp.pictures}" var="picture">
+	<img src="${picture.url}" width="500px" height="100%" />
+	<br/>
+</jstl:forEach>
 <br/>
 
 <br>

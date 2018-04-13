@@ -60,6 +60,14 @@
 		</display:column>
 	</security:authorize>
 
+	<security:authorize access="hasRole('USER')" >
+		<jstl:if test="${row.finalMode eq false}" >
+		<display:column>
+			<acme:button url="picture/user/create.do?articleId=${row.id}" code="article.picture.add" />
+		</display:column>
+		</jstl:if>
+	</security:authorize>
+
 </display:table>
 </fieldset>
 

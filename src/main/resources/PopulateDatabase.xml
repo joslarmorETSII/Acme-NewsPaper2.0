@@ -312,11 +312,15 @@
 	<property name="moment" value="01/04/2018"/>
 	<property name="summary" value="Summary del articulo1"/>
 	<property name="body" value="Cuerpo del articulo1"/>
-	<property name="picture" value="https://www.imagen.com"/>
 	<property name="finalMode" value="true"/>
 	<property name="taboo" value="false"/>
 	<property name="newsPaper" ref="newsPaper1" />
 		<property name="followUps">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="pictures">
 			<list>
 				<null/>
 			</list>
@@ -328,13 +332,17 @@
 		<property name="moment" value="01/04/2018 23:00"/>
 		<property name="summary" value="Summary del articulo"/>
 		<property name="body" value="Cuerpo del articulo"/>
-		<property name="picture" value="https://www.imagen.com"/>
 		<property name="finalMode" value="false"/>
 		<property name="taboo" value="false"/>
 		<property name="newsPaper" ref="newsPaper2" />
 		<property name="followUps">
 			<list>
 				<ref bean="followUp1" />
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture3" />
 			</list>
 		</property>
 	</bean>
@@ -344,13 +352,17 @@
 		<property name="moment" value="01/04/2018 23:00"/>
 		<property name="summary" value="Summary del articulo"/>
 		<property name="body" value="Cuerpo del articulo"/>
-		<property name="picture" value="https://www.imagen.com"/>
 		<property name="finalMode" value="false"/>
 		<property name="taboo" value="true"/>
 		<property name="newsPaper" ref="newsPaper2" />
 		<property name="followUps">
 			<list>
 				<null/>
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture1" />
 			</list>
 		</property>
 	</bean>
@@ -362,15 +374,33 @@
 		<property name="moment" value="01/04/2018 23:00"/>
 		<property name="summary" value="Summary del articulo"/>
 		<property name="text" value="Cuerpo del articulo"/>
-
 		<property name="pictures">
 			<list>
-				<value>http://www.imagen.com</value>
+				<ref bean="picture2" />
 			</list>
 		</property>
 		<property name="article" ref="article2" />
 	</bean>
 
+	<!-- Picture -->
+
+	<bean id="picture1" class="domain.Picture">
+		<property name="url" value="http://www.imagen.com"/>
+		<property name="article" ref="article3"/>
+		<property name="followUp"> <null /></property>
+	</bean>
+
+	<bean id="picture2" class="domain.Picture">
+		<property name="url" value="http://www.imagen.com"/>
+		<property name="article" ><null/></property>
+		<property name="followUp" ref="followUp1"/>
+	</bean>
+
+	<bean id="picture3" class="domain.Picture">
+		<property name="url" value="http://www.imagen.com"/>
+		<property name="article" ref="article2"/>
+		<property name="followUp"> <null /></property>
+	</bean>
 
 	<!-- Configuration -->
 

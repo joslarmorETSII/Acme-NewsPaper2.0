@@ -50,9 +50,7 @@ public class ArticleService {
 
     public Article create(){
         Article res= null;
-        User publisher =null;
 
-        publisher= userService.findByPrincipal();
         Collection<FollowUp> followUps= new ArrayList<>();
         res= new Article();
         res.setFollowUps(followUps);

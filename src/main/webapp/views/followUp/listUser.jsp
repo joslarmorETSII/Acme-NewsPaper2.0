@@ -41,6 +41,10 @@
 		</display:column>
 	</security:authorize>
 
+	<display:column>
+		<acme:button url="picture/user/create.do?followUpId=${row.id}" code="followUp.picture.add" />
+	</display:column>
+
 
 </display:table>
 

@@ -31,7 +31,6 @@ public class Article extends DomainEntity {
     private Date moment;
     private String summary;
     private String body;
-    private String picture;
     private boolean finalMode;
     private boolean taboo;
 
@@ -75,17 +74,6 @@ public class Article extends DomainEntity {
         this.body = body;
     }
 
-    @URL
-    @NotBlank
-    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
     public boolean getFinalMode() {
         return finalMode;
     }
@@ -106,6 +94,18 @@ public class Article extends DomainEntity {
 
     private NewsPaper newsPaper;
     private Collection<FollowUp> followUps;
+    private Collection<Picture> pictures;
+
+    @Valid
+    @NotNull
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    public Collection<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Collection<Picture> pictures) {
+        this.pictures = pictures;
+    }
 
     @Valid
     @NotNull

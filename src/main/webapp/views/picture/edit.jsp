@@ -18,29 +18,22 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${actionUri}" modelAttribute="followUp" >
+<form:form action="${actionUri}" modelAttribute="picture" >
 
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<form:hidden path="moment" />
-	<form:hidden path="pictures" />
+	<form:hidden path="followUp" />
+	<form:hidden path="article" />
 
+	<acme:textbox path="url" code="picture.url"/>
 
-	<form:label path="article"><spring:message code="followUp.article"/></form:label>
-	<form:select path="article">
-		<form:option label="----" value="0"/>
-		<form:options items="${articles}" itemLabel="title" itemValue="id"/>
-	</form:select>
-	<form:errors path="article" cssClass="error"/>
-	<br/>
+	<acme:submit name="save" code="picture.save"/>
 
-	<acme:textbox path="title" code="followUp.title"/>
-	<acme:textbox path="summary" code="followUp.summary" />
-	<acme:textarea path="text" code="followUp.text" />
+	<jstl:if test="${picture.id != 0}" >
+		<acme:submit name="delete" code="picture.delete"/>
+	</jstl:if>
 
-	<acme:submit name="save" code="followUp.save"/>
-
-	<acme:cancel code="followUp.cancel" url="welcome/index.do"/>
+	<acme:cancel code="picture.cancel" url="welcome/index.do"/>
 
 </form:form>
 

@@ -29,7 +29,6 @@ public class FollowUp extends DomainEntity {
     private Date moment;
     private String summary;
     private String text;
-    private Collection<String> pictures;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -71,21 +70,20 @@ public class FollowUp extends DomainEntity {
         this.text = text;
     }
 
-    //@URL
-    //@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    // Relationships -----------------------------------------------------------------------
+    private Article article;
+    private Collection<Picture> pictures;
+
+    @Valid
     @NotNull
-    @ElementCollection
-    public Collection<String> getPictures() {
+    @OneToMany(mappedBy = "followUp", cascade = CascadeType.ALL)
+    public Collection<Picture> getPictures() {
         return pictures;
     }
 
-    public void setPictures(Collection<String> pictures) {
+    public void setPictures(Collection<Picture> pictures) {
         this.pictures = pictures;
     }
-
-    // Relationships -----------------------------------------------------------------------
-
-    private Article article;
 
     @Valid
     @ManyToOne(optional = true)

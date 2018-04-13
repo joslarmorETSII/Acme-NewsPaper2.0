@@ -79,7 +79,7 @@ public class FollowUpUserController extends AbstractController {
         user = userService.findByPrincipal();
         followUps = followUpService.findFollowupsByUserId(user.getId());
 
-        result = new ModelAndView("followUp/list");
+        result = new ModelAndView("followUp/listUser");
         result.addObject("followUps", followUps);
         result.addObject("user",user);
         result.addObject("requestUri","followUp/user/list.do");

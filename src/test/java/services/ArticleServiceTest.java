@@ -51,7 +51,7 @@ public class ArticleServiceTest extends AbstractTest {
     */
 
     @SuppressWarnings("deprecation")
-    public void articleCreateTest(final String username, final String title, String body, String summary1, String moment1, String picture1, Boolean res1, Boolean res2, final Class<?> expected) {
+    public void articleCreateTest(final String username, final String title, String body, String summary1, String moment1, Boolean res1, Boolean res2, final Class<?> expected) {
         Class<?> caught = null;
         startTransaction();
         try {
@@ -66,7 +66,6 @@ public class ArticleServiceTest extends AbstractTest {
 
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             result.setMoment(formatter.parse(moment1));
-            result.setPicture(picture1);
             result.setBody(body);
 
             result.setFinalMode(res1);
@@ -154,21 +153,21 @@ public class ArticleServiceTest extends AbstractTest {
         final Object testingData[][] = {
                 // Crear un articulo estando logueado como user -> true
                 {
-                        "user1", "title1","body","summary","12/03/2020 12:00","www.picture.com",true,false, null
+                        "user1", "title1","body","summary","12/03/2020 12:00",true,false, null
                 },
                 // Crear un articulo sin estar logueado --> false
                 {
-                        null,"title1","body","summary","12/03/2020 12:00","www.picture.com",true,false, IllegalArgumentException.class
+                        null,"title1","body","summary","12/03/2020 12:00",true,false, IllegalArgumentException.class
                 },
                 // Crear un articulo logueado como manager  -> false
                 {
-                        "manager1","title1","body","summary","12/03/2020 12:00","www.picture.com",true,false, IllegalArgumentException.class
+                        "manager1","title1","body","summary","12/03/2020 12:00",true,false, IllegalArgumentException.class
                 },
 
 
         };
         for (int i = 0; i < testingData.length; i++)
-            this.articleCreateTest((String) testingData[i][0], (String) testingData[i][1],(String) testingData[i][2],(String)testingData[i][3] , (String)testingData[i][4],(String)testingData[i][5],(Boolean) testingData[i][6],(Boolean) testingData[i][7], (Class<?>) testingData[i][8]);
+            this.articleCreateTest((String) testingData[i][0], (String) testingData[i][1],(String) testingData[i][2],(String)testingData[i][3] , (String)testingData[i][4],(Boolean) testingData[i][5],(Boolean) testingData[i][6], (Class<?>) testingData[i][7]);
 
     }
 

@@ -32,7 +32,7 @@
 	</definition>
 
 	<definition name="article/search" extends="master.page">
-		<put-attribute name="title" value="Busqueda de articulos" />
+		<put-attribute name="title" value="Busqueda de articulos y revistas" />
 		<put-attribute name="body" value="/views/article/search.jsp" />
 	</definition>
 </tiles-definitions>
