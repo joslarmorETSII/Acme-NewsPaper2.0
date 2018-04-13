@@ -220,4 +220,7 @@ public class NewsPaperService {
         return newsPaperRepository.searchNewspapers(keyword,keyword);
     }
 
+    public void flush() {
+        newsPaperRepository.flush();
+    }
 }
