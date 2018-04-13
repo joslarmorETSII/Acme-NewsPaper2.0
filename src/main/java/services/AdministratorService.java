@@ -67,19 +67,17 @@ public class AdministratorService {
         return result;
     }
 
-    public Collection<Double> avgStdOfNewspapersPerUser(){
+    public Double[]  avgStdOfNewspapersPerUser(){
 
-        Collection<Double> result;
-        result = this.administratorRepository.avgStdOfNewspapersPerUser();
-        return result;
+         return this.administratorRepository.avgStdOfNewspapersPerUser();
     }
 
-    public Collection<Article> avgStdOfArticles(){
+    public Double[]  avgStdOfArticles(){
 
         return this.administratorRepository.avgStdOfArticles();
     }
 
-    public Collection<Double> avgStdOfArticlesPerNewspaper(){
+    public Double[]  avgStdOfArticlesPerNewspaper(){
 
         return this.administratorRepository.avgStdOfArticlesPerNewspaper();
     }
@@ -94,7 +92,7 @@ public class AdministratorService {
         return this.administratorRepository.newspapersWith10PercentFewerArticlesThanAvg();
     }
 
-    public Double ratioOfUsersThatCreatedNewspaper(){
+    public String ratioOfUsersThatCreatedNewspaper(){
 
         return this.administratorRepository.ratioOfUsersThatCreatedNewspaper();
     }
@@ -119,12 +117,12 @@ public class AdministratorService {
         return this.administratorRepository.avgFollowUpsPerArticleAfter2weekNewspaprerPublished();
     }
 
-    public Collection<Double> avgStdChirpsPerUser(){
+    public Double[] avgStdChirpsPerUser(){
 
         return this.administratorRepository.avgStdChirpsPerUser();
     }
 
-    public Collection<User> ratioUsersWith75PercentMoreChirpsPostedThanAVG(){
+    public Double ratioUsersWith75PercentMoreChirpsPostedThanAVG(){
 
         return this.administratorRepository.ratioUsersWith75PercentMoreChirpsPostedThanAVG();
     }

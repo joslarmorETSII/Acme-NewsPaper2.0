@@ -39,7 +39,7 @@
 
 	<acme:submit name="save" code="followUp.save"/>
 
-	<acme:cancel code="followUp.cancel" url="followUp/listAll.do"/>
+	<acme:cancel code="followUp.cancel" url="welcome/index.do"/>
 
 </form:form>
 

@@ -17,219 +17,196 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<br>
 
 <!-- Queries level c -->
 
 <fieldset>
 	<div class="panel-body">
-		<b><spring:message code="rendezvous.avgDevRendezvousesPerUser"/></b>
+		<b><spring:message code="dash.avgStdOfNewspapersPerUser"/></b>
 		<br/>
-		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgDevRendezvousesPerUser[0]}"/> <br/></h4>
-		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgDevRendezvousesPerUser[1]}"/> <br/></h4>
+		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgStdOfNewspapersPerUser[0]}"/> <br/></h4>
+		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgStdOfNewspapersPerUser[1]}"/> <br/></h4>
 	</div>
 </fieldset>
+<br/>
 
 <fieldset>
 	<div class="panel-body">
-		<legend><b><spring:message code="user.RatioCreatorsVsNoCreators"/></b></legend>
-
-		<jstl:out value="${RatioCreatorsVsNoCreators}"></jstl:out><br>
+		<b><spring:message code="dash.avgStdOfArticles"/></b>
+		<br/>
+		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgStdOfArticles[0]}"/> <br/></h4>
+		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgStdOfArticles[1]}"/> <br/></h4>
 	</div>
 </fieldset>
-
+<br/>
 <fieldset>
 	<div class="panel-body">
-		<b><spring:message code="rendezvous.avgDevRendezvousPerUser"/></b>
+		<b><spring:message code="dash.avgStdOfArticlesPerNewspaper"/></b>
 		<br/>
-		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgDevRendezvousPerUser[0]}"/> <br/></h4>
-		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgDevRendezvousPerUser[1]}"/> <br/></h4>
+		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgStdOfArticlesPerNewspaper[0]}"/> <br/></h4>
+		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgStdOfArticlesPerNewspaper[1]}"/> <br/></h4>
 	</div>
 </fieldset>
+<br/>
 
 <fieldset>
-	<div class="panel-body">
-		<b><spring:message code="rendezvous.avgDevRendezvousParticipatePerUser"/></b>
-		<br/>
-		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgDevRendezvousParticipatePerUser[0]}"/> <br/></h4>
-		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgDevRendezvousParticipatePerUser[1]}"/> <br/></h4>
-	</div>
-</fieldset>
+	<b><spring:message code="dash.newspapers10PercentMoreArticles"/></b>
+	<display:table name="newspapersWith10PercentMoreArticlesThanAvg" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
 
+		<acme:column code="newsPaper.publisher" value="${row.publisher.name} " />
+		<acme:column code="newsPaper.title" value="${row.title}"/>
+		<acme:column code="newsPaper.description" value="${row.description}"/>
+		<spring:message code="newsPaper.picture" var="pic"/>
+		<display:column title="${pic}"><img src="${row.picture}" alt="no image" width="130" height="100"></display:column>
 
-<fieldset>
-	<b><spring:message code="rendezvous.top10RendezvousParticipated"/></b>
-	<display:table pagesize="10" class="displaytag" keepStatus="true" name="top10RendezvousParticipated"
-				   requestURI="administrator/dashboard.do" id="row">
+		<spring:message var="publicationDate" code="newsPaper.publicationDate"/>
+		<spring:message var="formatDate" code="event.format.date"/>
+		<display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
 
-		<spring:message code="rendezvous.name" var="name"/>
-		<display:column property="name" title="${name}"/>
-		<spring:message code="rendezvous.description" var="description"/>
-		<display:column property="description" title="${description}"/>
-		<spring:message code="rendezvous.moment" var="moment"/>
-		<display:column property="moment" title="${moment}"/>
-		<spring:message code="rendezvous.picture" var="pic"/>
+		<display:column >
+			<acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+		</display:column>
+
+		<display:column>
+			<acme:button url="newsPaper/administrator/edit.do?newsPaperId=${row.id}" code="newsPaper.delete" />
+		</display:column>
 
 	</display:table>
 </fieldset>
+<br/>
 
-<!-- Queries level B -->
+<fieldset>
+    <b><spring:message code="dash.newspapers10PercentFewerArticles"/></b>
+    <display:table name="newspapersWith10PercentFewerArticlesThanAvg" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
+
+        <acme:column code="newsPaper.publisher" value="${row.publisher.name} " />
+        <acme:column code="newsPaper.title" value="${row.title}"/>
+        <acme:column code="newsPaper.description" value="${row.description}"/>
+        <spring:message code="newsPaper.picture" var="pic"/>
+        <display:column title="${pic}"><img src="${row.picture}" alt="no image" width="130" height="100"></display:column>
+
+        <spring:message var="publicationDate" code="newsPaper.publicationDate"/>
+        <spring:message var="formatDate" code="event.format.date"/>
+        <display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
+
+        <display:column >
+            <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        </display:column>
+
+        <display:column>
+            <acme:button url="newsPaper/administrator/edit.do?newsPaperId=${row.id}" code="newsPaper.delete" />
+        </display:column>
+
+    </display:table>
+</fieldset>
+<br/>
 
 <fieldset>
 	<div class="panel-body">
-		<b><spring:message code="announcement.avgDevAnnouncementsPerRendezvous"/></b>
+		<legend><b><spring:message code="dash.ratioOfUsersThatCreatedNewspaper"/></b></legend>
+
+		<jstl:out value="${ratioOfUsersThatCreatedNewspaper}"/><br>
+	</div>
+</fieldset>
+<br/>
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.ratioOfUserCreatingArticle"/></b></legend>
+
+		<jstl:out value="${ratioOfUserCreatingArticle}"/><br>
+	</div>
+</fieldset>
+<br/>
+
+<%-- Queries Level B --%>
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.avgFollowUpsPerArticle"/></b></legend>
+
+		<jstl:out value="${avgFollowUpsPerArticle}"/><br>
+	</div>
+</fieldset>
+<br/>
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.avgFollowUpsPerArticleAfter1week"/></b></legend>
+
+		<jstl:out value="${avgFollowUpsPerArticleAfter1weekNewspaprerPublished}"/><br>
+	</div>
+</fieldset>
+<br/>
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.avgFollowUpsPerArticleAfter2weeks"/></b></legend>
+
+		<jstl:out value="${avgFollowUpsPerArticleAfter2weekNewspaprerPublished}"/><br>
+	</div>
+</fieldset>
+<br/>
+<fieldset>
+	<div class="panel-body">
+		<b><spring:message code="dash.avgStdChirpsPerUser"/></b>
 		<br/>
-		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgDevAnnouncementsPerRendezvous[0]}"/> <br/></h4>
-		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgDevAnnouncementsPerRendezvous[1]}"/> <br/></h4>
+		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgStdChirpsPerUser[0]}"/> <br/></h4>
+		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgStdChirpsPerUser[1]}"/> <br/></h4>
 	</div>
 </fieldset>
+<br/>
+<%-- Queries Level A --%>
 
 <fieldset>
 	<div class="panel-body">
-		<b><spring:message code="rendezvous.rendezvousPlus75AvgAnnouncements"/></b>
-		<display:table pagesize="2" class="displaytag" keepStatus="true" name="rendezvousPlus75AvgAnnouncements"
-					   requestURI="administrator/dashboard.do" id="row">
+		<legend><b><spring:message code="dash.ratioUsersWith75PercentMoreChirpsPostedThanAVG"/></b></legend>
 
-			<spring:message code="rendezvous.name" var="name"/>
-			<display:column property="name" title="${name}"/>
-			<spring:message code="rendezvous.description" var="description"/>
-			<display:column property="description" title="${description}"/>
-			<spring:message code="rendezvous.moment" var="moment"/>
-			<display:column property="moment" title="${moment}"/>
-			<spring:message code="rendezvous.picture" var="pic"/>
-
-		</display:table>
+		<jstl:out value="${ratioUsersWith75PercentMoreChirpsPostedThanAVG}"/><br>
 	</div>
 </fieldset>
-
-<fieldset>
-	<b><spring:message code="rendezvous.rendezvousPlus10AvgAssociated"/></b>
-	<display:table pagesize="2" class="displaytag" keepStatus="true" name="rendezvousPlus10AvgAssociated"
-				   requestURI="administrator/dashboard.do" id="row">
-
-		<spring:message code="rendezvous.name" var="name"/>
-		<display:column property="name" title="${name}"/>
-		<spring:message code="rendezvous.description" var="description"/>
-		<display:column property="description" title="${description}"/>
-		<spring:message code="rendezvous.moment" var="moment"/>
-		<display:column property="moment" title="${moment}"/>
-		<spring:message code="rendezvous.picture" var="pic"/>
-
-	</display:table>
-</fieldset>
-<!-- Queries level a -->
-
+<br/>
 <fieldset>
 	<div class="panel-body">
-		<b><spring:message code="questions.questionsPerRendezvous"/></b>
-		<br/>
-		<h4><jstl:out value=" AVG: "/><jstl:out value="${questionsPerRendezvous[0]}"/> <br/></h4>
-		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${questionsPerRendezvous[1]}"/> <br/></h4>
+		<legend><b><spring:message code="dash.ratioPublicVSPrivateNewspapers"/></b></legend>
+
+		<jstl:out value="${ratioPublicVSPrivateNewspapers}"/><br>
 	</div>
 </fieldset>
-
+<br/>
+<br/>
 <fieldset>
 	<div class="panel-body">
-		<b><spring:message code="answer.avgDevAnswersQuestionsPerRendezvous"/></b>
-		<br/>
-		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgDevAnswersQuestionsPerRendezvous[0]}"/> <br/></h4>
-		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgDevAnswersQuestionsPerRendezvous[1]}"/> <br/></h4>
+		<legend><b><spring:message code="dash.avgArticlesPerNewsPapersPrivate"/></b></legend>
+
+		<jstl:out value="${avgArticlesPerNewsPapersPrivate}"/><br>
 	</div>
 </fieldset>
-
+<br/>
+<br/>
 <fieldset>
 	<div class="panel-body">
-		<b><spring:message code="comment.avgDevRepliesPerComment"/></b>
-		<br/>
-		<h4><jstl:out value=" AVG: "/><jstl:out value="${avgDevRepliesPerComment[0]}"/> <br/></h4>
-		<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgDevRepliesPerComment[1]}"/> <br/></h4>
+		<legend><b><spring:message code="dash.avgArticlesPerNewsPapersPublic"/></b></legend>
+
+		<jstl:out value="${avgArticlesPerNewsPapersPublic}"/><br>
 	</div>
 </fieldset>
-
-<!-- D09 Queries Level C-->
+<br/>
+<br/>
 <fieldset>
-	<b><spring:message code="dashboard.topSellingServises"/></b>
-	<display:table name="topSellingServises"  id="row" pagesize="5" class="displaytag" keepStatus="true"
-				   requestURI="administrator/dashboard.do">
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.ratioPrivateNewsPapersVsCustomers"/></b></legend>
 
-		<spring:message code="servise.name" var="name"/>
-		<display:column property="name" title="${name}"/>
-		<spring:message code="servise.description" var="description"/>
-		<display:column property="description" title="${description}"/>
-		<spring:message code="servise.picture" var="picture"/>
-		<display:column property="picture" title="${picture}"/>
-		<spring:message code="servise.manager" var="manag"/>
-		<display:column property="manager.name" title="${manag}"/>
-
-	</display:table>
+		<jstl:out value="${ratioPrivateNewsPapersVsCustomers}"/><br>
+	</div>
 </fieldset>
-
+<br/>
+<br/>
 <fieldset>
-	<b><spring:message code="dashboard.managersWithMoreServisesThanAvg"/></b>
-	<display:table name="managersWithMoreServisesThanAvg"  id="row" pagesize="5" class="displaytag"
-				   requestURI="administrator/dashboard.do">
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.avgServisesInEachCategory"/></b></legend>
 
-		<spring:message code="manager.name" var="name"/>
-		<display:column property="name" title="${name}"/>
-		<spring:message code="manager.vat" var="vat"/>
-		<display:column property="vat" title="${vat}"/>
-		<spring:message code="manager.email" var="email"/>
-		<display:column property="email" title="${email}"/>
-		<spring:message code="manager.phone" var="phone"/>
-		<display:column property="phone" title="${phone}"/>
-
-	</display:table>
+		<jstl:out value="${avgServisesInEachCategory}"/><br>
+	</div>
 </fieldset>
+<br/>
 
-<fieldset>
-	<b><spring:message code="dashboard.managersWithMoreServisesCancelled"/></b>
-	<display:table name="managersWithMoreServisesCancelled"  id="row" pagesize="5" class="displaytag"
-				   requestURI="administrator/dashboard.do">
 
-		<spring:message code="manager.name" var="name"/>
-		<display:column property="name" title="${name}"/>
-		<spring:message code="manager.vat" var="vat"/>
-		<display:column property="vat" title="${vat}"/>
-		<spring:message code="manager.email" var="email"/>
-		<display:column property="email" title="${email}"/>
-		<spring:message code="manager.phone" var="phone"/>
-		<display:column property="phone" title="${phone}"/>
 
-	</display:table>
-</fieldset>
 
-<jstl:if test="${!empty avgMinMaxDevServisesPerRendezvous}">
-	<fieldset>
-		<div>
-			<b><spring:message code="dashboard.avgMinMaxDevServisesPerRendezvous" /></b>
-			<br />
-			<h4><jstl:out value=" AVG: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][0]}"/> <br /></h4>
-			<h4><jstl:out value=" MIN: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][1]}"/> <br /> </h4>
-			<h4><jstl:out value=" MAX: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][2]}"/> <br /></h4>
-			<h4><jstl:out value=" STDDEV: "/><jstl:out value="${avgMinMaxDevServisesPerRendezvous[0][3]}"/> <br /></h4>
-		</div>
-	</fieldset>
-</jstl:if>
-
-<fieldset>
-	<b><spring:message code="dashboard.bestSellingServises"/></b>
-	<display:table name="bestSellingServises"  id="row" pagesize="5" class="displaytag" keepStatus="true"
-				   requestURI="administrator/dashboard.do">
-
-		<spring:message code="servise.name" var="name"/>
-		<display:column property="name" title="${name}"/>
-		<spring:message code="servise.description" var="description"/>
-		<display:column property="description" title="${description}"/>
-		<spring:message code="servise.picture" var="picture"/>
-		<display:column property="picture" title="${picture}"/>
-		<spring:message code="servise.manager" var="manag"/>
-		<display:column property="manager.name" title="${manag}"/>
-
-	</display:table>
-</fieldset>
-
-<fieldset>
-	<b><spring:message code="dashboard.avgServisesInEachCategory"/></b>
-	<br/>
-	<h4><jstl:out value="${avgServisesInEachCategory}"/> <br/></h4>
-</fieldset>

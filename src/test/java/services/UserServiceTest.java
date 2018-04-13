@@ -149,7 +149,7 @@ public class UserServiceTest extends AbstractTest {
         final Object testingData[][] = {
                 // Alguien sin registrar/logueado -> true
                 {
-                        "user33", "user33", "user33", "userTestName", "userTestSurname", "+34 123456789", "userTest@userTest.com", "addressUser",  null
+                        "user33", "user33", "user33", "userTestName", "userTestSurname", "+34123456789", "userTest@userTest.com", "addressUser",  null
                 },
                 // Todos los campos como null --> false
                {
@@ -157,16 +157,16 @@ public class UserServiceTest extends AbstractTest {
                 },
                 // Todos los campos completados, excepto la direccion postal -> true
                 {
-                        "userTest3", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34 123456789", "userTest@userTest.com", "",  null
+                        "userTest3", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34123456789", "userTest@userTest.com", "",  null
                 },
                 // Username size menor que 5-> false
                 {
-                        "use", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34 123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
+                        "use", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
                 },
 
                 // Todos los campos completados, introduciendo un <script> en el nombre -> false
                {
-                       "user343", "user343", "user343", "<script>", "userTestSurname43","+34 123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
+                       "user343", "user343", "user343", "<script>", "userTestSurname43","+34123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
                 },
 
         };

@@ -20,15 +20,15 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
     // 1- The average and the standard deviation of newspapers created per user.
     @Query("select avg(u.newsPapers.size),sqrt(sum(u.newsPapers.size *u.newsPapers.size)/ count(u) - (avg(u.newsPapers.size) *avg(u.newsPapers.size))) from  User u")
-    Collection<Double> avgStdOfNewspapersPerUser();
+    Double[] avgStdOfNewspapersPerUser();
 
     // 2- The average and the standard deviation of articles written by writer.
     @Query("select avg(u.newsPapers.size),sqrt(sum(u.newsPapers.size *u.newsPapers.size)/ count(u) - (avg(u.newsPapers.size) *avg(u.newsPapers.size))) from  User u")
-    Collection<Article> avgStdOfArticles();
+    Double[]  avgStdOfArticles();
 
     // 3- The average and the standard deviation of articles per newspaper.
     @Query("select avg(u.articles.size),sqrt(sum(u.articles.size *u.articles.size)/ count(u) - (avg(u.articles.size) *avg(u.articles.size))) from  NewsPaper u")
-    Collection<Double> avgStdOfArticlesPerNewspaper();
+    Double[]  avgStdOfArticlesPerNewspaper();
 
     // 4- The newspapers that have at least 10% more articles than the average.
     @Query("select r from NewsPaper r where r.articles.size > (select avg(r1.articles.size)*1.1 from NewsPaper r1)")
@@ -42,7 +42,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     // 6- The ratio of users who have ever created a newspaper.
 
     @Query("select concat( 100 * ( select count(t) from User t where t.newsPapers is not empty )/ count(r), '%') from User r")
-    Double ratioOfUsersThatCreatedNewspaper();
+    String ratioOfUsersThatCreatedNewspaper();
 
     // 7- The ratio of users who have ever written an article.
     @Query("select count(distinct u)*1.0 / (select count(u1)*1.0 from User u1)from User u join u.newsPapers p where p.publisher = u and p.articles.size>0")
@@ -66,12 +66,12 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
     // 11- The average and the standard deviation of the number of chirps per user.
     @Query("select avg(u.chirps.size),sqrt(sum(u.chirps.size *u.chirps.size)/ count(u) - (avg(u.chirps.size) *avg(u.chirps.size))) from  User u")
-    Collection<Double> avgStdChirpsPerUser();
+    Double[] avgStdChirpsPerUser();
 
     // 12- The ratio of users who have posted above 75% the average number of chirps per user.
     //          select u from User u where u.chirps.size > (select avg(u1.chirps.size)*1.75 from User u1)
     @Query("select 1.0*(select count(u1) from User u1 where (select count(c) from User u join u.chirps c where c.posted = true and c.user = u1) >= ( select avg(r1.chirps.size)*1.75 from User r1))/(count(f)) from User f")
-    Collection<User> ratioUsersWith75PercentMoreChirpsPostedThanAVG();
+    Double ratioUsersWith75PercentMoreChirpsPostedThanAVG();
 
     // ########################  QUERIES LEVEL A  ################################
 

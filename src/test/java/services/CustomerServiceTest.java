@@ -46,16 +46,6 @@ public class CustomerServiceTest extends AbstractTest {
 
             final Customer result = this.customerService.create();
 
-            Assert.notNull(username);
-            Assert.notNull(password);
-            Assert.notNull(passwordRepeat);
-            Assert.isTrue(password.equals(passwordRepeat));
-            Assert.notNull(phone);
-            Assert.isTrue(phone.matches("^\\+([3][4])( )(\\d{9})|()$"));
-
-            Assert.notNull(email);
-            Assert.notNull(name);
-            Assert.notNull(surname);
 
             result.getUserAccount().setUsername(username);
             result.setName(name);
@@ -89,16 +79,17 @@ public class CustomerServiceTest extends AbstractTest {
         final Object testingData[][] = {
                 // Alguien sin registrar/logueado -> true
                 {
-                        "cutomer33", "cutomer33", "cutomer33", "customerTestName", "customerTestName", "+34 123456789", "customerTest@customerTest.com", "addressTest", null
+                        "cutomer33", "cutomer33", "cutomer33", "customerTestName", "customerTestName", "+34123456789", "customerTest@customerTest.com", "addressTest", null
                 },
                 // todos los valores estan a null -> false
                 {
-                        null, null, null, null, null,  null, null,null, IllegalArgumentException.class
+                        null, null, null, null, null,  null, null,null, ConstraintViolationException.class
                 },
-                // Las contraseñas no coinciden -> false
+                // El patron de telefono incorrecto -> false
                 {
-                        "cutomer33", "cutomer33", "12345", "customerTestName", "customerTestName", "+34 123456789", "customerTest@customerTest.com", "addressTest", IllegalArgumentException.class
+                        "cutomer33", "cutomer33", "customer33", "customerTestName", "customerTestName", "+3 412 3456789", "customerTest@customerTest.com", "addressTest", ConstraintViolationException.class
                 },
+
         };
         for (int i = 0; i < testingData.length; i++)
             this.customerRegisterTest((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],

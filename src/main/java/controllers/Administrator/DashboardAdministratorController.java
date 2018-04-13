@@ -33,18 +33,18 @@ public class DashboardAdministratorController extends AbstractController{
 
         result = new ModelAndView("administrator/dashboard");
 
-        Collection<Double> avgStdOfNewspapersPerUser;
-        Collection<Article> avgStdOfArticles;
-        Collection<Double> avgStdOfArticlesPerNewspaper;
+        Double[]  avgStdOfNewspapersPerUser;
+        Double[]  avgStdOfArticles;
+        Double[]  avgStdOfArticlesPerNewspaper;
         Collection<NewsPaper> newspapersWith10PercentMoreArticlesThanAvg;
         Collection<NewsPaper> newspapersWith10PercentFewerArticlesThanAvg;
-        Double ratioOfUsersThatCreatedNewspaper;
+        String ratioOfUsersThatCreatedNewspaper;
         Double ratioOfUserCreatingArticle;
         Double avgFollowUpsPerArticle;
         Double avgFollowUpsPerArticleAfter1weekNewspaprerPublished;
         Double avgFollowUpsPerArticleAfter2weekNewspaprerPublished;
-        Collection<Double> avgStdChirpsPerUser;
-        Collection<User> ratioUsersWith75PercentMoreChirpsPostedThanAVG;
+        Double[] avgStdChirpsPerUser;
+        Double ratioUsersWith75PercentMoreChirpsPostedThanAVG;
         Double ratioPublicVSPrivateNewspapers;
         Double avgArticlesPerNewsPapersPrivate;
         Double avgArticlesPerNewsPapersPublic;
