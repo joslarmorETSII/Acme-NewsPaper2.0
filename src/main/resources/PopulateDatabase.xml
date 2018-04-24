@@ -275,7 +275,7 @@
 	<bean id="newsPaper2" class="domain.NewsPaper">
 		<property name="title" value="Titulo de newspaper 2"/>
 		<property name="publicationDate" value="01/04/2018"/>
-		<property name="description" value="Esto es un newspaper de prueba"/>
+		<property name="description" value="Esto es un newspaper de prueba 2"/>
 		<property name="picture" value="https://www.imagen.com"/>
 		<property name="published" value="false"/>
 		<property name="taboo" value="false"/>

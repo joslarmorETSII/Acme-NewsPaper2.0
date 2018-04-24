@@ -43,7 +43,7 @@
     </security:authorize>
 
     <security:authorize access="hasRole('USER')">
-        <jstl:if test="${empty row.customers && row.id !=0}">
+        <jstl:if test="${empty newsPaper.customers && newsPaper.id !=0}">
             <acme:submit name="delete" code="newsPaper.delete"/>
         </jstl:if>
     </security:authorize>
