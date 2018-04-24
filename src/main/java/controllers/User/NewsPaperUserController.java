@@ -99,8 +99,11 @@ public class NewsPaperUserController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid NewsPaper newsPaper, final BindingResult binding) {
+    public ModelAndView save(NewsPaper newsPaperPruned, final BindingResult binding) {
         ModelAndView result;
+
+        NewsPaper newsPaper = this.newsPaperService.reconstructS(newsPaperPruned,binding);
+
         if (binding.hasErrors())
             result = this.createEditModelAndView(newsPaper);
         else

@@ -23,9 +23,7 @@
     <form:hidden path="version"/>
     <form:hidden path="customers"/>
     <form:hidden path="articles"/>
-    <form:hidden path="publisher"/>
-    <form:hidden path="publicationDate" />
-    <form:hidden path="published" />
+    <form:hidden path="advertisements"/>
 
     <acme:textbox path="title" code="newsPaper.name"/>
     <acme:textarea path="description" code="newsPaper.description" />

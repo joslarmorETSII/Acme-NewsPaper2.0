@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.validation.Validator;
+import org.springframework.validation.BindingResult;
 
 @Service
 @Transactional
@@ -47,6 +49,9 @@ public class NewsPaperService {
     @Autowired
     private ActorService actorService;
 
+    @Autowired
+    private Validator validator;
+
     // Constructors -----------------------------------------------------------
 
     public NewsPaperService() {
@@ -60,11 +65,16 @@ public class NewsPaperService {
         User publisher= null;
         Collection<Article> articles= new ArrayList<>();
         Collection<Customer> customers= new ArrayList<>();
+        Collection<Advertisement> advertisements = new ArrayList<>();
+
         publisher=userService.findByPrincipal();
         res= new NewsPaper();
+
         res.setPublisher(publisher);
         res.setArticles(articles);
         res.setCustomers(customers);
+        res.setAdvertisements(advertisements);
+
         return res;
     }
 
@@ -222,5 +232,30 @@ public class NewsPaperService {
 
     public void flush() {
         newsPaperRepository.flush();
+    }
+
+    public NewsPaper reconstructD(final NewsPaper newsPaperPruned, final BindingResult binding) {
+        NewsPaper res;
+
+        Assert.notNull(newsPaperPruned);
+        res = this.findOne(newsPaperPruned.getId());
+
+        Assert.notNull(res);
+        this.validator.validate(res, binding);
+
+        return res;
+    }
+
+    public NewsPaper reconstructS(final NewsPaper newsPaperPruned, final BindingResult binding) {
+        final NewsPaper res;
+
+        final User publisher = this.userService.findByPrincipal();
+
+        res = newsPaperPruned;
+        res.setPublisher(publisher);
+
+        this.validator.validate(res, binding);
+
+        return res;
     }
 }

@@ -42,6 +42,8 @@
 		<bean class="converters.StringToPictureConverter" />
 		<bean class="converters.ConfigurationToStringConverter" />
 		<bean class="converters.StringToConfigurationConverter" />
+		<bean class="converters.AdvertisementToStringConverter" />
+		<bean class="converters.StringToAdvertisementConverter" />
 
 	</util:list>
 	
