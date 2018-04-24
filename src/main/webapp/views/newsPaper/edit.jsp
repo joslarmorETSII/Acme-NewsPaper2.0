@@ -18,6 +18,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <form:form action="${actionUri}" modelAttribute="newsPaper">
+
     <form:hidden path="id"/>
     <form:hidden path="version"/>
     <form:hidden path="customers"/>

@@ -15,13 +15,13 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="${actionUri}" modelAttribute="article" >
 
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+
 	<form:hidden path="followUps" />
 	<form:hidden path="taboo" />
 	<form:hidden path="moment" />
