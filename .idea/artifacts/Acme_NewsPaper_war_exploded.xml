@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="Acme-NewsPaper:war exploded">
-    <output-path>$PROJECT_DIR$/target/Acme-NewsPaper-1.13</output-path>
+    <output-path>$PROJECT_DIR$/target/Acme-NewsPaper2.0-1.13</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -73,7 +73,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/Acme-NewsPaper-1.13/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/Acme-NewsPaper2.0-1.13/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="Acme-NewsPaper/web/Web" />
     </root>

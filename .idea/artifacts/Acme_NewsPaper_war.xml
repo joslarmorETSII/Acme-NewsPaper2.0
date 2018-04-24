@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="Acme-NewsPaper:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="Acme-NewsPaper-1.13.war">
+    <root id="archive" name="Acme-NewsPaper2.0-1.13.war">
       <element id="artifact" artifact-name="Acme-NewsPaper:war exploded" />
     </root>
   </artifact>

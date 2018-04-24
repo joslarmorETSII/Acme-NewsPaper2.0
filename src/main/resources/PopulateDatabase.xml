@@ -90,6 +90,18 @@
 		</property>
 	</bean>
 
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="agent1" />
+		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
 	<!-- Admins -->
 
 	<bean id="administrator" class="domain.Administrator">
@@ -187,6 +199,39 @@
 		</property>
 	</bean>
 
+	<!-- Agents -->
+
+	<bean id="agent1" class="domain.Agent">
+		<property name="name" value="Agent1"/>
+		<property name="surname" value="AgentSurname"/>
+		<property name="email" value="josgomrod3@alum.us.es"/>
+		<property name="phone" value="+34695395229"/>
+		<property name="postalAddresses" value="C\ Reina Mercedes Bloque 25"/>
+		<property name="userAccount" ref="userAccount7"/>
+		<property name="creditCard" ref="creditCard1" />
+		<property name="advertisements">
+			<list>
+				<ref bean="advertisement1"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Advertisement -->
+
+	<bean id="advertisement1" class="domain.Advertisement">
+		<property name="title" value="title1"/>
+		<property name="urlBanner" value=""/>
+		<property name="urlPage" value=""/>
+		<property name="taboo" value="false"/>
+		<property name="agent" ref="agent1" />
+		<property name="newsPapers">
+			<list>
+				<ref bean="newsPaper1"/>
+			</list>
+		</property>
+	</bean>
+
+
 	<!-- Chirps -->
 
 	<bean id="chirp1" class="domain.Chirp">
@@ -220,6 +265,11 @@
 				<ref bean="customer1"/>
 			</list>
 		</property>
+		<property name="advertisements">
+			<list>
+				<ref bean="advertisement1"/>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="newsPaper2" class="domain.NewsPaper">
@@ -241,6 +291,11 @@
 		<property name="customers">
 			<list>
 				<null/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
+				<ref bean="advertisement1"/>
 			</list>
 		</property>
 	</bean>
