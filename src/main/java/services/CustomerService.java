@@ -3,8 +3,8 @@ package services;
 import domain.CreditCard;
 import domain.Customer;
 import domain.NewsPaper;
-import forms.CustomerForm;
 import forms.SubscribeForm;
+import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -117,20 +117,20 @@ public class CustomerService {
         return creditCard;
     }
 
-    public Customer reconstruct(CustomerForm customerForm, final BindingResult binding) {
+    public Customer reconstruct(UserForm userForm, final BindingResult binding) {
 
         Customer result;
 
         result = this.create();
-        result.getUserAccount().setUsername(customerForm.getUsername());
-        result.setName(customerForm.getName());
-        result.setSurname(customerForm.getSurname());
-        result.setPhone(customerForm.getPhone());
-        result.setEmail(customerForm.getEmail());
-        result.setPostalAddresses(customerForm.getPostalAddresses());
-        result.getUserAccount().setPassword(new Md5PasswordEncoder().encodePassword(customerForm.getPassword(), null));
+        result.getUserAccount().setUsername(userForm.getUsername());
+        result.setName(userForm.getName());
+        result.setSurname(userForm.getSurname());
+        result.setPhone(userForm.getPhone());
+        result.setEmail(userForm.getEmail());
+        result.setPostalAddresses(userForm.getPostalAddresses());
+        result.getUserAccount().setPassword(new Md5PasswordEncoder().encodePassword(userForm.getPassword(), null));
 
-        this.comprobarContrasena(customerForm.getPassword(), customerForm.getRepeatPassword(), binding);
+        this.comprobarContrasena(userForm.getPassword(), userForm.getRepeatPassword(), binding);
 
         return result;
     }
@@ -148,7 +148,7 @@ public class CustomerService {
         if (!result) {
             codigos = new String[1];
             codigos[0] = "customer.password.mismatch";
-            error = new FieldError("customerForm", "password", password, false, codigos, null, "");
+            error = new FieldError("userForm", "password", password, false, codigos, null, "");
             binding.addError(error);
         }
 

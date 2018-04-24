@@ -13,7 +13,7 @@ package controllers;
 import domain.CreditCard;
 import domain.Customer;
 import domain.NewsPaper;
-import forms.CustomerForm;
+
 import forms.SubscribeForm;
 import forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +79,7 @@ public class CustomerController extends AbstractController {
 		ModelAndView result;
 		result = new ModelAndView("customer/editForm");
 
-		result.addObject("customerForm", new CustomerForm());
+		result.addObject("userForm", new UserForm());
 
 		return result;
 	}
@@ -87,22 +87,22 @@ public class CustomerController extends AbstractController {
 	// Save ------------------------------------------------------------------------
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final CustomerForm customerForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final UserForm userForm, final BindingResult binding) {
 		ModelAndView result;
 		Customer customer;
 
 		try {
-			customer = this.customerService.reconstruct(customerForm, binding);
+			customer = this.customerService.reconstruct(userForm, binding);
 
 			if (binding.hasErrors())
-				result = this.createEditModelAndView2(customerForm, "customer.save.error");
+				result = this.createEditModelAndView2(userForm, "customer.save.error");
 			else {
 				result = new ModelAndView("redirect:/welcome/index.do");
 				this.customerService.save(customer);
 
 			}
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView2(customerForm, "customer.save.error");
+			result = this.createEditModelAndView2(userForm, "customer.save.error");
 		}
 
 		return result;
@@ -130,12 +130,12 @@ public class CustomerController extends AbstractController {
 		return result;
 	}
 
-	private ModelAndView createEditModelAndView2(CustomerForm customerForm, String messageCode) {
+	private ModelAndView createEditModelAndView2(UserForm userForm, String messageCode) {
 
 		ModelAndView res;
 		res = new ModelAndView("customer/editForm");
 
-		res.addObject("customerForm", customerForm);
+		res.addObject("userForm", userForm);
 //		res.addObject("requestURI", "customer/list.do");
 //		res.addObject("cancelUri", "customer/list.do");
 		res.addObject("message", messageCode);

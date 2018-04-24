@@ -16,7 +16,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <div class="input-group">
-    <form:form  action="customer/register.do" modelAttribute="customerForm">
+    <form:form  action="customer/register.do" modelAttribute="userForm">
 
     <div class="form-group">
         <acme:textbox code="customer.username" path="username" />
