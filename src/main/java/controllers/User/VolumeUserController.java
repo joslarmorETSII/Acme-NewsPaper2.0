@@ -92,7 +92,7 @@ public class VolumeUserController extends AbstractController{
         Volume volume;
         volume = this.volumeService.findOneToEdit(volumeId);
         Assert.notNull(volume);
-        result = this.createEditModelAndView(volume);
+        result = this.createEditModelAndView2(volume);
         return result;
     }
     @RequestMapping(value = "/addNewsPaper", method = RequestMethod.POST, params = "save")
@@ -107,7 +107,7 @@ public class VolumeUserController extends AbstractController{
                 this.volumeService.save(volume);
                 result = new ModelAndView("redirect:list.do");
             } catch (final Throwable oops) {
-                result = this.createEditModelAndView(volume, "volume.commit.error");
+                result = this.createEditModelAndView2(volume, "volume.commit.error");
             }
         return result;
     }
@@ -147,6 +147,25 @@ public class VolumeUserController extends AbstractController{
         result = new ModelAndView("volume/edit");
         result.addObject("volume", volume);
         result.addObject("actionUri","volume/user/edit.do");
+        result.addObject("message", messageCode);
+
+        return result;
+    }
+    protected ModelAndView createEditModelAndView2(final Volume volume) {
+        ModelAndView result;
+
+        result = this.createEditModelAndView2(volume, null);
+        return result;
+    }
+    protected ModelAndView createEditModelAndView2(final Volume volume, final String messageCode) {
+        ModelAndView result;
+
+        Collection<NewsPaper> newsPapers= newsPaperService.findAll();
+
+        result = new ModelAndView("volume/addNewsPaper");
+        result.addObject("volume", volume);
+        result.addObject("newsPapers",newsPapers);
+        result.addObject("actionUri","volume/user/addNewsPaper.do");
         result.addObject("message", messageCode);
 
         return result;
