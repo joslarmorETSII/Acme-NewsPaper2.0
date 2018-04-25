@@ -74,6 +74,10 @@
 		<!-- Picture -->
 		<security:intercept-url pattern="/picture/user/**" access="hasRole('USER')" />
 
+		<!-- Volume -->
+        <security:intercept-url pattern="/volume/user/**" access="hasRole('USER')" />
+        <security:intercept-url pattern="/volume/**" access="isAnonymous()" />
+
 
 		<!-- User -->
 

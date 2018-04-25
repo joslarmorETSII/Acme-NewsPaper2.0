@@ -4,11 +4,14 @@ import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import repositories.VolumeRepository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -18,6 +21,9 @@ public class VolumeService {
 
     @Autowired
     private VolumeRepository volumeRepository;
+
+    @Autowired
+    private Validator validator;
 
     //Services ----------------------------------------------------------------
 
@@ -40,6 +46,9 @@ public class VolumeService {
 
         res= new Volume();
         res.setUser(user);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        res.setAnyo(String.valueOf(cal.get(Calendar.YEAR)));
         return res;
     }
 
@@ -73,6 +82,14 @@ public class VolumeService {
 
     //Anthiliaries methodes
 
+    public Collection<NewsPaper> findPublishedAndPrivateNewsPaperPerVolume(int volumeId){
+        return volumeRepository.findPublishedAndPrivateNewsPaperPerVolume(volumeId);
+    }
+
+    public Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId){
+        return volumeRepository.findPublishedNewsPaperPerVolume(volumeId);
+    }
+
     public boolean checkByPrincipal(Volume volume) {
         Boolean res = null;
         User principal = null;
@@ -82,6 +99,19 @@ public class VolumeService {
 
         if (volume.getUser().equals(principal))
             res = true;
+
+        return res;
+    }
+
+    public Volume reconstructS(final Volume volumePruned, final BindingResult binding) {
+        final Volume res;
+
+        final User user = this.userService.findByPrincipal();
+
+        res = volumePruned;
+        res.setUser(user);
+
+        this.validator.validate(volumePruned,binding);
 
         return res;
     }

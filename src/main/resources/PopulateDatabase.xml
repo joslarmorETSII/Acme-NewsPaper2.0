@@ -495,7 +495,7 @@
 	<bean id="volume1" class="domain.Volume">
 		<property name="title" value="Title volume1"/>
 		<property name="description" value="Description volume1"/>
-		<property name="anyo" value="11/12/2018 12:00" />
+		<property name="anyo" value="2018" />
 		<property name="user" ref ="user1" />
 		<property name="customers">
 			<list>

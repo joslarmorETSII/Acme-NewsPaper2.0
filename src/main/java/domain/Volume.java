@@ -24,8 +24,7 @@ public class Volume extends DomainEntity {
 
     private String title;
     private String description;
-    private Date anyo;
-
+    private String anyo;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -47,13 +46,12 @@ public class Volume extends DomainEntity {
         this.description = description;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-    public Date getAnyo() {
+    @NotBlank
+    public String getAnyo() {
         return anyo;
     }
 
-    public void setAnyo(Date anyo) {
+    public void setAnyo(String anyo) {
         this.anyo = anyo;
     }
 

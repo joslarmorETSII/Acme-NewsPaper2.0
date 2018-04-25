@@ -42,8 +42,9 @@
 					<li class="arrow"></li>
 					<li><a href="article/user/list.do"><spring:message code="master.page.user.article.list" /></a></li>
 					<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
+					<li><a href="volume/user/list.do"><spring:message code="master.page.user.volume.list" /></a></li>
 					<li><a href="followUp/user/list.do"><spring:message code="master.page.user.followUp.list" /></a></li>
-				<li><a href="chirp/user/list.do"><spring:message code="master.page.user.chirp.list" /></a></li>
+					<li><a href="chirp/user/list.do"><spring:message code="master.page.user.chirp.list" /></a></li>
 
 
 			</ul>
@@ -76,6 +77,8 @@
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
 			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.user.register" /></a></li>
 			<li><a class="fNiv" href="customer/register.do"><spring:message code="master.page.customer.register" /></a></li>
+			<li><a class="fNiv" href="volume/list.do"><spring:message code="master.page.volume.list" /></a></li>
+
 
 		</security:authorize>
 		

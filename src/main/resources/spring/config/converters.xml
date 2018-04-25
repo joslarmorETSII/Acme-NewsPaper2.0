@@ -44,6 +44,9 @@
 		<bean class="converters.StringToConfigurationConverter" />
 		<bean class="converters.AdvertisementToStringConverter" />
 		<bean class="converters.StringToAdvertisementConverter" />
+		<bean class="converters.VolumeToStringConverter" />
+		<bean class="converters.StringToVolumeConverter" />
+
 
 	</util:list>
 	

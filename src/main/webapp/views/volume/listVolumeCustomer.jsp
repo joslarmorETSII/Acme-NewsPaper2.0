@@ -17,9 +17,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
-
-
 <display:table id="row" name="newsPapers" requestURI="${requestURI}"
                pagesize="5">
 

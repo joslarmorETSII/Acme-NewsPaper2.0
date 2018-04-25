@@ -17,27 +17,37 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<display:table id="row" name="volumes" requestURI="${requestURI}" pagesize="5">
 
-<display:table id="row" name="volumes" requestURI="${requestURI}"
-               pagesize="5">
+    <display:column>
+        <security:authorize access="hasRole('USER')" >
+            <jstl:if test="${row.user eq user}">
+                <acme:button url="volume/user/edit.do?volumeId=${row.id}" code="volume.edit" />
+            </jstl:if>
+        </security:authorize>
+    </display:column>
 
     <acme:column code="volume.title" value="${row.title}"/>
     <acme:column code="volume.description" value="${row.description}"/>
-    <acme:column code="volume.year" value="${row.year}"/>
+    <acme:column code="volume.anyo" value="${row.anyo}" />
 
-    <display:column >
-        <spring:message code="newsPapers.public" var="publics"/> <jstl:out value="${newsPapers}" />
+    <security:authorize access="isAnonymous()">
+    <display:column>
+        <acme:button url="newsPaper/listNewsPapersV.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
     </display:column>
+    </security:authorize>
 
-    <display:column >
-            <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+    <security:authorize access="isAuthenticated()">
+    <display:column>
+        <acme:button url="newsPaper/listNewsPapersVNP.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
     </display:column>
+    </security:authorize>
 
 </display:table>
 
-<input type="button" value="<spring:message code="customer.cancel" /> " onclick="goBack()">
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
+<security:authorize access="hasRole('USER')">
+    <acme:button code="volume.create" url="volume/user/create.do"/>
+</security:authorize>
+
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+       onclick="javascript: relativeRedir('/welcome/index.do');" />

@@ -1,10 +1,8 @@
 package services;
 
 import domain.*;
-import forms.CustomerForm;
-import forms.SubscribeForm;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -19,7 +17,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.validation.Validator;
-import org.springframework.validation.BindingResult;
 
 @Service
 @Transactional
