@@ -13,7 +13,7 @@ import java.util.Collection;
 public interface VolumeRepository extends JpaRepository<Volume,Integer> {
 
     @Query("select n from NewsPaper n join n.volumes nv where (n.modePrivate = false and n.published = true and nv.id=?1)")
-    Collection<NewsPaper> findPublishedAndPrivateNewsPaperPerVolume(int volumeId);
+    Collection<NewsPaper> findPublishedAndNotPrivateNewsPaperPerVolume(int volumeId);
 
     @Query("select n from NewsPaper n join n.volumes nv where (n.published = true and nv.id=?1)")
     Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId);

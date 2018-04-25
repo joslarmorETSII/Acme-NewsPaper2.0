@@ -87,8 +87,8 @@ public class VolumeService {
 
     //Anthiliaries methodes
 
-    public Collection<NewsPaper> findPublishedAndPrivateNewsPaperPerVolume(int volumeId){
-        return volumeRepository.findPublishedAndPrivateNewsPaperPerVolume(volumeId);
+    public Collection<NewsPaper> findPublishedAndNotPrivateNewsPaperPerVolume(int volumeId){
+        return volumeRepository.findPublishedAndNotPrivateNewsPaperPerVolume(volumeId);
     }
 
     public Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId){

@@ -86,7 +86,7 @@ public class NewsPaperController {
         formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
 
-        newsPapers = this.volumeService.findPublishedNewsPaperPerVolume(volumeId);
+        newsPapers = this.volumeService.findPublishedAndNotPrivateNewsPaperPerVolume(volumeId);
 
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapers);
