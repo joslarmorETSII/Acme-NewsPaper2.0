@@ -37,6 +37,14 @@
     </display:column>
     </security:authorize>
 
+    <security:authorize access="hasRole('USER')">
+        <display:column>
+            <acme:button url="volume/user/addNewsPaper.do?volumeId=${row.id}" code="volume.newsPapers.add"/>
+        </display:column>
+    </security:authorize>
+
+
+
     <security:authorize access="isAuthenticated()">
     <display:column>
         <acme:button url="newsPaper/listNewsPapersVNP.do?volumeId=${row.id}" code="volume.newsPapers.list"/>

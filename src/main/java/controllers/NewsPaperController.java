@@ -118,7 +118,7 @@ public class NewsPaperController {
 
 
 
-        result = new ModelAndView("newsPaper/list");
+        result = new ModelAndView("newsPaper/listNewsPaperVolume");
         result.addObject("newsPapers", newsPapers);
         result.addObject("requestUri","newsPaper/listNewsPapersVNP.do");
 

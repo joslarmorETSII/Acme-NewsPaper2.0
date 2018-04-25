@@ -85,6 +85,23 @@ public class VolumeUserController extends AbstractController{
         return result;
     }
 
+    @RequestMapping(value = "/addNewsPaper", method = RequestMethod.POST, params = "save")
+    public ModelAndView saveN(Volume volume, final BindingResult binding) {
+        ModelAndView result;
+
+
+        if (binding.hasErrors())
+            result = this.createEditModelAndView(volume);
+        else
+            try {
+                this.volumeService.save(volume);
+                result = new ModelAndView("redirect:list.do");
+            } catch (final Throwable oops) {
+                result = this.createEditModelAndView(volume, "volume.commit.error");
+            }
+        return result;
+    }
+
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
