@@ -2,13 +2,22 @@ package services;
 
 import domain.Advertisement;
 import domain.Agent;
+import domain.Customer;
+import forms.UserForm;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import repositories.AgentRepository;
 import repositories.ArticleRepository;
+import security.LoginService;
+import security.UserAccount;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -22,7 +31,8 @@ public class AgentService {
 
     // Supporting services ----------------------------------------------------
 
-
+    @Autowired
+    private UserAccountService userAccountService;
 
     // Constructors -----------------------------------------------------------
 
@@ -36,13 +46,21 @@ public class AgentService {
 
         res  = new Agent();
 
+        res.setAdvertisements(new ArrayList<Advertisement>());
+        res.setUserAccount(userAccountService.create("AGENT"));
+
         return res;
     }
 
     public Agent save(Agent agent){
+        Assert.notNull(agent);
         Agent res = null;
 
-        res= agentRepository.save(agent);
+        if (agent.getId() == 0) {
+            res = this.agentRepository.save(agent);
+        } else
+            res = this.agentRepository.save(agent);
+
         return res;
     }
 
@@ -62,5 +80,62 @@ public class AgentService {
         Assert.notNull(agent);
 
         this.agentRepository.delete(agent);
+    }
+
+    // Other business methods
+
+    public Agent findByPrincipal() {
+
+        Agent result;
+        final UserAccount agentAccount = LoginService.getPrincipal();
+        Assert.notNull(agentAccount);
+        result = this.findByAgentAccountId(agentAccount.getId());
+        Assert.notNull(result);
+        return result;
+    }
+
+    public Agent findByAgentAccountId(final int agentAccountId) {
+
+        Agent result;
+        result = this.agentRepository.findByAgentAccountId(agentAccountId);
+        return result;
+    }
+
+    public Agent reconstruct(UserForm userForm, final BindingResult binding) {
+
+        Agent result;
+
+        result = this.create();
+        result.getUserAccount().setUsername(userForm.getUsername());
+        result.setName(userForm.getName());
+        result.setSurname(userForm.getSurname());
+        result.setPhone(userForm.getPhone());
+        result.setEmail(userForm.getEmail());
+        result.setPostalAddresses(userForm.getPostalAddresses());
+        result.getUserAccount().setPassword(new Md5PasswordEncoder().encodePassword(userForm.getPassword(), null));
+
+        this.comprobarContrasena(userForm.getPassword(), userForm.getRepeatPassword(), binding);
+
+        return result;
+    }
+
+    private boolean comprobarContrasena(final String password, final String passwordRepeat, final BindingResult binding) {
+        FieldError error;
+        String[] codigos;
+        boolean result;
+
+        if (StringUtils.isNotBlank(password) && StringUtils.isNotBlank(passwordRepeat))
+            result = password.equals(passwordRepeat);
+        else
+            result = false;
+
+        if (!result) {
+            codigos = new String[1];
+            codigos[0] = "agent.password.mismatch";
+            error = new FieldError("userForm", "password", password, false, codigos, null, "");
+            binding.addError(error);
+        }
+
+        return result;
     }
 }

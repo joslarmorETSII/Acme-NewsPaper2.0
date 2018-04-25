@@ -1,9 +1,6 @@
 package services;
 
-import domain.Advertisement;
-import domain.Agent;
-import domain.Chirp;
-import domain.User;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -12,6 +9,7 @@ import repositories.AgentRepository;
 import repositories.ArticleRepository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -37,15 +35,19 @@ public class AdvertisementService {
 
     public Advertisement create() {
         Advertisement res=null;
+        Agent agent = null;
+        agent = agentService.findByPrincipal();
 
         res  = new Advertisement();
+        res.setNewsPapers(new ArrayList<NewsPaper>());
+        res.setAgent(agent);
 
         return res;
     }
 
     public Advertisement save(Advertisement advertisement){
         Advertisement res = null;
-
+        Assert.isTrue(checkByPrincipal(advertisement));
         res= advertisementRepository.save(advertisement);
         return res;
     }
@@ -66,5 +68,20 @@ public class AdvertisementService {
         Assert.notNull(advertisement);
 
         this.advertisementRepository.delete(advertisement);
+    }
+
+    // Other business methods -------------------------------------------------
+
+    public boolean checkByPrincipal(Advertisement advertisement) {
+        Boolean res = null;
+        Agent principal = null;
+
+        res = false;
+        principal = this.agentService.findByPrincipal();
+
+        if (advertisement.getAgent().equals(principal))
+            res = true;
+
+        return res;
     }
 }

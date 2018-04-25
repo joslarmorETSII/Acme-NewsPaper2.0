@@ -76,6 +76,7 @@
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
 			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.user.register" /></a></li>
 			<li><a class="fNiv" href="customer/register.do"><spring:message code="master.page.customer.register" /></a></li>
+			<li><a class="fNiv" href="agent/register.do"><spring:message code="master.page.agent.register" /></a></li>
 
 		</security:authorize>
 		

@@ -1,7 +1,7 @@
 package services;
 
 import domain.*;
-import forms.CustomerForm;
+
 import forms.SubscribeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;

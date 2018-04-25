@@ -71,6 +71,10 @@
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/customer/**" access="hasRole('CUSTOMER')"/>
 
+		<!-- Agent -->
+
+		<security:intercept-url pattern="/agent/register.do" access="isAnonymous()" />
+
 		<!-- Picture -->
 		<security:intercept-url pattern="/picture/user/**" access="hasRole('USER')" />
 

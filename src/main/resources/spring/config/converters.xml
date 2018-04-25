@@ -44,10 +44,8 @@
 		<bean class="converters.StringToConfigurationConverter" />
 		<bean class="converters.AdvertisementToStringConverter" />
 		<bean class="converters.StringToAdvertisementConverter" />
-		<bean class="converters.MessageToStringConverter"/>
-		<bean class="converters.FolderToStringConverter"/>
-		<bean class="converters.StringToFolderConverter"/>
-		<bean class="converters.StringToMessageConverter"/>
+		<bean class="converters.AgentToStringConverter" />
+		<bean class="converters.StringToAgentConverter" />
 
 	</util:list>
 	
