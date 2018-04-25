@@ -37,9 +37,13 @@ public class VolumeService {
     public Volume create(){
         Volume res= null;
         User user = this.userService.findByPrincipal();
+        Collection<Customer> customers= new ArrayList<>();
+        Collection<NewsPaper> newsPapers= new ArrayList<>();
 
         res= new Volume();
         res.setUser(user);
+        res.setCustomers(customers);
+        res.setNewsPapers(newsPapers);
         return res;
     }
 
