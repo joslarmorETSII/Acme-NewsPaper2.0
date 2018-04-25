@@ -23,6 +23,7 @@ public class User extends Actor{
     private Collection<NewsPaper> newsPapers;
     private Collection<User> followings;
     private Collection<User> followers;
+    private Collection<Volume> volumes;
 
     @Valid
     @NotNull
@@ -58,9 +59,6 @@ public class User extends Actor{
         this.followings = following;
     }
 
-
-
-
     public void setChirps(Collection<Chirp> chirps) {
         this.chirps = chirps;
     }
@@ -69,6 +67,14 @@ public class User extends Actor{
         this.newsPapers = newsPapers;
     }
 
+    @Valid
+    @NotNull
+    @OneToMany(mappedBy = "user")
+    public Collection<Volume> getVolumes() {
+        return volumes;
+    }
 
-
+    public void setVolumes(Collection<Volume> volumes) {
+        this.volumes = volumes;
+    }
 }

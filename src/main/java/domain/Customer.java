@@ -21,6 +21,7 @@ public class Customer extends Actor {
     // Relationships ----------------------------------------------------------
 
     Collection<NewsPaper> newsPapers;
+    Collection<Volume> volumes;
 
     @Valid
     @NotNull
@@ -33,4 +34,14 @@ public class Customer extends Actor {
         this.newsPapers = newsPapers;
     }
 
+    @Valid
+    @NotNull
+    @ManyToMany(mappedBy = "customers")
+    public Collection<Volume> getVolumes() {
+        return volumes;
+    }
+
+    public void setVolumes(Collection<Volume> volumes) {
+        this.volumes = volumes;
+    }
 }
