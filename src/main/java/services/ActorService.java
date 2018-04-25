@@ -1,6 +1,7 @@
 package services;
 
 import domain.Actor;
+import domain.Folder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -10,6 +11,7 @@ import security.LoginService;
 import security.UserAccount;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -20,6 +22,9 @@ public class ActorService {
 
     @Autowired
     private ActorRepository actorRepository;
+
+    @Autowired
+    private FolderService folderService;
 
     // Supporting services ----------------------------------------------------
 
@@ -111,6 +116,29 @@ public class ActorService {
         result = this.checkRole(Authority.USER);
 
         return result;
+    }
+
+    public Collection<Folder> generateFolders(Actor actor){
+        Collection<Folder> folders = new ArrayList<>();
+
+        Folder inbox = folderService.createInFolder(actor);
+        folderService.saveCreate(inbox);
+        Folder outbox = folderService.createOutFolder(actor);
+        folderService.saveCreate(outbox);
+        Folder spambox = folderService.createSpamFolder(actor);
+        folderService.saveCreate(spambox);
+        Folder trashbox = folderService.createTrashFolder(actor);
+        folderService.saveCreate(trashbox);
+        Folder notification = folderService.createNotificationFolder(actor);
+        folderService.saveCreate(notification);
+
+        folders.add(inbox);
+        folders.add(outbox);
+        folders.add(spambox);
+        folders.add(trashbox);
+        folders.add(notification);
+
+        return folders;
     }
 
 

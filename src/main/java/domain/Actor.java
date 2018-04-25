@@ -6,8 +6,10 @@ import org.hibernate.validator.constraints.SafeHtml;
 import security.UserAccount;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -83,6 +85,8 @@ public abstract class Actor extends DomainEntity {
 
     private UserAccount userAccount;
     private CreditCard creditCard;
+    private Collection<Folder> folders;
+
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL, optional = false)
@@ -101,6 +105,18 @@ public abstract class Actor extends DomainEntity {
 
     public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
+    }
+
+
+    @Valid
+    @OneToMany(mappedBy = "actor")
+    @NotNull
+    public Collection<Folder> getFolders() {
+        return this.folders;
+    }
+
+    public void setFolders(final Collection<Folder> folders) {
+        this.folders = folders;
     }
 
 }

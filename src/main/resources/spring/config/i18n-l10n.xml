@@ -34,6 +34,8 @@
 		<value>/views/picture/messages</value>
 		<value>/views/chirp/messages</value>
 		<value>/views/volume/messages</value>
+		<value>/views/agent/messages</value>
+
 
 	</util:list>
 

@@ -71,6 +71,10 @@
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/customer/**" access="hasRole('CUSTOMER')"/>
 
+		<!-- Agent -->
+
+		<security:intercept-url pattern="/agent/register.do" access="isAnonymous()" />
+
 		<!-- Picture -->
 		<security:intercept-url pattern="/picture/user/**" access="hasRole('USER')" />
 
@@ -94,8 +98,15 @@
 		<security:intercept-url pattern="/followUp/user/display.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/followUp/**" access="permitAll()" />
 
+		<!-- Message / Folder -->
+		<security:intercept-url pattern="/message/admin/**" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/message/actor/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/folder/**" access="isAuthenticated()" />
+
+
         <!-- Search -->
         <security:intercept-url pattern="/everyone/search.do" access="permitAll()" />
+
 
 
 

@@ -9,6 +9,7 @@ import org.springframework.validation.Validator;
 import repositories.VolumeRepository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -43,9 +44,13 @@ public class VolumeService {
     public Volume create(){
         Volume res= null;
         User user = this.userService.findByPrincipal();
+        Collection<Customer> customers= new ArrayList<>();
+        Collection<NewsPaper> newsPapers= new ArrayList<>();
 
         res= new Volume();
         res.setUser(user);
+        res.setCustomers(customers);
+        res.setNewsPapers(newsPapers);
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         res.setAnyo(String.valueOf(cal.get(Calendar.YEAR)));
