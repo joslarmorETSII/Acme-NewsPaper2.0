@@ -26,6 +26,7 @@
     <form:hidden path="title"/>
     <form:hidden path="description"/>
     <form:hidden path="anyo" />
+    <form:hidden path="user"/>
 
 
     <form:select path="newsPapers" items="${newsPapers}" itemLabel="title"/>
