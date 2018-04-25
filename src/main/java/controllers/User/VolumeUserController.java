@@ -85,8 +85,18 @@ public class VolumeUserController extends AbstractController{
         return result;
     }
 
+
+    @RequestMapping(value = "/addNewsPaper", method = RequestMethod.GET)
+    public ModelAndView editN(@RequestParam int volumeId) {
+        final ModelAndView result;
+        Volume volume;
+        volume = this.volumeService.findOneToEdit(volumeId);
+        Assert.notNull(volume);
+        result = this.createEditModelAndView(volume);
+        return result;
+    }
     @RequestMapping(value = "/addNewsPaper", method = RequestMethod.POST, params = "save")
-    public ModelAndView saveN(Volume volume, final BindingResult binding) {
+    public ModelAndView saveN(@Valid Volume volume, final BindingResult binding) {
         ModelAndView result;
 
 
