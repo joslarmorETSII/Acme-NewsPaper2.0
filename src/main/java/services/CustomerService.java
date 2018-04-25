@@ -1,8 +1,6 @@
 package services;
 
-import domain.CreditCard;
-import domain.Customer;
-import domain.NewsPaper;
+import domain.*;
 import forms.SubscribeForm;
 import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
@@ -38,6 +36,9 @@ public class CustomerService {
     @Autowired
     private CreditCardService creditCardService;
 
+    @Autowired
+    private ActorService actorService;
+
     // Constructors -----------------------------------------------------------
 
     public CustomerService() {
@@ -52,6 +53,8 @@ public class CustomerService {
         result = new Customer();
         result.setNewsPapers(new ArrayList<NewsPaper>());
         result.setUserAccount(userAccountService.create("CUSTOMER"));
+        result.setFolders(new ArrayList<Folder>());
+        result.setVolumes(new ArrayList<Volume>());
 
         return result;
     }
@@ -70,14 +73,19 @@ public class CustomerService {
         return result;
     }
 
-    public Customer save(final Customer customer) {
+    public Customer save(Customer customer) {
 
         Assert.notNull(customer);
-
         Customer result;
+        Collection<Folder> folders;
+
 
         if (customer.getId() == 0) {
             result = this.customerRepository.save(customer);
+            folders = actorService.generateFolders(result);
+            customer.setFolders(folders);
+            result = this.customerRepository.save(result);
+
         } else
             result = this.customerRepository.save(customer);
 

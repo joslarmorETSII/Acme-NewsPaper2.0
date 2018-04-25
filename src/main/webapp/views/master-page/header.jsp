@@ -62,11 +62,11 @@
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="/newsPaper/customer/list.do"><spring:message code="master.page.newspaper.customer.list" /></a></li>
+					<li><a href="newsPaper/customer/list.do"><spring:message code="master.page.newspaper.customer.list" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
-			<li><a class="fNiv" href="/newsPaper/customer/listNewsPaperCustomer.do"><spring:message code="master.page.newspaper.customerNewsPaper" /></a></li>
+			<li><a class="fNiv" href="newsPaper/customer/listNewsPaperCustomer.do"><spring:message code="master.page.newspaper.customerNewsPaper" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
@@ -80,8 +80,9 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a href="folder/actor/list.do"><spring:message code="master.page.mail" /></a></li>
 			<li>
-				<a class="fNiv"> 
+				<a class="fNiv">
 					<spring:message code="master.page.profile" /> 
 			        (<security:authentication property="principal.username" />)
 				</a>

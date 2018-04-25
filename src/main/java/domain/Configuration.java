@@ -86,6 +86,9 @@ public class Configuration extends DomainEntity {
         this.tabooWords = tabooWords;
     }
 
+
+
+
     // Relationships ----------------------------------------------------------
 
 }

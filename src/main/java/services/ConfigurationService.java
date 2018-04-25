@@ -68,6 +68,13 @@ public class ConfigurationService {
         configurationRepository.flush();
     }
 
+    public Configuration getCS() {
+        Collection<Configuration> configurationSystems;
+
+        configurationSystems = this.findAll();
+        return configurationSystems.iterator().next();
+    }
+
 
 }
 

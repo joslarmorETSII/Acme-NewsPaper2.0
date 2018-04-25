@@ -1,9 +1,7 @@
 package services;
 
 
-import domain.Chirp;
-import domain.NewsPaper;
-import domain.User;
+import domain.*;
 import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ActorService actorService;
+
     // Supporting services ----------------------------------------------------
 
     @Autowired
@@ -50,6 +51,8 @@ public class UserService {
         result.setFollowings(new ArrayList<User>());
         result.setNewsPapers(new ArrayList<NewsPaper>());
         result.setUserAccount(this.userAccountService.create("USER"));
+        result.setVolumes(new ArrayList<Volume>());
+        result.setFolders(new ArrayList<Folder>());
 
         return result;
     }
@@ -68,12 +71,19 @@ public class UserService {
         return result;
     }
 
-    public User save(final User user) {
+    public User save(User user) {
         Assert.notNull(user);
         User result;
+        Collection<Folder> folders;
 
-        result = this.userRepository.save(user);
-
+        if(user.getId()==0){
+            result = userRepository.save(user);
+            folders = actorService.generateFolders(result);
+            result.setFolders(folders);
+            result = userRepository.save(result);
+        }else {
+            result = this.userRepository.save(user);
+        }
         return result;
     }
 
