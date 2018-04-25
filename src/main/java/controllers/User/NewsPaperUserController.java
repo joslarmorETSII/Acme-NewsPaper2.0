@@ -117,9 +117,10 @@ public class NewsPaperUserController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST,params = "delete")
-    public ModelAndView edit(NewsPaper newsPaper){
+    public ModelAndView edit(NewsPaper newsPaperPruned, BindingResult binding){
         ModelAndView result;
 
+        NewsPaper newsPaper = this.newsPaperService.reconstructD(newsPaperPruned, binding);
         try{
             newsPaperService.delete(newsPaper);
             result = new ModelAndView("redirect:list.do");

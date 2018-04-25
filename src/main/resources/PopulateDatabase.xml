@@ -128,6 +128,11 @@
 				<ref bean="newsPaper2"/>
 			</list>
 		</property>
+		<property name="volumes">
+			<list>
+				<ref bean="volume1" />
+			</list>
+		</property>
 	</bean>
 
 	<!-- CreditCard -->
@@ -170,7 +175,11 @@
             <list>
             </list>
         </property>
-
+		<property name="volumes">
+			<list>
+				<ref bean="volume1" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="user2" class="domain.User">
@@ -193,6 +202,11 @@
 		</property>
 
 		<property name="followings">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="volumes">
 			<list>
 				<null/>
 			</list>
@@ -270,6 +284,11 @@
 				<ref bean="advertisement1"/>
 			</list>
 		</property>
+		<property name="volumes">
+			<list>
+				<ref bean="volume1" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="newsPaper2" class="domain.NewsPaper">
@@ -298,6 +317,11 @@
 				<ref bean="advertisement1"/>
 			</list>
 		</property>
+		<property name="volumes">
+			<list>
+				<null/>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Followers -->
@@ -324,6 +348,11 @@
 		<property name="followings">
 			<list>
 				<ref bean="user1"/>
+			</list>
+		</property>
+		<property name="volumes">
+			<list>
+				<null/>
 			</list>
 		</property>
 	</bean>
@@ -358,6 +387,11 @@
             <list>
             </list>
         </property>
+		<property name="volumes">
+			<list>
+				<null/>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Articles -->
@@ -455,6 +489,24 @@
 		<property name="url" value="http://www.imagen.com"/>
 		<property name="article" ref="article2"/>
 		<property name="followUp"> <null /></property>
+	</bean>
+
+	<!-- Volume -->
+	<bean id="volume1" class="domain.Volume">
+		<property name="title" value="Title volume1"/>
+		<property name="description" value="Description volume1"/>
+		<property name="anyo" value="11/12/2018 12:00" />
+		<property name="user" ref ="user1" />
+		<property name="customers">
+			<list>
+				<ref bean="customer1" />
+			</list>
+		</property>
+		<property name="newsPapers">
+			<list>
+				<ref bean="newsPaper1" />
+			</list>
+		</property>
 	</bean>
 
 	<!-- Configuration -->

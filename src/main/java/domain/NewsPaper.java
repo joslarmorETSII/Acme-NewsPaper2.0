@@ -144,7 +144,7 @@ public class NewsPaper extends DomainEntity {
 
     @Valid
     @NotNull
-    @ManyToMany()
+    @ManyToMany
     public Collection<Advertisement> getAdvertisements() {
         return advertisements;
     }
@@ -156,9 +156,7 @@ public class NewsPaper extends DomainEntity {
     @Valid
     @NotNull
     @ManyToMany(mappedBy = "newsPapers")
-    public Collection<Volume> getVolumes() {
-        return volumes;
-    }
+    public Collection<Volume> getVolumes() { return volumes; }
 
     public void setVolumes(Collection<Volume> volumes) {
         this.volumes = volumes;
