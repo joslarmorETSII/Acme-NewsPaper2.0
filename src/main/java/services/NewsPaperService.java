@@ -65,6 +65,7 @@ public class NewsPaperService {
         Collection<Article> articles= new ArrayList<>();
         Collection<Customer> customers= new ArrayList<>();
         Collection<Advertisement> advertisements = new ArrayList<>();
+        Collection<Volume> volumes = new ArrayList<>();
 
         publisher=userService.findByPrincipal();
         res= new NewsPaper();
@@ -73,7 +74,7 @@ public class NewsPaperService {
         res.setArticles(articles);
         res.setCustomers(customers);
         res.setAdvertisements(advertisements);
-
+        res.setVolumes(volumes);
         return res;
     }
 
