@@ -61,11 +61,12 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')" >
-		<jstl:if test="${row.finalMode eq false}" >
 		<display:column>
+		<jstl:if test="${row.finalMode eq false}" >
 			<acme:button url="picture/user/create.do?articleId=${row.id}" code="article.picture.add" />
-		</display:column>
 		</jstl:if>
+		</display:column>
+
 	</security:authorize>
 
 </display:table>

@@ -1,5 +1,6 @@
 package domain;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
@@ -22,6 +23,7 @@ public class Picture extends DomainEntity{
 
     @URL
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    @NotBlank
     public String getUrl() {
         return url;
     }

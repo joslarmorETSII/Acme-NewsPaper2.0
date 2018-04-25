@@ -59,7 +59,6 @@ public class PictureService {
         Assert.isTrue(checkByPrincipal(picture));
 
         res= pictureRepository.save(picture);
-        article.getPictures().add(picture);
         return res;
     }
 
@@ -68,7 +67,6 @@ public class PictureService {
         Assert.isTrue(checkByPrincipal(picture));
 
         res= pictureRepository.save(picture);
-        followUp.getPictures().add(picture);
         return res;
     }
 
