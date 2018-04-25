@@ -1,5 +1,12 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: yuzi
+  Date: 4/25/18
+  Time: 11:09 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+        pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -12,19 +19,19 @@
 
 <form:form action="${requestURI}" modelAttribute="folder">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="system" />
-	<form:hidden path="messages"/>
-	<form:hidden path="actor"/>
+    <form:hidden path="id" />
+    <form:hidden path="version" />
+    <form:hidden path="system" />
+    <form:hidden path="messages"/>
+    <form:hidden path="actor"/>
 
-	<acme:textbox code="messageFolder.name" path="name"/>
-	<br />
-	
-	<acme:submit name="save" code="messageFolder.save"/>
+    <acme:textbox code="messageFolder.name" path="name"/>
+    <br />
 
-	<acme:cancel url="folder/actor/list.do" code="messageFolder.cancel"/>
-	
-	<br />
+    <acme:submit name="save" code="messageFolder.save"/>
+
+    <acme:cancel url="folder/actor/list.do" code="messageFolder.cancel"/>
+
+    <br />
 
 </form:form>
