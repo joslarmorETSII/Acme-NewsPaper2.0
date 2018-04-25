@@ -101,7 +101,7 @@ public class VolumeUserController extends AbstractController{
 
 
         if (binding.hasErrors())
-            result = this.createEditModelAndView(volume);
+            result = this.createEditModelAndView2(volume);
         else
             try {
                 this.volumeService.save(volume);
