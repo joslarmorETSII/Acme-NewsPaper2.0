@@ -107,14 +107,30 @@ public class VolumeService {
     }
 
     public Volume reconstructS(final Volume volumePruned, final BindingResult binding) {
-        final Volume res;
+        Volume res;
+        if(volumePruned.getId()==0) {
+            res = this.create();
+        }else{
+            res = this.findOne(volumePruned.getId());
+        }
+        res.setTitle(volumePruned.getTitle());
+        res.setDescription(volumePruned.getDescription());
+        res.setAnyo(volumePruned.getAnyo());
 
-        final User user = this.userService.findByPrincipal();
+        this.validator.validate(res,binding);
 
-        res = volumePruned;
-        res.setUser(user);
+        return res;
+    }
+    public Volume reconstructAddNewsPaper(final Volume volumePruned, final BindingResult binding) {
+        Volume res;
+        res = this.findOne(volumePruned.getId());
+        Collection<NewsPaper> newsPapers = new ArrayList<>();
+        newsPapers = res.getNewsPapers();
+        newsPapers.addAll(volumePruned.getNewsPapers());
 
-        this.validator.validate(volumePruned,binding);
+        res.setNewsPapers(newsPapers);
+
+        this.validator.validate(res,binding);
 
         return res;
     }

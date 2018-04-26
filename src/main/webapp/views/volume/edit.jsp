@@ -22,8 +22,6 @@
 
     <form:hidden path="id"/>
     <form:hidden path="version"/>
-    <form:hidden path="customers"/>
-    <form:hidden path="newsPapers"/>
 
     <acme:textbox path="title" code="volume.title"/>
     <acme:textarea path="description" code="volume.description"/>

@@ -71,16 +71,23 @@ public class VolumeUserController extends AbstractController{
     public ModelAndView save(Volume volumePruned, final BindingResult binding) {
         ModelAndView result;
 
-        Volume volume = this.volumeService.reconstructS(volumePruned,binding);
 
-        if (binding.hasErrors())
-            result = this.createEditModelAndView(volume);
-        else
             try {
-                this.volumeService.save(volume);
-                result = new ModelAndView("redirect:list.do");
+                Volume volume = this.volumeService.reconstructS(volumePruned,binding);
+
+                if (binding.hasErrors()) {
+                    result = this.createEditModelAndView(volumePruned);
+                }
+                else {
+                    this.volumeService.save(volume);
+                    result = new ModelAndView("redirect:list.do");
+                }
             } catch (final Throwable oops) {
-                result = this.createEditModelAndView(volume, "volume.commit.error");
+                if (binding.hasErrors()) {
+                    result = this.createEditModelAndView(volumePruned);
+                }else{
+                    result = this.createEditModelAndView(volumePruned, "volume.commit.error");
+                }
             }
         return result;
     }
@@ -96,18 +103,28 @@ public class VolumeUserController extends AbstractController{
         return result;
     }
     @RequestMapping(value = "/addNewsPaper", method = RequestMethod.POST, params = "save")
-    public ModelAndView saveN(@Valid Volume volume, final BindingResult binding) {
+    public ModelAndView saveN(Volume volumePruned, final BindingResult binding) {
         ModelAndView result;
 
 
-        if (binding.hasErrors())
-            result = this.createEditModelAndView2(volume);
-        else
+
             try {
-                this.volumeService.save(volume);
-                result = new ModelAndView("redirect:list.do");
+                Volume volume = this.volumeService.reconstructAddNewsPaper(volumePruned,binding);
+
+                if (binding.hasErrors()){
+                    result = this.createEditModelAndView2(volumePruned);
+                }
+                else{
+                    this.volumeService.save(volume);
+                    result = new ModelAndView("redirect:list.do");
+                }
+
             } catch (final Throwable oops) {
-                result = this.createEditModelAndView2(volume, "volume.commit.error");
+                if (binding.hasErrors()){
+                    result = this.createEditModelAndView2(volumePruned);
+                }else{
+                    result = this.createEditModelAndView2(volumePruned, "volume.commit.error");
+                }
             }
         return result;
     }

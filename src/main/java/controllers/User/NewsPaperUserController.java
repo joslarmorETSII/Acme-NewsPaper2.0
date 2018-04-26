@@ -102,25 +102,33 @@ public class NewsPaperUserController extends AbstractController {
     public ModelAndView save(NewsPaper newsPaperPruned, final BindingResult binding) {
         ModelAndView result;
 
-        NewsPaper newsPaper = this.newsPaperService.reconstructS(newsPaperPruned,binding);
 
-        if (binding.hasErrors())
-            result = this.createEditModelAndView(newsPaper);
-        else
+
             try {
-                this.newsPaperService.save(newsPaper);
-                result = new ModelAndView("redirect:list.do");
+                NewsPaper newsPaper = this.newsPaperService.reconstructS(newsPaperPruned,binding);
+
+                if (binding.hasErrors()){
+                    result = this.createEditModelAndView(newsPaperPruned);
+                }
+                else {
+                    this.newsPaperService.save(newsPaper);
+                    result = new ModelAndView("redirect:list.do");
+                }
             } catch (final Throwable oops) {
-                result = this.createEditModelAndView(newsPaper, "newsPaper.commit.error");
+                if (binding.hasErrors()){
+                    result = this.createEditModelAndView(newsPaperPruned);
+                }else{
+                    result = this.createEditModelAndView(newsPaperPruned, "newsPaper.commit.error");
+                }
             }
         return result;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST,params = "delete")
-    public ModelAndView edit(NewsPaper newsPaperPruned, BindingResult binding){
+    public ModelAndView edit(NewsPaper newsPaperPruned){
         ModelAndView result;
 
-        NewsPaper newsPaper = this.newsPaperService.reconstructD(newsPaperPruned, binding);
+        NewsPaper newsPaper = this.newsPaperService.findOne(newsPaperPruned.getId());
         try{
             newsPaperService.delete(newsPaper);
             result = new ModelAndView("redirect:list.do");

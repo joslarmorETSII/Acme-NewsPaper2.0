@@ -234,27 +234,20 @@ public class NewsPaperService {
         newsPaperRepository.flush();
     }
 
-    public NewsPaper reconstructD(final NewsPaper newsPaperPruned, final BindingResult binding) {
-        NewsPaper res;
-
-        Assert.notNull(newsPaperPruned);
-        res = this.findOne(newsPaperPruned.getId());
-
-        Assert.notNull(res);
-        this.validator.validate(res, binding);
-
-        return res;
-    }
-
     public NewsPaper reconstructS(final NewsPaper newsPaperPruned, final BindingResult binding) {
-        final NewsPaper res;
+        NewsPaper res;
+        if(newsPaperPruned.getId()==0) {
+            res = this.create();
+        }else{
+            res = this.findOne(newsPaperPruned.getId());
 
-        final User publisher = this.userService.findByPrincipal();
+        }
+        res.setTitle(newsPaperPruned.getTitle());
+        res.setDescription(newsPaperPruned.getDescription());
+        res.setPicture(newsPaperPruned.getPicture());
+        res.setModePrivate(newsPaperPruned.isModePrivate());
 
-        res = newsPaperPruned;
-        res.setPublisher(publisher);
-
-        this.validator.validate(res, binding);
+        this.validator.validate(res,binding);
 
         return res;
     }
