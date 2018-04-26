@@ -1,8 +1,6 @@
 package controllers;
 
-import domain.Advertisement;
-import domain.Agent;
-import domain.Chirp;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -13,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.AdvertisementService;
 import services.AgentService;
+import services.NewsPaperService;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/advertisement")
@@ -27,6 +27,9 @@ public class AdvertisementController  extends AbstractController {
 
     @Autowired
     private AgentService agentService;
+
+    @Autowired
+    private NewsPaperService newsPaperService;
 
     // Creation ------------------------------------------------------
 
@@ -60,7 +63,7 @@ public class AdvertisementController  extends AbstractController {
         else
             try {
                 this.advertisementService.save(advertisement);
-                result = new ModelAndView("redirect:list.do");
+                result = new ModelAndView("redirect:/welcome/index.do");
             } catch (final Throwable oops) {
                 result = this.createEditModelAndView(advertisement, "advertisement.commit.error");
             }
@@ -73,7 +76,7 @@ public class AdvertisementController  extends AbstractController {
 
         try {
             advertisementService.delete(advertisement);
-            result = new ModelAndView("redirect:list.do");
+            result = new ModelAndView("redirect:/welcome/index.do");
         } catch (Throwable oops) {
             result = createEditModelAndView(advertisement, "advertisement.commit.error");
         }
@@ -92,10 +95,13 @@ public class AdvertisementController  extends AbstractController {
 
     protected ModelAndView createEditModelAndView(final Advertisement advertisement, final String messageCode) {
         ModelAndView result;
-        Agent user = agentService.findByPrincipal();
+        Agent agent = agentService.findByPrincipal();
+
+        Collection<NewsPaper> newsPapers = newsPaperService.findPublishedNewsPaper();
 
         result = new ModelAndView("advertisement/edit");
         result.addObject("advertisement", advertisement);
+        result.addObject("newsPapers", newsPapers);
         result.addObject("actionUri", "advertisement/edit.do");
         result.addObject("message", messageCode);
 

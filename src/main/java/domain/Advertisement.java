@@ -20,8 +20,8 @@ public class Advertisement extends DomainEntity{
     // Attributes ------------------------------------------------------------------------
 
     private String title;
-    private String urlBanner;
-    private String urlPage;
+    private String banner;
+    private String targetPage;
     private Boolean taboo;
 
     @NotBlank
@@ -36,22 +36,22 @@ public class Advertisement extends DomainEntity{
 
     @URL
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    public String getUrlBanner() {
-        return urlBanner;
+    public String getBanner() {
+        return banner;
     }
 
-    public void setUrlBanner(String urlBanner) {
-        this.urlBanner = urlBanner;
+    public void setBanner(String banner) {
+        this.banner = banner;
     }
 
     @URL
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-    public String getUrlPage() {
-        return urlPage;
+    public String getTargetPage() {
+        return targetPage;
     }
 
-    public void setUrlPage(String urlPage) {
-        this.urlPage = urlPage;
+    public void setTargetPage(String targetPage) {
+        this.targetPage = targetPage;
     }
 
     public Boolean getTaboo() {

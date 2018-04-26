@@ -92,7 +92,7 @@
 
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="agent1" />
-		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="password" value="83a87fd756ab57199c0bb6d5e11168cb" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -280,8 +280,8 @@
 
 	<bean id="advertisement1" class="domain.Advertisement">
 		<property name="title" value="title1"/>
-		<property name="urlBanner" value=""/>
-		<property name="urlPage" value=""/>
+		<property name="banner" value=""/>
+		<property name="targetPage" value=""/>
 		<property name="taboo" value="false"/>
 		<property name="agent" ref="agent1" />
 		<property name="newsPapers">

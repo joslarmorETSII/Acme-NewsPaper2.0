@@ -21,9 +21,8 @@
 
     <form:hidden path="id"/>
     <form:hidden path="version"/>
-    <form:hidden path="newsPapers"/>
 
-    <acme:textbox path="name" code="agent.name"/>
+    <acme:textbox path="title" code="agent.n"/>
     <br />
 
     <acme:textbox path="surname" code="agent.surname"/>
