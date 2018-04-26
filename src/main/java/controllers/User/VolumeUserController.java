@@ -129,6 +129,40 @@ public class VolumeUserController extends AbstractController{
         return result;
     }
 
+    @RequestMapping(value = "/removeNewsPaper", method = RequestMethod.GET)
+    public ModelAndView editND(@RequestParam int volumeId) {
+        final ModelAndView result;
+        Volume volume;
+        volume = this.volumeService.findOneToEdit(volumeId);
+        Assert.notNull(volume);
+        result = this.createEditModelAndView3(volume);
+        return result;
+    }
+    @RequestMapping(value = "/removeNewsPaper", method = RequestMethod.POST, params = "delete")
+    public ModelAndView saveND(Volume volumePruned, final BindingResult binding) {
+        ModelAndView result;
+
+        try {
+            Volume volume = this.volumeService.reconstructRemoveNewsPaper(volumePruned,binding);
+
+            if (binding.hasErrors()){
+                result = this.createEditModelAndView3(volumePruned);
+            }
+            else{
+                this.volumeService.save(volume);
+                result = new ModelAndView("redirect:list.do");
+            }
+
+        } catch (final Throwable oops) {
+            if (binding.hasErrors()){
+                result = this.createEditModelAndView3(volumePruned);
+            }else{
+                result = this.createEditModelAndView3(volumePruned, "volume.commit.error");
+            }
+        }
+        return result;
+    }
+
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -168,6 +202,7 @@ public class VolumeUserController extends AbstractController{
 
         return result;
     }
+
     protected ModelAndView createEditModelAndView2(final Volume volume) {
         ModelAndView result;
 
@@ -185,6 +220,24 @@ public class VolumeUserController extends AbstractController{
         result.addObject("volume", volume);
         result.addObject("newsPapers",newsPapers);
         result.addObject("actionUri","volume/user/addNewsPaper.do");
+        result.addObject("message", messageCode);
+
+        return result;
+    }
+
+    protected ModelAndView createEditModelAndView3(final Volume volume) {
+        ModelAndView result;
+
+        result = this.createEditModelAndView3(volume, null);
+        return result;
+    }
+    protected ModelAndView createEditModelAndView3(final Volume volume, final String messageCode) {
+        ModelAndView result;
+
+        result = new ModelAndView("volume/removeNewsPaper");
+        result.addObject("volume", volume);
+        result.addObject("newsPapers",volume.getNewsPapers());
+        result.addObject("actionUri","volume/user/removeNewsPaper.do");
         result.addObject("message", messageCode);
 
         return result;

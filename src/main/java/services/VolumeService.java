@@ -121,12 +121,27 @@ public class VolumeService {
 
         return res;
     }
+
     public Volume reconstructAddNewsPaper(final Volume volumePruned, final BindingResult binding) {
         Volume res;
         res = this.findOne(volumePruned.getId());
         Collection<NewsPaper> newsPapers = new ArrayList<>();
         newsPapers = res.getNewsPapers();
         newsPapers.addAll(volumePruned.getNewsPapers());
+
+        res.setNewsPapers(newsPapers);
+
+        this.validator.validate(res,binding);
+
+        return res;
+    }
+
+    public Volume reconstructRemoveNewsPaper(final Volume volumePruned, final BindingResult binding) {
+        Volume res;
+        res = this.findOne(volumePruned.getId());
+        Collection<NewsPaper> newsPapers = new ArrayList<>();
+        newsPapers = res.getNewsPapers();
+        newsPapers.removeAll(volumePruned.getNewsPapers());
 
         res.setNewsPapers(newsPapers);
 

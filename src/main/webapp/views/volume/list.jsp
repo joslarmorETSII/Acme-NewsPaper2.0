@@ -43,7 +43,11 @@
         </display:column>
     </security:authorize>
 
-
+    <security:authorize access="hasRole('USER')">
+        <display:column>
+            <acme:button url="volume/user/removeNewsPaper.do?volumeId=${row.id}" code="volume.newsPapers.remove"/>
+        </display:column>
+    </security:authorize>
 
     <security:authorize access="isAuthenticated()">
     <display:column>

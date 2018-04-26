@@ -28,5 +28,8 @@
 		<put-attribute name="title" value="Add newsPapers" />
 		<put-attribute name="body" value="/views/volume/addNewsPaper.jsp" />
 	</definition>
-	
+	<definition name="volume/removeNewsPaper" extends="master.page">
+		<put-attribute name="title" value="Remove newsPapers" />
+		<put-attribute name="body" value="/views/volume/removeNewsPaper.jsp" />
+	</definition>
 </tiles-definitions>
