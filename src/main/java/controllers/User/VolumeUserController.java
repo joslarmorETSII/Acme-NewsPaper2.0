@@ -160,7 +160,9 @@ public class VolumeUserController extends AbstractController{
     protected ModelAndView createEditModelAndView2(final Volume volume, final String messageCode) {
         ModelAndView result;
 
-        Collection<NewsPaper> newsPapers= newsPaperService.findAll();
+        Collection<NewsPaper> newsPapers= newsPaperService.findPublishedNewsPaper();
+        Collection<NewsPaper> newsPapers1 = volume.getNewsPapers();
+        newsPapers.removeAll(newsPapers1);
 
         result = new ModelAndView("volume/addNewsPaper");
         result.addObject("volume", volume);

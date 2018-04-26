@@ -1,6 +1,7 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,7 +25,7 @@ public class Volume extends DomainEntity {
 
     private String title;
     private String description;
-    private String anyo;
+    private Integer anyo;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -46,12 +47,13 @@ public class Volume extends DomainEntity {
         this.description = description;
     }
 
-    @NotBlank
-    public String getAnyo() {
+    @Range(min = 2018,max = 3000)
+    @NotNull
+    public Integer getAnyo() {
         return anyo;
     }
 
-    public void setAnyo(String anyo) {
+    public void setAnyo(Integer anyo) {
         this.anyo = anyo;
     }
 

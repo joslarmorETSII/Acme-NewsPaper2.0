@@ -51,9 +51,7 @@ public class VolumeService {
         res.setUser(user);
         res.setCustomers(customers);
         res.setNewsPapers(newsPapers);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        res.setAnyo(String.valueOf(cal.get(Calendar.YEAR)));
+
         return res;
     }
 

@@ -24,10 +24,10 @@
     <form:hidden path="version"/>
     <form:hidden path="customers"/>
     <form:hidden path="newsPapers"/>
-    <form:hidden path="anyo" />
 
     <acme:textbox path="title" code="volume.title"/>
     <acme:textarea path="description" code="volume.description"/>
+    <acme:textbox path="anyo" code="volume.anyo" placeHolder="2018"/>
 
     <acme:submit name="save" code="volume.save"/>
 
