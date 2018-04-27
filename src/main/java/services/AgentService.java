@@ -3,6 +3,7 @@ package services;
 import domain.Advertisement;
 import domain.Agent;
 import domain.Customer;
+import domain.Folder;
 import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class AgentService {
     @Autowired
     private UserAccountService userAccountService;
 
+    @Autowired
+    private ActorService actorService;
+
     // Constructors -----------------------------------------------------------
 
     public AgentService() { super();
@@ -55,9 +59,13 @@ public class AgentService {
     public Agent save(Agent agent){
         Assert.notNull(agent);
         Agent res = null;
+        Collection<Folder> folders;
 
         if (agent.getId() == 0) {
             res = this.agentRepository.save(agent);
+            folders = actorService.generateFolders(res);
+            res.setFolders(folders);
+            res = agentRepository.save(res);
         } else
             res = this.agentRepository.save(agent);
 
