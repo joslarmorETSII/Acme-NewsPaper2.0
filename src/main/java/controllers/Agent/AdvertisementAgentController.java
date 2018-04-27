@@ -3,6 +3,7 @@ package controllers.Agent;
 import controllers.AbstractController;
 import controllers.Administrator.AdvertisementAdministratorController;
 import domain.*;
+import forms.RegisterAdvertisementForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.AdvertisementService;
 import services.AgentService;
+import services.CreditCardService;
 import services.NewsPaperService;
 
 import javax.validation.Valid;
@@ -31,9 +33,12 @@ public class AdvertisementAgentController extends AbstractController {
     private AgentService agentService;
 
     @Autowired
+    private CreditCardService creditCardService;
+
+    @Autowired
     private NewsPaperService newsPaperService;
 
-    public AdvertisementAgentController(){
+    public AdvertisementAgentController() {
         super();
     }
 
@@ -43,9 +48,12 @@ public class AdvertisementAgentController extends AbstractController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView create() {
         ModelAndView result;
-        Advertisement advertisement= null;
-        advertisement = this.advertisementService.create();
-        result = this.createEditModelAndView(advertisement);
+
+        result = new ModelAndView("advertisement/registerAdvertisementForm");
+        RegisterAdvertisementForm registerAdvertisementForm;
+        registerAdvertisementForm = new RegisterAdvertisementForm();
+        result.addObject("registerAdvertisementForm", registerAdvertisementForm);
+        result.addObject("newsPapers", newsPaperService.findPublishedNewsPaper());
 
         return result;
     }
@@ -63,19 +71,31 @@ public class AdvertisementAgentController extends AbstractController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid Advertisement advertisement, BindingResult binding) {
+    public ModelAndView save(@Valid RegisterAdvertisementForm registerAdvertisementForm, BindingResult binding) {
         ModelAndView result;
-        if (binding.hasErrors())
-            result = this.createEditModelAndView(advertisement);
-        else
-            try {
-                this.advertisementService.save(advertisement);
-                result = new ModelAndView("redirect:/welcome/index.do");
-            } catch (final Throwable oops) {
-                result = this.createEditModelAndView(advertisement, "advertisement.commit.error");
+        Agent agent;
+        NewsPaper newsPaper;
+        try {
+            Advertisement advertisement = agentService.reconstructRegisterAdvertisement(registerAdvertisementForm, binding);
+
+            if (binding.hasErrors())
+                result = createEditModelAndView2(registerAdvertisementForm);
+            else {
+                result = new ModelAndView("redirect: list.do");
+                agent = agentService.findByPrincipal();
+                agent.getAdvertisements().add(advertisement);
+                advertisement.setAgent(agent);
+                newsPaper = registerAdvertisementForm.getNewsPaper();
+                newsPaper.getAdvertisements().add(advertisement);
+                newsPaperService.save(newsPaper);
+                advertisementService.save(advertisement);
+
             }
-        return result;
+        } catch (final Throwable oops) {
+            result = this.createEditModelAndView2(registerAdvertisementForm, "general.commit.error");
+        }
     }
+
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
     public ModelAndView edit(Advertisement advertisement) {
@@ -116,4 +136,12 @@ public class AdvertisementAgentController extends AbstractController {
         return result;
     }
 
+    private ModelAndView createEditModelAndView2(RegisterAdvertisementForm registerAdvertisementForm) {
+        return createEditModelAndView2(registerAdvertisementForm, null);
+    }
+
+    private ModelAndView createEditModelAndView2(RegisterAdvertisementForm registerAdvertisementForm,String messageCode) {
+
+
+    }
 }

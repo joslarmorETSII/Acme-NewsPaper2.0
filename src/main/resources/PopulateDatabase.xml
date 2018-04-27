@@ -164,14 +164,23 @@
 		<property name="cvv" value="243" />
 	</bean>
 
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holder" value="Holder 2" />
+		<property name="brand" value="visa" />
+		<property name="number" value="4785 5308 6052 0625" />
+		<property name="expirationMonth" value="12" />
+		<property name="expirationYear" value="2018" />
+		<property name="cvv" value="123" />
+	</bean>
+
 	<!-- Users -->
 
 	<bean id="user1" class="domain.User">
-		<property name="name" value="Khawla"/>
-		<property name="surname" value="Al Alsfar"/>
-		<property name="email" value="khaala@alum.us.es"/>
-		<property name="phone" value="+34640661936"/>
-		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="name" value="Fulanita"/>
+		<property name="surname" value="Fulanita"/>
+		<property name="email" value="fulanita@alum.us.es"/>
+		<property name="phone" value="+34234562334"/>
+		<property name="postalAddresses" value="reina mercedes"/>
 		<property name="userAccount" ref="userAccount3"/>
 
 		<property name="chirps">
@@ -211,11 +220,11 @@
 	</bean>
 
 	<bean id="user2" class="domain.User">
-		<property name="name" value="Feliciano"/>
-		<property name="surname" value="Blanco Castaño"/>
-		<property name="email" value="feliciano@alum.us.es"/>
+		<property name="name" value="alejandro"/>
+		<property name="surname" value="alejandro"/>
+		<property name="email" value="alejandro@alum.us.es"/>
 		<property name="phone" value="+34666666666"/>
-		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="postalAddresses" value="reina mercedes"/>
 		<property name="userAccount" ref="userAccount4"/>
 
 		<property name="chirps">
@@ -256,7 +265,7 @@
 		<property name="name" value="Agent1"/>
 		<property name="surname" value="AgentSurname"/>
 		<property name="email" value="josgomrod3@alum.us.es"/>
-		<property name="phone" value="+34695395229"/>
+		<property name="phone" value="+34123456789"/>
 		<property name="postalAddresses" value="C\ Reina Mercedes Bloque 25"/>
 		<property name="userAccount" ref="userAccount7"/>
 		<property name="creditCard" ref="creditCard1" />
@@ -284,12 +293,8 @@
 		<property name="targetPage" value=""/>
 		<property name="taboo" value="false"/>
 		<property name="agent" ref="agent1" />
-		<property name="newsPapers">
-			<list>
-				<ref bean="newsPaper1"/>
-				
-			</list>
-		</property>
+		<property name="creditCard" ref="creditCard2"/>
+		<property name="newsPaper" ref="newsPaper1"/>
 	</bean>
 
 
@@ -378,7 +383,7 @@
 		<property name="surname" value="Surname follower"/>
 		<property name="email" value="follower@alum.us.es"/>
 		<property name="phone" value="+34666666666"/>
-		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="postalAddresses" value="Reina mercedes"/>
 		<property name="userAccount" ref="userAccount5"/>
 
 		<property name="chirps">
@@ -420,7 +425,7 @@
 		<property name="surname" value="Surname following"/>
 		<property name="email" value="following@alum.us.es"/>
 		<property name="phone" value="+34666666666"/>
-		<property name="postalAddresses" value="Barriada la Oliva"/>
+		<property name="postalAddresses" value="Reina mercedes"/>
 		<property name="userAccount" ref="userAccount6"/>
 
 		<property name="chirps">

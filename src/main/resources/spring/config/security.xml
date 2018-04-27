@@ -77,8 +77,7 @@
 
 		<!-- Advertisement -->
 
-		<security:intercept-url pattern="/advertisement/agent/create.do" access="hasRole('AGENT')" />
-		<security:intercept-url pattern="/advertisement/agent/edit.do" access="hasRole('AGENT')" />
+		<security:intercept-url pattern="/advertisement/agent/**" access="hasRole('AGENT')" />
 		<security:intercept-url pattern="/advertisement/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
 

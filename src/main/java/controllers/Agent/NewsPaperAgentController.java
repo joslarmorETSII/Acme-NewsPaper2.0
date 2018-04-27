@@ -22,6 +22,9 @@ public class NewsPaperAgentController extends AbstractController {
     @Autowired
     private NewsPaperService newsPaperService;
 
+    @Autowired
+    private AdvertisementService advertisementService;
+
     public NewsPaperAgentController() { super();}
 
     // Listing -------------------------------------------------------

@@ -22,6 +22,7 @@
     <form:hidden path="id"/>
     <form:hidden path="version"/>
     <form:hidden path="agent"/>
+    <form:hidden path="taboo"/>
 
 
     <acme:textbox path="title" code="advertisement.title"/>
@@ -33,15 +34,42 @@
     <acme:textbox path="targetPage" code="advertisement.targetPage"/>
     <br />
 
-    <acme:textbox path="taboo" code="advertisement.taboo"/>
-    <br />
+    <form:label path="creditCard.holder"><spring:message code="advertisement.holder"/></form:label>
+    <form:input path="creditCard.holder"/>
+    <form:errors path="creditCard.holder" cssClass="error"/>
+    <br/>
+
+    <form:label path="creditCard.brand"><spring:message code="advertisement.brand"/></form:label>
+    <form:input path="creditCard.brand"/>
+    <form:errors path="creditCard.brand" cssClass="error"/>
+    <br/>
+
+    <form:label path="creditCard.number"><spring:message code="advertisement.number"/></form:label>
+    <form:input path="creditCard.number"/>
+    <form:errors path="creditCard.number" cssClass="error"/>
+    <br/>
+
+    <form:label path="creditCard.expirationMonth"><spring:message code="advertisement.expirationMonth"/></form:label>
+    <form:input path="creditCard.expirationMonth"/>
+    <form:errors path="creditCard.expirationMonth" cssClass="error"/>
+    <br/>
+
+    <form:label path="creditCard.expirationYear"><spring:message code="advertisement.expirationYear"/></form:label>
+    <form:input path="creditCard.expirationYear"/>
+    <form:errors path="creditCard.expirationYear" cssClass="error"/>
+    <br/>
+
+    <form:label path="creditCard.cvv"><spring:message code="advertisement.cvv"/></form:label>
+    <form:input path="creditCard.cvv"/>
+    <form:errors path="creditCard.cvv" cssClass="error"/>
+    <br/>
 
     <form:label path="newsPapers">
         <spring:message code="advertisement.newsPapers" />
     </form:label>
     <form:select path="newsPapers" items="${newsPapers}" itemLabel="title"/>
     <form:errors path="newsPapers" cssClass="error" />
-
+    <br/>
 
     <input type="submit" name="save" value="<spring:message code="advertisement.save"/>" />
 

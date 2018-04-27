@@ -51,7 +51,6 @@ public class AdvertisementService {
         agent = agentService.findByPrincipal();
 
         res  = new Advertisement();
-        res.setNewsPapers(new ArrayList<NewsPaper>());
         res.setAgent(agent);
 
         return res;

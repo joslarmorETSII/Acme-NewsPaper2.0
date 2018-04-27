@@ -1,9 +1,8 @@
 package services;
 
-import domain.Advertisement;
-import domain.Agent;
-import domain.Customer;
-import domain.Folder;
+import domain.*;
+import forms.RegisterAdvertisementForm;
+import forms.SubscribeForm;
 import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,12 @@ public class AgentService {
 
     @Autowired
     private ActorService actorService;
+
+    @Autowired
+    private CreditCardService creditCardService;
+
+    @Autowired
+    private AdvertisementService advertisementService;
 
     // Constructors -----------------------------------------------------------
 
@@ -145,5 +150,26 @@ public class AgentService {
         }
 
         return result;
+    }
+
+    public Advertisement reconstructRegisterAdvertisement(RegisterAdvertisementForm registerAdvertisementForm, final BindingResult binding) {
+        Advertisement advertisement = advertisementService.create();
+        CreditCard creditCard = creditCardService.create();
+
+        advertisement.setTitle(registerAdvertisementForm.getTitle());
+        advertisement.setBanner(registerAdvertisementForm.getBanner());
+        advertisement.setTargetPage(registerAdvertisementForm.getTargetPage());
+
+        creditCard.setBrand(registerAdvertisementForm.getBrand());
+        creditCard.setCvv(registerAdvertisementForm.getCvv());
+        creditCard.setExpirationMonth(registerAdvertisementForm.getExpirationMonth());
+        creditCard.setExpirationYear(registerAdvertisementForm.getExpirationYear());
+        creditCard.setHolder(registerAdvertisementForm.getHolder());
+        creditCard.setNumber(registerAdvertisementForm.getNumber());
+
+        advertisement.setCreditCard(creditCard);
+        advertisement.setNewsPaper(registerAdvertisementForm.getNewsPaper());
+
+        return advertisement;
     }
 }

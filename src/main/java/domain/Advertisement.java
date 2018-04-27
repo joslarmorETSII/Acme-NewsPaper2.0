@@ -22,7 +22,7 @@ public class Advertisement extends DomainEntity{
     private String title;
     private String banner;
     private String targetPage;
-    private Boolean taboo;
+    private boolean taboo;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -54,17 +54,20 @@ public class Advertisement extends DomainEntity{
         this.targetPage = targetPage;
     }
 
-    public Boolean getTaboo() {
+
+
+    public boolean getTaboo() {
         return taboo;
     }
 
-    public void setTaboo(Boolean taboo) {
+    public void setTaboo(boolean taboo) {
         this.taboo = taboo;
     }
 
     // Relationships ----------------------------------------------------------------------
 
-    private Collection<NewsPaper> newsPapers;
+    private NewsPaper newsPaper;
+    private CreditCard creditCard;
     private Agent agent;
 
     @Valid
@@ -80,12 +83,23 @@ public class Advertisement extends DomainEntity{
 
     @Valid
     @NotNull
-    @ManyToMany(mappedBy = "advertisements")
-    public Collection<NewsPaper> getNewsPapers() {
-        return newsPapers;
+    @ManyToOne(optional = false)
+    public NewsPaper getNewsPaper() {
+        return newsPaper;
     }
 
-    public void setNewsPapers(Collection<NewsPaper> newsPapers) {
-        this.newsPapers = newsPapers;
+    public void setNewsPaper(NewsPaper newsPaper) {
+        this.newsPaper = newsPaper;
+    }
+
+    @Valid
+    @NotNull
+    @OneToOne(optional = false)
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 }
