@@ -142,4 +142,6 @@ public class AdvertisementService {
         Assert.isTrue(actorService.isAdministrator());
         return advertisementRepository.findTabooAdvertisement();
     }
+
+
 }

@@ -57,7 +57,7 @@
 		<security:intercept-url pattern="/newsPaper/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/newsPaper/customer/**" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/newsPaper/**" access="permitAll()" />
-
+		<security:intercept-url pattern="/newsPaper/agent/**" access="hasRole('AGENT')" />
 
 		<!-- Configuration -->
 		<security:intercept-url pattern="/configuration/administrator/**" access="hasRole('ADMINISTRATOR')" />
@@ -77,8 +77,8 @@
 
 		<!-- Advertisement -->
 
-		<security:intercept-url pattern="/advertisement/create.do" access="hasRole('AGENT')" />
-		<security:intercept-url pattern="/advertisement/edit.do" access="hasRole('AGENT')" />
+		<security:intercept-url pattern="/advertisement/agent/create.do" access="hasRole('AGENT')" />
+		<security:intercept-url pattern="/advertisement/agent/edit.do" access="hasRole('AGENT')" />
 		<security:intercept-url pattern="/advertisement/administrator/**" access="hasRole('ADMINISTRATOR')" />
 
 

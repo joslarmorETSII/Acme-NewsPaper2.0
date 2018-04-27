@@ -1,5 +1,7 @@
-package controllers;
+package controllers.Agent;
 
+import controllers.AbstractController;
+import controllers.Administrator.AdvertisementAdministratorController;
 import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +19,8 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
-@RequestMapping("/advertisement")
-public class AdvertisementController  extends AbstractController {
+@RequestMapping("/advertisement/agent")
+public class AdvertisementAgentController extends AbstractController {
 
     //Services -------------------------------------------------------
 
@@ -31,7 +33,9 @@ public class AdvertisementController  extends AbstractController {
     @Autowired
     private NewsPaperService newsPaperService;
 
-
+    public AdvertisementAgentController(){
+        super();
+    }
 
 
     // Creation ------------------------------------------------------

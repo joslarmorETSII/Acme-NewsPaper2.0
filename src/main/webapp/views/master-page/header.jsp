@@ -61,7 +61,8 @@
 
 		<security:authorize access="hasRole('AGENT')">
 
-			<li><a class="fNiv" href="/advertisement/create.do"><spring:message code="master.page.advertisement.create" />
+			<li><a class="fNiv" href="advertisement/agent/create.do"><spring:message code="master.page.advertisement.create" />
+			<li><a class="fNiv" href="newsPaper/agent/list.do"><spring:message code="master.page.newsPaper.list" />
 
 		</security:authorize>
 

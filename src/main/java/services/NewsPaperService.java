@@ -263,4 +263,9 @@ public class NewsPaperService {
     public Collection<NewsPaper> findPublishedAndPrivateNewsPaper(){
         return this.newsPaperRepository.findPublishedAndPrivateNewsPaper();
     }
+
+    public Collection<NewsPaper> findNewsPaperPlacedAdvertisement(int agentId) {
+        Assert.isTrue(actorService.isAdministrator());
+        return newsPaperRepository.findNewsPaperPlacedAdvertisement(agentId);
+    }
 }

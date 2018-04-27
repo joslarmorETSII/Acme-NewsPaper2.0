@@ -40,4 +40,10 @@
         <put-attribute name="title" value="List newsPapers per volume " />
         <put-attribute name="body" value="/views/newsPaper/listNewsPaperVolume.jsp" />
     </definition>
+
+    <definition name="newsPaper/listNewsPaperAdvertisement" extends="master.page">
+        <put-attribute name="title" value="List newsPapers " />
+        <put-attribute name="body" value="/views/newsPaper/listNewsPaperAdvertisement.jsp" />
+    </definition>
+
 </tiles-definitions>
