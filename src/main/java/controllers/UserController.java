@@ -63,14 +63,14 @@ public class UserController extends AbstractController{
             user = this.userService.reconstruct(userForm, binding);
 
             if (binding.hasErrors())
-                result = this.createEditModelAndView(userForm, "user.save.error");
+                result = this.createEditModelAndView(userForm, "user.commit.error");
             else {
                 result = new ModelAndView("redirect:/welcome/index.do");
                 user = this.userService.save(user);
 
             }
         } catch (final Throwable oops) {
-            result = this.createEditModelAndView(userForm, "user.save.error");
+            result = this.createEditModelAndView(userForm, "user.commit.error");
         }
 
         return result;

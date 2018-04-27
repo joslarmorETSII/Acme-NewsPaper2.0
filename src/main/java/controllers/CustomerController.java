@@ -65,7 +65,7 @@ public class CustomerController extends AbstractController {
 				result = new ModelAndView("redirect: list.do");
 
 			}catch (Throwable oops){
-				result = createEditModelAndView(customerService.create(),"customer.save.error");
+				result = createEditModelAndView(customerService.create(),"customer.commit.error");
 			}
 		}
 		return result;
@@ -95,14 +95,14 @@ public class CustomerController extends AbstractController {
 			customer = this.customerService.reconstruct(userForm, binding);
 
 			if (binding.hasErrors())
-				result = this.createEditModelAndView2(userForm, "customer.save.error");
+				result = this.createEditModelAndView2(userForm, "customer.commit.error");
 			else {
 				result = new ModelAndView("redirect:/welcome/index.do");
 				this.customerService.save(customer);
 
 			}
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView2(userForm, "customer.save.error");
+			result = this.createEditModelAndView2(userForm, "customer.commit.error");
 		}
 
 		return result;

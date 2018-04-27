@@ -51,7 +51,7 @@ public class AgentController extends AbstractController {
                 result = new ModelAndView("redirect: list.do");
 
             }catch (Throwable oops){
-                result = createEditModelAndView(agentService.create(),"agent.save.error");
+                result = createEditModelAndView(agentService.create(),"agent.commit.error");
             }
         }
         return result;
@@ -81,14 +81,14 @@ public class AgentController extends AbstractController {
             agent = this.agentService.reconstruct(userForm, binding);
 
             if (binding.hasErrors())
-                result = this.createEditModelAndView2(userForm, "agent.save.error");
+                result = this.createEditModelAndView2(userForm, "agent.commit.error");
             else {
                 result = new ModelAndView("redirect:/welcome/index.do");
                 this.agentService.save(agent);
 
             }
         } catch (final Throwable oops) {
-            result = this.createEditModelAndView2(userForm, "agent.save.error");
+            result = this.createEditModelAndView2(userForm, "agent.commit.error");
         }
 
         return result;
