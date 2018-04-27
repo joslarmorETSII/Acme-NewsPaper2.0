@@ -125,6 +125,14 @@ public class NewsPaperService {
 
     // Other business methods -------------------------------------------------
 
+    public void unsuscribe(NewsPaper newsPaper){
+        Customer customer = this.customerService.findByPrincipal();
+        newsPaper.getCustomers().remove(customer);
+        customer.getNewsPapers().remove(newsPaper);
+        this.save(newsPaper);
+        this.customerService.save(customer);
+    }
+
     public void findOneToPublish(NewsPaper newsPaper){
         Collection<Article> articles= newsPaper.getArticles();
         Assert.isTrue(!newsPaper.getTaboo());
@@ -250,5 +258,9 @@ public class NewsPaperService {
         this.validator.validate(res,binding);
 
         return res;
+    }
+
+    public Collection<NewsPaper> findPublishedAndPrivateNewsPaper(){
+        return this.newsPaperRepository.findPublishedAndPrivateNewsPaper();
     }
 }

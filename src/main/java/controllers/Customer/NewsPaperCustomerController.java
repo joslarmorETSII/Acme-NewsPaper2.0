@@ -4,6 +4,7 @@ import controllers.AbstractController;
 import domain.CreditCard;
 import domain.Customer;
 import domain.NewsPaper;
+import domain.User;
 import forms.SubscribeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,10 +47,11 @@ public class NewsPaperCustomerController extends AbstractController{
         ModelAndView result;
 
         Collection<NewsPaper> newsPapers= customerService.findByPrincipal().getNewsPapers();
+        Customer customer = customerService.findByPrincipal();
 
         result = new ModelAndView("newsPaper/listNewsPaperCustomer");
         result.addObject("newsPapers", newsPapers);
-
+        result.addObject("customer", customer);
         result.addObject("requestURI", "newsPaper/customer/listNewsPaperCustomer.do");
         return result;
     }
@@ -60,7 +62,7 @@ public class NewsPaperCustomerController extends AbstractController{
         ModelAndView result;
         Customer customer = customerService.findByPrincipal();
 
-        Collection<NewsPaper> newsPapersToSubscribe = newsPaperService.findPublishedNewsPaper();
+        Collection<NewsPaper> newsPapersToSubscribe = newsPaperService.findPublishedAndPrivateNewsPaper();
         newsPapersToSubscribe.removeAll(customer.getNewsPapers());
 
         result = new ModelAndView("newsPaper/list");
@@ -71,7 +73,6 @@ public class NewsPaperCustomerController extends AbstractController{
     }
 
     //Subscribirse
-
 
     @RequestMapping(value = "/subscribe", method = RequestMethod.GET)
     public ModelAndView subscribe(@RequestParam  int newsPaperId) {
@@ -124,8 +125,39 @@ public class NewsPaperCustomerController extends AbstractController{
         return result;
     }
 
+    //Unsuscribe
+    @RequestMapping(value = "/unsubscribe", method = RequestMethod.GET)
+    public ModelAndView unsuscribe(@RequestParam int newsPaperId){
+        ModelAndView result;
+        NewsPaper newsPaper= newsPaperService.findOne(newsPaperId);
+        try{
+
+            newsPaperService.unsuscribe(newsPaper);
+            result = new ModelAndView("redirect:list.do");
+        }catch (Throwable oops){
+            result = createEditModelAndView(newsPaper,"general.commit.error");
+        }
+        return result;
+    }
+
     // Ancillary methods
 
+    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper) {
+        ModelAndView result;
+
+        result = this.createEditModelAndView(newsPaper, null);
+        return result;
+    }
+
+    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper, final String messageCode) {
+        ModelAndView result;
+
+        result = new ModelAndView("newsPaper/edit");
+        result.addObject("newsPaper", newsPaper);
+        result.addObject("message", messageCode);
+
+        return result;
+    }
 
     protected ModelAndView createEditModelAndView2(SubscribeForm subscribeForm, final String messageCode) {
         ModelAndView result;

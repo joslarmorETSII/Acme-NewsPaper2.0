@@ -23,4 +23,7 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
 
     @Query("select n from NewsPaper n where n.taboo =true")
     Collection<NewsPaper> findNewsPaperByTabooIsTrue();
+
+    @Query("select n from NewsPaper n where n.published = true and n.modePrivate = true")
+    Collection<NewsPaper> findPublishedAndPrivateNewsPaper();
 }

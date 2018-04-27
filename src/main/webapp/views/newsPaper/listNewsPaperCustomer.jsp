@@ -16,6 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <jstl:if test="${pageContext.response.locale.language == 'es' }">
     <jstl:set value="{0,date,dd/MM/yyyy}" var="formatDate"/>
@@ -32,7 +33,9 @@
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
         <acme:column code="newsPaper.title" value="${newspaper.title}"/>
         <acme:column code="newsPaper.description" value="${newspaper.description}"/>
-        <acme:column code="newsPaper.picture" value="${newspaper.picture}"/>
+
+        <spring:message code="newsPaper.picture" var="pic"/>
+        <display:column title="${pic}"><img src="${newspaper.picture}" alt="no image" width="130" height="100"></display:column>
 
         <spring:message var="publicationDate" code="newsPaper.publicationDate"/>
         <spring:message var="formatDate" code="event.format.date"/>
@@ -42,9 +45,13 @@
             <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
         </display:column>
 
-        <display:column >
-            <spring:message code="newsPaper.subscribed" var="subscribed"/> <jstl:out value="${subscribed}" />
-        </display:column>
+        <security:authorize access="hasRole('CUSTOMER')">
+            <display:column >
+                <jstl:if test="${ newspaper.modePrivate ne false and fn:contains(newspaper.customers, customer) }">
+                    <acme:button url="newsPaper/customer/unsubscribe.do?newsPaperId=${newspaper.id}" code="newsPaper.unsubscribe"/>
+                </jstl:if>
+            </display:column>
+        </security:authorize>
 
     </display:table>
 
