@@ -31,6 +31,9 @@ public class AdvertisementController  extends AbstractController {
     @Autowired
     private NewsPaperService newsPaperService;
 
+
+
+
     // Creation ------------------------------------------------------
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -83,6 +86,7 @@ public class AdvertisementController  extends AbstractController {
 
         return result;
     }
+
 
     // Ancillary methods ------------------------------------------------------
 

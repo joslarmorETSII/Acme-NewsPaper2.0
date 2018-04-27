@@ -32,7 +32,7 @@
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
 			<li><a class="fNiv" href="newsPaper/administrator/list.do"><spring:message code="master.page.newsPaper.administrator" /></a></li>
             <li><a class="fNiv" href="article/administrator/list.do"><spring:message code="master.page.article.administrator" /></a></li>
-
+			<li><a class="fNiv" href="advertisement/administrator/list.do"><spring:message code="master.page.advertisement.list" />
 		</security:authorize>
 
 		<security:authorize access="hasRole('USER')">
@@ -61,7 +61,7 @@
 
 		<security:authorize access="hasRole('AGENT')">
 
-			<li><a class="fNiv" href="/advertisement/create.do"><spring:message code="master.page.advertisement.create" /><
+			<li><a class="fNiv" href="/advertisement/create.do"><spring:message code="master.page.advertisement.create" />
 
 		</security:authorize>
 

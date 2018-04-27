@@ -11,6 +11,9 @@ import repositories.ArticleRepository;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @Transactional
@@ -25,6 +28,15 @@ public class AdvertisementService {
 
     @Autowired
     private AgentService agentService;
+
+    @Autowired
+    private NewsPaperService    newsPaperService;
+
+    @Autowired
+    private ConfigurationService configurationService;
+
+    @Autowired
+    private ActorService actorService;
 
     // Constructors -----------------------------------------------------------
 
@@ -48,6 +60,10 @@ public class AdvertisementService {
     public Advertisement save(Advertisement advertisement){
         Advertisement res = null;
         Assert.isTrue(checkByPrincipal(advertisement));
+
+        if(isTabooAdvertisement(advertisement)){
+            advertisement.setTaboo(true);
+        }
         res= advertisementRepository.save(advertisement);
         return res;
     }
@@ -66,7 +82,11 @@ public class AdvertisementService {
 
     public void delete(Advertisement advertisement){
         Assert.notNull(advertisement);
+        Collection<NewsPaper> newsPapers = newsPaperService.findAll();
 
+        for(NewsPaper n: newsPapers){
+            n.getAdvertisements().remove(advertisement);
+        }
         this.advertisementRepository.delete(advertisement);
     }
 
@@ -83,5 +103,43 @@ public class AdvertisementService {
             res = true;
 
         return res;
+    }
+
+    private boolean isTabooAdvertisement(final Advertisement advertisement) {
+        boolean result = false;
+        Pattern p;
+        Matcher isAnyMatcherTitle;
+
+        p = this.tabooWords();
+        isAnyMatcherTitle = p.matcher(advertisement.getTitle());
+
+        if (isAnyMatcherTitle.find() )
+            result = true;
+
+        return result;
+    }
+
+    public Pattern tabooWords() {
+        Pattern result;
+        List<String> tabooWords;
+
+        final Collection<String> taboolist = this.configurationService.findAll().iterator().next().getTabooWords();
+        tabooWords = new ArrayList<>(taboolist);
+
+        String str = ".*\\b(";
+        for (int i = 0; i <= tabooWords.size(); i++)
+            if (i < tabooWords.size())
+                str += tabooWords.get(i) + "|";
+            else
+                str += tabooWords.iterator().next() + ")\\b.*";
+
+        result = Pattern.compile(str, Pattern.CASE_INSENSITIVE);
+
+        return result;
+    }
+
+    public Collection<Advertisement> findTabooAdvertisement() {
+        Assert.isTrue(actorService.isAdministrator());
+        return advertisementRepository.findTabooAdvertisement();
     }
 }

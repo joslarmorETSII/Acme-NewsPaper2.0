@@ -22,5 +22,9 @@
 		<put-attribute name="body" value="/views/advertisement/edit.jsp" />
 	</definition>
 
+	<definition name="advertisement/list" extends="master.page">
+		<put-attribute name="title" value="Lista de anuncios" />
+		<put-attribute name="body" value="/views/advertisement/list.jsp" />
+	</definition>
 
 </tiles-definitions>
