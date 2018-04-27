@@ -58,8 +58,8 @@ public class VolumeService {
     //save
 
     public Volume save (Volume volume){
-        Volume res = null;
-        Assert.isTrue(checkByPrincipal(volume));
+        Volume res;
+        //Assert.isTrue(checkByPrincipal(volume));
 
         res= volumeRepository.save(volume);
         return res;
@@ -148,5 +148,9 @@ public class VolumeService {
         this.validator.validate(res,binding);
 
         return res;
+    }
+
+    public Collection<NewsPaper> findPrivateNewsPapersByVolume(int volumeId) {
+        return volumeRepository.findPrivateNewspapersByVolumeId(volumeId);
     }
 }

@@ -1,7 +1,9 @@
 package services;
 
+import controllers.AbstractController;
 import domain.*;
 import forms.SubscribeForm;
+import forms.SubscribeVolumeForm;
 import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,5 +167,17 @@ public class CustomerService {
 
     public void flush() {
         customerRepository.flush();
+    }
+
+    public CreditCard reconstructSubscribeVolume(SubscribeVolumeForm subscribeVolumeForm, BindingResult binding) {
+        CreditCard creditCard = creditCardService.create();
+        creditCard.setBrand(subscribeVolumeForm.getBrand());
+        creditCard.setCvv(subscribeVolumeForm.getCvv());
+        creditCard.setExpirationMonth(subscribeVolumeForm.getExpirationMonth());
+        creditCard.setExpirationYear(subscribeVolumeForm.getExpirationYear());
+        creditCard.setHolder(subscribeVolumeForm.getHolder());
+        creditCard.setNumber(subscribeVolumeForm.getNumber());
+
+        return creditCard;
     }
 }

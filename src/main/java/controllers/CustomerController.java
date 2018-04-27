@@ -45,9 +45,9 @@ public class CustomerController extends AbstractController {
 	public ModelAndView edit(@RequestParam int customerId){
 		ModelAndView result;
 		Customer customer;
+
 		Assert.notNull(customerId);
 		customer = customerService.findOne(customerId);
-
 		result = createEditModelAndView(customer);
 
 		return result;
@@ -95,7 +95,7 @@ public class CustomerController extends AbstractController {
 			customer = this.customerService.reconstruct(userForm, binding);
 
 			if (binding.hasErrors())
-				result = this.createEditModelAndView2(userForm, "customer.commit.error");
+				result = this.createEditModelAndView2(userForm);
 			else {
 				result = new ModelAndView("redirect:/welcome/index.do");
 				this.customerService.save(customer);
@@ -108,10 +108,6 @@ public class CustomerController extends AbstractController {
 		return result;
 	}
 
-
-
-
-
 	// Ancillary methods
 
 
@@ -122,7 +118,7 @@ public class CustomerController extends AbstractController {
 
 	private ModelAndView createEditModelAndView(final Customer customer, final String message) {
 
-		final ModelAndView result = new ModelAndView("customer/edit");
+		ModelAndView result = new ModelAndView("customer/edit");
 
 		result.addObject("customer", customer);
 		result.addObject("message", message);
@@ -130,14 +126,16 @@ public class CustomerController extends AbstractController {
 		return result;
 	}
 
+	private ModelAndView createEditModelAndView2( UserForm userForm) {
+		return createEditModelAndView2(userForm,null);
+	}
+
 	private ModelAndView createEditModelAndView2(UserForm userForm, String messageCode) {
 
 		ModelAndView res;
-		res = new ModelAndView("customer/editForm");
 
+		res = new ModelAndView("customer/editForm");
 		res.addObject("userForm", userForm);
-//		res.addObject("requestURI", "customer/list.do");
-//		res.addObject("cancelUri", "customer/list.do");
 		res.addObject("message", messageCode);
 
 		return res;

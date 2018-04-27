@@ -87,7 +87,8 @@
 
 		<!-- Volume -->
         <security:intercept-url pattern="/volume/user/**" access="hasRole('USER')" />
-        <security:intercept-url pattern="/volume/**" access="isAnonymous()" />
+		<security:intercept-url pattern="/volume/customer/**" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/volume/**" access="permitAll()" />
 
 
 		<!-- User -->

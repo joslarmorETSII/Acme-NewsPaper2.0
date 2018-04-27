@@ -63,7 +63,7 @@ public class UserController extends AbstractController{
             user = this.userService.reconstruct(userForm, binding);
 
             if (binding.hasErrors())
-                result = this.createEditModelAndView(userForm, "user.commit.error");
+                result = createEditModelAndView(userForm);
             else {
                 result = new ModelAndView("redirect:/welcome/index.do");
                 user = this.userService.save(user);
@@ -147,10 +147,13 @@ public class UserController extends AbstractController{
 
     // Ancillary methods ------------------------------------------------------------
 
+    private ModelAndView createEditModelAndView( UserForm userForm) {
+        return createEditModelAndView(userForm,null);
+    }
 
-    private ModelAndView createEditModelAndView(final UserForm userForm, final String message) {
+        private ModelAndView createEditModelAndView( UserForm userForm,  String message) {
 
-        final ModelAndView result = new ModelAndView("user/edit");
+        ModelAndView result = new ModelAndView("user/edit");
 
         result.addObject("userForm", userForm);
         result.addObject("message", message);

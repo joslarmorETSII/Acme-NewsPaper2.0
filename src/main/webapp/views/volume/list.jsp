@@ -33,19 +33,23 @@
 
     <security:authorize access="isAnonymous()">
     <display:column>
-        <acme:button url="newsPaper/listNewsPapersV.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
+         <acme:button url="newsPaper/listNewsPapersV.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
     </display:column>
     </security:authorize>
 
     <security:authorize access="hasRole('USER')">
         <display:column>
-            <acme:button url="volume/user/addNewsPaper.do?volumeId=${row.id}" code="volume.newsPapers.add"/>
+            <jstl:if test="${row.user eq user}">
+             <acme:button url="volume/user/addNewsPaper.do?volumeId=${row.id}" code="volume.newsPapers.add"/>
+            </jstl:if>
         </display:column>
     </security:authorize>
 
     <security:authorize access="hasRole('USER')">
         <display:column>
+            <jstl:if test="${row.user eq user}">
             <acme:button url="volume/user/removeNewsPaper.do?volumeId=${row.id}" code="volume.newsPapers.remove"/>
+            </jstl:if>
         </display:column>
     </security:authorize>
 

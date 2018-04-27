@@ -16,25 +16,44 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-
-<display:table id="row" name="newsPapers" requestURI="${requestURI}"
-               pagesize="5">
-
-    <acme:column code="newsPaper.publisher" value="${row.publisher.name} " />
-    <acme:column code="newsPaper.title" value="${row.title}"/>
-    <acme:column code="newsPaper.description" value="${row.description}"/>
-    <acme:column code="newsPaper.picture" value="${row.picture}"/>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 
-    <display:column >
-        <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+<display:table id="row" name="volumes" requestURI="${requestURI}" pagesize="5">
+    <c:set var = "contiene" value = "false"/>
+    <jstl:forEach items="${row.customers}" var="cliente">
+        <jstl:if test="${cliente eq customer }">
+            <c:set var = "contiene" value = "true"/>
+        </jstl:if>
+    </jstl:forEach>
+
+
+    <acme:column code="volume.title" value="${row.title}"/>
+    <acme:column code="volume.description" value="${row.description}"/>
+    <acme:column code="volume.anyo" value="${row.anyo}" />
+
+
+
+    <display:column>
+        <jstl:if test="${contiene eq true }">
+            <acme:button url="volume/customer/unsubscribe.do?volumeId=${row.id}" code="newsPaper.unsubscribe"/>
+        </jstl:if>
     </display:column>
 
-    <display:column >
-        <spring:message code="newsPaper.subscribed" var="subscribed"/> <jstl:out value="${subscribed}" />
+    <display:column>
+        <jstl:if test="${contiene ne true}">
+            <acme:button url="volume/customer/subscribe.do?volumeId=${row.id}" code="newsPaper.subscribe"/>
+        </jstl:if>
+    </display:column>
+
+
+    <display:column>
+        <acme:button url="newsPaper/listNewsPapersVNP.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
     </display:column>
 
 </display:table>
+
 
 <input type="button" value="<spring:message code="customer.cancel" /> " onclick="goBack()">
 <script>

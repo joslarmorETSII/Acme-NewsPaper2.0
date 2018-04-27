@@ -16,7 +16,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <div class="input-group">
-    <form:form  action="volume/customer/subscribe.do" modelAttribute="subscribeForm">
+    <form:form  action="volume/customer/subscribe.do" modelAttribute="subscribeVolumeForm">
 
     <form:hidden path="volume"/>
 

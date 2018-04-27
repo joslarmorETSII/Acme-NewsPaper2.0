@@ -19,4 +19,6 @@ public interface VolumeRepository extends JpaRepository<Volume,Integer> {
     Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId);
 
 
+    @Query("select vn from Volume v join v.newsPapers vn where v.id=?1 and vn.modePrivate = true")
+    Collection<NewsPaper> findPrivateNewspapersByVolumeId(int id);
 }

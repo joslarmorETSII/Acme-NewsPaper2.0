@@ -33,11 +33,11 @@ public class NewsPaperAgentController extends AbstractController {
         Collection<Advertisement> allAdvertisement;
 
         result = new ModelAndView("advertisement/list");
-        tabooAdvertisement = advertisementService.findTabooAdvertisement();
-        allAdvertisement = advertisementService.findAll();
+       // tabooAdvertisement = advertisementService.findTabooAdvertisement();
+        //allAdvertisement = advertisementService.findAll();
 
-        result.addObject("advertisements", allAdvertisement);
-        result.addObject("tabooAdvertisements",tabooAdvertisement);
+       // result.addObject("advertisements", allAdvertisement);
+        //result.addObject("tabooAdvertisements",tabooAdvertisement);
 
         return result;
     }

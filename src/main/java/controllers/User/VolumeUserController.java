@@ -183,6 +183,21 @@ public class VolumeUserController extends AbstractController{
 
     }
 
+    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    public ModelAndView listAll() {
+        ModelAndView result;
+        User user;
+
+        user = userService.findByPrincipal();
+        result = new ModelAndView("volume/list");
+        result.addObject("volumes", volumeService.findAll());
+        result.addObject("user", user);
+        result.addObject("requestURI","volume/user/listAll.do");
+
+        return result;
+
+    }
+
     // Ancillary methods ------------------------------------------------------
 
     protected ModelAndView createEditModelAndView(final Volume volume) {

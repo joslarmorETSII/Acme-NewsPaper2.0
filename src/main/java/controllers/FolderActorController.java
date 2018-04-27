@@ -97,7 +97,7 @@ public class FolderActorController extends AbstractController {
     // Edition ----------------------------------------------------------------
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam final int folderId) {
+    public ModelAndView edit(@RequestParam int folderId) {
         ModelAndView result;
         Folder folder;
 
@@ -105,7 +105,7 @@ public class FolderActorController extends AbstractController {
             folder = this.folderService.findOne(folderId);
             Assert.notNull(folder);
             Assert.isTrue(folder.getActor().getId() == this.actorService.findByPrincipal().getId());
-            Assert.isTrue(folder.getSystem() != true);
+            Assert.isTrue(!folder.getSystem() );
 
             result = this.createEditModelAndView(folder);
         } catch (final Exception e) {
@@ -121,7 +121,7 @@ public class FolderActorController extends AbstractController {
     public ModelAndView save(@Valid final Folder folder, final BindingResult binding) {
         ModelAndView result;
         if (binding.hasErrors()) {
-            result = this.createEditModelAndView(folder, "folder.commit.error.2");
+            result = createEditModelAndView(folder);
             System.out.println(binding);
         } else
             try {

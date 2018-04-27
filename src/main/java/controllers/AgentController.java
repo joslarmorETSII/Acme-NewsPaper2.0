@@ -81,7 +81,7 @@ public class AgentController extends AbstractController {
             agent = this.agentService.reconstruct(userForm, binding);
 
             if (binding.hasErrors())
-                result = this.createEditModelAndView2(userForm, "agent.commit.error");
+                result = createEditModelAndView2(userForm);
             else {
                 result = new ModelAndView("redirect:/welcome/index.do");
                 this.agentService.save(agent);
@@ -97,12 +97,12 @@ public class AgentController extends AbstractController {
     // Ancillary methods
 
 
-    private ModelAndView createEditModelAndView(final Agent agent) {
+    private ModelAndView createEditModelAndView(Agent agent) {
 
         return this.createEditModelAndView(agent, null);
     }
 
-    private ModelAndView createEditModelAndView(final Agent agent, final String message) {
+    private ModelAndView createEditModelAndView(Agent agent, String message) {
 
         final ModelAndView result = new ModelAndView("agent/edit");
 
@@ -111,8 +111,11 @@ public class AgentController extends AbstractController {
 
         return result;
     }
+    private ModelAndView createEditModelAndView2(UserForm userForm) {
+        return createEditModelAndView2(userForm,null);
+    }
 
-    private ModelAndView createEditModelAndView2(UserForm userForm, String messageCode) {
+        private ModelAndView createEditModelAndView2(UserForm userForm, String messageCode) {
 
         ModelAndView res;
         res = new ModelAndView("agent/editForm");

@@ -30,6 +30,7 @@
 			</li>
 			<li><a class="fNiv" href="chirp/administrator/list.do"><spring:message code="master.page.chirp.list-taboo" /></a></li>
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
+			<li><a class="fNiv" href="volume/list.do"><spring:message code="master.page.volume.list" /></a></li>
 			<li><a class="fNiv" href="newsPaper/administrator/list.do"><spring:message code="master.page.newsPaper.administrator" /></a></li>
             <li><a class="fNiv" href="article/administrator/list.do"><spring:message code="master.page.article.administrator" /></a></li>
 			<li><a class="fNiv" href="advertisement/administrator/list.do"><spring:message code="master.page.advertisement.list" />
@@ -42,13 +43,14 @@
 					<li class="arrow"></li>
 					<li><a href="article/user/list.do"><spring:message code="master.page.user.article.list" /></a></li>
 					<li><a href="newsPaper/user/list.do"><spring:message code="master.page.user.newsPaper.list" /></a></li>
-					<li><a href="volume/user/list.do"><spring:message code="master.page.user.volume.list" /></a></li>
+					<li><a href="volume/user/list.do"><spring:message code="master.page.volume.list.mine" /></a></li>
 					<li><a href="followUp/user/list.do"><spring:message code="master.page.user.followUp.list" /></a></li>
 					<li><a href="chirp/user/list.do"><spring:message code="master.page.user.chirp.list" /></a></li>
 
 
 			</ul>
 			</li>
+			<li><a class="fNiv" href="volume/user/listAll.do"><spring:message code="master.page.volume.list" /></a></li>
 			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 			<li><a class="fNiv" href="user/user/list-followers.do"><spring:message code="master.page.user.followers" /></a></li>
@@ -60,10 +62,16 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('AGENT')">
-
-			<li><a class="fNiv" href="advertisement/agent/create.do"><spring:message code="master.page.advertisement.create" />
-			<li><a class="fNiv" href="newsPaper/agent/list.do"><spring:message code="master.page.newsPaper.list" />
-
+			<li><a class="fNiv"><spring:message	code="master.page.agent" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="advertisement/agent/list.do"><spring:message code="master.page.advertisement.list" /></a></li>
+					<li><a href="newsPaper/agent/list.do"><spring:message code="master.page.newsPaper.list" /></a></li>
+				</ul>
+			</li>
+			<li><a class="fNiv" href="volume/list.do"><spring:message code="master.page.volume.list" /></a></li>
+			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.actor.newsPaper.listAll" /></a></li>
+			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('CUSTOMER')">
@@ -71,22 +79,31 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="newsPaper/customer/list.do"><spring:message code="master.page.newspaper.customer.list" /></a></li>
+					<li><a href="volume/customer/listVolumeCustomer.do"><spring:message code="master.page.customer.volume.list.mine" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
+			<li><a class="fNiv" href="volume/customer/listAllVolumes.do"><spring:message code="master.page.volume.list" /></a></li>
 			<li><a class="fNiv" href="newsPaper/customer/listNewsPaperCustomer.do"><spring:message code="master.page.newspaper.customerNewsPaper" /></a></li>
-		</security:authorize>
+			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.newsPaper.listAll" /></a></li>
+			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
+
+
+	</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a  href="user/register.do"><spring:message code="master.page.user.register" /></a></li>
+					<li><a  href="customer/register.do"><spring:message code="master.page.customer.register" /></a></li>
+					<li><a  href="agent/register.do"><spring:message code="master.page.agent.register" /></a></li>
+				</ul>
+			</li>
+			<li><a class="fNiv" href="volume/list.do"><spring:message code="master.page.volume.list" /></a></li>
 			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.newsPaper.listAll" /></a></li>
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.user.listAll" /></a></li>
-			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.user.register" /></a></li>
-			<li><a class="fNiv" href="customer/register.do"><spring:message code="master.page.customer.register" /></a></li>
-			<li><a class="fNiv" href="volume/list.do"><spring:message code="master.page.volume.list" /></a></li>
-			<li><a class="fNiv" href="agent/register.do"><spring:message code="master.page.agent.register" /></a></li>
-
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
