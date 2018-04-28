@@ -59,7 +59,7 @@
         <input type="submit" name="save" value="<spring:message code="advertisement.save"/>" />
 
         <input type="button" name="cancel" value="<spring:message code="advertisement.cancel" />"
-               onclick="javascript: relativeRedir('advertisement/list.do');" />
+               onclick="javascript: relativeRedir('advertisement/agent/list.do');" />
 
         </form:form>
     </div>

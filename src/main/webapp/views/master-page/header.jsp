@@ -28,8 +28,8 @@
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="chirp/administrator/list.do"><spring:message code="master.page.chirp.list-taboo" /></a></li>
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.administrator.edit" /></a></li>
+			<li><a class="fNiv" href="chirp/administrator/list.do"><spring:message code="master.page.chirp.list-taboo" /></a></li>
 			<li><a class="fNiv" href="volume/list.do"><spring:message code="master.page.volume.list" /></a></li>
 			<li><a class="fNiv" href="newsPaper/administrator/list.do"><spring:message code="master.page.newsPaper.administrator" /></a></li>
             <li><a class="fNiv" href="article/administrator/list.do"><spring:message code="master.page.article.administrator" /></a></li>

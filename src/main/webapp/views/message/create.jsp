@@ -45,8 +45,9 @@
 		<form:errors path="actorReceivers" cssClass="error" />
 		<br />
 		</jstl:if>
-		<acme:submit code="message.send" name="send" />&nbsp;
-		<br />
 
-	
+		<acme:submit code="message.send" name="send" />&nbsp;
+		<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+			   onclick="javascript: relativeRedir('folder/actor/list.do');" />
+
 	</form:form>
