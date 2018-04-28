@@ -20,19 +20,17 @@
 <fieldset>
 		<security:authorize access="hasRole('ADMINISTRATOR')" >
 			<b><spring:message code="advertisement.allTaboo"/></b>
+			<display:table id="row" name="tabooAdvertisements" requestURI="${requestURI}"
+					   pagesize="5">
+				<acme:column code="advertisement.title" value="${row.title}" />
+				<acme:column code="advertisement.banner" value="${row.banner}" />
+				<acme:column code="advertisement.targetPage" value="${row.targetPage}"/>
+				<acme:column code="advertisement.taboo" value="${row.taboo}"/>
+					<display:column>
+						<acme:button url="advertisement/administrator/delete.do?advertisementId=${row.id}" code="advertisement.delete" />
+					</display:column>
+			</display:table>
 		</security:authorize>
-	<display:table id="row" name="tabooAdvertisements" requestURI="${requestURI}"
-			   pagesize="5">
-		<acme:column code="advertisement.title" value="${row.title}" />
-		<acme:column code="advertisement.banner" value="${row.banner}" />
-		<acme:column code="advertisement.targetPage" value="${row.targetPage}"/>
-		<acme:column code="advertisement.taboo" value="${row.taboo}"/>
-		<security:authorize access="hasRole('ADMINISTRATOR')" >
-			<display:column>
-				<acme:button url="advertisement/administrator/delete.do?advertisementId=${row.id}" code="advertisement.delete" />
-			</display:column>
-		</security:authorize>
-	</display:table>
 </fieldset>
 <br/>
 <br/>
@@ -57,5 +55,8 @@
 </fieldset>
 	<br/>
 
+<security:authorize access="hasRole('AGENT')">
+	<acme:button code="advertisement.create" url="advertisement/agent/create.do"/>
+</security:authorize>
 <input type="button" name="cancel" value="<spring:message code="advertisement.cancel" />"
 	   onclick="javascript: relativeRedir('welcome/index.do');" />

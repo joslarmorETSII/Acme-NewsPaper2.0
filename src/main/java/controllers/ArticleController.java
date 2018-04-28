@@ -25,6 +25,9 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private NewsPaperService newsPaperService;
+
     // Constructors -----------------------------------------------------------
 
     public ArticleController(){
@@ -41,6 +44,7 @@ public class ArticleController {
         article = this.articleService.findOne(articleId);
         result = new ModelAndView("article/display");
         result.addObject("article", article);
+        result.addObject("advertisement",newsPaperService.selectRandomAdd(article));
 
         return result;
     }

@@ -28,8 +28,8 @@
 
 <fieldset>
 
-    <b><spring:message code="newsPapers.placedAdvertisement"/></b>
-    <display:table id="newspaper" name="newsPapers" requestURI="${requestURI}"
+    <legend><spring:message code="newsPapers.placedAdvertisement"/></legend>
+    <display:table id="newspaper" name="newsPapersWithAdds" requestURI="${requestURI}"
                    pagesize="5">
 
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
@@ -55,12 +55,12 @@
     </display:table>
 
 </fieldset>
-
+<br/>
 <fieldset>
 
-    <b><spring:message code="newsPapers.notPlacedAdvertisement"/></b>
+    <legend><spring:message code="newsPapers.notPlacedAdvertisement"/></legend>
 
-    <display:table id="newspaper" name="newsPapers" requestURI="${requestURI}"
+    <display:table id="newspaper" name="newsPapersWithNoAdds" requestURI="${requestURI}"
                    pagesize="5">
 
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />

@@ -290,8 +290,8 @@
 
 	<bean id="advertisement1" class="domain.Advertisement">
 		<property name="title" value="title1"/>
-		<property name="banner" value=""/>
-		<property name="targetPage" value=""/>
+		<property name="banner" value="http://media.worldsbestbanners.com/catalog/category/Advertisement_Banners.jpg"/>
+		<property name="targetPage" value="http://worldsbestbanners.com/view-all-pre-designed-banners/advertisement-banners.html"/>
 		<property name="taboo" value="false"/>
 		<property name="agent" ref="agent1" />
 		<property name="creditCard" ref="creditCard2"/>

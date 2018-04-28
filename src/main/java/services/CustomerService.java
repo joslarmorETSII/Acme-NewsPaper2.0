@@ -100,9 +100,9 @@ public class CustomerService {
 
         Customer result;
         final UserAccount customerAccount = LoginService.getPrincipal();
-        Assert.notNull(customerAccount);
+        //Assert.notNull(customerAccount);
         result = this.findByCustomerAccountId(customerAccount.getId());
-        Assert.notNull(result);
+        //Assert.notNull(result);
         return result;
     }
 
@@ -158,7 +158,7 @@ public class CustomerService {
         if (!result) {
             codigos = new String[1];
             codigos[0] = "customer.password.mismatch";
-            error = new FieldError("userForm", "password", password, false, codigos, null, "");
+            error = new FieldError("userForm", "password", password, false, codigos, null, "password mismatch");
             binding.addError(error);
         }
 

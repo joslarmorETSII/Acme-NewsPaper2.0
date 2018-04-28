@@ -136,7 +136,7 @@ public class UserService {
         if (!result) {
             codigos = new String[1];
             codigos[0] = "user.password.mismatch";
-            error = new FieldError("userForm", "password", password, false, codigos, null, "");
+            error = new FieldError("userForm", "password", password, false, codigos, null, "password mismatch");
             binding.addError(error);
         }
 

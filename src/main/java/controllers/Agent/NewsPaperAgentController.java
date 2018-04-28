@@ -2,6 +2,7 @@ package controllers.Agent;
 
 import controllers.AbstractController;
 import domain.Advertisement;
+import domain.Agent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,9 @@ public class NewsPaperAgentController extends AbstractController {
     @Autowired
     private AdvertisementService advertisementService;
 
+    @Autowired
+    private AgentService agentService;
+
     public NewsPaperAgentController() { super();}
 
     // Listing -------------------------------------------------------
@@ -32,15 +36,14 @@ public class NewsPaperAgentController extends AbstractController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView result;
-        Collection<Advertisement> tabooAdvertisement;
-        Collection<Advertisement> allAdvertisement;
+        Agent agent;
 
-        result = new ModelAndView("advertisement/list");
-       // tabooAdvertisement = advertisementService.findTabooAdvertisement();
-        //allAdvertisement = advertisementService.findAll();
+        result = new ModelAndView("newsPaper/listNewsPaperAdvertisement");
+        agent = agentService.findByPrincipal();
 
-       // result.addObject("advertisements", allAdvertisement);
-        //result.addObject("tabooAdvertisements",tabooAdvertisement);
+
+        result.addObject("newsPapersWithAdds", newsPaperService.findNewsPaperPlacedAdvertisement(agent.getId()));
+        result.addObject("newsPapersWithNoAdds",newsPaperService.newsPapersWithNoAdds());
 
         return result;
     }

@@ -35,6 +35,7 @@ public class Advertisement extends DomainEntity{
     }
 
     @URL
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getBanner() {
         return banner;
@@ -45,6 +46,7 @@ public class Advertisement extends DomainEntity{
     }
 
     @URL
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getTargetPage() {
         return targetPage;

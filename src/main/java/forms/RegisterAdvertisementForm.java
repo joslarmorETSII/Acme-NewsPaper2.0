@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 
 public class RegisterAdvertisementForm {
@@ -19,6 +20,7 @@ public class RegisterAdvertisementForm {
     private String banner;
     private String targetPage;
     private NewsPaper newsPaper;
+    private Integer newsPaperId;
     private String	    holder;
     private String	    brand;
     private String	    number;
@@ -26,8 +28,15 @@ public class RegisterAdvertisementForm {
     private Integer		expirationYear;
     private Integer		cvv;
 
-
     @NotNull
+    public Integer getNewsPaperId() {
+        return newsPaperId;
+    }
+
+    public void setNewsPaperId(Integer newsPaperId) {
+        this.newsPaperId = newsPaperId;
+    }
+
     public NewsPaper getNewsPaper() {
         return newsPaper;
     }
@@ -47,6 +56,7 @@ public class RegisterAdvertisementForm {
     }
 
     @URL
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getBanner() {
         return banner;
@@ -57,6 +67,7 @@ public class RegisterAdvertisementForm {
     }
 
     @URL
+    @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getTargetPage() {
         return targetPage;

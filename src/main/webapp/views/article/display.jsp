@@ -19,6 +19,13 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+
+<jstl:if test="${advertisement ne null}">
+	<img src="${advertisement.banner}" width="500px" height="100%"  />
+	<br/>
+</jstl:if>
+
+
 <h3><b><spring:message code="article.title"/>:&nbsp;</b><jstl:out value="${article.title}"/></h3>
 
 <jstl:if test="${pageContext.response.locale.language == 'es'}">

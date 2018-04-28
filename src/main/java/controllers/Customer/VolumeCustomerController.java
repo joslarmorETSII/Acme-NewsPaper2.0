@@ -94,12 +94,19 @@ public class VolumeCustomerController extends AbstractController{
         ModelAndView result;
         Volume volume;
         Customer principal;
+        Collection<NewsPaper> privateNewsPapers;
+
 
         volume = volumeService.findOne(volumeId);
         Assert.notNull(volume);
         principal = customerService.findByPrincipal();
         principal.getVolumes().remove(volume);
         volume.getCustomers().remove(principal);
+        privateNewsPapers = volumeService.findPrivateNewsPapersByVolume(volume.getId());
+        if(privateNewsPapers.size()>0){
+            principal.getNewsPapers().removeAll(privateNewsPapers);
+        }
+        customerService.save(principal);
         volumeService.save(volume);
 
         result = new ModelAndView("redirect: listAllVolumes.do");
@@ -127,8 +134,11 @@ public class VolumeCustomerController extends AbstractController{
                 customer.getVolumes().add(volume);
                 CreditCard saved = creditCardService.save(creditCard);
                 customer.setCreditCard(saved);
-                customerService.save(customer);
                 privateNewsPapers = volumeService.findPrivateNewsPapersByVolume(volume.getId());
+                if(privateNewsPapers.size()>0){
+                    customer.getNewsPapers().addAll(privateNewsPapers);
+                }
+                customerService.save(customer);
                 volumeService.save(volume);
             }
         } catch (final Throwable oops) {

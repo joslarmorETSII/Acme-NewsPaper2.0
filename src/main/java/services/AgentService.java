@@ -43,6 +43,9 @@ public class AgentService {
     @Autowired
     private AdvertisementService advertisementService;
 
+    @Autowired
+    private NewsPaperService newsPaperService;
+
     // Constructors -----------------------------------------------------------
 
     public AgentService() { super();
@@ -145,7 +148,7 @@ public class AgentService {
         if (!result) {
             codigos = new String[1];
             codigos[0] = "agent.password.mismatch";
-            error = new FieldError("userForm", "password", password, false, codigos, null, "");
+            error = new FieldError("userForm", "password", password, false, codigos, null, "password mismatch");
             binding.addError(error);
         }
 
@@ -154,22 +157,17 @@ public class AgentService {
 
     public Advertisement reconstructRegisterAdvertisement(RegisterAdvertisementForm registerAdvertisementForm, final BindingResult binding) {
         Advertisement advertisement = advertisementService.create();
-        CreditCard creditCard = creditCardService.create();
-
+        NewsPaper newsPaper;
         advertisement.setTitle(registerAdvertisementForm.getTitle());
         advertisement.setBanner(registerAdvertisementForm.getBanner());
         advertisement.setTargetPage(registerAdvertisementForm.getTargetPage());
 
-        creditCard.setBrand(registerAdvertisementForm.getBrand());
-        creditCard.setCvv(registerAdvertisementForm.getCvv());
-        creditCard.setExpirationMonth(registerAdvertisementForm.getExpirationMonth());
-        creditCard.setExpirationYear(registerAdvertisementForm.getExpirationYear());
-        creditCard.setHolder(registerAdvertisementForm.getHolder());
-        creditCard.setNumber(registerAdvertisementForm.getNumber());
 
-        advertisement.setCreditCard(creditCard);
-        advertisement.setNewsPaper(registerAdvertisementForm.getNewsPaper());
-
+        if (registerAdvertisementForm.getNewsPaperId() != null){
+            newsPaper = newsPaperService.findOne(registerAdvertisementForm.getNewsPaperId());
+            advertisement.setCreditCard(new CreditCard());
+            advertisement.setNewsPaper(newsPaper);
+        }
         return advertisement;
     }
 }

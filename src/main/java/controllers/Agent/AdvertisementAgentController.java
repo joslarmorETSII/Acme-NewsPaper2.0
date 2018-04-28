@@ -1,4 +1,4 @@
-/*
+
 package controllers.Agent;
 
 import controllers.AbstractController;
@@ -77,24 +77,27 @@ public class AdvertisementAgentController extends AbstractController {
         Agent agent;
         NewsPaper newsPaper;
         try {
+            CreditCard creditCard = creditCardService.reconstruct(registerAdvertisementForm,binding);
             Advertisement advertisement = agentService.reconstructRegisterAdvertisement(registerAdvertisementForm, binding);
+
 
             if (binding.hasErrors())
                 result = createEditModelAndView2(registerAdvertisementForm);
             else {
+                CreditCard saved = creditCardService.save(creditCard);
+                 advertisement.setCreditCard(saved);
+                Advertisement savedAdd = advertisementService.save(advertisement);
                 result = new ModelAndView("redirect: list.do");
-                agent = agentService.findByPrincipal();
-                agent.getAdvertisements().add(advertisement);
-                advertisement.setAgent(agent);
-                newsPaper = registerAdvertisementForm.getNewsPaper();
-                newsPaper.getAdvertisements().add(advertisement);
+                newsPaper = savedAdd.getNewsPaper();
+                newsPaper.getAdvertisements().add(savedAdd);
+
                 newsPaperService.save(newsPaper);
-                advertisementService.save(advertisement);
 
             }
         } catch (final Throwable oops) {
             result = this.createEditModelAndView2(registerAdvertisementForm, "general.commit.error");
         }
+        return result;
     }
 
 
@@ -112,19 +115,31 @@ public class AdvertisementAgentController extends AbstractController {
         return result;
     }
 
+    // Listing ------------------------------------------------------
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
+        ModelAndView result;
+        Agent principal;
+
+        principal = agentService.findByPrincipal();
+        result = new ModelAndView("advertisement/list");
+        result.addObject("advertisements",principal.getAdvertisements());
+        return result;
+    }
+
 
     // Ancillary methods ------------------------------------------------------
 
-    protected ModelAndView createEditModelAndView(final Advertisement advertisement) {
+    protected ModelAndView createEditModelAndView(Advertisement advertisement) {
         ModelAndView result;
 
         result = this.createEditModelAndView(advertisement, null);
         return result;
     }
 
-    protected ModelAndView createEditModelAndView(final Advertisement advertisement, final String messageCode) {
+    protected ModelAndView createEditModelAndView( Advertisement advertisement, String messageCode) {
         ModelAndView result;
-        Agent agent = agentService.findByPrincipal();
 
         Collection<NewsPaper> newsPapers = newsPaperService.findPublishedNewsPaper();
 
@@ -142,7 +157,15 @@ public class AdvertisementAgentController extends AbstractController {
     }
 
     private ModelAndView createEditModelAndView2(RegisterAdvertisementForm registerAdvertisementForm,String messageCode) {
+        ModelAndView result;
+
+        result = new ModelAndView("advertisement/registerAdvertisementForm");
+        result.addObject("registerAdvertisementForm", registerAdvertisementForm);
+        result.addObject("newsPapers", newsPaperService.findPublishedNewsPaper());
+        result.addObject("message", messageCode);
+
+        return result;
 
 
     }
-}*/
+}

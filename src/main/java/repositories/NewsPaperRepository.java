@@ -32,4 +32,7 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
 
     @Query("select a.newsPaper from Advertisement a where a.agent.id=?1")
     Collection<NewsPaper> findNewsPaperPlacedAdvertisement(int agentId);
+
+    @Query("select n from NewsPaper n where n.published= true and n.advertisements is empty  ")
+    Collection<NewsPaper> newsPapersWithNoAdds();
 }

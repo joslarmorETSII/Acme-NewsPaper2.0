@@ -12,10 +12,7 @@ import repositories.NewsPaperRepository;
 import security.Authority;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.validation.Validator;
@@ -51,6 +48,9 @@ public class NewsPaperService {
     @Autowired
     private Validator validator;
 
+    @Autowired
+    private AgentService agentService;
+
     // Constructors -----------------------------------------------------------
 
     public NewsPaperService() {
@@ -80,7 +80,7 @@ public class NewsPaperService {
 
     public NewsPaper save(NewsPaper newsPaper){
         NewsPaper res= null;
-        Assert.isTrue(checkByPrincipal(newsPaper) || checkByPrincipalCustomer());
+        Assert.isTrue(checkByPrincipal(newsPaper) || checkByPrincipalCustomer() || checkByPrincipalAgent());
         if(isTabooNewsPaper(newsPaper)){
             newsPaper.setTaboo(true);
         }
@@ -162,7 +162,7 @@ public class NewsPaperService {
     }
 
     public boolean checkByPrincipalCustomer() {
-        Boolean res = null;
+        Boolean res = false;
         Customer principal = null;
         principal= customerService.findByPrincipal();
         if(principal!=null) {
@@ -184,6 +184,19 @@ public class NewsPaperService {
         }
         return res;
 
+    }
+
+    public boolean checkByPrincipalAgent() {
+        Boolean res = false;
+        Agent principal = null;
+        principal= agentService.findByPrincipal();
+        if(principal!=null) {
+            Collection<Authority> authorities = principal.getUserAccount().getAuthorities();
+            String authority = authorities.toArray()[0].toString();
+            res = authority.equals("AGENT");
+        }
+
+        return res;
     }
 
     public Collection<NewsPaper> findPublishedNewsPaper(){
@@ -269,7 +282,22 @@ public class NewsPaperService {
     }
 
     public Collection<NewsPaper> findNewsPaperPlacedAdvertisement(int agentId) {
-        Assert.isTrue(actorService.isAdministrator());
         return newsPaperRepository.findNewsPaperPlacedAdvertisement(agentId);
     }
+
+    public Collection<NewsPaper> newsPapersWithNoAdds(){
+        return newsPaperRepository.newsPapersWithNoAdds();
+    }
+
+    public Advertisement selectRandomAdd(Article article) {
+        List<Advertisement> adds = new ArrayList<>(article.getNewsPaper().getAdvertisements());
+        Advertisement res =null;
+        if(adds.size()>0){
+            int index = (int) (Math.random() * adds.size());
+            res = adds.get(index);
+        }
+        return res;
+    }
+
+
 }

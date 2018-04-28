@@ -15,6 +15,7 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jstl:if test="${not empty newsPapers}">
 <div class="input-group">
     <form:form  action="advertisement/agent/edit.do" modelAttribute="registerAdvertisementForm">
 
@@ -47,13 +48,13 @@
             <acme:textbox code="advertisement.cvv" path="cvv"/>
         </div>
 
-        <form:label path="newsPaper">
-            <spring:message code="advertisement.newsPapers" />
-        </form:label>
-        <form:select path="newsPaper" items="${newsPapers}" itemLabel="title"/>
-        <form:errors path="newsPaper" cssClass="error" />
-        <br/>
 
+        <form:label path="newsPaperId"><spring:message code="advertisement.newsPapers" /></form:label>
+        <form:select path="newsPaperId">
+            <form:options items="${newsPapers}" itemLabel="title" itemValue="id"/>
+        </form:select>
+        <form:errors path="newsPaper" cssClass="error"/>
+        <br/>
 
         <input type="submit" name="save" value="<spring:message code="advertisement.save"/>" />
 
@@ -62,4 +63,9 @@
 
         </form:form>
     </div>
+</jstl:if>
+<jstl:if test="${empty newsPapers}">
+    <b><spring:message code="advertisement.NoNewsPapers"/></b>
+</jstl:if>
+
 
