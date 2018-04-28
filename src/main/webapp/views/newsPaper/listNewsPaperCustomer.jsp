@@ -47,6 +47,7 @@
 
         <security:authorize access="hasRole('CUSTOMER')">
             <display:column >
+                <!--TODO: fn:contains(...) -->
                 <jstl:if test="${ newspaper.modePrivate ne false and fn:contains(newspaper.customers, customer) }">
                     <acme:button url="newsPaper/customer/unsubscribe.do?newsPaperId=${newspaper.id}" code="newsPaper.unsubscribe"/>
                 </jstl:if>

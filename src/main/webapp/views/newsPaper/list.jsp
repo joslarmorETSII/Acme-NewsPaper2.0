@@ -78,7 +78,9 @@
     </security:authorize>
 
     <display:column >
-        <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        <jstl:if test="${row.modePrivate eq false or row.publisher eq user }">
+            <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        </jstl:if>
     </display:column>
 
     <security:authorize access="hasRole('ADMINISTRATOR')" >

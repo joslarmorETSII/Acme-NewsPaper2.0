@@ -16,21 +16,29 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
 
 
 
 
     <display:table id="newspaper" name="newsPapers" requestURI="${requestURI}"
                    pagesize="5">
+        <c:set var = "contiene" value = "false"/>
+        <jstl:forEach items="${newspaper.customers}" var="cliente">
+            <jstl:if test="${cliente eq customer }">
+                <c:set var = "contiene" value = "true"/>
+            </jstl:if>
+        </jstl:forEach>
 
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
         <acme:column code="newsPaper.title" value="${newspaper.title}"/>
 
 
-
-
         <display:column >
-            <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+            <jstl:if test="${contiene eq true or newspaper.modoPrivate eq false}">
+                <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+            </jstl:if>
         </display:column>
 
     </display:table>
