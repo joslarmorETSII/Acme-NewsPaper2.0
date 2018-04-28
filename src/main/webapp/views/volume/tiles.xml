@@ -33,7 +33,7 @@
 		<put-attribute name="body" value="/views/volume/removeNewsPaper.jsp" />
 	</definition>
 	<definition name="volume/listVolumeCustomer" extends="master.page">
-		<put-attribute name="title" value="List of  volumes" />
+		<put-attribute name="title" value="List of volumes" />
 		<put-attribute name="body" value="/views/volume/listVolumeCustomer.jsp" />
 	</definition>
 </tiles-definitions>

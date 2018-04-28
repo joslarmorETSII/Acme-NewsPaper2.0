@@ -3,6 +3,7 @@ package controllers.User;
 import controllers.AbstractController;
 import domain.NewsPaper;
 import domain.User;
+import domain.Volume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.NewsPaperService;
 import services.UserService;
+import services.VolumeService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -33,6 +35,8 @@ public class NewsPaperUserController extends AbstractController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private VolumeService volumeService;
 
     // Constructor --------------------------------------------
 
@@ -79,6 +83,37 @@ public class NewsPaperUserController extends AbstractController {
         result.addObject("user",user);
         result.addObject("requestUri","newsPaper/user/list.do");
 
+        result.addObject("momentEs", momentEs);
+        result.addObject("momentEn", momentEn);
+
+        return result;
+
+    }
+
+    @RequestMapping(value = "/listNewspaperUserVolume", method = RequestMethod.GET)
+    public ModelAndView listNewspaperUserVolume(@RequestParam int volumeId) {
+        ModelAndView result;
+        User user;
+        Collection<NewsPaper> newsPapers=null;
+
+        SimpleDateFormat formatterEs;
+        SimpleDateFormat formatterEn;
+        String momentEs;
+        String momentEn;
+
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
+        momentEs = formatterEs.format(new Date());
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
+        momentEn = formatterEn.format(new Date());
+        user = this.userService.findByPrincipal();
+
+        Volume volume =this.volumeService.findOne(volumeId);
+        newsPapers = volume.getNewsPapers();
+
+        result = new ModelAndView("newsPaper/listNewsPaperPerVolume");
+        result.addObject("newsPapers", newsPapers);
+        result.addObject("requestUri","newsPaper/user/listNewspaperUserVolume.do");
+        result.addObject("user",user);
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
 

@@ -44,7 +44,6 @@
             </jstl:if>
         </display:column>
     </security:authorize>
-
     <security:authorize access="hasRole('USER')">
         <display:column>
             <jstl:if test="${row.user eq user}">
@@ -53,10 +52,16 @@
         </display:column>
     </security:authorize>
 
-    <security:authorize access="isAuthenticated()">
+    <security:authorize access="hasAnyRole('CUSTOMER','AGENT')">
     <display:column>
-        <acme:button url="newsPaper/listNewsPapersVNP.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
+        <acme:button url="newsPaper/listNewsPapersV.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
     </display:column>
+    </security:authorize>
+
+    <security:authorize access="hasRole('USER')">
+        <display:column>
+            <acme:button url="newsPaper/user/listNewspaperUserVolume.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
+        </display:column>
     </security:authorize>
 
 </display:table>

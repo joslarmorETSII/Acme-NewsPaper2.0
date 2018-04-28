@@ -30,6 +30,13 @@
     <display:table id="newspaper" name="newsPapers" requestURI="${requestURI}"
                    pagesize="5">
 
+        <c:set var = "contiene" value = "false"/>
+        <jstl:forEach items="${newspaper.customers}" var="cliente">
+            <jstl:if test="${cliente eq customer }">
+                <c:set var = "contiene" value = "true"/>
+            </jstl:if>
+        </jstl:forEach>
+
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
         <acme:column code="newsPaper.title" value="${newspaper.title}"/>
         <acme:column code="newsPaper.description" value="${newspaper.description}"/>
@@ -46,9 +53,8 @@
         </display:column>
 
         <security:authorize access="hasRole('CUSTOMER')">
-            <display:column >
-                <!--TODO: fn:contains(...) -->
-                <jstl:if test="${ newspaper.modePrivate ne false and fn:contains(newspaper.customers, customer) }">
+            <display:column>
+                <jstl:if test="${contiene eq true}">
                     <acme:button url="newsPaper/customer/unsubscribe.do?newsPaperId=${newspaper.id}" code="newsPaper.unsubscribe"/>
                 </jstl:if>
             </display:column>

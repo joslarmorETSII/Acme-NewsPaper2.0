@@ -36,9 +36,9 @@
         <put-attribute name="body" value="/views/newsPaper/listNewsPaperCustomer.jsp" />
     </definition>
 
-    <definition name="newsPaper/listNewsPaperVolume" extends="master.page">
+    <definition name="newsPaper/listNewsPaperPerVolume" extends="master.page">
         <put-attribute name="title" value="List newsPapers per volume " />
-        <put-attribute name="body" value="/views/newsPaper/listNewsPaperVolume.jsp" />
+        <put-attribute name="body" value="/views/newsPaper/listNewsPaperPerVolume.jsp" />
     </definition>
 
     <definition name="newsPaper/listNewsPaperAdvertisement" extends="master.page">

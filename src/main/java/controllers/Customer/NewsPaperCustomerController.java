@@ -1,10 +1,7 @@
 package controllers.Customer;
 
 import controllers.AbstractController;
-import domain.CreditCard;
-import domain.Customer;
-import domain.NewsPaper;
-import domain.User;
+import domain.*;
 import forms.SubscribeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +15,13 @@ import repositories.NewsPaperRepository;
 import services.CreditCardService;
 import services.CustomerService;
 import services.NewsPaperService;
+import services.VolumeService;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/newsPaper/customer")
@@ -38,16 +38,17 @@ public class NewsPaperCustomerController extends AbstractController{
     @Autowired
     private CreditCardService creditCardService;
 
+    @Autowired
+    private VolumeService   volumeService;
 
     // Listing  --------------------------------------------------------------
-
+    //Listado de newspaper donde estoy suscrito
     @RequestMapping(value = "/listNewsPaperCustomer", method = RequestMethod.GET)
     public ModelAndView list() {
 
         ModelAndView result;
-
-        Collection<NewsPaper> newsPapers= customerService.findByPrincipal().getNewsPapers();
         Customer customer = customerService.findByPrincipal();
+        Collection<NewsPaper> newsPapers= customer.getNewsPapers();
 
         result = new ModelAndView("newsPaper/listNewsPaperCustomer");
         result.addObject("newsPapers", newsPapers);
@@ -55,7 +56,7 @@ public class NewsPaperCustomerController extends AbstractController{
         result.addObject("requestURI", "newsPaper/customer/listNewsPaperCustomer.do");
         return result;
     }
-
+    //Listado de newspaper donte me puedo suscritbir
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listNotSubscribed() {
 
@@ -71,6 +72,43 @@ public class NewsPaperCustomerController extends AbstractController{
         result.addObject("requestURI", "newsPaper/customer/list.do");
         return result;
     }
+    //Listado de newspaper por volume que son privadas y no privadas
+    @RequestMapping(value = "/listNewsPapersPerVolume", method = RequestMethod.GET)
+    public ModelAndView listNewsPapersVNP(@RequestParam int volumeId) {
+        ModelAndView result;
+        boolean volumeContieneNewspaper = false;
+        Collection<NewsPaper> newsPapers=null;
+        Customer customer = this.customerService.findByPrincipal();
+        SimpleDateFormat formatterEs;
+        SimpleDateFormat formatterEn;
+        String momentEs;
+        String momentEn;
+
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
+        momentEs = formatterEs.format(new Date());
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
+        momentEn = formatterEn.format(new Date());
+
+        newsPapers = this.volumeService.findPublishedNewsPaperPerVolume(volumeId);
+        Volume volume = this.volumeService.findOne(volumeId);
+
+        if(volume.getCustomers().contains(customer)){
+                volumeContieneNewspaper = true;
+        }
+
+
+
+        result = new ModelAndView("newsPaper/listNewsPaperPerVolume");
+        result.addObject("newsPapers", newsPapers);
+        result.addObject("requestUri","newsPaper/listNewsPapersPerVolume.do");
+        result.addObject("volumeContieneNewspaper", volumeContieneNewspaper);
+        result.addObject("momentEs", momentEs);
+        result.addObject("momentEn", momentEn);
+
+        return result;
+
+    }
+
 
     //Subscribirse
 
@@ -115,8 +153,6 @@ public class NewsPaperCustomerController extends AbstractController{
                 customer.setCreditCard(saved);
                 this.customerService.save(customer);
                 this.newsPaperService.save(newsPaper);
-
-
             }
         } catch (final Throwable oops) {
             result = this.createEditModelAndView2(subscribeForm, "commit.save.error");
@@ -133,7 +169,7 @@ public class NewsPaperCustomerController extends AbstractController{
         try{
 
             newsPaperService.unsuscribe(newsPaper);
-            result = new ModelAndView("redirect:list.do");
+            result = new ModelAndView("redirect:listAllVolumes.do");
         }catch (Throwable oops){
             result = createEditModelAndView(newsPaper,"general.commit.error");
         }

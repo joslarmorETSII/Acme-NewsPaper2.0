@@ -21,6 +21,7 @@
 
 
 <display:table id="row" name="volumes" requestURI="${requestURI}" pagesize="5">
+
     <c:set var = "contiene" value = "false"/>
     <jstl:forEach items="${row.customers}" var="cliente">
         <jstl:if test="${cliente eq customer }">
@@ -49,7 +50,7 @@
 
 
     <display:column>
-        <acme:button url="newsPaper/listNewsPapersVNP.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
+        <acme:button url="newsPaper/customer/listNewsPapersPerVolume.do?volumeId=${row.id}" code="volume.newsPapers.list"/>
     </display:column>
 
 </display:table>

@@ -56,12 +56,14 @@ public class VolumeCustomerController extends AbstractController{
     public ModelAndView listAllVolumes() {
 
         ModelAndView result;
+        Customer customer = customerService.findByPrincipal();
 
         Collection<Volume> volumes= volumeService.findAll();
+        volumes.removeAll(customer.getVolumes());
 
         result = new ModelAndView("volume/listVolumeCustomer");
         result.addObject("volumes", volumes);
-        result.addObject("customer",customerService.findByPrincipal());
+        result.addObject("customer",customer);
         result.addObject("requestURI", "volume/customer/listAllVolumes.do");
         return result;
     }

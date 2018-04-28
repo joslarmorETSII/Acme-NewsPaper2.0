@@ -56,7 +56,7 @@ public class NewsPaperController {
         momentEs = formatterEs.format(new Date());
         formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
-        newsPapers=newsPaperService.findPublishedNewsPaper();
+        newsPapers=newsPaperService.findPublishedAndNotPrivateNewsPaper();
 
 
         result = new ModelAndView("newsPaper/list");
@@ -91,37 +91,6 @@ public class NewsPaperController {
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapers);
         result.addObject("requestUri","newsPaper/listNewsPapersV.do");
-        result.addObject("momentEs", momentEs);
-        result.addObject("momentEn", momentEn);
-
-        return result;
-
-    }
-
-    @RequestMapping(value = "/listNewsPapersVNP", method = RequestMethod.GET)
-    public ModelAndView listNewsPapersVNP(@RequestParam int volumeId) {
-        ModelAndView result;
-
-        Collection<NewsPaper> newsPapers=null;
-
-        SimpleDateFormat formatterEs;
-        SimpleDateFormat formatterEn;
-        String momentEs;
-        String momentEn;
-
-        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
-        momentEs = formatterEs.format(new Date());
-        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
-        momentEn = formatterEn.format(new Date());
-
-        newsPapers = this.volumeService.findPublishedNewsPaperPerVolume(volumeId);
-
-
-
-        result = new ModelAndView("newsPaper/listNewsPaperVolume");
-        result.addObject("newsPapers", newsPapers);
-        result.addObject("requestUri","newsPaper/listNewsPapersVNP.do");
-
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
 

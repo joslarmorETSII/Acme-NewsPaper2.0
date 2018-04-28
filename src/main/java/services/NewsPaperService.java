@@ -190,6 +190,10 @@ public class NewsPaperService {
         return newsPaperRepository.findPublishedNewsPaper();
     }
 
+    public Collection<NewsPaper> findPublishedAndNotPrivateNewsPaper(){
+        return newsPaperRepository.findPublishedAndNotPrivateNewsPaper();
+    }
+
     public Collection<NewsPaper> findAllNewsPaperByUserAndNotPublished(int userId) {
         return this.newsPaperRepository.findAllNewsPaperByUserAndNotPublished(userId);
     }

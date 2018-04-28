@@ -191,6 +191,7 @@
 		<property name="newsPapers">
 			<list>
 				<ref bean="newsPaper1"/>
+				<ref bean="newsPaper3"/>
 			</list>
 		</property>
 		<property name="followings">
@@ -372,6 +373,38 @@
 		<property name="volumes">
 			<list>
 				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="newsPaper3" class="domain.NewsPaper">
+		<property name="title" value="Titulo de newspaper 3"/>
+		<property name="publicationDate" value="01/04/2018"/>
+		<property name="description" value="Esto es un newspaper de prueba 3"/>
+		<property name="picture" value="https://thumb1.shutterstock.com/display_pic_with_logo/2679097/485390743/stock-vector-old-newspaper-vintage-design-retro-background-vector-template-with-text-and-images-485390743.jpg"/>
+		<property name="published" value="true"/>
+		<property name="taboo" value="false"/>
+		<property name="modePrivate" value="false"/>
+		<property name="publisher" ref="user1"/>
+
+		<property name="articles">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="customers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="volumes">
+			<list>
+				<null />
 			</list>
 		</property>
 	</bean>

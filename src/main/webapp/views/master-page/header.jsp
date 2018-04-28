@@ -79,10 +79,10 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="newsPaper/customer/list.do"><spring:message code="master.page.newspaper.customer.list" /></a></li>
-					<li><a href="volume/customer/listVolumeCustomer.do"><spring:message code="master.page.customer.volume.list.mine" /></a></li>
+					<li><a href="volume/customer/listAllVolumes.do"><spring:message code="master.page.volume.customer.list" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="volume/customer/listAllVolumes.do"><spring:message code="master.page.volume.list" /></a></li>
+			<li><a class="fNiv" href="volume/customer/listVolumeCustomer.do"><spring:message code="master.page.customer.volume.list.mine" /></a></li>
 			<li><a class="fNiv" href="newsPaper/customer/listNewsPaperCustomer.do"><spring:message code="master.page.newspaper.customerNewsPaper" /></a></li>
 			<li><a class="fNiv" href="newsPaper/listAll.do"><spring:message code="master.page.newsPaper.listAll" /></a></li>
 			<li><a class="fNiv" href="article/listAll.do"><spring:message code="master.page.actor.article.listAll" /></a></li>
