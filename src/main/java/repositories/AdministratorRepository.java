@@ -101,7 +101,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     // ########################  QUERIES LEVEL C  NEWSPAPER 2################################
 
     // 18- The ratio of newspapers that have at least one advertisement versus the newspapers that haven?t any.
-    @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.advertisements.size != 0) from NewsPaper n1 where n1.advertisements.size = 0")
+    @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.advertisements.size > 0) from NewsPaper n1 where n1.advertisements.size = 0")
     Double ratioNpAdvertisementsVsNpWithOut();
 
     //19- The ratio of advertisements that have taboo words.
@@ -116,6 +116,6 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
     //21- The ratio of subscriptions to volumes versus subscriptions to newspapers.
     @Query("select count(v1)*1.0 / (select count(n1)*1.0 from NewsPaper n1 where n1.customers.size != 0) from Volume v1 where v1.customers.size !=0")
-    Double rationSubscribedNewsPVsSbuscribedVolume();
+    Double rationSubscribedNewsVsSubscribedVolume();
 
 }

@@ -88,6 +88,13 @@ public class DashboardAdministratorController extends AbstractController{
         result.addObject("ratioPrivateNewsPapersVsCustomers",ratioPrivateNewsPapersVsCustomers);
         result.addObject("avgServisesInEachCategory",ratioPrivateNewsPapersVsPublicPerPublisher);
 
+        //  Newspaper 2.0 -------------------------------------------------
+
+        result.addObject("ratioNpAdvertisementsVsNpWithOut",administratorService.ratioNpAdvertisementsVsNpWithOut());
+        result.addObject("ratioAdverTabooVsAdvertisement",administratorService.ratioAdverTabooVsAdvertisement());
+        result.addObject("avgNewsPapersPerVolume",administratorService.avgNewsPapersPerVolume());
+        result.addObject("rationSubscribedNewsPVsSubscribedVolume",administratorService.rationSubscribedNewsVsSubscribedVolume());
+
         return result;
     }
 }

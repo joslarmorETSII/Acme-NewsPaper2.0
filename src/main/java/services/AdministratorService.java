@@ -152,7 +152,7 @@ public class AdministratorService {
         return this.administratorRepository.ratioPrivateNewsPapersVsPublicPerPublisher();
     }
 
-    //NewsPaper2
+    // NewsPaper2  -------------------------------------------------
 
     public Double ratioNpAdvertisementsVsNpWithOut(){
 
@@ -169,8 +169,8 @@ public class AdministratorService {
         return this.administratorRepository.avgNewsPapersPerVolume();
     }
 
-    public Double rationSubscribedNewsPVsSbuscribedVolume(){
+    public Double rationSubscribedNewsVsSubscribedVolume(){
 
-        return this.administratorRepository.rationSubscribedNewsPVsSbuscribedVolume();
+        return this.administratorRepository.rationSubscribedNewsVsSubscribedVolume();
     }
 }

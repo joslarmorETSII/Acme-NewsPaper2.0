@@ -207,6 +207,38 @@
 </fieldset>
 <br/>
 
+<!-- Queries Newspaper 2.0 -->
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.ratioNpAdvertisementsVsNpWithOut"/></b></legend>
+
+		<jstl:out value="${ratioNpAdvertisementsVsNpWithOut}"/><br>
+	</div>
+</fieldset>
+<br/>
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.ratioAdverTabooVsAdvertisement"/></b></legend>
+
+		<jstl:out value="${ratioAdverTabooVsAdvertisement}"/><br>
+	</div>
+</fieldset>
+<br/>
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.avgNewsPapersPerVolume"/></b></legend>
+
+		<jstl:out value="${avgNewsPapersPerVolume}"/><br>
+	</div>
+</fieldset>
+<br/>
+<fieldset>
+	<div class="panel-body">
+		<legend><b><spring:message code="dash.rationSubscribedNewsPVsSubscribedVolume"/></b></legend>
+
+		<jstl:out value="${rationSubscribedNewsPVsSubscribedVolume}"/><br>
+	</div>
+</fieldset>
 
 
 
