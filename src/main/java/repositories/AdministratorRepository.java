@@ -97,4 +97,25 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     // 17- The ratio of users who have posted above 75% the average number of chirps per user.
     @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.modePrivate = false) from NewsPaper n1 where n1.modePrivate = true group by n1.publisher")
     Double ratioPrivateNewsPapersVsPublicPerPublisher();
+
+    // ########################  QUERIES LEVEL C  NEWSPAPER 2################################
+
+    // 18- The ratio of newspapers that have at least one advertisement versus the newspapers that haven?t any.
+    @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.advertisements.size != 0) from NewsPaper n1 where n1.advertisements.size = 0")
+    Double ratioNpAdvertisementsVsNpWithOut();
+
+    //19- The ratio of advertisements that have taboo words.
+    @Query("select count(a1)*1.0 / (select count(a2)*1.0 from Advertisement a2 where a2.taboo = true) from Advertisement a1")
+    Double ratioAdverTabooVsAdvertisement();
+
+    // ########################  QUERIES LEVEL B  NEWSPAPER 2################################
+
+    //20- The average number of newspapers per volume.
+    @Query("select avg(v.newsPapers.size) from Volume v group by v")
+    Double avgNewsPapersPerVolume();
+
+    //21- The ratio of subscriptions to volumes versus subscriptions to newspapers.
+    @Query("select count(v1)*1.0 / (select count(n1)*1.0 from NewsPaper n1 where n1.customers.size != 0) from Volume v1 where v1.customers.size !=0")
+    Double rationSubscribedNewsPVsSbuscribedVolume();
+
 }
