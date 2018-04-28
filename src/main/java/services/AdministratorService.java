@@ -151,4 +151,26 @@ public class AdministratorService {
 
         return this.administratorRepository.ratioPrivateNewsPapersVsPublicPerPublisher();
     }
+
+    //NewsPaper2
+
+    public Double ratioNpAdvertisementsVsNpWithOut(){
+
+        return this.administratorRepository.ratioNpAdvertisementsVsNpWithOut();
+    }
+
+    public Double ratioAdverTabooVsAdvertisement(){
+
+        return this.administratorRepository.ratioAdverTabooVsAdvertisement();
+    }
+
+    public Double avgNewsPapersPerVolume(){
+
+        return this.administratorRepository.avgNewsPapersPerVolume();
+    }
+
+    public Double rationSubscribedNewsPVsSbuscribedVolume(){
+
+        return this.administratorRepository.rationSubscribedNewsPVsSbuscribedVolume();
+    }
 }
