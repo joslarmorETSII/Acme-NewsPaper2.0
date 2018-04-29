@@ -89,6 +89,12 @@ public class AdvertisementService {
         this.advertisementRepository.delete(advertisement);
     }
 
+    public void deleteAll(NewsPaper newsPaper){
+        for(Advertisement a : newsPaper.getAdvertisements()){
+            this.advertisementRepository.delete(a);
+        }
+    }
+
     // Other business methods -------------------------------------------------
 
     public boolean checkByPrincipal(Advertisement advertisement) {

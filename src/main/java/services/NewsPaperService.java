@@ -51,6 +51,12 @@ public class NewsPaperService {
     @Autowired
     private AgentService agentService;
 
+    @Autowired
+    private AdvertisementService advertisementService;
+
+    @Autowired
+    private VolumeService volumeService;
+
     // Constructors -----------------------------------------------------------
 
     public NewsPaperService() {
@@ -118,7 +124,8 @@ public class NewsPaperService {
                 customerService.save(c);
             }
         }
-
+        this.advertisementService.deleteAll(newsPaper);
+        this.volumeService.delete(newsPaper);
         this.articleService.deleteAll(newsPaper.getArticles());
         this.newsPaperRepository.delete(newsPaper);
     }

@@ -41,6 +41,9 @@ public class ArticleService {
     @Autowired
     private ActorService actorService;
 
+    @Autowired
+    private PictureService pictureService;
+
     // Constructors -----------------------------------------------------------
 
     public ArticleService() { super();
@@ -103,8 +106,14 @@ public class ArticleService {
     public void deleteAll(Collection<Article> articles){
         for(Article a: articles){
             Collection<FollowUp> followUps = a.getFollowUps();
+            for(FollowUp f: followUps){
+                this.pictureService.deleteAll(f);
+            }
             followUpService.deleteAll(followUps);
-            this.articleRepository.delete(articles);
+            for(Picture p : a.getPictures()){
+                this.pictureService.delete(p);
+            }
+            this.articleRepository.delete(a);
         }
     }
 

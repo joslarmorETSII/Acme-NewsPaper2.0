@@ -83,6 +83,10 @@ public class VolumeService {
         return res;
     }
 
+    public void delete(NewsPaper newsPaper){
+        this.volumeRepository.delete(newsPaper.getVolumes());
+    }
+
     //Anthiliaries methodes
 
     public Collection<NewsPaper> findPublishedAndNotPrivateNewsPaperPerVolume(int volumeId){

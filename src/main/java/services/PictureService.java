@@ -91,8 +91,12 @@ public class PictureService {
 
     public void delete(Picture picture){
         Assert.notNull(picture);
-        Assert.isTrue(checkByPrincipal(picture));
+        Assert.isTrue(checkByPrincipal(picture) || checkByPrincipalAdmin(picture));
         this.pictureRepository.delete(picture);
+    }
+
+    public void deleteAll(FollowUp followUp){
+        this.pictureRepository.delete(followUp.getPictures());
     }
 
     // Other business methods -------------------------------------------------
@@ -115,6 +119,18 @@ public class PictureService {
         }
 
         return res;
+    }
+
+    public boolean checkByPrincipalAdmin(Picture picture){
+        Boolean res= false;
+        Administrator administrator = administratorService.findByPrincipal();
+        if(administrator!=null) {
+            Collection<Authority> authorities = administrator.getUserAccount().getAuthorities();
+            String authority = authorities.toArray()[0].toString();
+            res = authority.equals("ADMINISTRATOR");
+        }
+        return res;
+
     }
 
 }
