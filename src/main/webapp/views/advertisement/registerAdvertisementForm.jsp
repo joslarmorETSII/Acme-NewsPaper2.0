@@ -19,43 +19,51 @@
 <div class="input-group">
     <form:form  action="advertisement/agent/edit.do" modelAttribute="registerAdvertisementForm">
 
+        <fieldset>
+            <legend><spring:message code="advertisement.add.inf"/> </legend>
             <acme:textbox path="title" code="advertisement.title"/>
-        <br />
+            <br />
 
-            <acme:textbox path="banner" code="advertisement.banner"/>
-        <br />
+                <acme:textbox path="banner" code="advertisement.banner"/>
+            <br />
 
-            <acme:textbox path="targetPage" code="advertisement.targetPage"/>
-        <br />
-    <div class="form-group">
-        <acme:textbox code="advertisement.holder" path="holder" />
+                <acme:textbox path="targetPage" code="advertisement.targetPage"/>
+            <br />
+        </fieldset>
         <br/>
+        <fieldset>
+            <legend><spring:message code="general.creditCard"/> </legend>
+        <div class="form-group">
+            <acme:textbox code="advertisement.holder" path="holder" />
+            <br/>
 
-        <div class="form-group">
-            <acme:textbox code="advertisement.brand" path="brand" />
-        </div>
+            <div class="form-group">
+                <acme:textbox code="advertisement.brand" path="brand" />
+            </div>
 
-        <div class="form-group">
-            <acme:textbox code="advertisement.number" path="number" />
-        </div>
-        <div class="form-group">
-            <acme:textbox code="advertisement.expirationMonth" path="expirationMonth" />
-        </div>
-        <div class="form-group">
-            <acme:textbox code="advertisement.expirationYear" path="expirationYear"/>
-        </div>
-        <div class="form-group">
-            <acme:textbox code="advertisement.cvv" path="cvv"/>
-        </div>
-
-
+            <div class="form-group">
+                <acme:textbox code="advertisement.number" path="number" />
+            </div>
+            <div class="form-group">
+                <acme:textbox code="advertisement.expirationMonth" path="expirationMonth" />
+            </div>
+            <div class="form-group">
+                <acme:textbox code="advertisement.expirationYear" path="expirationYear"/>
+            </div>
+            <div class="form-group">
+                <acme:textbox code="advertisement.cvv" path="cvv"/>
+            </div>
+        </fieldset>
+        <br/>
+        <fieldset>
+            <legend><spring:message code="general.newspaper"/> </legend>
         <form:label path="newsPaperId"><spring:message code="advertisement.newsPapers" /></form:label>
         <form:select path="newsPaperId">
             <form:options items="${newsPapers}" itemLabel="title" itemValue="id"/>
         </form:select>
         <form:errors path="newsPaper" cssClass="error"/>
         <br/>
-
+        </fieldset>
         <input type="submit" name="save" value="<spring:message code="advertisement.save"/>" />
 
         <input type="button" name="cancel" value="<spring:message code="advertisement.cancel" />"

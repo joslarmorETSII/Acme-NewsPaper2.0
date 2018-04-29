@@ -173,6 +173,42 @@
 		<property name="cvv" value="123" />
 	</bean>
 
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holder" value="Holder 2" />
+		<property name="brand" value="visa" />
+		<property name="number" value="4785 5308 6052 0625" />
+		<property name="expirationMonth" value="12" />
+		<property name="expirationYear" value="2018" />
+		<property name="cvv" value="123" />
+	</bean>
+
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holder" value="Holder 2" />
+		<property name="brand" value="visa" />
+		<property name="number" value="4785 5308 6052 0625" />
+		<property name="expirationMonth" value="12" />
+		<property name="expirationYear" value="2018" />
+		<property name="cvv" value="123" />
+	</bean>
+
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holder" value="Holder 2" />
+		<property name="brand" value="visa" />
+		<property name="number" value="4785 5308 6052 0625" />
+		<property name="expirationMonth" value="12" />
+		<property name="expirationYear" value="2018" />
+		<property name="cvv" value="123" />
+	</bean>
+
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holder" value="Holder 2" />
+		<property name="brand" value="visa" />
+		<property name="number" value="4785 5308 6052 0625" />
+		<property name="expirationMonth" value="12" />
+		<property name="expirationYear" value="2018" />
+		<property name="cvv" value="123" />
+	</bean>
+
 	<!-- Users -->
 
 	<bean id="user1" class="domain.User">
@@ -289,15 +325,44 @@
 	<!-- Advertisement -->
 
 	<bean id="advertisement1" class="domain.Advertisement">
-		<property name="title" value="title1"/>
+		<property name="title" value="CocaCola"/>
 		<property name="banner" value="http://media.worldsbestbanners.com/catalog/category/Advertisement_Banners.jpg"/>
 		<property name="targetPage" value="http://worldsbestbanners.com/view-all-pre-designed-banners/advertisement-banners.html"/>
 		<property name="taboo" value="false"/>
 		<property name="agent" ref="agent1" />
-		<property name="creditCard" ref="creditCard2"/>
+		<property name="creditCard" ref="creditCard6"/>
 		<property name="newsPaper" ref="newsPaper1"/>
 	</bean>
 
+	<bean id="advertisement2" class="domain.Advertisement">
+		<property name="title" value="Starbucks"/>
+		<property name="banner" value="https://mir-s3-cdn-cf.behance.net/project_modules/1400/fc01fd44198707.580b7ef556450.jpg"/>
+		<property name="targetPage" value="https://www.behance.net/gallery/44198707/Starbucks-Pumpkin-Spice-Latte-Spoof-Advertisement"/>
+		<property name="taboo" value="false"/>
+		<property name="agent" ref="agent1" />
+		<property name="creditCard" ref="creditCard3"/>
+		<property name="newsPaper" ref="newsPaper1"/>
+	</bean>
+
+	<bean id="advertisement3" class="domain.Advertisement">
+		<property name="title" value="SPRUDGE"/>
+		<property name="banner" value="http://331mrnu3ylm2k3db3s1xd1hg.wpengine.netdna-cdn.com/wp-content/uploads/2016/06/PacificFoods3July2016.jpg"/>
+		<property name="targetPage" value="http://sprudge.com/advertise-2"/>
+		<property name="taboo" value="false"/>
+		<property name="agent" ref="agent1" />
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="newsPaper" ref="newsPaper2"/>
+	</bean>
+
+	<bean id="advertisement4" class="domain.Advertisement">
+		<property name="title" value="Paris"/>
+		<property name="banner" value="http://a4.images.mywebroom.com/image/upload/f_auto,q_90/v1407185403/8732-collection-127-image_2-oh-paris-banner.jpg"/>
+		<property name="targetPage" value="http://www.mywebroom.com/home-collections/oh-paris/"/>
+		<property name="taboo" value="false"/>
+		<property name="agent" ref="agent1" />
+		<property name="creditCard" ref="creditCard5"/>
+		<property name="newsPaper" ref="newsPaper3"/>
+	</bean>
 
 	<!-- Chirps -->
 
@@ -313,9 +378,9 @@
 	<!-- NewsPapers -->
 
 	<bean id="newsPaper1" class="domain.NewsPaper">
-		<property name="title" value="Titulo de newspaper 1"/>
+		<property name="title" value="The etsii Post"/>
 		<property name="publicationDate" value="01/04/2018"/>
-		<property name="description" value="Esto es un newspaper de prueba"/>
+		<property name="description" value="News about computer, network, software, software engineering, IT."/>
 		<property name="picture" value="https://thumb1.shutterstock.com/display_pic_with_logo/2679097/485390743/stock-vector-old-newspaper-vintage-design-retro-background-vector-template-with-text-and-images-485390743.jpg"/>
 		<property name="published" value="true"/>
 		<property name="taboo" value="false"/>
@@ -335,6 +400,7 @@
 		<property name="advertisements">
 			<list>
 				<ref bean="advertisement1"/>
+				<ref bean="advertisement2"/>
 			</list>
 		</property>
 		<property name="volumes">
@@ -345,11 +411,44 @@
 	</bean>
 
 	<bean id="newsPaper2" class="domain.NewsPaper">
-		<property name="title" value="Titulo de newspaper 2"/>
+		<property name="title" value="The young entrepreneur"/>
 		<property name="publicationDate" value="01/04/2018"/>
-		<property name="description" value="Esto es un newspaper de prueba 2"/>
-		<property name="picture" value="https://www.imagen.com"/>
+		<property name="description" value="Get the small business news stories and updates from Entrepreneurs"/>
+		<property name="picture" value="http://i.dailymail.co.uk/i/newpix/2018/04/24/17/4B50DB5E00000578-5635119-Nolin_Jean_Baptiste_LE_GLOBE_TERRESTRE_REPRESENT_EN_DEUX_PLANS_H-a-49_1524586336734.jpg"/>
 		<property name="published" value="false"/>
+		<property name="taboo" value="false"/>
+		<property name="modePrivate" value="true"/>
+		<property name="publisher" ref="user1"/>
+
+		<property name="articles">
+			<list>
+				<ref bean="article4"/>
+				<ref bean="article5"/>
+			</list>
+		</property>
+		<property name="customers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
+				<ref bean="advertisement3"/>
+			</list>
+		</property>
+		<property name="volumes">
+			<list>
+				<null/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="newsPaper3" class="domain.NewsPaper">
+		<property name="title" value="Daily News"/>
+		<property name="publicationDate" value="01/04/2018"/>
+		<property name="description" value="The daily news is a newspaper based in Spain, Sevilla. Coverage, Technology, sports, entertainment news, celebrity gossip..."/>
+		<property name="picture" value="http://www.stl-horizon.com/wp-content/uploads/2017/05/technology-591103f20ff18.jpg"/>
+		<property name="published" value="true"/>
 		<property name="taboo" value="false"/>
 		<property name="modePrivate" value="true"/>
 		<property name="publisher" ref="user1"/>
@@ -367,39 +466,7 @@
 		</property>
 		<property name="advertisements">
 			<list>
-				<null/>
-			</list>
-		</property>
-		<property name="volumes">
-			<list>
-				<null/>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="newsPaper3" class="domain.NewsPaper">
-		<property name="title" value="Titulo de newspaper 3"/>
-		<property name="publicationDate" value="01/04/2018"/>
-		<property name="description" value="Esto es un newspaper de prueba 3"/>
-		<property name="picture" value="https://thumb1.shutterstock.com/display_pic_with_logo/2679097/485390743/stock-vector-old-newspaper-vintage-design-retro-background-vector-template-with-text-and-images-485390743.jpg"/>
-		<property name="published" value="true"/>
-		<property name="taboo" value="false"/>
-		<property name="modePrivate" value="false"/>
-		<property name="publisher" ref="user1"/>
-
-		<property name="articles">
-			<list>
-				<null/>
-			</list>
-		</property>
-		<property name="customers">
-			<list>
-				<null/>
-			</list>
-		</property>
-		<property name="advertisements">
-			<list>
-				<null/>
+				<ref bean="advertisement4"/>
 			</list>
 		</property>
 		<property name="volumes">
@@ -500,10 +567,11 @@
 	<!-- Articles -->
 
 	<bean id="article1" class="domain.Article">
-	<property name="title" value="Titulo del articulo1"/>
+	<property name="title" value="The future of VR goes beyond sight and sound."/>
 	<property name="moment" value="01/04/2018"/>
-	<property name="summary" value="Summary del articulo1"/>
-	<property name="body" value="Cuerpo del articulo1"/>
+	<property name="summary" value="Disney's haptic VR jacket lets you feel snowball impacts and snakes slithering"/>
+	<property name="body" value="Virtual reality is a gateway to powerful experiences. Strap on a pair of VR goggles, look around, and the scene you see will adjust, in real time, to match your gaze. But the technology is a visual one. Virtual reality doesn't include touch, although there are controllers that provide hand presence, allowing you to manipulate objects in the virtual world, or shoot a simulated gun. So while VR today could simulate a Westworld like setting, you're not going to be actually feeling the hug of a cowboy-robot on your body while using any of the major platforms at least not for a while.
+The Force Jacket, a garment from Disney Research, aims to address that gap. Made out of a converted life jacket, the prototype uses embedded airbags that inflate, deflate, or even vibrate to literally give its wearer a feeling of being touched. When coupled with VR software, the setup can simulate something bizarre a snake slithering on you or more pedestrian: getting hit by a snowball. In brief, the sensation of touch you feel on your actual body can match what you see in a virtual one. (The device is the result of a research project, so these lifejacket garments aren't exactly on sale on Amazon. It’s also not the first research to focus on incorporating haptics into VR.)"/>
 	<property name="finalMode" value="true"/>
 	<property name="taboo" value="false"/>
 	<property name="newsPaper" ref="newsPaper1" />
@@ -514,19 +582,19 @@
 		</property>
 		<property name="pictures">
 			<list>
-				<null/>
+				<ref bean="picture7"/>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="article2" class="domain.Article">
-		<property name="title" value="Titulo del articulo2"/>
+		<property name="title" value="House prices rising faster"/>
 		<property name="moment" value="01/04/2018 23:00"/>
-		<property name="summary" value="Summary del articulo"/>
-		<property name="body" value="Cuerpo del articulo"/>
+		<property name="summary" value="ONS report reveals how house prices compare to local wages "/>
+		<property name="body" value="How expensive are homes near you? Official figures reveal properties now cost 7.8 times wages-this map lets you check your area"/>
 		<property name="finalMode" value="false"/>
 		<property name="taboo" value="false"/>
-		<property name="newsPaper" ref="newsPaper2" />
+		<property name="newsPaper" ref="newsPaper3" />
 		<property name="followUps">
 			<list>
 				<ref bean="followUp1" />
@@ -540,13 +608,14 @@
 	</bean>
 
 	<bean id="article3" class="domain.Article">
-		<property name="title" value="Titulo del articulo 3"/>
+		<property name="title" value="Investing for income"/>
 		<property name="moment" value="01/04/2018 23:00"/>
-		<property name="summary" value="Summary del articulo"/>
-		<property name="body" value="Cuerpo del articulo"/>
+		<property name="summary" value="How to invest for income: What you need to know about shares, bonds and why dividends matter"/>
+		<property name="body" value="Investing for income can be about harnessing the power of dividends to boost your investment returns, or using the stock market and bonds to increase the money you have to spend.
+		In our new series on investing for income, James Norton, senior investment planner at Vanguard, will explain what you need to know, the investments to look for and the pitfalls to avoid."/>
 		<property name="finalMode" value="false"/>
 		<property name="taboo" value="true"/>
-		<property name="newsPaper" ref="newsPaper2" />
+		<property name="newsPaper" ref="newsPaper3" />
 		<property name="followUps">
 			<list>
 				<null/>
@@ -555,6 +624,48 @@
 		<property name="pictures">
 			<list>
 				<ref bean="picture1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="article4" class="domain.Article">
+		<property name="title" value=" National Geographic"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="Photographer Karen Larson took this amazing image of a mother polar bear and her two cubs"/>
+		<property name="body" value="From a leaping leopard to a paddling polar bear: Jaw-dropping nature photographs submitted to the 2018 National Geographic Travel Photographer of the Year Contest. Mammals are among the most adaptable animals on the planet.
+They are found on every continent and in every ocean, and range in size from tiny bumblebee bats to enormous blue whales. One reason for their success is the way they move. Mammals as a group use every possible form of locomotion. Terrestrial species walk, run, jump, climb, hop, swing, dig, and burrow. Aquatic ones swim, shuffle, and dive. A few even fly.
+Diet and behavior vary, too. Many carnivores, for example, are top predators that live generally solitary lives. These include jaguars, tigers, and polar bears. By contrast, lions, otters, wolves, and dolphins live in family groups. Even more social are some of the herbivores, especially hoofed animals like deer and zebra"/>
+		<property name="finalMode" value="true"/>
+		<property name="taboo" value="false"/>
+		<property name="newsPaper" ref="newsPaper2" />
+		<property name="followUps">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture4" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="article5" class="domain.Article">
+		<property name="title" value="El museo como centro educativo"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="El director del Reina Sofía, el valenciano Manel Borja-Villel, defiende que la enseñanza del arte debería empezar por lo contemporáneo"/>
+		<property name="body" value="La función educativa de los museos no es algo nuevo. El primer director del MOMA de Nueva York, Alfred Barr, ya advertía en 1929, antes incluso de su apertura, que el museo “funcionará exclusivamente como una institución educativa”. Y un año después abundaba en esta idea al afirmar que el nuevo museo “poseerá un inestimable valor educativo, tanto para pintores en busca de ánimo e inspiración, como para estudiantes de cultura contemporánea e Historia del Arte, críticos en busca de cánones comparativos y público aficionado a contemplar cuadros, en general”."/>
+		<property name="finalMode" value="true"/>
+		<property name="taboo" value="false"/>
+		<property name="newsPaper" ref="newsPaper2" />
+		<property name="followUps">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture6" />
 			</list>
 		</property>
 	</bean>
@@ -577,7 +688,7 @@
 	<!-- Picture -->
 
 	<bean id="picture1" class="domain.Picture">
-		<property name="url" value="http://www.imagen.com"/>
+		<property name="url" value="https://www.africabusinessclassroom.com/wp-content/uploads/2015/07/investment-1.jpg"/>
 		<property name="article" ref="article3"/>
 		<property name="followUp"> <null /></property>
 	</bean>
@@ -589,11 +700,33 @@
 	</bean>
 
 	<bean id="picture3" class="domain.Picture">
-		<property name="url" value="http://www.imagen.com"/>
+		<property name="url" value="http://i.dailymail.co.uk/i/newpix/2018/04/24/17/4B50DB5300000578-5635119-Isidore_of_Seville_ETYMOLOGIAE_AUGSBURG_G_NTHER_ZAINER_19_NOVEMB-a-52_1524586336782.jpg"/>
 		<property name="article" ref="article2"/>
 		<property name="followUp"> <null /></property>
 	</bean>
 
+	<bean id="picture4" class="domain.Picture">
+		<property name="url" value="http://i.dailymail.co.uk/i/newpix/2018/04/26/12/4B9304F200000578-0-image-a-23_1524742867188.jpg"/>
+		<property name="article" ref="article4"/>
+		<property name="followUp"> <null /></property>
+	</bean>
+
+	<bean id="picture5" class="domain.Picture">
+		<property name="url" value="http://www.hdfondos.eu/pictures/2013/0324/2/animals-national-geographic-baby-wolf-images-222665.jpg"/>
+		<property name="article" ref="article4"/>
+		<property name="followUp"> <null /></property>
+	</bean>
+
+	<bean id="picture6" class="domain.Picture">
+		<property name="url" value="https://elpais.com/ccaa/imagenes/2018/04/27/valencia/1524823086_556001_1524823603_noticia_grande.jpg"/>
+		<property name="article" ref="article5"/>
+		<property name="followUp"> <null /></property>
+	</bean>
+    <bean id="picture7" class="domain.Picture">
+        <property name="url" value="https://i.ytimg.com/vi/6kLfxbP2IPk/hqdefault.jpg"/>
+        <property name="article" ref="article1"/>
+        <property name="followUp"> <null /></property>
+    </bean>
 	<!-- Volume -->
 	<bean id="volume1" class="domain.Volume">
 		<property name="title" value="Title volume1"/>

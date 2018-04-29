@@ -5,6 +5,7 @@ import domain.NewsPaper;
 import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/article")
-public class ArticleController {
+public class ArticleController extends AbstractController{
 
     // Services --------------------------------------------
 
@@ -40,11 +41,25 @@ public class ArticleController {
     public ModelAndView display(@RequestParam final int articleId) {
         ModelAndView result;
         Article article;
+        SimpleDateFormat formatterEs;
+        SimpleDateFormat formatterEn;
+        String momentEs;
+        String momentEn;
 
         article = this.articleService.findOne(articleId);
+        Assert.notNull(article);
+
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
+        momentEs = formatterEs.format(article.getMoment());
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
+        momentEn = formatterEn.format(article.getMoment());
+
+
         result = new ModelAndView("article/display");
         result.addObject("article", article);
         result.addObject("advertisement",newsPaperService.selectRandomAdd(article));
+        result.addObject("momentEs", momentEs);
+        result.addObject("momentEn", momentEn);
 
         return result;
     }

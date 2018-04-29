@@ -21,36 +21,46 @@
 
 
 <jstl:if test="${advertisement ne null}">
-	<img src="${advertisement.banner}" width="500px" height="100%"  />
+	<fieldset>
+		<legend><b><spring:message code="general.advertisement"/></b> </legend>
+	<a href="${advertisement.targetPage}">
+		<img src="${advertisement.banner}" width="500px" height="100%" class="center" />
+	</a>
+	</fieldset>
 	<br/>
 </jstl:if>
 
-
+<fieldset>
 <h3><b><spring:message code="article.title"/>:&nbsp;</b><jstl:out value="${article.title}"/></h3>
 
-<jstl:if test="${pageContext.response.locale.language == 'es'}">
-
-	<b><spring:message code="article.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
-	<br/>
-</jstl:if>
-
-<jstl:if test="${pageContext.response.locale.language == 'en'}">
-	<b><spring:message code="article.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
-	<br/>
-</jstl:if>
-
-<b><spring:message code="article.summary"/>:&nbsp;</b><jstl:out value="${article.summary}"/>
+	<fieldset>
+		<legend><b><spring:message code="article.summary"/></b></legend>
+		<jstl:out value="${article.summary}"/>
+	</fieldset>
+<br/>
+<fieldset>
+	<legend><b><spring:message code="article.body"/></b></legend>
+		<jstl:out value="${article.body}"/>
+</fieldset>
 <br/>
 
-<b><spring:message code="article.body"/>:&nbsp;</b><jstl:out value="${article.body}"/>
-<br/>
-<b><spring:message code="article.picture"/></b>
 
+<fieldset>
+	<legend><b><spring:message code="article.picture"/></b></legend>
 <jstl:forEach items="${article.pictures}" var="picture">
-	<img src="${picture.url}" width="500px" height="100%" />
+	<img src="${picture.url}" width="500px" height="100%" class="center"/>
 	<br/>
 </jstl:forEach>
+</fieldset>
+	<jstl:if test="${pageContext.response.locale.language == 'es'}">
+		<b><spring:message code="article.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
+		<br/>
+	</jstl:if>
 
+	<jstl:if test="${pageContext.response.locale.language == 'en'}">
+		<b><spring:message code="article.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
+		<br/>
+	</jstl:if>
 <b><spring:message code="article.finalMode"/>:&nbsp;</b><jstl:out value="${article.finalMode}"/>
 <br/>
 
@@ -60,5 +70,6 @@
 <a href="followUp/list.do?articleId=${article.id}"><spring:message code="article.listFollowUps"/></a>
 <br/>
 
+</fieldset>
 <input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
 	   onclick="javascript: relativeRedir('article/listAll.do');" />

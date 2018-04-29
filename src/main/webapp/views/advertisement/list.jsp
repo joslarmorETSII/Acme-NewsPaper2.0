@@ -23,8 +23,9 @@
 			<display:table id="row" name="tabooAdvertisements" requestURI="${requestURI}"
 					   pagesize="5">
 				<acme:column code="advertisement.title" value="${row.title}" />
-				<acme:column code="advertisement.banner" value="${row.banner}" />
+				<display:column title="${banner}"><img src="${row.banner}" alt="no image" width="130" height="100"></display:column>
 				<acme:column code="advertisement.targetPage" value="${row.targetPage}"/>
+				<acme:column code="advertisement.taboo" value="${row.taboo}"/>
 				<acme:column code="advertisement.taboo" value="${row.taboo}"/>
 					<display:column>
 						<acme:button url="advertisement/administrator/delete.do?advertisementId=${row.id}" code="advertisement.delete" />
@@ -43,7 +44,7 @@
 			   pagesize="5">
 
 	<acme:column code="advertisement.title" value="${row.title}" />
-	<acme:column code="advertisement.banner" value="${row.banner}" />
+	<display:column title="${banner}"><img src="${row.banner}" alt="no image" width="130" height="100"></display:column>
 	<acme:column code="advertisement.targetPage" value="${row.targetPage}"/>
 	<acme:column code="advertisement.taboo" value="${row.taboo}"/>
 	<security:authorize access="hasRole('ADMINISTRATOR')" >

@@ -66,6 +66,7 @@ public class Article extends DomainEntity {
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+    @Column(length = 1024)
     public String getBody() {
         return body;
     }

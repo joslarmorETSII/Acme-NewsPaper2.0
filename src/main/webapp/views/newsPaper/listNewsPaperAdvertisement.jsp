@@ -47,11 +47,6 @@
             <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
         </display:column>
 
-        <display:column >
-            <acme:button url="advertisement/agent/list.do?advertisementId=${advertisement.id}" code="advertisement.display"/>
-        </display:column>
-
-
     </display:table>
 
 </fieldset>
@@ -78,15 +73,9 @@
             <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
         </display:column>
 
-        <display:column >
-            <acme:button url="advertisement/agent/list.do?advertisementId=${advertisement.id}" code="advertisement.display"/>
-        </display:column>
-
-
     </display:table>
 
 </fieldset>
-
 
 
 <input type="button" value="<spring:message code="customer.cancel" /> " onclick="goBack()">
