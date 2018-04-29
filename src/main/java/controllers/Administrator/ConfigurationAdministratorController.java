@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.Administrator;
 
 import javax.validation.Valid;
 
