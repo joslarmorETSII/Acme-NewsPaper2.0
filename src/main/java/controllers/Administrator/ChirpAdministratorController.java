@@ -1,5 +1,6 @@
 package controllers.Administrator;
 
+import controllers.AbstractController;
 import domain.Chirp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import java.util.Collection;
 
 @Controller
 @RequestMapping("/chirp/administrator")
-public class ChirpAdministratorController {
+public class ChirpAdministratorController extends AbstractController{
 
     // Services --------------------------------------------
 

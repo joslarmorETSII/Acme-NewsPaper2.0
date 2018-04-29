@@ -1,5 +1,6 @@
 package controllers.Administrator;
 
+import controllers.AbstractController;
 import domain.Advertisement;
 import domain.Agent;
 import domain.NewsPaper;
@@ -18,7 +19,7 @@ import java.util.Collection;
 
 @Controller
 @RequestMapping("/advertisement/administrator")
-public class AdvertisementAdministratorController {
+public class AdvertisementAdministratorController extends AbstractController{
 
     // Services --------------------------------------------
 
