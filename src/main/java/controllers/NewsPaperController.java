@@ -135,7 +135,7 @@ public class NewsPaperController extends AbstractController {
 
         newsPaper = this.newsPaperService.findOne(newsPaperId);
 
-
+        Assert.isTrue(!newsPaper.isModePrivate());
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelURI", "newsPaper/listAll.do");

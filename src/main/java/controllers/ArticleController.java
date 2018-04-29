@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.ArticleService;
 import services.NewsPaperService;
+import services.UserService;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -28,6 +29,9 @@ public class ArticleController extends AbstractController{
 
     @Autowired
     private NewsPaperService newsPaperService;
+
+    @Autowired
+    private UserService userService;
 
     // Constructors -----------------------------------------------------------
 
@@ -79,8 +83,10 @@ public class ArticleController extends AbstractController{
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView result;
-        User user;
+
         Collection<Article> articles=null;
+
+
 
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
@@ -102,6 +108,7 @@ public class ArticleController extends AbstractController{
         result.addObject("requestURI","article/listAll.do");
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+
 
         return result;
 
