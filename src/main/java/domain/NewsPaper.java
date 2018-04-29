@@ -16,7 +16,8 @@ import java.util.Date;
 @Table(indexes = {
         @Index(columnList = "publisher_id")
 })
-public class NewsPaper extends DomainEntity {
+public class
+NewsPaper extends DomainEntity {
 
     // Constructors -----------------------------------------------------------
 

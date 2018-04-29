@@ -87,19 +87,13 @@
     </security:authorize>
 
 
-
-
-    <security:authorize access="hasRole('ANONYMOUS')" >
+    <security:authorize access="isAnonymous()||hasAnyRole('AGENT','CUSTOMER')">
     <display:column >
-        <acme:button url="newsPaper/displayAnonymous.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        <jstl:if test="${row.modePrivate eq false}">
+         <acme:button url="newsPaper/displayAnonymous.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        </jstl:if>
     </display:column>
     </security:authorize>
-
-    <display:column >
-        <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
-    </display:column>
-
-
 
 
     <security:authorize access="hasRole('ADMINISTRATOR')" >

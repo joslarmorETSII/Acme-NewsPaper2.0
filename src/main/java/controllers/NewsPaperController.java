@@ -132,15 +132,8 @@ public class NewsPaperController extends AbstractController {
     public ModelAndView displayAnonymous(@RequestParam int newsPaperId) {
         ModelAndView result;
         NewsPaper newsPaper;
-        Customer c ;
+
         newsPaper = this.newsPaperService.findOne(newsPaperId);
-
-        Actor actor=actorService.findByPrincipal();
-        User publisher = newsPaper.getPublisher();
-        c = newsPaperService.customerOfNewsPaper(newsPaperId);
-
-
-            Assert.isTrue(!newsPaper.isModePrivate());
 
 
         result = new ModelAndView("newsPaper/display");

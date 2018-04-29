@@ -21,32 +21,39 @@
 
 
 
-
+<fieldset>
 <h3><b><spring:message code="followUp.title"/>:&nbsp;</b><jstl:out value="${followUp.title}"/></h3>
 
-<jstl:if test="${pageContext.response.locale.language == 'es'}">
+
+	<fieldset>
+		<legend><b><spring:message code="followUp.summary"/></b></legend>
+			<jstl:out value="${followUp.summary}"/>
+	</fieldset>
+	<br/>
+	<fieldset>
+		<legend><b><spring:message code="followUp.text"/></b></legend>
+			<jstl:out value="${followUp.text}"/>
+	</fieldset>
+	<br/>
+	<fieldset>
+		<legend><b><spring:message code="article.picture"/></b></legend>
+		<jstl:forEach items="${followUp.pictures}" var="picture">
+			<img src="${picture.url}" width="500px" height="100%" class="center"/>
+			<br/>
+		</jstl:forEach>
+	</fieldset>
+	<br/>
+	<jstl:if test="${pageContext.response.locale.language == 'es'}">
 
 		<b><spring:message code="followUp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
-	<br/>
-</jstl:if>
+		<br/>
+	</jstl:if>
 
-<jstl:if test="${pageContext.response.locale.language == 'en'}">
-	<b><spring:message code="followUp.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
-	<br/>
-</jstl:if>
-
-<b><spring:message code="followUp.summary"/>:&nbsp;</b><jstl:out value="${followUp.summary}"/>
-<br/>
-
-<b><spring:message code="followUp.text"/>:&nbsp;</b><jstl:out value="${followUp.text}"/>
-<br/>
-<b><spring:message code="article.picture"/></b>
-<jstl:forEach items="${followUp.pictures}" var="picture">
-	<img src="${picture.url}" width="500px" height="100%" />
-	<br/>
-</jstl:forEach>
-<br/>
-
+	<jstl:if test="${pageContext.response.locale.language == 'en'}">
+		<b><spring:message code="followUp.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
+		<br/>
+	</jstl:if>
+</fieldset>
 <br>
 <input type="button" name="cancel" value="<spring:message code="followUp.cancel" />"
 	   onclick="javascript: relativeRedir('followUp/list.do?articleId=${followUp.article.id}');" />

@@ -60,6 +60,7 @@ public class FollowUp extends DomainEntity {
         this.summary = summary;
 }
 
+    @Column(length = 1024)
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getText() {

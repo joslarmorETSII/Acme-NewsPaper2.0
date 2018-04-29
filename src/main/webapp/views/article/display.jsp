@@ -19,7 +19,6 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-
 <jstl:if test="${advertisement ne null}">
 	<fieldset>
 		<legend><b><spring:message code="general.advertisement"/></b> </legend>
@@ -73,3 +72,4 @@
 </fieldset>
 <input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
 	   onclick="javascript: relativeRedir('article/listAll.do');" />
+

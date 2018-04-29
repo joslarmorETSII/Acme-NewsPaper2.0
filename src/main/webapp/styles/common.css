@@ -24,3 +24,8 @@
 	margin-right: auto;
 	width: 50%;
 }
+
+.bg-1 {
+	background-color: #C0C0C0; /* Green */
+	color: #888888;
+}

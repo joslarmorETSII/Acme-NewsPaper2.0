@@ -450,7 +450,7 @@
 		<property name="description" value="The daily news is a newspaper based in Spain, Sevilla. Coverage, Technology, sports, entertainment news, celebrity gossip..."/>
 		<property name="picture" value="http://www.stl-horizon.com/wp-content/uploads/2017/05/technology-591103f20ff18.jpg"/>
 		<property name="published" value="true"/>
-		<property name="taboo" value="false"/>
+		<property name="taboo" value="true"/>
 		<property name="modePrivate" value="true"/>
 		<property name="publisher" ref="user1"/>
 
@@ -609,7 +609,7 @@ The Force Jacket, a garment from Disney Research, aims to address that gap. Made
 	<property name="newsPaper" ref="newsPaper1" />
 		<property name="followUps">
 			<list>
-				<null/>
+				<ref bean="followUp2"/>
 			</list>
 		</property>
 		<property name="pictures">
@@ -702,12 +702,14 @@ Diet and behavior vary, too. Many carnivores, for example, are top predators tha
 		</property>
 	</bean>
 	<bean id="article6" class="domain.Article">
-		<property name="title" value="El museo como centro educativo"/>
+		<property name="title" value="Deep South USA Music Triangle"/>
 		<property name="moment" value="01/04/2018 23:00"/>
-		<property name="summary" value="El director del Reina Sofía, el valenciano Manel Borja-Villel, defiende que la enseñanza del arte debería empezar por lo contemporáneo"/>
-		<property name="body" value="La función educativa de los museos no es algo nuevo. El primer director del MOMA de Nueva York, Alfred Barr, ya advertía en 1929, antes incluso de su apertura, que el museo “funcionará exclusivamente como una institución educativa”. Y un año después abundaba en esta idea al afirmar que el nuevo museo “poseerá un inestimable valor educativo, tanto para pintores en busca de ánimo e inspiración, como para estudiantes de cultura contemporánea e Historia del Arte, críticos en busca de cánones comparativos y público aficionado a contemplar cuadros, en general”."/>
+		<property name="summary" value="Soak up the atmosphere of three music cities: Nashville is country, Tupelo is the birthplace of Elvis and Memphis has soul."/>
+		<property name="body" value="Nashville, Tennessee
+Music City USA is still the capital of country music and bars and honky-tonks line downtown Broadway. There’s good music in the clubs and at the famous Grand Ole Opry. Elvis appeared on stage here early in his career and made many of his famous recordings at RCA studios.
+For more than 40 years, The Station Inn has presented great bluegrass, roots and Americana music. It’s a small unassuming venue in the heart of Nashville, an area known as the Gulch.  Many of the world’s most successful musicians have played at here, including Bill Monroe, Vince Gill, Alison Krauss and John Prine. What’s great is that it sells beer and pizza at pub prices and the admission prices are low."/>
 		<property name="finalMode" value="true"/>
-		<property name="taboo" value="false"/>
+		<property name="taboo" value="true"/>
 		<property name="newsPaper" ref="newsPaper4" />
 		<property name="followUps">
 			<list>
@@ -716,7 +718,7 @@ Diet and behavior vary, too. Many carnivores, for example, are top predators tha
 		</property>
 		<property name="pictures">
 			<list>
-				<ref bean="picture6" />
+				<ref bean="picture8" />
 			</list>
 		</property>
 	</bean>
@@ -733,6 +735,21 @@ Diet and behavior vary, too. Many carnivores, for example, are top predators tha
 			</list>
 		</property>
 		<property name="article" ref="article2" />
+	</bean>
+
+	<bean id="followUp2" class="domain.FollowUp">
+		<property name="title" value="Virtual reality surgery lets trainee doctors practise operations"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="A virtual reality simulator for training junior surgeons seems to make them better equipped to cut open real patients"/>
+		<property name="text" value="Osso VR is the leading, validated virtual reality surgical training platform designed for surgeons, sales teams, and hospital staff of all skill levels. Our product offers highly realistic hand-based interactions in an immersive training environments that contain the latest, cutting edge procedures and technology.
+Our award-winning training solutions are results-driven, allowing teams and individuals to not only train on the latest in medical device technology, but objectively measure their performance through our proprietary analytics platform and dashboards.
+The Osso VR team is currently focused on solving training gaps for orthopedic and spine therapies, but is also expanding into other specialties and procedures."/>
+		<property name="pictures">
+			<list>
+				<null />
+			</list>
+		</property>
+		<property name="article" ref="article1" />
 	</bean>
 
 	<!-- Picture -->
@@ -777,6 +794,17 @@ Diet and behavior vary, too. Many carnivores, for example, are top predators tha
         <property name="article" ref="article1"/>
         <property name="followUp"> <null /></property>
     </bean>
+	<bean id="picture8" class="domain.Picture">
+		<property name="url" value="http://www.thetravelmagazine.net/wp-content/uploads/The-Station-Inn.jpg"/>
+		<property name="article" ref="article6"/>
+		<property name="followUp"> <null /></property>
+	</bean>
+	<bean id="picture9" class="domain.Picture">
+		<property name="url" value="https://d1o50x50snmhul.cloudfront.net/wp-content/uploads/2018/03/03091436/vr-screenshot-6_preview.jpg"/>
+		<property name="article"> <null /></property>
+		<property name="followUp" ref="followUp2"/>
+	</bean>
+
 	<!-- Volume -->
 	<bean id="volume1" class="domain.Volume">
 		<property name="title" value="Title volume1"/>
