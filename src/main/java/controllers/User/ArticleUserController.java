@@ -80,6 +80,7 @@ public class ArticleUserController extends AbstractController{
         result.addObject("requestURI","article/user/list.do");
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+        result.addObject("allArticlesView",true);
 
         return result;
 

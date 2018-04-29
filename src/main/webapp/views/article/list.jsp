@@ -33,7 +33,7 @@
 
 	<security:authorize access="hasRole('USER')" >
 		<display:column>
-		<jstl:if test="${row.finalMode eq false}" >
+		<jstl:if test="${row.finalMode eq false and allArticlesView eq true}" >
 			<acme:button url="article/user/edit.do?articleId=${row.id}" code="article.edit" />
 		</jstl:if>
 		</display:column>
