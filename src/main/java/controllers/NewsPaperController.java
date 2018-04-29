@@ -105,6 +105,8 @@ public class NewsPaperController {
         ModelAndView result;
         NewsPaper newsPaper;
 
+
+
         newsPaper = this.newsPaperService.findOne(newsPaperId);
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);

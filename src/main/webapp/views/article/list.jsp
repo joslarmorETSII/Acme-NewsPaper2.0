@@ -54,12 +54,6 @@
 		</display:column>
 	</security:authorize>
 
-	<security:authorize access="isAuthenticated()" >
-		<display:column>
-			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
-		</display:column>
-	</security:authorize>
-
 	<security:authorize access="hasRole('USER')" >
 		<display:column>
 		<jstl:if test="${row.finalMode eq false}" >
@@ -91,10 +85,6 @@
 
 	<display:column>
 		<acme:button url="article/administrator/edit.do?articleId=${row2.id}" code="article.delete" />
-	</display:column>
-
-	<display:column>
-		<acme:button url="article/display.do?articleId=${row2.id}" code="article.display" />
 	</display:column>
 
 </display:table>

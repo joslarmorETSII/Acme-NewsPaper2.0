@@ -228,6 +228,7 @@
 			<list>
 				<ref bean="newsPaper1"/>
 				<ref bean="newsPaper3"/>
+				<ref bean="newsPaper4"/>
 			</list>
 		</property>
 		<property name="followings">
@@ -476,6 +477,37 @@
 		</property>
 	</bean>
 
+	<bean id="newsPaper4" class="domain.NewsPaper">
+		<property name="title" value="News Timer"/>
+		<property name="publicationDate" value="01/04/2018"/>
+		<property name="description" value="The daily news is a newspaper based in Spain, Sevilla. Coverage, Technology, sports, entertainment news, celebrity gossip..."/>
+		<property name="picture" value="http://www.stl-horizon.com/wp-content/uploads/2017/05/technology-591103f20ff18.jpg"/>
+		<property name="published" value="false"/>
+		<property name="taboo" value="false"/>
+		<property name="modePrivate" value="false"/>
+		<property name="publisher" ref="user1"/>
+
+		<property name="articles">
+			<list>
+				<ref bean="article6"/>
+			</list>
+		</property>
+		<property name="customers">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="volumes">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
 	<!-- Followers -->
 
 	<bean id="follower1" class="domain.User">
@@ -669,7 +701,25 @@ Diet and behavior vary, too. Many carnivores, for example, are top predators tha
 			</list>
 		</property>
 	</bean>
-
+	<bean id="article6" class="domain.Article">
+		<property name="title" value="El museo como centro educativo"/>
+		<property name="moment" value="01/04/2018 23:00"/>
+		<property name="summary" value="El director del Reina Sofía, el valenciano Manel Borja-Villel, defiende que la enseñanza del arte debería empezar por lo contemporáneo"/>
+		<property name="body" value="La función educativa de los museos no es algo nuevo. El primer director del MOMA de Nueva York, Alfred Barr, ya advertía en 1929, antes incluso de su apertura, que el museo “funcionará exclusivamente como una institución educativa”. Y un año después abundaba en esta idea al afirmar que el nuevo museo “poseerá un inestimable valor educativo, tanto para pintores en busca de ánimo e inspiración, como para estudiantes de cultura contemporánea e Historia del Arte, críticos en busca de cánones comparativos y público aficionado a contemplar cuadros, en general”."/>
+		<property name="finalMode" value="true"/>
+		<property name="taboo" value="false"/>
+		<property name="newsPaper" ref="newsPaper4" />
+		<property name="followUps">
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture6" />
+			</list>
+		</property>
+	</bean>
 	<!-- FollowUps -->
 
 	<bean id="followUp1" class="domain.FollowUp">
