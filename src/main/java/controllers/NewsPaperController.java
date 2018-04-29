@@ -127,4 +127,27 @@ public class NewsPaperController extends AbstractController {
 
         return result;
     }
+
+    @RequestMapping(value = "/displayAnonymous", method = RequestMethod.GET)
+    public ModelAndView displayAnonymous(@RequestParam int newsPaperId) {
+        ModelAndView result;
+        NewsPaper newsPaper;
+        Customer c ;
+        newsPaper = this.newsPaperService.findOne(newsPaperId);
+
+        Actor actor=actorService.findByPrincipal();
+        User publisher = newsPaper.getPublisher();
+        c = newsPaperService.customerOfNewsPaper(newsPaperId);
+
+
+            Assert.isTrue(!newsPaper.isModePrivate());
+
+
+        result = new ModelAndView("newsPaper/display");
+        result.addObject("newsPaper", newsPaper);
+        result.addObject("cancelURI", "newsPaper/listAll.do");
+
+
+        return result;
+    }
 }

@@ -87,9 +87,19 @@
     </security:authorize>
 
 
-        <display:column >
-             <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
-        </display:column>
+
+
+    <security:authorize access="hasRole('ANONYMOUS')" >
+    <display:column >
+        <acme:button url="newsPaper/displayAnonymous.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+    </display:column>
+    </security:authorize>
+
+    <display:column >
+        <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+    </display:column>
+
+
 
 
     <security:authorize access="hasRole('ADMINISTRATOR')" >
