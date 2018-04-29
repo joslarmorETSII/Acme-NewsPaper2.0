@@ -5,6 +5,7 @@ import domain.*;
 import forms.SubscribeForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -144,8 +145,7 @@ public class NewsPaperService {
         Collection<Article> articles= newsPaper.getArticles();
         Assert.isTrue(!newsPaper.getTaboo());
         for(Article a:articles){
-            Assert.isTrue(!a.getTaboo());
-            if(a.getFinalMode() && !a.getTaboo()){
+            if(a.getFinalMode()){
                 newsPaper.setPublished(true);
                 newsPaper.setPublicationDate(new Date());
                 a.setMoment(new Date());
@@ -304,6 +304,11 @@ public class NewsPaperService {
             res = adds.get(index);
         }
         return res;
+    }
+
+
+    public Customer customerOfNewsPaper(int newsPaperId){
+        return newsPaperRepository.customerOfNewsPaper(newsPaperId);
     }
 
 

@@ -1,10 +1,13 @@
 package controllers;
 
+import domain.Actor;
+import domain.Customer;
 import domain.NewsPaper;
 import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +23,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/newsPaper")
-public class NewsPaperController {
+public class NewsPaperController extends AbstractController {
 
     // Services --------------------------------------------
 
@@ -38,6 +41,8 @@ public class NewsPaperController {
     public NewsPaperController() {
         super();
     }
+
+
 
     // Listing -------------------------------------------------------
 
@@ -104,10 +109,17 @@ public class NewsPaperController {
     public ModelAndView display(@RequestParam int newsPaperId) {
         ModelAndView result;
         NewsPaper newsPaper;
-
-
-
+        Customer c ;
         newsPaper = this.newsPaperService.findOne(newsPaperId);
+
+        Actor actor=actorService.findByPrincipal();
+        User publisher = newsPaper.getPublisher();
+        c = newsPaperService.customerOfNewsPaper(newsPaperId);
+
+        if(!actor.equals(publisher) ){
+            Assert.isTrue(!newsPaper.isModePrivate());
+        }
+
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelURI", "newsPaper/listAll.do");

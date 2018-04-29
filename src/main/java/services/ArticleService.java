@@ -11,6 +11,7 @@ import security.Authority;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,6 +58,7 @@ public class ArticleService {
         Collection<FollowUp> followUps= new ArrayList<>();
         res= new Article();
         res.setFollowUps(followUps);
+        res.setMoment(new Date());
         return res;
     }
 
@@ -72,6 +74,7 @@ public class ArticleService {
         if(isTabooArticle(article)){
             article.setTaboo(true);
         }
+
         res = articleRepository.save(article);
         return res;
 

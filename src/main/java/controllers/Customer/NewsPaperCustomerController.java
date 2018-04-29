@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import repositories.NewsPaperRepository;
-import services.CreditCardService;
-import services.CustomerService;
-import services.NewsPaperService;
-import services.VolumeService;
+import services.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -40,6 +37,9 @@ public class NewsPaperCustomerController extends AbstractController{
 
     @Autowired
     private VolumeService   volumeService;
+
+    @Autowired
+    private ActorService actorService;
 
     // Listing  --------------------------------------------------------------
     //Listado de newspaper donde estoy suscrito
@@ -206,6 +206,29 @@ public class NewsPaperCustomerController extends AbstractController{
         result = new ModelAndView("customer/subscribeForm");
         result.addObject("subscribeForm", subscribeForm);
         result.addObject("message", messageCode);
+
+        return result;
+    }
+
+    // Display ----------------------------------------------------------------
+
+    @RequestMapping(value = "/display", method = RequestMethod.GET)
+    public ModelAndView display(@RequestParam int newsPaperId) {
+        ModelAndView result;
+        NewsPaper newsPaper;
+        Customer c ;
+        newsPaper = this.newsPaperService.findOne(newsPaperId);
+
+        Actor actor=actorService.findByPrincipal();
+
+        c = newsPaperService.customerOfNewsPaper(newsPaperId);
+
+        Assert.isTrue(actor.equals(c));
+
+         result = new ModelAndView("newsPaper/display");
+        result.addObject("newsPaper", newsPaper);
+        result.addObject("cancelURI", "newsPaper/listAll.do");
+
 
         return result;
     }

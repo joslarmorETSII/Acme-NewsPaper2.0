@@ -46,6 +46,14 @@ public class ArticleController extends AbstractController{
         String momentEs;
         String momentEn;
 
+
+
+
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        momentEs = formatterEs.format(new Date());
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        momentEn = formatterEn.format(new Date());
+
         article = this.articleService.findOne(articleId);
         Assert.notNull(article);
 
@@ -60,6 +68,8 @@ public class ArticleController extends AbstractController{
         result.addObject("advertisement",newsPaperService.selectRandomAdd(article));
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+
+
 
         return result;
     }

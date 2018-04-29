@@ -48,9 +48,11 @@
         <spring:message var="formatDate" code="event.format.date"/>
         <display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
 
-        <display:column >
-            <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
-        </display:column>
+        <security:authorize access="hasRole('CUSTOMER')" >
+            <display:column >
+                <acme:button url="newsPaper/customer/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+            </display:column>
+        </security:authorize>
 
         <security:authorize access="hasRole('CUSTOMER')">
             <display:column>

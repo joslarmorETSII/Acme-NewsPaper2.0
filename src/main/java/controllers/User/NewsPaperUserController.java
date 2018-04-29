@@ -1,9 +1,7 @@
 package controllers.User;
 
 import controllers.AbstractController;
-import domain.NewsPaper;
-import domain.User;
-import domain.Volume;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import services.ActorService;
 import services.NewsPaperService;
 import services.UserService;
 import services.VolumeService;
@@ -37,6 +36,8 @@ public class NewsPaperUserController extends AbstractController {
 
     @Autowired
     private VolumeService volumeService;
+
+
 
     // Constructor --------------------------------------------
 
@@ -191,9 +192,13 @@ public class NewsPaperUserController extends AbstractController {
     @RequestMapping(value = "/display", method = RequestMethod.GET)
     public ModelAndView display(@RequestParam final int newsPaperId) {
         ModelAndView result;
-        NewsPaper newsPaper;
+        NewsPaper newsPaper= null;
+
+
 
         newsPaper = this.newsPaperService.findOne(newsPaperId);
+
+        Assert.isTrue(!newsPaper.isModePrivate());
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelURI", "newsPaper/user/list.do");

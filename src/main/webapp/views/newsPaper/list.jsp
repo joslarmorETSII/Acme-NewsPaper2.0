@@ -35,7 +35,7 @@
 
     <jstl:set var="forPublish" value="true" />
     <jstl:forEach var="item" items="${row.articles}" >
-        <jstl:if test="${item.taboo eq true or item.finalMode eq false}" >
+        <jstl:if test="${ item.finalMode eq false}" >
                 <jstl:set var="forPublish" value="false" />
         </jstl:if>
     </jstl:forEach>
@@ -61,7 +61,7 @@
 
     <security:authorize access="hasRole('USER')">
         <display:column >
-            <jstl:if test="${ row.published ne true && !empty row.articles && forPublish eq true && row.taboo eq false}">
+            <jstl:if test="${ row.published ne true && !empty row.articles && forPublish eq true }">
                 <acme:button url="newsPaper/user/publish.do?newsPaperId=${row.id}" code="newsPaper.publish"/>
             </jstl:if>
             <jstl:if test="${row.published eq true}">
@@ -78,11 +78,19 @@
         </display:column>
     </security:authorize>
 
+    <security:authorize access="hasRole('USER')" >
     <display:column >
         <jstl:if test="${row.modePrivate eq false or row.publisher eq user }">
             <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
         </jstl:if>
     </display:column>
+    </security:authorize>
+
+    <security:authorize access="hasRole('CUSTOMER')" >
+        <display:column >
+             <acme:button url="newsPaper/customer/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        </display:column>
+    </security:authorize>
 
     <security:authorize access="hasRole('ADMINISTRATOR')" >
         <display:column>
