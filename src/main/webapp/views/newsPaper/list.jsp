@@ -86,11 +86,11 @@
     </display:column>
     </security:authorize>
 
-    <security:authorize access="hasRole('CUSTOMER')" >
+
         <display:column >
-             <acme:button url="newsPaper/customer/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+             <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
         </display:column>
-    </security:authorize>
+
 
     <security:authorize access="hasRole('ADMINISTRATOR')" >
         <display:column>
