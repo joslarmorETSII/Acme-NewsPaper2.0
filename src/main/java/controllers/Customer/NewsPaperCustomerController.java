@@ -144,7 +144,7 @@ public class NewsPaperCustomerController extends AbstractController{
             if (binding.hasErrors())
                 result = this.createEditModelAndView2(subscribeForm, "general.commit.error");
             else {
-                result = new ModelAndView("redirect:list.do");
+                result = new ModelAndView("redirect:listNewsPaperCustomer.do");
                 customer = customerService.findByPrincipal();
                 newsPaper = subscribeForm.getNewsPaper();
                 newsPaper.getCustomers().add(customer);
@@ -169,7 +169,7 @@ public class NewsPaperCustomerController extends AbstractController{
         try{
 
             newsPaperService.unsuscribe(newsPaper);
-            result = new ModelAndView("redirect:listAllVolumes.do");
+            result = new ModelAndView("redirect:list.do");
         }catch (Throwable oops){
             result = createEditModelAndView(newsPaper,"general.commit.error");
         }
