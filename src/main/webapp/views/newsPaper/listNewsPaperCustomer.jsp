@@ -56,9 +56,7 @@
 
         <security:authorize access="hasRole('CUSTOMER')">
             <display:column>
-                <jstl:if test="${contiene eq true}">
                     <acme:button url="newsPaper/customer/unsubscribe.do?newsPaperId=${newspaper.id}" code="newsPaper.unsubscribe"/>
-                </jstl:if>
             </display:column>
         </security:authorize>
 
