@@ -96,6 +96,8 @@
     </security:authorize>
 
 
+
+
     <security:authorize access="hasRole('ADMINISTRATOR')" >
         <display:column>
             <acme:button url="newsPaper/administrator/edit.do?newsPaperId=${row.id}" code="newsPaper.delete" />
