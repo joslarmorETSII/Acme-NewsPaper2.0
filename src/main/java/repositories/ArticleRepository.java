@@ -13,7 +13,7 @@ public interface ArticleRepository extends JpaRepository<Article,Integer> {
 
     @Query("select a from NewsPaper n join n.articles a where n.publisher=?1")
     Collection<Article> findArticlesByUser(User user);
-    @Query("select a from Article a where a.newsPaper.published = true")
+    @Query("select a from Article a where a.finalMode = true and a.newsPaper.published = true ")
     Collection<Article> findPublishArticles();
 
     @Query("select n.articles from NewsPaper n where n.publisher.id = ?1 and n.published=true")
