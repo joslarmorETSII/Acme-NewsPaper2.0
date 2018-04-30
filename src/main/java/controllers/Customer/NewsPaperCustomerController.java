@@ -223,6 +223,7 @@ public class NewsPaperCustomerController extends AbstractController{
 
         c = newsPaperService.customerOfNewsPaper(newsPaperId);
 
+
         Assert.isTrue(actor.equals(c));
 
          result = new ModelAndView("newsPaper/display");

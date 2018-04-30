@@ -29,6 +29,11 @@
             </jstl:if>
         </display:column>
 
+        <security:authorize access="hasRole('CUSTOMER')" >
+        <display:column>
+                <acme:button url="newsPaper/customer/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+        </display:column>
+        </security:authorize>
     </display:table>
 
 <input type="button" value="<spring:message code="newsPaper.cancel" /> " onclick="goBack()">
