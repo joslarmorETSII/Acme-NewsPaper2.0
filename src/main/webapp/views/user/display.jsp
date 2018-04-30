@@ -29,7 +29,9 @@
 <br/>
 <br/>
 <fieldset>
-    <h1><spring:message code="user.name"/>:&nbsp;<jstl:out value="${user.name}" /></h1>
+    <h1><spring:message code="user.nameAccount"/>:&nbsp;<jstl:out value="${user.userAccount.username}" /></h1>
+
+    <b><spring:message code="user.name"/>:&nbsp;<jstl:out value="${user.name}" /></b>
     <br/>
 
     <b><spring:message code="user.surname"/>:&nbsp;</b><jstl:out value="${user.surname}" />

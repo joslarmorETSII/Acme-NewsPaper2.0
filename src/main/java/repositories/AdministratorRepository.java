@@ -94,8 +94,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     @Query("select count(c1.newsPapers.size)*1.0 /(select count(c2)*1.0 from Customer c2) from Customer c1 where c1.newsPapers.size > 0")
     Double ratioPrivateNewsPapersVsCustomers();
 
-    // 17- The ratio of users who have posted above 75% the average number of chirps per user.
-    @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.modePrivate = false) from NewsPaper n1 where n1.modePrivate = true group by n1.publisher")
+//    // 17- The ratio of users who have posted above 75% the average number of chirps per user.
+    @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.modePrivate = false) from NewsPaper n1 where n1.modePrivate = true")
     Double ratioPrivateNewsPapersVsPublicPerPublisher();
 
     // ########################  QUERIES LEVEL C  NEWSPAPER 2################################
@@ -111,7 +111,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     // ########################  QUERIES LEVEL B  NEWSPAPER 2################################
 
     //20- The average number of newspapers per volume.
-    @Query("select avg(v.newsPapers.size) from Volume v group by v")
+    @Query("select avg(v.newsPapers.size) from Volume v")
     Double avgNewsPapersPerVolume();
 
     //21- The ratio of subscriptions to volumes versus subscriptions to newspapers.
