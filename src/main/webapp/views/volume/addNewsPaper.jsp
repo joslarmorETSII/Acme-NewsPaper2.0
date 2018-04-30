@@ -18,6 +18,7 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jstl:if test="${not empty newsPapers}">
 <form:form action="${actionUri}" modelAttribute="volume" >
 
     <form:hidden path="id"/>
@@ -28,9 +29,11 @@
     <br />
 
     <acme:submit name="save" code="volume.save"/>
-
     <acme:cancel code="volume.cancel" url="volume/user/list.do"/>
 
-
 </form:form>
+</jstl:if>
+<jstl:if test="${empty newsPapers}">
+    <spring:message code="advertisement.NoNewsPapers"/>
+</jstl:if>
 
