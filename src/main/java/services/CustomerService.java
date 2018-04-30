@@ -155,10 +155,10 @@ public class CustomerService {
         else
             result = false;
 
-        if (!result) {
+        if (!result && password.length()>=4 && passwordRepeat.length()>=4) {
             codigos = new String[1];
             codigos[0] = "customer.password.mismatch";
-            error = new FieldError("userForm", "password", password, false, codigos, null, "password mismatch");
+            error = new FieldError("userForm", "repeatPassword", password, false, codigos, null, "password mismatch");
             binding.addError(error);
         }
 

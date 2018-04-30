@@ -98,6 +98,7 @@ public abstract class Actor extends DomainEntity {
         this.userAccount = userAccount;
     }
 
+    @Valid
     @OneToOne(optional = true)
     public CreditCard getCreditCard() {
         return creditCard;

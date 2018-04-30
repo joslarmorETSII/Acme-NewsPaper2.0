@@ -167,7 +167,7 @@
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holder" value="Holder 2" />
 		<property name="brand" value="visa" />
-		<property name="number" value="4785 5308 6052 0625" />
+		<property name="number" value="4785530860520625" />
 		<property name="expirationMonth" value="12" />
 		<property name="expirationYear" value="2018" />
 		<property name="cvv" value="123" />
@@ -176,7 +176,7 @@
 	<bean id="creditCard3" class="domain.CreditCard">
 		<property name="holder" value="Holder 2" />
 		<property name="brand" value="visa" />
-		<property name="number" value="4785 5308 6052 0625" />
+		<property name="number" value="4785530860520625" />
 		<property name="expirationMonth" value="12" />
 		<property name="expirationYear" value="2018" />
 		<property name="cvv" value="123" />
@@ -185,7 +185,7 @@
 	<bean id="creditCard4" class="domain.CreditCard">
 		<property name="holder" value="Holder 2" />
 		<property name="brand" value="visa" />
-		<property name="number" value="4785 5308 6052 0625" />
+		<property name="number" value="4785530860520625" />
 		<property name="expirationMonth" value="12" />
 		<property name="expirationYear" value="2018" />
 		<property name="cvv" value="123" />
@@ -194,7 +194,7 @@
 	<bean id="creditCard5" class="domain.CreditCard">
 		<property name="holder" value="Holder 2" />
 		<property name="brand" value="visa" />
-		<property name="number" value="4785 5308 6052 0625" />
+		<property name="number" value="4785530860520625" />
 		<property name="expirationMonth" value="12" />
 		<property name="expirationYear" value="2018" />
 		<property name="cvv" value="123" />
@@ -203,7 +203,7 @@
 	<bean id="creditCard6" class="domain.CreditCard">
 		<property name="holder" value="Holder 2" />
 		<property name="brand" value="visa" />
-		<property name="number" value="4785 5308 6052 0625" />
+		<property name="number" value="4785530860520625" />
 		<property name="expirationMonth" value="12" />
 		<property name="expirationYear" value="2018" />
 		<property name="cvv" value="123" />

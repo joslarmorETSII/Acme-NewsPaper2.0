@@ -5,6 +5,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
@@ -48,9 +49,8 @@ public class CreditCard extends DomainEntity {
         this.brand = brand;
     }
 
-    @NotBlank
+    @Pattern(regexp = "^\\d+$")
     @CreditCardNumber
-    @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getNumber() {
         return this.number;
     }

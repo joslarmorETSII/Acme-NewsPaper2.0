@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class SubscribeForm {
 
@@ -59,6 +60,7 @@ public class SubscribeForm {
 
     @NotBlank
     @CreditCardNumber
+    @Pattern(regexp = "\\d+")
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getNumber() {
         return number;
