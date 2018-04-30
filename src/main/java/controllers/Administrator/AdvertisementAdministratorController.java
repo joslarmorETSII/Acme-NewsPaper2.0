@@ -51,6 +51,8 @@ public class AdvertisementAdministratorController extends AbstractController{
 
         result.addObject("advertisements", allAdvertisement);
         result.addObject("tabooAdvertisements",tabooAdvertisement);
+        result.addObject("requestURI","advertisement/administrator/list.do");
+
 
         return result;
     }

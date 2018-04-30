@@ -125,6 +125,7 @@ public class AdvertisementAgentController extends AbstractController {
         principal = agentService.findByPrincipal();
         result = new ModelAndView("advertisement/list");
         result.addObject("advertisements",principal.getAdvertisements());
+        result.addObject("requestURI","advertisement/agent/list.do");
         return result;
     }
 

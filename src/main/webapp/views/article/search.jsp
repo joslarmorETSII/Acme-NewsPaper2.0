@@ -32,7 +32,8 @@
 <br/>
 <br/>
 <fieldset>
-<display:table name="articles" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
+	<legend><spring:message code="newsPaper.listArticles"/> </legend>
+	<display:table name="articles" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
 
 	<acme:column code="article.title" value="${row.title}" />
 	<spring:message var="moment" code="article.moment"/>
@@ -49,12 +50,16 @@
 	</security:authorize>
 
 		<display:column>
-			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+			<jstl:if test="${newspaper.modePrivate eq  false}">
+				<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+			</jstl:if>
 		</display:column>
 </display:table>
 </fieldset>
 <br/>
+<br/>
 <fieldset>
+	<legend><spring:message code="article.newsPaper"/> </legend>
 <display:table name="newsPapers" id="newspaper" pagesize="10" class="displaytag" requestURI="${requestUri}">
 
 	<acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
@@ -68,7 +73,9 @@
 	<display:column property="publicationDate" title="${publicationDate}" format="${formatDate2}" sortable="true" />
 
 	<display:column >
-		<acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+		<jstl:if test="${newspaper.modePrivate eq  false}">
+			<acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+		</jstl:if>
 	</display:column>
 
 </display:table>
