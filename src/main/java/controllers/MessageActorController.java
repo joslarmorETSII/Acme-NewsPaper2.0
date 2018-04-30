@@ -124,6 +124,7 @@ public class MessageActorController extends AbstractController {
 
             result = new ModelAndView("redirect:/folder/actor/list.do");
         } catch (final Exception e) {
+            // TODO: Arreglar todo
             result = new ModelAndView("redirect:/panic/misc.do");
         }
 
