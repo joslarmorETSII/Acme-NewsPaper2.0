@@ -136,6 +136,11 @@ public class CreditCardService {
             codigos[0] = "creditCard.month.expired";
             error = new FieldError("registerAdvertisementForm", "expirationMonth", month, false, codigos, null, "must not expire this month");
             binding.addError(error);
+        }if (!result && actualYear.equals(year) && month<actualMonth){
+            codigos = new String[1];
+            codigos[0] = "creditCard.month.invalid";
+            error = new FieldError("registerAdvertisementForm", "expirationMonth", month, false, codigos, null, "should not be in the past");
+            binding.addError(error);
         }
 
         return result;

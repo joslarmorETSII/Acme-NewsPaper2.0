@@ -46,6 +46,8 @@ public class AgentService {
     @Autowired
     private NewsPaperService newsPaperService;
 
+
+
     // Constructors -----------------------------------------------------------
 
     public AgentService() { super();
