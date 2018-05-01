@@ -1,10 +1,7 @@
 package controllers.User;
 
 import controllers.AbstractController;
-import domain.Article;
-import domain.NewsPaper;
-import domain.User;
-import domain.Volume;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -13,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.ArticleService;
-import services.NewsPaperService;
-import services.UserService;
-import services.VolumeService;
+import services.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -36,6 +30,9 @@ public class VolumeUserController extends AbstractController{
 
     @Autowired
     private NewsPaperService newsPaperService;
+
+    @Autowired
+    private CustomerService customerService;
 
     // Constructor --------------------------------------------
 
@@ -105,8 +102,7 @@ public class VolumeUserController extends AbstractController{
     @RequestMapping(value = "/addNewsPaper", method = RequestMethod.POST, params = "save")
     public ModelAndView saveN(Volume volumePruned, final BindingResult binding) {
         ModelAndView result;
-
-
+        Collection<NewsPaper> newsPapers;
 
             try {
                 Volume volume = this.volumeService.reconstructAddNewsPaper(volumePruned,binding);
@@ -115,6 +111,15 @@ public class VolumeUserController extends AbstractController{
                     result = this.createEditModelAndView2(volumePruned);
                 }
                 else{
+                    newsPapers = volumePruned.getNewsPapers();
+                    for(NewsPaper n: newsPapers){
+                        if(n.isModePrivate()){
+                            for(Customer c: volume.getCustomers()){
+                                c.getNewsPapers().add(n);
+                                n.getCustomers().add(c);
+                            }
+                        }
+                    }
                     this.volumeService.save(volume);
                     result = new ModelAndView("redirect:list.do");
                 }

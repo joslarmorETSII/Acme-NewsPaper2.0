@@ -142,7 +142,7 @@ public class NewsPaperCustomerController extends AbstractController{
             CreditCard creditCard = customerService.reconstructSubscribe(subscribeForm, binding);
 
             if (binding.hasErrors())
-                result = this.createEditModelAndView2(subscribeForm, "general.commit.error");
+                result = this.createEditModelAndView2(subscribeForm, null);
             else {
                 result = new ModelAndView("redirect:listNewsPaperCustomer.do");
                 customer = customerService.findByPrincipal();
