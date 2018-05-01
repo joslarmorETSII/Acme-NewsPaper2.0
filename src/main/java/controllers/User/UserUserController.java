@@ -115,7 +115,7 @@ public class UserUserController extends AbstractController{
         result = new ModelAndView("user/following");
         result.addObject("users", principal.getFollowings());
 
-        result.addObject("requestURI", "list-following.do");
+        result.addObject("requestURI", "user/user/list-following.do");
         return result;
 
     }

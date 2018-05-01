@@ -82,7 +82,7 @@ public class FollowUpUserController extends AbstractController {
         result = new ModelAndView("followUp/listUser");
         result.addObject("followUps", followUps);
         result.addObject("user",user);
-        result.addObject("requestUri","followUp/user/list.do");
+        result.addObject("requestURI","followUp/user/list.do");
 
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
