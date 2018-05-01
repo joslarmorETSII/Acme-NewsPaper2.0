@@ -44,8 +44,11 @@
         <display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
 
         <display:column >
+            <jstl:if test="${newspaper.modePrivate eq false}">
             <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+            </jstl:if>
         </display:column>
+
 
     </display:table>
 
