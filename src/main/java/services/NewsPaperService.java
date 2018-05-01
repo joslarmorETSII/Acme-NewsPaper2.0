@@ -143,7 +143,6 @@ public class NewsPaperService {
 
     public void findOneToPublish(NewsPaper newsPaper){
         Collection<Article> articles= newsPaper.getArticles();
-        Assert.isTrue(!newsPaper.getTaboo());
         for(Article a:articles){
             if(a.getFinalMode()){
                 newsPaper.setPublished(true);

@@ -102,6 +102,7 @@ public class NewsPaperCustomerController extends AbstractController{
         result.addObject("newsPapers", newsPapers);
         result.addObject("requestUri","newsPaper/listNewsPapersPerVolume.do");
         result.addObject("volumeContieneNewspaper", volumeContieneNewspaper);
+        result.addObject("customer",customerService.findByPrincipal());
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
 

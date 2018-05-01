@@ -19,6 +19,14 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
     <display:table id="newspaper" name="newsPapers" requestURI="${requestURI}" pagesize="5">
+        <security:authorize access="hasRole('CUSTOMER')" >
+            <jstl:set var="suscrito" value="false"/>
+            <jstl:forEach items="${customer.newsPapers}" var="customerNPs">
+                <jstl:if test="${customerNPs eq newspaper or newspaper.modePrivate eq false}">
+                    <jstl:set var="suscrito" value="True"/>
+                </jstl:if>
+            </jstl:forEach>
+        </security:authorize>
 
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
         <acme:column code="newsPaper.title" value="${newspaper.title}"/>
@@ -33,7 +41,9 @@
 
         <security:authorize access="hasRole('CUSTOMER')" >
         <display:column>
+            <jstl:if test="${suscrito}">
                 <acme:button url="newsPaper/customer/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+            </jstl:if>
         </display:column>
         </security:authorize>
     </display:table>
