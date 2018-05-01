@@ -44,6 +44,7 @@ public class NewsPaperAgentController extends AbstractController {
 
         result.addObject("newsPapersWithAdds", newsPaperService.findNewsPaperPlacedAdvertisement(agent.getId()));
         result.addObject("newsPapersWithNoAdds",newsPaperService.newsPapersWithNoAdds());
+        result.addObject("requestURI","/newsPaper/agent/list.do");
 
         return result;
     }

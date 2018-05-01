@@ -59,6 +59,7 @@ public class WelcomeController extends AbstractController {
 		momentEn = formatterEn.format(new Date());
 
 		HttpSession session = request.getSession();
+		String url = request.getRequestURI();
 		session.setAttribute("nameOfbusiness",configuration.getName());
 
 		result = new ModelAndView("welcome/index");
