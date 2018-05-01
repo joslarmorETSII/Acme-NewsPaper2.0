@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class SubscribeVolumeForm {
 
@@ -59,6 +60,7 @@ public class SubscribeVolumeForm {
     }
 
     @NotBlank
+    @Pattern(regexp = "^\\d+$")
     @CreditCardNumber
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getNumber() {

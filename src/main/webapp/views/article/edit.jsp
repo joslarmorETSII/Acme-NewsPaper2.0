@@ -17,6 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<jstl:if test="${not empty newsPapers}">
 <form:form action="${actionUri}" modelAttribute="article" >
 
 	<form:hidden path="id"/>
@@ -52,7 +53,10 @@
 	<acme:cancel code="article.cancel" url="article/listAll.do"/>
 
 </form:form>
-
+</jstl:if>
+<jstl:if test="${ empty newsPapers}">
+	<spring:message code="general.create.newspaper"/>
+</jstl:if>
 
 
 

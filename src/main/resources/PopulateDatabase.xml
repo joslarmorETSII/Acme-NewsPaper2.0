@@ -624,7 +624,7 @@ The Force Jacket, a garment from Disney Research, aims to address that gap. Made
 		<property name="moment" value="01/04/2018 23:00"/>
 		<property name="summary" value="ONS report reveals how house prices compare to local wages "/>
 		<property name="body" value="How expensive are homes near you? Official figures reveal properties now cost 7.8 times wages-this map lets you check your area"/>
-		<property name="finalMode" value="false"/>
+		<property name="finalMode" value="true"/>
 		<property name="taboo" value="false"/>
 		<property name="newsPaper" ref="newsPaper3" />
 		<property name="followUps">
@@ -645,7 +645,7 @@ The Force Jacket, a garment from Disney Research, aims to address that gap. Made
 		<property name="summary" value="How to invest for income: What you need to know about shares, bonds and why dividends matter"/>
 		<property name="body" value="Investing for income can be about harnessing the power of dividends to boost your investment returns, or using the stock market and bonds to increase the money you have to spend.
 		In our new series on investing for income, James Norton, senior investment planner at Vanguard, will explain what you need to know, the investments to look for and the pitfalls to avoid."/>
-		<property name="finalMode" value="false"/>
+		<property name="finalMode" value="true"/>
 		<property name="taboo" value="true"/>
 		<property name="newsPaper" ref="newsPaper3" />
 		<property name="followUps">
@@ -1168,6 +1168,20 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 			<list />
 		</property>
 		<property name="actor" ref="following1" />
+	</bean>
+
+	<bean id="search1" class="domain.Search">
+		<property name="keyword" value=""/>
+		<property name="articles" >
+			<list>
+				<null/>
+			</list>
+		</property>
+		<property name="newsPapers" >
+			<list>
+				<null/>
+			</list>
+		</property>
 	</bean>
 
 </beans>

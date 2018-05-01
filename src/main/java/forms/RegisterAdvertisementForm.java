@@ -99,6 +99,7 @@ public class RegisterAdvertisementForm {
 
     @NotBlank
     @CreditCardNumber
+    @Pattern(regexp = "^\\d+$")
     @SafeHtml(whitelistType = WhiteListType.NONE)
     public String getNumber() {
         return number;

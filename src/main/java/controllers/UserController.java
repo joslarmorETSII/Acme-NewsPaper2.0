@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.ArticleService;
 import services.NewsPaperService;
+import services.SearchService;
 import services.UserService;
 
 import javax.validation.Valid;
@@ -33,6 +34,9 @@ public class UserController extends AbstractController{
 
     @Autowired
     private NewsPaperService    newsPaperService;
+
+    @Autowired
+    private SearchService searchService;
 
     // Constructor -----------------------------------------
     public UserController() {
@@ -114,6 +118,7 @@ public class UserController extends AbstractController{
         ModelAndView result;
         Collection<Article> articles;
         Collection<NewsPaper> newsPapers;
+        Search searchSystem;
 
         if(bindingResult.hasErrors()){
             return createModelAndView(search);
@@ -122,12 +127,16 @@ public class UserController extends AbstractController{
             result = new ModelAndView("article/search");
             articles = articleService.findbyTitleAndBodyAndSummary(search.getKeyword());
             newsPapers = newsPaperService.searchNewspapers(search.getKeyword());
+            searchSystem = searchService.getSearch();
+            searchSystem.setNewsPapers(newsPapers);
+            searchSystem.setArticles(articles);
+            searchService.save(searchSystem);
 
             result.addObject("articles", articles);
             result.addObject("newsPapers",newsPapers);
             result.addObject("requestURI", "user/search.do");
         }catch (Throwable oops){
-            return createModelAndView(search,"general.error");
+            return createModelAndView(search,"general.commit.error");
         }
         return result;
     }
@@ -137,9 +146,11 @@ public class UserController extends AbstractController{
         ModelAndView result;
 
         result = new ModelAndView("article/search");
-        Search search = new Search();
+        Search search = searchService.getSearch();
 
-        result.addObject("search",search);
+        result.addObject("search", search);
+        result.addObject("articles", search.getArticles());
+        result.addObject("newsPapers",search.getNewsPapers());
         result.addObject("requestURI", "user/search.do");
 
         return result;

@@ -26,6 +26,9 @@
 </jstl:if>
 
 <form:form action="user/search.do" modelAttribute="search">
+	<form:hidden path="articles"/>
+	<form:hidden path="newsPapers"/>
+
 	<form:input path="keyword"/>
 	<acme:submit name="search" code="master.page.search"/>
 </form:form>

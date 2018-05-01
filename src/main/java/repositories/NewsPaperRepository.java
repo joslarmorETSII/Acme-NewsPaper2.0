@@ -19,7 +19,7 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
     @Query("select n from NewsPaper n where n.publisher.id=?1 AND n.published = FALSE")
     Collection<NewsPaper> findAllNewsPaperByUserAndNotPublished(int userId);
 
-    @Query("select n from NewsPaper n where n.title like %?1% or n.description like %?2%")
+    @Query("select n from NewsPaper n where (n.title like %?1% or n.description like %?2%) and n.published=true")
     Collection<NewsPaper> searchNewspapers(String title,String description);
 
     @Query("select n from NewsPaper n where n.taboo =true")
