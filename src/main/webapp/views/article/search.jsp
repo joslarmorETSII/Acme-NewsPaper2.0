@@ -48,16 +48,19 @@
 
 	<security:authorize access="hasRole('ADMINISTRATOR')" >
 		<display:column>
-			<acme:button url="article/administrator/edit.do?articleId=${row.id}" code="article.delete" />
+			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
 		</display:column>
 	</security:authorize>
 
-		<display:column>
-			<jstl:if test="${newspaper.modePrivate eq  false}">
-				<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
-			</jstl:if>
-		</display:column>
-</display:table>
+	<security:authorize access="!hasRole('ADMINISTRATOR')" >
+	<display:column>
+		<jstl:if test="${row.newsPaper.modePrivate eq false}">
+			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+		</jstl:if>
+	</display:column>
+	</security:authorize>
+
+	</display:table>
 </fieldset>
 <br/>
 <br/>
@@ -75,11 +78,30 @@
 	<spring:message var="formatDate2" code="event.format.date"/>
 	<display:column property="publicationDate" title="${publicationDate}" format="${formatDate2}" sortable="true" />
 
-	<display:column >
-		<jstl:if test="${newspaper.modePrivate eq  false}">
-			<acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
-		</jstl:if>
-	</display:column>
+
+	<security:authorize access="hasRole('USER')" >
+		<display:column >
+			<jstl:if test="${newspaper.modePrivate eq false }">
+				<acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+
+
+	<security:authorize access="isAnonymous()||hasAnyRole('AGENT','CUSTOMER')">
+		<display:column >
+			<jstl:if test="${newspaper.modePrivate eq false}">
+				<acme:button url="newsPaper/displayAnonymous.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+
+	<security:authorize access="hasRole('ADMINISTRATOR')" >
+		<display:column>
+				<acme:button url="newsPaper/administrator/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
+		</display:column>
+	</security:authorize>
+
 
 </display:table>
 </fieldset>
