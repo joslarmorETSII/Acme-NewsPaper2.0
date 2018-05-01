@@ -124,7 +124,7 @@
     <display:column property="publicationDate" title="${publicationDate}" format="${formatDate}" sortable="true" />
 
     <display:column >
-        <acme:button url="newsPaper/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        <acme:button url="newsPaper/administrator/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
     </display:column>
 
     <display:column>

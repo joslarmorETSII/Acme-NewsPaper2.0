@@ -23,11 +23,13 @@
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
         <acme:column code="newsPaper.title" value="${newspaper.title}"/>
 
+        <security:authorize access="hasRole('USER')" >
         <display:column>
-            <jstl:if test="${volumeContieneNewspaper eq true or newspaper.modePrivate eq false or newspaper.publisher eq user}">
+            <jstl:if test="${volumeContieneNewspaper eq true or newspaper.publisher eq user}">
                 <acme:button url="newsPaper/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
             </jstl:if>
         </display:column>
+        </security:authorize>
 
         <security:authorize access="hasRole('CUSTOMER')" >
         <display:column>

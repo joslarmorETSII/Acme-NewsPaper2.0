@@ -2,16 +2,15 @@ package controllers.Administrator;
 
 
 import controllers.AbstractController;
-import domain.Administrator;
-import domain.Article;
-import domain.NewsPaper;
-import domain.User;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import services.ActorService;
 import services.AdministratorService;
 import services.NewsPaperService;
 import services.UserService;
@@ -33,6 +32,9 @@ public class NewsPaperAdministratorController extends AbstractController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ActorService actorService;
 
 
 
@@ -82,6 +84,30 @@ public class NewsPaperAdministratorController extends AbstractController {
         }catch (Throwable oops){
             result = createEditModelAndView(newsPaper,"article.commit.error");
         }
+
+        return result;
+    }
+
+    // Display ----------------------------------------------------------------
+
+    @RequestMapping(value = "/display", method = RequestMethod.GET)
+    public ModelAndView display(@RequestParam int newsPaperId) {
+        ModelAndView result;
+        NewsPaper newsPaper;
+
+        newsPaper = this.newsPaperService.findOne(newsPaperId);
+
+        Actor actor=actorService.findByPrincipal();
+
+        Administrator admin = administratorService.findByPrincipal();
+
+
+        Assert.isTrue(actor.equals(admin));
+
+        result = new ModelAndView("newsPaper/display");
+        result.addObject("newsPaper", newsPaper);
+        result.addObject("cancelURI", "newsPaper/listAll.do");
+
 
         return result;
     }
