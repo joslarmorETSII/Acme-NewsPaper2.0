@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -180,13 +182,15 @@ public class VolumeUserController extends AbstractController{
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<Volume> volumes = null;
 
         user = userService.findByPrincipal();
         volumes = user.getVolumes();
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession",request.getRequestURI());
 
         result = new ModelAndView("volume/list");
         result.addObject("volumes", volumes);

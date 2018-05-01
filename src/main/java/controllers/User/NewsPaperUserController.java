@@ -16,6 +16,7 @@ import services.UserService;
 import services.VolumeService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -79,6 +80,8 @@ public class NewsPaperUserController extends AbstractController {
         user = userService.findByPrincipal();
         newsPapers=user.getNewsPapers();
 
+
+
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapers);
         result.addObject("user",user);
@@ -92,7 +95,7 @@ public class NewsPaperUserController extends AbstractController {
     }
 
     @RequestMapping(value = "/listNewspaperUserVolume", method = RequestMethod.GET)
-    public ModelAndView listNewspaperUserVolume(@RequestParam int volumeId) {
+    public ModelAndView listNewspaperUserVolume(@RequestParam int volumeId,HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<NewsPaper> newsPapers=null;
@@ -111,12 +114,17 @@ public class NewsPaperUserController extends AbstractController {
         Volume volume =this.volumeService.findOne(volumeId);
         newsPapers = volume.getNewsPapers();
 
+        HttpSession session = request.getSession();
+
         result = new ModelAndView("newsPaper/listNewsPaperPerVolume");
         result.addObject("newsPapers", newsPapers);
         result.addObject("requestUri","newsPaper/user/listNewspaperUserVolume.do");
         result.addObject("user",user);
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+        result.addObject("cancelUriSession",session.getAttribute("cancelUriSession"));
+
+
 
         return result;
 

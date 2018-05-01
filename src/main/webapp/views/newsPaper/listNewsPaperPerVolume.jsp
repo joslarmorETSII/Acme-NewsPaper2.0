@@ -48,9 +48,5 @@
         </security:authorize>
     </display:table>
 
-<input type="button" value="<spring:message code="newsPaper.cancel" /> " onclick="goBack()">
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
+<acme:button code="general.cancel" url="${cancelUriSession}"/>
+
