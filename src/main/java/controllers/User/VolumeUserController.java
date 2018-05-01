@@ -146,7 +146,7 @@ public class VolumeUserController extends AbstractController{
     @RequestMapping(value = "/removeNewsPaper", method = RequestMethod.POST, params = "delete")
     public ModelAndView saveND(Volume volumePruned, final BindingResult binding) {
         ModelAndView result;
-
+        Collection<NewsPaper> newsPapersToRemove;
         try {
             Volume volume = this.volumeService.reconstructRemoveNewsPaper(volumePruned,binding);
 
@@ -154,6 +154,15 @@ public class VolumeUserController extends AbstractController{
                 result = this.createEditModelAndView3(volumePruned);
             }
             else{
+                newsPapersToRemove = volumePruned.getNewsPapers();
+                for(NewsPaper n: newsPapersToRemove){
+                    if(n.isModePrivate()){
+                        for(Customer c: volume.getCustomers()){
+                            c.getNewsPapers().remove(n);
+                            n.getCustomers().remove(c);
+                        }
+                    }
+                }
                 this.volumeService.save(volume);
                 result = new ModelAndView("redirect:list.do");
             }
