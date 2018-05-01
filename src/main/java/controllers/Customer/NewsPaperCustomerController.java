@@ -224,7 +224,7 @@ public class NewsPaperCustomerController extends AbstractController{
         c = newsPaperService.customerOfNewsPaper(newsPaperId);
 
 
-        Assert.isTrue(actor.equals(c));
+        Assert.isTrue(actor.equals(c) || !newsPaper.isModePrivate());
 
          result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
