@@ -52,6 +52,8 @@
 	<acme:button code="followUp.create" url="followUp/user/create.do"/>
 </security:authorize>
 
+<acme:button code="followUp.cancel" url="${cancelUri}"/>
+
 
 
 

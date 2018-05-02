@@ -54,11 +54,14 @@
 		</display:column>
 	</security:authorize>
 
-	<security:authorize access="isAuthenticated()" >
+
 		<display:column>
+			<jstl:if test="${row.newsPaper.modePrivate eq false}">
 			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+			</jstl:if>
 		</display:column>
-	</security:authorize>
+
+
 
 	<security:authorize access="hasRole('USER')" >
 		<display:column>
@@ -99,6 +102,8 @@
 <security:authorize access="hasRole('USER')">
 	<acme:button code="article.create" url="article/user/create.do"/>
 </security:authorize>
+
+<acme:button code="article.cancel" url="${cancelUri}"/>
 
 
 

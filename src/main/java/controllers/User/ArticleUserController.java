@@ -81,6 +81,7 @@ public class ArticleUserController extends AbstractController{
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
         result.addObject("allArticlesView",true);
+        result.addObject("cancelUri", "welcome/index.do");
 
         return result;
 
@@ -148,6 +149,7 @@ public class ArticleUserController extends AbstractController{
         result.addObject("newsPapers", newsPapers);
         result.addObject("actionUri","article/user/edit.do");
         result.addObject("message", messageCode);
+        result.addObject("cancelUri","article/user/list.do");
 
         return result;
     }

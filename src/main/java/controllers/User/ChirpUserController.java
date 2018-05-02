@@ -82,6 +82,7 @@ public class ChirpUserController extends AbstractController {
         result.addObject("requestURI", "chirp/user/list.do");
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+        result.addObject("cancelUri","welcome/index.do");
 
         return result;
 

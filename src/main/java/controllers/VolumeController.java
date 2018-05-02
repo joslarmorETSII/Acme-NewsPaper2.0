@@ -41,6 +41,7 @@ public class VolumeController extends AbstractController {
         result = new ModelAndView("volume/list");
         result.addObject("volumes", volumes);
         result.addObject("requestURI","volume/list.do");
+        result.addObject("cancelUri", "volume/list.do");
 
         return result;
 
