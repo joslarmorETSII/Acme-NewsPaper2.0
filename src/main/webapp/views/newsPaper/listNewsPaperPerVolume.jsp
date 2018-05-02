@@ -41,7 +41,7 @@
 
         <security:authorize access="hasRole('CUSTOMER')" >
         <display:column>
-            <jstl:if test="${suscrito}">
+            <jstl:if test="${suscrito or newspaper.modePrivate eq false}">
                 <acme:button url="newsPaper/customer/display.do?newsPaperId=${newspaper.id}" code="newsPaper.display"/>
             </jstl:if>
         </display:column>
