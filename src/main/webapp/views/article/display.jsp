@@ -70,6 +70,6 @@
 <br/>
 
 </fieldset>
-<input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
-	   onclick="javascript: relativeRedir('article/listAll.do');" />
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+	   onclick="javascript: relativeRedir('${cancelUriSession}');" />
 

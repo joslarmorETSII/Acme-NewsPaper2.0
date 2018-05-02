@@ -14,6 +14,8 @@ import services.ArticleService;
 import services.NewsPaperService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -42,16 +44,13 @@ public class ArticleController extends AbstractController{
     // Display ----------------------------------------------------------------
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam final int articleId) {
+    public ModelAndView display(@RequestParam final int articleId, HttpServletRequest request) {
         ModelAndView result;
         Article article;
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
         String momentEs;
         String momentEn;
-
-
-
 
         formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         momentEs = formatterEs.format(new Date());
@@ -66,14 +65,12 @@ public class ArticleController extends AbstractController{
         formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(article.getMoment());
 
-
         result = new ModelAndView("article/display");
         result.addObject("article", article);
         result.addObject("advertisement",newsPaperService.selectRandomAdd(article));
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
-
-
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
         return result;
     }

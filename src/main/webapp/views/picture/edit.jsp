@@ -33,8 +33,8 @@
 		<acme:submit name="delete" code="picture.delete"/>
 	</jstl:if>
 
-	<acme:cancel code="picture.cancel" url="welcome/index.do"/>
-
+	<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+		   onclick="javascript: relativeRedir('${cancelUriSession}');" />
 </form:form>
 
 

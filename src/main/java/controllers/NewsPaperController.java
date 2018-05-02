@@ -17,6 +17,8 @@ import services.NewsPaperService;
 import services.UserService;
 import services.VolumeService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -47,7 +49,7 @@ public class NewsPaperController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
 
         Collection<NewsPaper> newsPapers=null;
@@ -63,11 +65,12 @@ public class NewsPaperController extends AbstractController {
         momentEn = formatterEn.format(new Date());
         newsPapers=newsPaperService.findPublishedAndNotPrivateNewsPaper();
 
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapers);
         result.addObject("requestUri","newsPaper/listAll.do");
-
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
 
@@ -107,7 +110,7 @@ public class NewsPaperController extends AbstractController {
     // Display ----------------------------------------------------------------
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam int newsPaperId) {
+    public ModelAndView display(@RequestParam int newsPaperId, HttpServletRequest request) {
         ModelAndView result;
         NewsPaper newsPaper;
         Customer c ;
@@ -123,7 +126,7 @@ public class NewsPaperController extends AbstractController {
 
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
-        result.addObject("cancelURI", "newsPaper/listAll.do");
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
 
         return result;
