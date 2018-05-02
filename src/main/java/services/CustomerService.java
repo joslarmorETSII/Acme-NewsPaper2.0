@@ -59,6 +59,7 @@ public class CustomerService {
         result.setUserAccount(userAccountService.create("CUSTOMER"));
         result.setFolders(new ArrayList<Folder>());
         result.setVolumes(new ArrayList<Volume>());
+        result.setSearch(new Search());
 
         return result;
     }

@@ -86,6 +86,7 @@ public abstract class Actor extends DomainEntity {
     private UserAccount userAccount;
     private CreditCard creditCard;
     private Collection<Folder> folders;
+    private Search search;
 
 
     @NotNull
@@ -120,4 +121,12 @@ public abstract class Actor extends DomainEntity {
         this.folders = folders;
     }
 
+    @OneToOne(optional = false,cascade = CascadeType.ALL)
+    public Search getSearch() {
+        return search;
+    }
+
+    public void setSearch(Search search) {
+        this.search = search;
+    }
 }

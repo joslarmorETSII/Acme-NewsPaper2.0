@@ -2,10 +2,7 @@ package domain;
 
 import org.hibernate.validator.constraints.SafeHtml;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
@@ -33,7 +30,7 @@ public class Search extends DomainEntity{
     private Collection<NewsPaper> newsPapers;
     private Collection<Article>   articles;
 
-    @OneToMany
+    @ManyToMany
     public Collection<NewsPaper> getNewsPapers() {
         return newsPapers;
     }
@@ -42,7 +39,7 @@ public class Search extends DomainEntity{
         this.newsPapers = newsPapers;
     }
 
-    @OneToMany
+    @ManyToMany
     public Collection<Article> getArticles() {
         return articles;
     }

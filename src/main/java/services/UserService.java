@@ -55,6 +55,7 @@ public class UserService {
         result.setUserAccount(this.userAccountService.create("USER"));
         result.setVolumes(new ArrayList<Volume>());
         result.setFolders(new ArrayList<Folder>());
+        result.setSearch(new Search());
 
         return result;
     }
