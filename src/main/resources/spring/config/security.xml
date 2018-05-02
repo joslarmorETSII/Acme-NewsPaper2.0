@@ -91,9 +91,9 @@
 
 
 		<!-- User -->
-
+		<security:intercept-url pattern="/user/actor/search" access="isAuthenticated()" />
 		<security:intercept-url pattern="/user/user/**" access="hasRole('USER')" />
-        <security:intercept-url pattern="/user/**" access="permitAll()"/>
+		<security:intercept-url pattern="/user/**" access="permitAll()"/>
 
 		<!-- Terms and Conditions -->
 		<security:intercept-url pattern="/termAndCondition/**" access="permitAll()" />

@@ -30,10 +30,12 @@ public class UserService {
     @Autowired
     private ActorService actorService;
 
+
     // Supporting services ----------------------------------------------------
 
     @Autowired
     private UserAccountService userAccountService;
+
 
 
     // Constructors -----------------------------------------------------------
@@ -53,6 +55,7 @@ public class UserService {
         result.setUserAccount(this.userAccountService.create("USER"));
         result.setVolumes(new ArrayList<Volume>());
         result.setFolders(new ArrayList<Folder>());
+        result.setSearch(new Search());
 
         return result;
     }

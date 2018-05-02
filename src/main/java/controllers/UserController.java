@@ -1,9 +1,6 @@
 package controllers;
 
-import domain.Article;
-import domain.NewsPaper;
-import domain.Search;
-import domain.User;
+import domain.*;
 import forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.ArticleService;
-import services.NewsPaperService;
-import services.SearchService;
-import services.UserService;
+import services.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -37,6 +31,9 @@ public class UserController extends AbstractController{
 
     @Autowired
     private SearchService searchService;
+
+    @Autowired
+    private ActorService actorService;
 
     // Constructor -----------------------------------------
     public UserController() {
@@ -70,6 +67,7 @@ public class UserController extends AbstractController{
                 result = createEditModelAndView(userForm);
             else {
                 result = new ModelAndView("redirect:/welcome/index.do");
+
                 user = this.userService.save(user);
 
             }
@@ -128,6 +126,7 @@ public class UserController extends AbstractController{
             articles = articleService.findbyTitleAndBodyAndSummary(search.getKeyword());
             newsPapers = newsPaperService.searchNewspapers(search.getKeyword());
             searchSystem = searchService.getSearch();
+            //searchSystem.setKeyword(search.getKeyword());
             searchSystem.setNewsPapers(newsPapers);
             searchSystem.setArticles(articles);
             searchService.save(searchSystem);
@@ -152,6 +151,56 @@ public class UserController extends AbstractController{
         result.addObject("articles", search.getArticles());
         result.addObject("newsPapers",search.getNewsPapers());
         result.addObject("requestURI", "user/search.do");
+        result.addObject("cancelURI", "welcome/index.do");
+
+        return result;
+    }
+
+    // Search logueado ----------------
+    @RequestMapping(value = "/actor/search", method = RequestMethod.POST, params = "search")
+    public ModelAndView action3(@Valid Search search, BindingResult bindingResult) {
+        ModelAndView result;
+        Collection<Article> articles;
+        Collection<NewsPaper> newsPapers;
+        Search mySearch;
+        Actor principal;
+
+        if(bindingResult.hasErrors()){
+            return createModelAndView(search);
+        }else try {
+            result = new ModelAndView("article/search");
+
+            principal = actorService.findByPrincipal();
+            articles = articleService.findbyTitleAndBodyAndSummary(search.getKeyword());
+            newsPapers = newsPaperService.searchNewspapers(search.getKeyword());
+            mySearch = principal.getSearch();
+            mySearch.setKeyword(search.getKeyword());
+            mySearch.setNewsPapers(newsPapers);
+            mySearch.setArticles(articles);
+            searchService.save(mySearch);
+
+            result.addObject("articles", articles);
+            result.addObject("newsPapers",newsPapers);
+            result.addObject("requestURI", "user/actor/search.do");
+        }catch (Throwable oops){
+            return createModelAndView(search,"general.commit.error");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/actor/search", method = RequestMethod.GET)
+    public ModelAndView action4() {
+        ModelAndView result;
+        Actor principal;
+
+        result = new ModelAndView("article/search");
+        principal = actorService.findByPrincipal();
+        Search search = principal.getSearch();
+
+        result.addObject("search", search);
+        result.addObject("articles", search.getArticles());
+        result.addObject("newsPapers",search.getNewsPapers());
+        result.addObject("requestURI", "user/actor/search.do");
         result.addObject("cancelURI", "welcome/index.do");
 
         return result;
