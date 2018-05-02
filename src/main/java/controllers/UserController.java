@@ -166,12 +166,15 @@ public class UserController extends AbstractController{
 
     // Search logueado ----------------
     @RequestMapping(value = "/actor/search", method = RequestMethod.POST, params = "search")
-    public ModelAndView action3(@Valid Search search, BindingResult bindingResult) {
+    public ModelAndView action3(@Valid Search search, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView result;
         Collection<Article> articles;
         Collection<NewsPaper> newsPapers;
         Search mySearch;
         Actor principal;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         if(bindingResult.hasErrors()){
             return createModelAndView(search);
@@ -197,9 +200,12 @@ public class UserController extends AbstractController{
     }
 
     @RequestMapping(value = "/actor/search", method = RequestMethod.GET)
-    public ModelAndView action4() {
+    public ModelAndView action4(HttpServletRequest request) {
         ModelAndView result;
         Actor principal;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("article/search");
         principal = actorService.findByPrincipal();
