@@ -220,7 +220,7 @@ public class NewsPaperCustomerController extends AbstractController{
     public ModelAndView display(@RequestParam int newsPaperId) {
         ModelAndView result;
         NewsPaper newsPaper;
-        Customer c ;
+        Collection<Customer> c ;
         newsPaper = this.newsPaperService.findOne(newsPaperId);
 
         Actor actor=actorService.findByPrincipal();
@@ -228,7 +228,7 @@ public class NewsPaperCustomerController extends AbstractController{
         c = newsPaperService.customerOfNewsPaper(newsPaperId);
 
 
-        Assert.isTrue(actor.equals(c) || !newsPaper.isModePrivate());
+        Assert.isTrue(c.contains(actor) || !newsPaper.isModePrivate());
 
          result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);

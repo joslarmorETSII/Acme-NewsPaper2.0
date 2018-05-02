@@ -113,12 +113,10 @@ public class NewsPaperController extends AbstractController {
     public ModelAndView display(@RequestParam int newsPaperId, HttpServletRequest request) {
         ModelAndView result;
         NewsPaper newsPaper;
-        Customer c ;
         newsPaper = this.newsPaperService.findOne(newsPaperId);
 
         Actor actor=actorService.findByPrincipal();
         User publisher = newsPaper.getPublisher();
-        c = newsPaperService.customerOfNewsPaper(newsPaperId);
 
         if(!actor.equals(publisher) ){
             Assert.isTrue(!newsPaper.isModePrivate());

@@ -38,6 +38,6 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
     Collection<NewsPaper> newsPapersWithNoAdds();
 
     @Query("select n.customers from NewsPaper n where n.id=?1")
-    Customer customerOfNewsPaper(int newsPaperId);
+    Collection<Customer> customerOfNewsPaper(int newsPaperId);
 
 }

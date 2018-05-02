@@ -306,7 +306,7 @@ public class NewsPaperService {
     }
 
 
-    public Customer customerOfNewsPaper(int newsPaperId){
+    public Collection<Customer> customerOfNewsPaper(int newsPaperId){
         return newsPaperRepository.customerOfNewsPaper(newsPaperId);
     }
 
