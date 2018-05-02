@@ -51,8 +51,7 @@
 </jstl:forEach>
 </fieldset>
 
-
 <br/>
 
-<input type="button" name="cancel" value="<spring:message code="chirp.cancel" />"
-       onclick="javascript: relativeRedir('${cancelURI}');" />
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+       onclick="javascript: relativeRedir('${cancelUriSession}');" />

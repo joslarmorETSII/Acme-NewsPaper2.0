@@ -62,7 +62,7 @@ public class NewsPaperUserController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<NewsPaper> newsPapers=null;
@@ -80,13 +80,13 @@ public class NewsPaperUserController extends AbstractController {
         user = userService.findByPrincipal();
         newsPapers=user.getNewsPapers();
 
-
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapers);
         result.addObject("user",user);
         result.addObject("requestUri","newsPaper/user/list.do");
-
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
 

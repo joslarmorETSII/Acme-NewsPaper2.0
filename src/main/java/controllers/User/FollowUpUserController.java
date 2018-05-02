@@ -17,6 +17,8 @@ import services.FollowUpService;
 import services.NewsPaperService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -61,7 +63,7 @@ public class FollowUpUserController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<FollowUp> followUps;
@@ -75,6 +77,9 @@ public class FollowUpUserController extends AbstractController {
         momentEs = formatterEs.format(new Date());
         formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         user = userService.findByPrincipal();
         followUps = followUpService.findFollowupsByUserId(user.getId());

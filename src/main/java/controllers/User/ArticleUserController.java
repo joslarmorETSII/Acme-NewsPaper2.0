@@ -16,6 +16,8 @@ import services.ArticleService;
 import services.NewsPaperService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -56,7 +58,7 @@ public class ArticleUserController extends AbstractController{
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<Article> articles=null;
@@ -66,6 +68,8 @@ public class ArticleUserController extends AbstractController{
         String momentEs;
         String momentEn;
 
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession",request.getRequestURI());
 
         formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         momentEs = formatterEs.format(new Date());
