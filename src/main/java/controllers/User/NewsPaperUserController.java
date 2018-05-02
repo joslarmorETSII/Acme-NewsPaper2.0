@@ -124,6 +124,7 @@ public class NewsPaperUserController extends AbstractController {
         result.addObject("momentEn", momentEn);
         result.addObject("cancelUriSession",session.getAttribute("cancelUriSession"));
 
+        session.setAttribute("cancelUriSession", request.getRequestURI()+ "?volumeId=" + volumeId);
 
 
         return result;
