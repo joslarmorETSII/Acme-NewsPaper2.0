@@ -23,7 +23,7 @@
             <jstl:set var="suscrito" value="false"/>
             <jstl:forEach items="${customer.newsPapers}" var="customerNPs">
                 <jstl:if test="${customerNPs eq newspaper or newspaper.modePrivate eq false}">
-                    <jstl:set var="suscrito" value="True"/>
+                    <jstl:set var="suscrito" value="true"/>
                 </jstl:if>
             </jstl:forEach>
         </security:authorize>
