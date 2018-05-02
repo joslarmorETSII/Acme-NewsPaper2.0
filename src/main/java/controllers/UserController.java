@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -112,11 +114,14 @@ public class UserController extends AbstractController{
     // Search ---------------------------------------------------------------
 
     @RequestMapping(value = "/search", method = RequestMethod.POST, params = "search")
-    public ModelAndView action2(@Valid Search search, BindingResult bindingResult) {
+    public ModelAndView action2(@Valid Search search, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView result;
         Collection<Article> articles;
         Collection<NewsPaper> newsPapers;
         Search searchSystem;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         if(bindingResult.hasErrors()){
             return createModelAndView(search);
@@ -141,8 +146,11 @@ public class UserController extends AbstractController{
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ModelAndView action2() {
+    public ModelAndView action2(HttpServletRequest request) {
         ModelAndView result;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("article/search");
         Search search = searchService.getSearch();
