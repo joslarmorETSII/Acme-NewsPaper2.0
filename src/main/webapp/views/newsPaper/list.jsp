@@ -139,5 +139,5 @@
     <acme:button code="newsPaper.create" url="newsPaper/user/create.do"/>
 </security:authorize>
 
-<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
-       onclick="javascript: relativeRedir('/welcome/index.do');" />
+
+<acme:cancel code="newsPaper.cancel" url="${cancelUri}"/>

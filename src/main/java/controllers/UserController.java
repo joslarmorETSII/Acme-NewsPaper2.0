@@ -152,6 +152,7 @@ public class UserController extends AbstractController{
         result.addObject("articles", search.getArticles());
         result.addObject("newsPapers",search.getNewsPapers());
         result.addObject("requestURI", "user/search.do");
+        result.addObject("cancelURI", "welcome/index.do");
 
         return result;
     }

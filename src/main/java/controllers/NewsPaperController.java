@@ -98,6 +98,7 @@ public class NewsPaperController extends AbstractController {
         result.addObject("requestUri","newsPaper/listNewsPapersV.do");
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+        result.addObject("cancelUri", "volume/list.do");
 
         return result;
 

@@ -106,4 +106,6 @@
 </display:table>
 </fieldset>
 
+<acme:cancel code="article.cancel" url="${cancelURI}"/>
+
 

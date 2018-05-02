@@ -50,7 +50,7 @@
 		<acme:submit name="delete" code="article.delete"/>
 	</jstl:if>
 
-	<acme:cancel code="article.cancel" url="article/listAll.do"/>
+	<acme:cancel code="article.cancel" url="${cancelUri}"/>
 
 </form:form>
 </jstl:if>

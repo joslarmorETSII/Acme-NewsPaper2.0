@@ -202,9 +202,11 @@ public class VolumeUserController extends AbstractController{
     }
 
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    public ModelAndView listAll() {
+    public ModelAndView listAll(HttpServletRequest request) {
         ModelAndView result;
         User user;
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession",request.getRequestURI());
 
         user = userService.findByPrincipal();
         result = new ModelAndView("volume/list");

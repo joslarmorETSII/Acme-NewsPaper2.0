@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import repositories.NewsPaperRepository;
 import services.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,7 +76,7 @@ public class NewsPaperCustomerController extends AbstractController{
     }
     //Listado de newspaper por volume que son privadas y no privadas
     @RequestMapping(value = "/listNewsPapersPerVolume", method = RequestMethod.GET)
-    public ModelAndView listNewsPapersVNP(@RequestParam int volumeId) {
+    public ModelAndView listNewsPapersVNP(@RequestParam int volumeId, HttpServletRequest request) {
         ModelAndView result;
         boolean volumeContieneNewspaper = false;
         Collection<NewsPaper> newsPapers=null;
@@ -96,7 +98,7 @@ public class NewsPaperCustomerController extends AbstractController{
                 volumeContieneNewspaper = true;
         }
 
-
+        HttpSession session = request.getSession();
 
         result = new ModelAndView("newsPaper/listNewsPaperPerVolume");
         result.addObject("newsPapers", newsPapers);
@@ -105,6 +107,7 @@ public class NewsPaperCustomerController extends AbstractController{
         result.addObject("customer",customerService.findByPrincipal());
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+        result.addObject("cancelUriSession",session.getAttribute("cancelUriSession"));
 
         return result;
 

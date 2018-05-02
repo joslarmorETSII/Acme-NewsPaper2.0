@@ -18,6 +18,8 @@ import services.CreditCardService;
 import services.CustomerService;
 import services.VolumeService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -39,27 +41,34 @@ public class VolumeCustomerController extends AbstractController{
     // Listing  --------------------------------------------------------------
 
     @RequestMapping(value = "/listVolumeCustomer", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
 
         ModelAndView result;
 
         Collection<Volume> volumes= customerService.findByPrincipal().getVolumes();
 
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession",request.getRequestURI());
+
         result = new ModelAndView("volume/listVolumeCustomer");
         result.addObject("volumes", volumes);
         result.addObject("customer",customerService.findByPrincipal());
         result.addObject("requestURI", "volume/customer/listVolumeCustomer.do");
+        result.addObject("cancelUri", "welcome/index.do");
         return result;
     }
 
     @RequestMapping(value = "/listAllVolumes", method = RequestMethod.GET)
-    public ModelAndView listAllVolumes() {
+    public ModelAndView listAllVolumes(HttpServletRequest request) {
 
         ModelAndView result;
         Customer customer = customerService.findByPrincipal();
 
         Collection<Volume> volumes= volumeService.findAll();
         volumes.removeAll(customer.getVolumes());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession",request.getRequestURI());
 
         result = new ModelAndView("volume/listVolumeCustomer");
         result.addObject("volumes", volumes);

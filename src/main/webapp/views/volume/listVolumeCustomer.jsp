@@ -55,10 +55,4 @@
 
 </display:table>
 
-
-<input type="button" value="<spring:message code="customer.cancel" /> " onclick="goBack()">
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
+<acme:button code="general.cancel" url="${cancelUri}"/>

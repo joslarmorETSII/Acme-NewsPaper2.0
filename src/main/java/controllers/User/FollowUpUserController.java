@@ -86,6 +86,7 @@ public class FollowUpUserController extends AbstractController {
 
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
+        result.addObject("cancelUri","welcome/index.do");
 
         return result;
 
