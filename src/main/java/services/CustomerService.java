@@ -55,6 +55,7 @@ public class CustomerService {
         Customer result;
 
         result = new Customer();
+
         result.setNewsPapers(new ArrayList<NewsPaper>());
         result.setUserAccount(userAccountService.create("CUSTOMER"));
         result.setFolders(new ArrayList<Folder>());

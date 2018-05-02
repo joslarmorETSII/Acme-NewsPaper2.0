@@ -205,6 +205,7 @@ public class VolumeUserController extends AbstractController{
     public ModelAndView listAll(HttpServletRequest request) {
         ModelAndView result;
         User user;
+
         HttpSession session = request.getSession();
         session.setAttribute("cancelUriSession",request.getRequestURI());
 

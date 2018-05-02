@@ -78,12 +78,10 @@ public class ArticleController extends AbstractController{
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
 
         Collection<Article> articles=null;
-
-
 
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
@@ -95,6 +93,9 @@ public class ArticleController extends AbstractController{
         momentEs = formatterEs.format(new Date());
         formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         momentEn = formatterEn.format(new Date());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         //TODO: Solo mostrar los que estan en final mode
 

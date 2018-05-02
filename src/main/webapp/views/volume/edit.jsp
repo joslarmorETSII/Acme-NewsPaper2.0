@@ -29,7 +29,7 @@
 
     <acme:submit name="save" code="volume.save"/>
 
-    <acme:cancel code="volume.cancel" url="volume/user/list.do"/>
+    <acme:cancel code="volume.cancel" url="${cancelUriSession}"/>
 
 
 </form:form>

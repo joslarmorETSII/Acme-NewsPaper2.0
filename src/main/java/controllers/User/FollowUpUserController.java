@@ -50,12 +50,12 @@ public class FollowUpUserController extends AbstractController {
     // Creation ------------------------------------------------------
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create() {
+    public ModelAndView create(HttpServletRequest request) {
         ModelAndView result;
         FollowUp followUp;
 
         followUp = followUpService.create();
-        result = createEditModelAndView(followUp);
+        result = createEditModelAndView(followUp, request);
 
         return result;
     }
@@ -99,16 +99,16 @@ public class FollowUpUserController extends AbstractController {
 
     //  Edition ----------------------------------------------------------------
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid FollowUp followUp, BindingResult binding) {
+    public ModelAndView save(@Valid FollowUp followUp, BindingResult binding, HttpServletRequest request) {
         ModelAndView result;
         if (binding.hasErrors())
-            result = this.createEditModelAndView(followUp);
+            result = this.createEditModelAndView(followUp,request);
         else
             try {
                 followUpService.save(followUp);
                 result = new ModelAndView("redirect:list.do");
             } catch (final Throwable oops) {
-                result = this.createEditModelAndView(followUp, "article.commit.error");
+                result = this.createEditModelAndView(followUp, "article.commit.error", request);
             }
         return result;
     }
@@ -116,14 +116,14 @@ public class FollowUpUserController extends AbstractController {
 
     // Ancillary methods ------------------------------------------------------
 
-    protected ModelAndView createEditModelAndView(FollowUp followUp) {
+    protected ModelAndView createEditModelAndView(FollowUp followUp, HttpServletRequest request) {
         ModelAndView result;
 
-        result = this.createEditModelAndView(followUp, null);
+        result = this.createEditModelAndView(followUp, null, request);
         return result;
     }
 
-    protected ModelAndView createEditModelAndView(FollowUp followUp, final String messageCode) {
+    protected ModelAndView createEditModelAndView(FollowUp followUp, final String messageCode, HttpServletRequest request) {
         ModelAndView result;
         User principal;
         Collection<Article> articles;
@@ -137,6 +137,7 @@ public class FollowUpUserController extends AbstractController {
         result.addObject("articles", articles);
         result.addObject("message", messageCode);
         result.addObject("actionUri","followUp/user/edit.do");
+        result.addObject("cancelUriSession" ,request.getSession().getAttribute("cancelUriSession"));
 
         return result;
     }
