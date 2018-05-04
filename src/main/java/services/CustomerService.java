@@ -1,4 +1,3 @@
-/*
 package services;
 
 import controllers.AbstractController;
@@ -36,8 +35,7 @@ public class CustomerService {
     @Autowired
     private UserAccountService userAccountService;
 
-    @Autowired
-    private CreditCardService creditCardService;
+
 
     @Autowired
     private ActorService actorService;
@@ -57,10 +55,10 @@ public class CustomerService {
 
         result = new Customer();
 
-        result.setNewsPapers(new ArrayList<NewsPaper>());
+        result.setSubscriptionsToNewspapers(new ArrayList<SubscribeNewsPaper>());
         result.setUserAccount(userAccountService.create("CUSTOMER"));
         result.setFolders(new ArrayList<Folder>());
-        result.setVolumes(new ArrayList<Volume>());
+        result.setSubscriptionsToVolumes(new ArrayList<SubscribeVolume>());
         result.setSearch(new Search());
 
         return result;
@@ -119,7 +117,7 @@ public class CustomerService {
     }
 
 
-    public CreditCard reconstructSubscribe(SubscribeForm subscribeForm, final BindingResult binding) {
+   /* public CreditCard reconstructSubscribe(SubscribeForm subscribeForm, final BindingResult binding) {
         CreditCard creditCard = creditCardService.create();
 
         creditCard.setBrand(subscribeForm.getBrand());
@@ -130,7 +128,7 @@ public class CustomerService {
         creditCard.setNumber(subscribeForm.getNumber());
 
         return creditCard;
-    }
+    }*/
 
     public Customer reconstruct(UserForm userForm, final BindingResult binding) {
 
@@ -174,7 +172,7 @@ public class CustomerService {
         customerRepository.flush();
     }
 
-    public CreditCard reconstructSubscribeVolume(SubscribeVolumeForm subscribeVolumeForm, BindingResult binding) {
+    /*public CreditCard reconstructSubscribeVolume(SubscribeVolumeForm subscribeVolumeForm, BindingResult binding) {
         CreditCard creditCard = creditCardService.create();
         creditCard.setBrand(subscribeVolumeForm.getBrand());
         creditCard.setCvv(subscribeVolumeForm.getCvv());
@@ -184,6 +182,5 @@ public class CustomerService {
         creditCard.setNumber(subscribeVolumeForm.getNumber());
 
         return creditCard;
-    }
+    }*/
 }
-*/
