@@ -1,13 +1,16 @@
-/*
 package services;
 
+import domain.Article;
+import domain.NewsPaper;
 import domain.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.SearchRepository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -36,9 +39,14 @@ public class SearchService {
 
     public Search create() {
         Search res;
+        Collection<Article> articles = new ArrayList<>();
+        Collection<NewsPaper> newsPapers = new ArrayList<>();
 
         res= new Search();
 
+        res.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
+        res.setArticles(articles);
+        res.setNewsPapers(newsPapers);
         return res;
     }
 
@@ -47,6 +55,7 @@ public class SearchService {
     }
 
     public Search save( Search search) {
+        search.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
         return searchRepository.save(search);
     }
 
@@ -67,7 +76,5 @@ public class SearchService {
 
         return search.iterator().next();
     }
-
-
 }
-*/
+
