@@ -51,6 +51,9 @@
 
 <acme:button code="message.sendAMessage" url="message/actor/create.do"/>
 
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+	   onclick="javascript: relativeRedir('welcome/index.do');" />
+
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<acme:button code="message.notify" url="message/admin/create.do"/>
 </security:authorize>

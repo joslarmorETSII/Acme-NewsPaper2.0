@@ -15,6 +15,8 @@ import services.AdministratorService;
 import services.NewsPaperService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -91,7 +93,7 @@ public class NewsPaperAdministratorController extends AbstractController {
     // Display ----------------------------------------------------------------
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam int newsPaperId) {
+    public ModelAndView display(@RequestParam int newsPaperId, HttpServletRequest request) {
         ModelAndView result;
         NewsPaper newsPaper;
 
@@ -107,6 +109,7 @@ public class NewsPaperAdministratorController extends AbstractController {
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelURI", "newsPaper/listAll.do");
+
 
 
         return result;

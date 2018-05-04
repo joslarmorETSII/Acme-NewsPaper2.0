@@ -118,6 +118,8 @@ public class NewsPaperController extends AbstractController {
         Actor actor=actorService.findByPrincipal();
         User publisher = newsPaper.getPublisher();
 
+        HttpSession session = request.getSession();
+
         if(!actor.equals(publisher) ){
             Assert.isTrue(!newsPaper.isModePrivate());
         }
@@ -125,6 +127,8 @@ public class NewsPaperController extends AbstractController {
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
+
+        session.setAttribute("cancelUriSession", request.getRequestURI()+ "?newsPaperId=" + newsPaperId);
 
 
         return result;

@@ -49,12 +49,12 @@ public class NewsPaperUserController extends AbstractController {
     // Creation ------------------------------------------------------
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create() {
+    public ModelAndView create(HttpServletRequest request) {
         ModelAndView result;
         NewsPaper newsPaper= null ;
 
         newsPaper = this.newsPaperService.create();
-        result = this.createEditModelAndView(newsPaper);
+        result = this.createEditModelAndView(newsPaper, request);
 
         return result;
     }
@@ -134,17 +134,17 @@ public class NewsPaperUserController extends AbstractController {
     //  Edition ----------------------------------------------------------------
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam  int newsPaperId) {
+    public ModelAndView edit(@RequestParam  int newsPaperId, HttpServletRequest request) {
         final ModelAndView result;
         NewsPaper newsPaper;
         newsPaper = this.newsPaperService.findOneToEdit(newsPaperId);
         Assert.notNull(newsPaper);
-        result = this.createEditModelAndView(newsPaper);
+        result = this.createEditModelAndView(newsPaper, request);
         return result;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(NewsPaper newsPaperPruned, final BindingResult binding) {
+    public ModelAndView save(NewsPaper newsPaperPruned, final BindingResult binding, HttpServletRequest request) {
         ModelAndView result;
 
 
@@ -153,7 +153,7 @@ public class NewsPaperUserController extends AbstractController {
                 NewsPaper newsPaper = this.newsPaperService.reconstructS(newsPaperPruned,binding);
 
                 if (binding.hasErrors()){
-                    result = this.createEditModelAndView(newsPaperPruned);
+                    result = this.createEditModelAndView(newsPaperPruned, request);
                 }
                 else {
                     this.newsPaperService.save(newsPaper);
@@ -161,16 +161,16 @@ public class NewsPaperUserController extends AbstractController {
                 }
             } catch (final Throwable oops) {
                 if (binding.hasErrors()){
-                    result = this.createEditModelAndView(newsPaperPruned);
+                    result = this.createEditModelAndView(newsPaperPruned, request);
                 }else{
-                    result = this.createEditModelAndView(newsPaperPruned, "newsPaper.commit.error");
+                    result = this.createEditModelAndView(newsPaperPruned, "newsPaper.commit.error", request);
                 }
             }
         return result;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST,params = "delete")
-    public ModelAndView edit(NewsPaper newsPaperPruned){
+    public ModelAndView edit(NewsPaper newsPaperPruned, HttpServletRequest request){
         ModelAndView result;
 
         NewsPaper newsPaper = this.newsPaperService.findOne(newsPaperPruned.getId());
@@ -178,7 +178,7 @@ public class NewsPaperUserController extends AbstractController {
             newsPaperService.delete(newsPaper);
             result = new ModelAndView("redirect:list.do");
         }catch (Throwable oops){
-            result = createEditModelAndView(newsPaper,"newsPaper.commit.error");
+            result = createEditModelAndView(newsPaper,"newsPaper.commit.error", request);
         }
 
         return result;
@@ -218,19 +218,20 @@ public class NewsPaperUserController extends AbstractController {
 
     // Ancillary methods ------------------------------------------------------
 
-    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper) {
+    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper, HttpServletRequest request) {
         ModelAndView result;
 
-        result = this.createEditModelAndView(newsPaper, null);
+        result = this.createEditModelAndView(newsPaper, null, request);
         return result;
     }
 
-    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper, final String messageCode) {
+    protected ModelAndView createEditModelAndView(final NewsPaper newsPaper, final String messageCode, HttpServletRequest request) {
         ModelAndView result;
         result = new ModelAndView("newsPaper/edit");
         result.addObject("newsPaper", newsPaper);
         result.addObject("message", messageCode);
         result.addObject("actionUri","newsPaper/user/edit.do");
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
         return result;
     }

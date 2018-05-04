@@ -53,5 +53,12 @@
 
 <br/>
 
+<security:authorize access="!hasRole('ADMINISTRATOR')" >
 <input type="button" name="cancel" value="<spring:message code="general.cancel" />"
        onclick="javascript: relativeRedir('${cancelUriSession}');" />
+</security:authorize>
+
+<security:authorize access="hasRole('ADMINISTRATOR')" >
+    <input type="button" name="cancel" value="<spring:message code="general.cancel" />"
+           onclick="javascript: relativeRedir('${cancelURI}');" />
+</security:authorize>

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ArticleService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -88,14 +90,13 @@ public class UserUserController extends AbstractController{
         return result;
     }
 
-
-
-
-
     @RequestMapping(value = "/list-followers", method = RequestMethod.GET)
-    public ModelAndView listFollowers() {
+    public ModelAndView listFollowers(HttpServletRequest request) {
         ModelAndView result;
         User principal;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         principal = userService.findByPrincipal();
         result = new ModelAndView("user/followers");
@@ -107,9 +108,12 @@ public class UserUserController extends AbstractController{
     }
 
     @RequestMapping(value = "/list-following", method = RequestMethod.GET)
-    public ModelAndView listFollowing() {
+    public ModelAndView listFollowing(HttpServletRequest request) {
         ModelAndView result;
         User principal;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         principal = userService.findByPrincipal();
         result = new ModelAndView("user/following");
@@ -123,10 +127,10 @@ public class UserUserController extends AbstractController{
     //  Follow - Unfollow -----------------------------------------------------------
 
     @RequestMapping(value = "/follow", method = RequestMethod.GET)
-    public ModelAndView doFollow(@RequestParam Integer userId) {
+    public ModelAndView doFollow(@RequestParam Integer userId, HttpServletRequest request) {
         ModelAndView result;
 
-        result =listFollowing();
+        result =listFollowing(request);
         try {
             userService.follow(userId);
         }catch (Throwable oops){
@@ -138,10 +142,10 @@ public class UserUserController extends AbstractController{
 
 
     @RequestMapping(value = "/unfollow", method = RequestMethod.GET)
-    public ModelAndView doUnfollow(@RequestParam Integer userId) {
+    public ModelAndView doUnfollow(@RequestParam Integer userId, HttpServletRequest request) {
         ModelAndView result;
 
-        result = listFollowing();
+        result = listFollowing(request);
         try {
             userService.unfollow(userId);
         }catch (Throwable oops){
