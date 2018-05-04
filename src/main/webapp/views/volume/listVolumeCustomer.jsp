@@ -42,11 +42,13 @@
         </jstl:if>
     </display:column>
 
+
     <display:column>
         <jstl:if test="${contiene ne true}">
             <acme:button url="volume/customer/subscribe.do?volumeId=${row.id}" code="newsPaper.subscribe"/>
         </jstl:if>
     </display:column>
+
 
 
     <display:column>
