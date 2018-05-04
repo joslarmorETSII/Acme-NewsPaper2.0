@@ -1,4 +1,3 @@
-/*
 package services;
 
 import domain.*;
@@ -38,8 +37,7 @@ public class AgentService {
     @Autowired
     private ActorService actorService;
 
-    @Autowired
-    private CreditCardService creditCardService;
+
 
     @Autowired
     private AdvertisementService advertisementService;
@@ -175,4 +173,3 @@ public class AgentService {
         return advertisement;
     }
 }
-*/
