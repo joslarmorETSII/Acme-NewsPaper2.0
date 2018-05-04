@@ -1,4 +1,3 @@
-/*
 package services;
 
 import domain.*;
@@ -43,14 +42,14 @@ public class VolumeService {
     public Volume create(){
         Volume res= null;
         User user = this.userService.findByPrincipal();
-        Collection<Customer> customers= new ArrayList<>();
+
         Collection<NewsPaper> newsPapers= new ArrayList<>();
 
         res= new Volume();
         res.setUser(user);
-        res.setSubscriptions(customers);
-        res.setNewsPapers(newsPapers);
 
+        res.setNewsPapers(newsPapers);
+        res.setSubscriptionVolumes(new ArrayList<SubscribeVolume>());
         return res;
     }
 
@@ -157,4 +156,3 @@ public class VolumeService {
         return volumeRepository.findPrivateNewspapersByVolumeId(volumeId);
     }
 }
-*/
