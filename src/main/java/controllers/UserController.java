@@ -1,3 +1,4 @@
+/*
 package controllers;
 
 import domain.*;
@@ -247,3 +248,4 @@ public class UserController extends AbstractController{
         return result;
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package controllers.Customer;
 
 import controllers.AbstractController;
@@ -11,14 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import repositories.NewsPaperRepository;
 import services.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -94,7 +93,7 @@ public class NewsPaperCustomerController extends AbstractController{
         newsPapers = this.volumeService.findPublishedNewsPaperPerVolume(volumeId);
         Volume volume = this.volumeService.findOne(volumeId);
 
-        if(volume.getCustomers().contains(customer)){
+        if(volume.getSubscriptions().contains(customer)){
                 volumeContieneNewspaper = true;
         }
 
@@ -151,7 +150,7 @@ public class NewsPaperCustomerController extends AbstractController{
                 result = new ModelAndView("redirect:listNewsPaperCustomer.do");
                 customer = customerService.findByPrincipal();
                 newsPaper = subscribeForm.getNewsPaper();
-                newsPaper.getCustomers().add(customer);
+                newsPaper.getSubscriptions().add(customer);
                 customer.getNewsPapers().add(newsPaper);
                 CreditCard saved=creditCardService.save(creditCard);
                 customer.setCreditCard(saved);
@@ -238,3 +237,4 @@ public class NewsPaperCustomerController extends AbstractController{
         return result;
     }
 }
+*/

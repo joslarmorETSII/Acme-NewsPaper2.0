@@ -1,3 +1,4 @@
+/*
 package services;
 
 import domain.Actor;
@@ -37,9 +38,11 @@ public class NewsPaperServiceTest extends AbstractTest {
     // Tests
     // ====================================================
 
-       /*  FUNCTIONAL REQUIREMENT:
+       */
+/*  FUNCTIONAL REQUIREMENT:
        * An actor who is not authenticated must be able to:
-            -.List the newspapers that are published and browse their articles. */
+            -.List the newspapers that are published and browse their articles. *//*
+
 
     public void listOfNewsPaperTest(final String username,final Class<?> expected){
         Class<?> caught = null;
@@ -62,11 +65,13 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    /*  FUNCTIONAL REQUIREMENT:
+    */
+/*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a user must be able to:
                -. Create a newspaper. A user who has created a newspaper is commonly referred to
                 as a publisher.
-    */
+    *//*
+
 
     @SuppressWarnings("deprecation")
     public void newsPaperCreateTest(final String username, final String title,String description1,String publicationDate1,String picture1,Boolean res1,Boolean res2,Boolean res3, final Class<?> expected) {
@@ -104,11 +109,13 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    /*  FUNCTIONAL REQUIREMENT:
+    */
+/*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a user must be able to:
                -. Create a newspaper. A user who has created a newspaper is commonly referred to
                 as a publisher.
-    */
+    *//*
+
 
     @SuppressWarnings("deprecation")
     public void newsPaperPublishTest(final String username, final String title,String description1,String publicationDate1,String picture1,Boolean res1,Boolean res2,Boolean res3, final Class<?> expected) {
@@ -149,11 +156,13 @@ public class NewsPaperServiceTest extends AbstractTest {
     }
 
 
-      /*  FUNCTIONAL REQUIREMENT:
+      */
+/*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a admin must be able to:
                 -.Remove an article that he or she thinks is inappropriate.
 
-    */
+    *//*
+
 
 
     public void deleteNewsPaperTest(final String username, String newsPaperBean,Boolean published, final Class<?> expected) {
@@ -180,10 +189,12 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    /*  FUNCTIONAL REQUIREMENT:
+    */
+/*  FUNCTIONAL REQUIREMENT:
        * An actor who is authenticated as an administrator must be able to:
                - List the newsPaper that contain taboo words.
-    */
+    *//*
+
 
     public void listNewsPaperTabooWords(final String username,final Class<?> expected) {
         Class<?> caught = null;
@@ -203,11 +214,13 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-     /*  FUNCTIONAL REQUIREMENT:
+     */
+/*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a user must be able to:
                -.Decide on whether a newspaper that he or she?s created is public or private.
 
-    */
+    *//*
+
 
     public void editNewsPaperTest(final String username, final String title,String description1,String publicationDate1,String picture1,Boolean res1,Boolean res2,Boolean res3,String newsPaperBean, final Class<?> expected) {
         Class<?> caught = null;
@@ -392,4 +405,4 @@ public class NewsPaperServiceTest extends AbstractTest {
             this.editNewsPaperTest((String) testingData[i][0], (String) testingData[i][1],(String) testingData[i][2],(String)testingData[i][3] , (String)testingData[i][4],(Boolean) testingData[i][5],(Boolean) testingData[i][6],(Boolean) testingData[i][7],(String)testingData[i][8], (Class<?>) testingData[i][9]);
 
     }
-}
+}*/

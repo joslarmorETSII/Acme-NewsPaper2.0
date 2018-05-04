@@ -1,3 +1,4 @@
+/*
 package controllers.Agent;
 
 import controllers.AbstractController;
@@ -50,3 +51,4 @@ public class NewsPaperAgentController extends AbstractController {
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package services;
 
 
@@ -25,7 +26,8 @@ public class UseCaseEditNewspaper extends AbstractTest{
 
     // Tests ------------------------------------------------------------------
 
-    /*  CASO DE USO:
+    */
+/*  CASO DE USO:
      *
      *   Un Actor se authentifica como User, lista todos las Newspapers ,
      *   elige uno de los que creado para editar lo edita y lo guarda.
@@ -49,7 +51,8 @@ public class UseCaseEditNewspaper extends AbstractTest{
      * · Introducir un script.
      * · Introducir una url invalida para la picture.
      * ·
-     */
+     *//*
+
 
     public void newspaperEditTest( String username, String title, String description, String picture, Boolean modePrivate, String newspaperBean, Class<?> expected) {
 
@@ -143,3 +146,4 @@ public class UseCaseEditNewspaper extends AbstractTest{
     }
 
 }
+*/

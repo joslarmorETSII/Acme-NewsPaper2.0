@@ -23,6 +23,7 @@ public class Advertisement extends DomainEntity{
     private String banner;
     private String targetPage;
     private boolean taboo;
+    private CreditCard creditCard;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -56,8 +57,6 @@ public class Advertisement extends DomainEntity{
         this.targetPage = targetPage;
     }
 
-
-
     public boolean getTaboo() {
         return taboo;
     }
@@ -66,10 +65,18 @@ public class Advertisement extends DomainEntity{
         this.taboo = taboo;
     }
 
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
     // Relationships ----------------------------------------------------------------------
 
     private NewsPaper newsPaper;
-    private CreditCard creditCard;
     private Agent agent;
 
     @Valid
@@ -94,14 +101,5 @@ public class Advertisement extends DomainEntity{
         this.newsPaper = newsPaper;
     }
 
-    @Valid
-    @NotNull
-    @OneToOne(optional = false)
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
 
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
 }

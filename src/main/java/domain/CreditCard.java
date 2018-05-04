@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,9 +14,9 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
-@Entity
+@Embeddable
 @Access(AccessType.PROPERTY)
-public class CreditCard extends DomainEntity {
+public class CreditCard{
 
     private String	    holder;
     private String	    brand;
@@ -90,6 +91,5 @@ public class CreditCard extends DomainEntity {
     }
 
 
-    //// Relationships ----------------------------------------------------------
 
 }
