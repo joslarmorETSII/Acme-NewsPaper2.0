@@ -1,4 +1,3 @@
-/*
 package services;
 
 import domain.Search;
@@ -8,6 +7,7 @@ import repositories.SearchRepository;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -47,6 +47,7 @@ public class SearchService {
     }
 
     public Search save( Search search) {
+        search.setLastUpdate(new Date());
         return searchRepository.save(search);
     }
 
@@ -67,7 +68,5 @@ public class SearchService {
 
         return search.iterator().next();
     }
-
-
 }
-*/
+

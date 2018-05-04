@@ -1,9 +1,13 @@
 package domain;
 
 import org.hibernate.validator.constraints.SafeHtml;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -14,7 +18,8 @@ public class Search extends DomainEntity{
         super();
     }
 
-    private String keyword;
+    private String  keyword;
+    private Date    lastUpdate;
 
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getKeyword() {
@@ -23,6 +28,18 @@ public class Search extends DomainEntity{
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    @NotNull
+    @Past
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     // Relationships ------------------------------------------------
