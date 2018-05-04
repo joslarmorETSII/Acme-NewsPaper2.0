@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
@@ -33,6 +34,7 @@ public class Configuration extends DomainEntity {
     private String				englishWelcome;
     private String				spanishWelcome;
     private Collection<String>	tabooWords;
+    private int                 cache;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -77,7 +79,6 @@ public class Configuration extends DomainEntity {
 
     @NotNull
     @ElementCollection
-    //TODO: @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public Collection<String> getTabooWords() {
         return this.tabooWords;
     }
@@ -86,8 +87,14 @@ public class Configuration extends DomainEntity {
         this.tabooWords = tabooWords;
     }
 
+    @Range(min = 5, max = 60)
+    public int getCache() {
+        return cache;
+    }
 
-
+    public void setCache(int cache) {
+        this.cache = cache;
+    }
 
     // Relationships ----------------------------------------------------------
 

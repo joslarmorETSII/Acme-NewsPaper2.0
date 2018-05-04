@@ -848,7 +848,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 			<value>sexo</value>
 		</list>
 		</property>
-
+		<property name="cache" value="5" />
 	</bean>
 
 	<!-- Folders -->
