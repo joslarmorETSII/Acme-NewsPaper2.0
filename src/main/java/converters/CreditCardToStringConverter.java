@@ -1,3 +1,4 @@
+/*
 package converters;
 
 import domain.CreditCard;
@@ -22,3 +23,4 @@ public class CreditCardToStringConverter  implements Converter<CreditCard,String
         return result;
     }
 }
+*/

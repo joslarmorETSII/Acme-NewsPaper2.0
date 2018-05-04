@@ -1,3 +1,4 @@
+/*
 package controllers.Customer;
 
 import controllers.AbstractController;
@@ -110,7 +111,7 @@ public class VolumeCustomerController extends AbstractController{
         Assert.notNull(volume);
         principal = customerService.findByPrincipal();
         principal.getVolumes().remove(volume);
-        volume.getCustomers().remove(principal);
+        volume.getSubscriptions().remove(principal);
         privateNewsPapers = volumeService.findPrivateNewsPapersByVolume(volume.getId());
         if(privateNewsPapers.size()>0){
             principal.getNewsPapers().removeAll(privateNewsPapers);
@@ -139,7 +140,7 @@ public class VolumeCustomerController extends AbstractController{
                 result = new ModelAndView("redirect: listVolumeCustomer.do");
                 customer = customerService.findByPrincipal();
                 volume = subscribeVolumeForm.getVolume();
-                volume.getCustomers().add(customer);
+                volume.getSubscriptions().add(customer);
                 customer.getVolumes().add(volume);
                 CreditCard saved = creditCardService.save(creditCard);
                 customer.setCreditCard(saved);
@@ -174,3 +175,4 @@ public class VolumeCustomerController extends AbstractController{
 
 
 }
+*/

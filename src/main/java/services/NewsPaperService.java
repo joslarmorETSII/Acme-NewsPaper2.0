@@ -1,11 +1,9 @@
+/*
 package services;
 
 import domain.*;
 
-import forms.SubscribeForm;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -79,7 +77,7 @@ public class NewsPaperService {
 
         res.setPublisher(publisher);
         res.setArticles(articles);
-        res.setCustomers(customers);
+        res.setSubscriptions(customers);
         res.setAdvertisements(advertisements);
         res.setVolumes(volumes);
         return res;
@@ -118,7 +116,7 @@ public class NewsPaperService {
     public void delete(NewsPaper newsPaper){
         Assert.notNull(newsPaper);
         Assert.isTrue(checkByPrincipalAdmin(newsPaper) || checkByPrincipal(newsPaper));
-        Collection<Customer> customers =newsPaper.getCustomers();
+        Collection<Customer> customers =newsPaper.getSubscriptions();
         if(customers.size()>0) {
             for(Customer c : customers){
                 c.getNewsPapers().remove(newsPaper);
@@ -135,7 +133,7 @@ public class NewsPaperService {
 
     public void unsuscribe(NewsPaper newsPaper){
         Customer customer = this.customerService.findByPrincipal();
-        newsPaper.getCustomers().remove(customer);
+        newsPaper.getSubscriptions().remove(customer);
         customer.getNewsPapers().remove(newsPaper);
         this.save(newsPaper);
         this.customerService.save(customer);
@@ -312,3 +310,4 @@ public class NewsPaperService {
 
 
 }
+*/

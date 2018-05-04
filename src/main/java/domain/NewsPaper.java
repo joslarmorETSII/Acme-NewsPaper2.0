@@ -106,7 +106,7 @@ NewsPaper extends DomainEntity {
 
     private Collection<Article> articles;
     private User publisher;
-    private Collection<Customer> customers;
+    private Collection<SubscribeNewsPaper> subscriptions;
     private Collection<Advertisement> advertisements;
     private Collection<Volume> volumes;
 
@@ -123,13 +123,13 @@ NewsPaper extends DomainEntity {
 
     @Valid
     @NotNull
-    @ManyToMany(mappedBy = "newsPapers")
-    public Collection<Customer> getCustomers() {
-        return customers;
+    @OneToMany(mappedBy = "newsPaper")
+    public Collection<SubscribeNewsPaper> getSubscriptions() {
+        return subscriptions;
     }
 
-    public void setCustomers(Collection<Customer> customers) {
-        this.customers = customers;
+    public void setSubscriptions(Collection<SubscribeNewsPaper> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 
     @Valid

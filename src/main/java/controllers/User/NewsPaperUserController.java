@@ -1,3 +1,4 @@
+/*
 package controllers.User;
 
 import controllers.AbstractController;
@@ -236,3 +237,4 @@ public class NewsPaperUserController extends AbstractController {
     }
 }
 
+*/

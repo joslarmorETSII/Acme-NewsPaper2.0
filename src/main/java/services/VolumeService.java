@@ -1,3 +1,4 @@
+/*
 package services;
 
 import domain.*;
@@ -10,9 +11,7 @@ import repositories.VolumeRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 @Service
 @Transactional
@@ -49,7 +48,7 @@ public class VolumeService {
 
         res= new Volume();
         res.setUser(user);
-        res.setCustomers(customers);
+        res.setSubscriptions(customers);
         res.setNewsPapers(newsPapers);
 
         return res;
@@ -158,3 +157,4 @@ public class VolumeService {
         return volumeRepository.findPrivateNewspapersByVolumeId(volumeId);
     }
 }
+*/

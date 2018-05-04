@@ -1,3 +1,4 @@
+/*
 package controllers.User;
 
 import controllers.AbstractController;
@@ -14,10 +15,7 @@ import services.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/volume/user")
@@ -116,9 +114,9 @@ public class VolumeUserController extends AbstractController{
                     newsPapers = volumePruned.getNewsPapers();
                     for(NewsPaper n: newsPapers){
                         if(n.isModePrivate()){
-                            for(Customer c: volume.getCustomers()){
+                            for(Customer c: volume.getSubscriptions()){
                                 c.getNewsPapers().add(n);
-                                n.getCustomers().add(c);
+                                n.getSubscriptions().add(c);
                             }
                         }
                     }
@@ -159,9 +157,9 @@ public class VolumeUserController extends AbstractController{
                 newsPapersToRemove = volumePruned.getNewsPapers();
                 for(NewsPaper n: newsPapersToRemove){
                     if(n.isModePrivate()){
-                        for(Customer c: volume.getCustomers()){
+                        for(Customer c: volume.getSubscriptions()){
                             c.getNewsPapers().remove(n);
-                            n.getCustomers().remove(c);
+                            n.getSubscriptions().remove(c);
                         }
                     }
                 }
@@ -279,3 +277,4 @@ public class VolumeUserController extends AbstractController{
         return result;
     }
 }
+*/

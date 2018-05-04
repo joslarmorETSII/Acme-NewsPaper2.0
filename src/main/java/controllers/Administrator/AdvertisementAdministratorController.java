@@ -1,3 +1,4 @@
+/*
 package controllers.Administrator;
 
 import controllers.AbstractController;
@@ -115,3 +116,4 @@ public class AdvertisementAdministratorController extends AbstractController{
         return result;
     }
 }
+*/

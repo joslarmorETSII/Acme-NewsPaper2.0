@@ -1,3 +1,4 @@
+/*
 package services;
 
 import domain.*;
@@ -150,3 +151,4 @@ public class AdvertisementService {
 
 
 }
+*/

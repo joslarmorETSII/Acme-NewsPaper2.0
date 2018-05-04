@@ -1,3 +1,4 @@
+/*
 package controllers.Administrator;
 
 
@@ -136,3 +137,4 @@ public class NewsPaperAdministratorController extends AbstractController {
         return result;
     }
 }
+*/

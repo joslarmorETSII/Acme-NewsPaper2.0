@@ -3,13 +3,11 @@ package domain;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
-import java.util.Date;
 
 
 @Entity
@@ -59,7 +57,7 @@ public class Volume extends DomainEntity {
 
     // Relationships -----------------------------------------------------------------------
 
-    private Collection<Customer> customers;
+    private Collection<SubscribeVolume> subscriptions;
     private Collection<NewsPaper> newsPapers;
     private User user;
 
@@ -76,13 +74,13 @@ public class Volume extends DomainEntity {
 
     @Valid
     @NotNull
-    @ManyToMany
-    public Collection<Customer> getCustomers() {
-        return customers;
+    @OneToMany
+    public Collection<SubscribeVolume> getSubscriptions() {
+        return subscriptions;
     }
 
-    public void setCustomers(Collection<Customer> customers) {
-        this.customers = customers;
+    public void setSubscriptions(Collection<SubscribeVolume> customers) {
+        this.subscriptions = customers;
     }
 
     @Valid

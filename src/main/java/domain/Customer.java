@@ -1,7 +1,5 @@
 package domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,28 +18,28 @@ public class Customer extends Actor {
 
     // Relationships ----------------------------------------------------------
 
-    Collection<NewsPaper> newsPapers;
-    Collection<Volume> volumes;
+    private Collection<SubscribeNewsPaper> subscriptionsToNewspapers;
+    private Collection<SubscribeVolume> subscriptionsToVolumes;
 
-    @Valid
     @NotNull
-    @ManyToMany
-    public Collection<NewsPaper> getNewsPapers() {
-        return newsPapers;
-    }
-
-    public void setNewsPapers(Collection<NewsPaper> newsPapers) {
-        this.newsPapers = newsPapers;
+    @Valid
+    @OneToMany(mappedBy = "customer")
+    public Collection<SubscribeNewsPaper> getSubscriptionsToNewspapers() {
+        return subscriptionsToNewspapers;
     }
 
     @Valid
     @NotNull
-    @ManyToMany(mappedBy = "customers")
-    public Collection<Volume> getVolumes() {
-        return volumes;
+    @OneToMany(mappedBy = "customer")
+    public Collection<SubscribeVolume> getSubscriptionsToVolumes() {
+        return subscriptionsToVolumes;
     }
 
-    public void setVolumes(Collection<Volume> volumes) {
-        this.volumes = volumes;
+    public void setSubscriptionsToNewspapers(Collection<SubscribeNewsPaper> subscriptionsToNewspaper) {
+        this.subscriptionsToNewspapers = subscriptionsToNewspaper;
+    }
+
+    public void setSubscriptionsToVolumes(Collection<SubscribeVolume> subscriptionsToVolumes) {
+        this.subscriptionsToVolumes = subscriptionsToVolumes;
     }
 }

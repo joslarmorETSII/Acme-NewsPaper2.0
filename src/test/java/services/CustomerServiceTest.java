@@ -1,3 +1,4 @@
+/*
 package services;
 
 import javax.transaction.Transactional;
@@ -33,10 +34,12 @@ public class CustomerServiceTest extends AbstractTest {
     // Tests
     // ====================================================
 
-    /*  FUNCTIONAL REQUIREMENT:
+    */
+/*  FUNCTIONAL REQUIREMENT:
      *  An actor who is not authenticated must be able to:
           -Register to the system as a customer.
-*/
+*//*
+
 
     public void customerRegisterTest(final String username, final String password, final String passwordRepeat, final String name, final String surname, final String phone, final String email, final String postalAddress, final Class<?> expected) {
         Class<?> caught = null;
@@ -95,4 +98,4 @@ public class CustomerServiceTest extends AbstractTest {
             this.customerRegisterTest((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
                     (String) testingData[i][7], (Class<?>) testingData[i][8]);
     }
-}
+}*/
