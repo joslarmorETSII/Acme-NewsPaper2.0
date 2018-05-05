@@ -58,7 +58,7 @@ public class Volume extends DomainEntity {
     // Relationships -----------------------------------------------------------------------
 
     private Collection<SubscribeVolume> subscriptionVolumes;
-    private Collection<NewsPaper> newsPapers;
+    private Collection<NewsPaper> newsPapersVolume;
     private User user;
 
     @Valid
@@ -86,11 +86,11 @@ public class Volume extends DomainEntity {
     @Valid
     @NotNull
     @ManyToMany
-    public Collection<NewsPaper> getNewsPapers() {
-        return newsPapers;
+    public Collection<NewsPaper> getNewsPapersVolume() {
+        return newsPapersVolume;
     }
 
-    public void setNewsPapers(Collection<NewsPaper> newsPapers) {
-        this.newsPapers = newsPapers;
+    public void setNewsPapersVolume(Collection<NewsPaper> newsPapers) {
+        this.newsPapersVolume = newsPapersVolume;
     }
 }

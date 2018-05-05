@@ -48,7 +48,7 @@ public class VolumeService {
         res= new Volume();
         res.setUser(user);
 
-        res.setNewsPapers(newsPapers);
+        res.setNewsPapersVolume(newsPapers);
         res.setSubscriptionVolumes(new ArrayList<SubscribeVolume>());
         return res;
     }
@@ -128,10 +128,10 @@ public class VolumeService {
         Volume res;
         res = this.findOne(volumePruned.getId());
         Collection<NewsPaper> newsPapers = new ArrayList<>();
-        newsPapers = res.getNewsPapers();
-        newsPapers.addAll(volumePruned.getNewsPapers());
+        newsPapers = res.getNewsPapersVolume();
+        newsPapers.addAll(volumePruned.getNewsPapersVolume());
 
-        res.setNewsPapers(newsPapers);
+        res.setNewsPapersVolume(newsPapers);
 
         this.validator.validate(res,binding);
 
@@ -142,10 +142,10 @@ public class VolumeService {
         Volume res;
         res = this.findOne(volumePruned.getId());
         Collection<NewsPaper> newsPapers = new ArrayList<>();
-        newsPapers = res.getNewsPapers();
-        newsPapers.removeAll(volumePruned.getNewsPapers());
+        newsPapers = res.getNewsPapersVolume();
+        newsPapers.removeAll(volumePruned.getNewsPapersVolume());
 
-        res.setNewsPapers(newsPapers);
+        res.setNewsPapersVolume(newsPapers);
 
         this.validator.validate(res,binding);
 
