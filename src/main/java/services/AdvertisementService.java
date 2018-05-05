@@ -1,17 +1,18 @@
 package services;
 
 import domain.*;
+import forms.RegisterAdvertisementForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import repositories.AdvertisementRepository;
 import repositories.AgentRepository;
 import repositories.ArticleRepository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -146,6 +147,50 @@ public class AdvertisementService {
     public Collection<Advertisement> findTabooAdvertisement() {
         Assert.isTrue(actorService.isAdministrator());
         return advertisementRepository.findTabooAdvertisement();
+    }
+
+    public CreditCard reconstruct(RegisterAdvertisementForm registerAdvertisementForm, BindingResult binding) {
+        CreditCard creditCard= new CreditCard();
+
+        creditCard.setBrand(registerAdvertisementForm.getBrand());
+        creditCard.setCvv(registerAdvertisementForm.getCvv());
+        creditCard.setExpirationMonth(registerAdvertisementForm.getExpirationMonth());
+        creditCard.setExpirationYear(registerAdvertisementForm.getExpirationYear());
+        creditCard.setHolder(registerAdvertisementForm.getHolder());
+        creditCard.setNumber(registerAdvertisementForm.getNumber());
+
+        checkMonth(registerAdvertisementForm.getExpirationMonth(),registerAdvertisementForm.getExpirationYear(),binding);
+        return creditCard;
+    }
+
+    private boolean checkMonth(Integer month, Integer year, BindingResult binding) {
+        FieldError error;
+        String[] codigos;
+        boolean result;
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        Integer actualMonth = c.get(Calendar.MONTH)+1;
+        Integer actualYear = c.get(Calendar.YEAR);
+
+
+        if (month!=null)
+            result = month.equals(actualMonth) && actualYear.equals(year);
+        else
+            result = false;
+
+        if (result) {
+            codigos = new String[1];
+            codigos[0] = "creditCard.month.expired";
+            error = new FieldError("registerAdvertisementForm", "expirationMonth", month, false, codigos, null, "must not expire this month");
+            binding.addError(error);
+        }if (!result && actualYear.equals(year) && month<actualMonth){
+            codigos = new String[1];
+            codigos[0] = "creditCard.month.invalid";
+            error = new FieldError("registerAdvertisementForm", "expirationMonth", month, false, codigos, null, "should not be in the past");
+            binding.addError(error);
+        }
+
+        return result;
     }
 
 
