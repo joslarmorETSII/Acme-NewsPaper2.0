@@ -23,8 +23,8 @@
     <form:hidden path="id"/>
     <form:hidden path="version"/>
 
-    <form:select path="newsPapers" items="${newsPapers}" itemLabel="title"/>
-    <form:errors path="newsPapers" cssClass="error" />
+    <form:select path="newsPapersVolume" items="${newsPapers}" itemLabel="title"/>
+    <form:errors path="newsPapersVolume" cssClass="error" />
     <br />
 
     <acme:submit name="delete" code="volume.delete"/>

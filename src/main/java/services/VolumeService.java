@@ -151,7 +151,7 @@ public class VolumeService {
         return res;
     }
 
-   /* public Collection<NewsPaper> findPrivateNewsPapersByVolume(int volumeId) {
+    public Collection<NewsPaper> findPrivateNewsPapersByVolume(int volumeId) {
         return volumeRepository.findPrivateNewspapersByVolumeId(volumeId);
-    }*/
+    }
 }

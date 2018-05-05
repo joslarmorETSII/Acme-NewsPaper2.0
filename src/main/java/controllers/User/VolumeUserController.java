@@ -1,4 +1,4 @@
-/*
+
 package controllers.User;
 
 import controllers.AbstractController;
@@ -111,15 +111,6 @@ public class VolumeUserController extends AbstractController{
                     result = this.createEditModelAndView2(volumePruned);
                 }
                 else{
-                    newsPapers = volumePruned.getNewsPapers();
-                    for(NewsPaper n: newsPapers){
-                        if(n.isModePrivate()){
-                            for(Customer c: volume.getSubscriptions()){
-                                c.getNewsPapers().add(n);
-                                n.getSubscriptions().add(c);
-                            }
-                        }
-                    }
                     this.volumeService.save(volume);
                     result = new ModelAndView("redirect:list.do");
                 }
@@ -154,15 +145,9 @@ public class VolumeUserController extends AbstractController{
                 result = this.createEditModelAndView3(volumePruned);
             }
             else{
-                newsPapersToRemove = volumePruned.getNewsPapers();
-                for(NewsPaper n: newsPapersToRemove){
-                    if(n.isModePrivate()){
-                        for(Customer c: volume.getSubscriptions()){
-                            c.getNewsPapers().remove(n);
-                            n.getSubscriptions().remove(c);
-                        }
-                    }
-                }
+                newsPapersToRemove = volumePruned.getNewsPapersVolume();
+                volume.getNewsPapersVolume().removeAll(newsPapersToRemove);
+
                 this.volumeService.save(volume);
                 result = new ModelAndView("redirect:list.do");
             }
@@ -247,7 +232,7 @@ public class VolumeUserController extends AbstractController{
         ModelAndView result;
 
         Collection<NewsPaper> newsPapers= newsPaperService.findPublishedNewsPaper();
-        Collection<NewsPaper> newsPapers1 = volume.getNewsPapers();
+        Collection<NewsPaper> newsPapers1 = volume.getNewsPapersVolume();
         newsPapers.removeAll(newsPapers1);
 
         result = new ModelAndView("volume/addNewsPaper");
@@ -270,11 +255,11 @@ public class VolumeUserController extends AbstractController{
 
         result = new ModelAndView("volume/removeNewsPaper");
         result.addObject("volume", volume);
-        result.addObject("newsPapers",volume.getNewsPapers());
+        result.addObject("newsPapers",volume.getNewsPapersVolume());
         result.addObject("actionUri","volume/user/removeNewsPaper.do");
         result.addObject("message", messageCode);
 
         return result;
     }
 }
-*/
+

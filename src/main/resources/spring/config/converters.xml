@@ -52,7 +52,12 @@
 		<bean class="converters.MessageToStringConverter"/>
 		<bean class="converters.StringToMessageConverter"/>
 		<bean class="converters.StringToFolderConverter"/>
-
+		<bean class="converters.StringToSubscribeNewsPaperConverter"/>
+		<bean class="converters.StringToSubscribeVolumeConverter"/>
+		<bean class="converters.SubscribeNewsPaperToStringConverter"/>
+		<bean class="converters.SubscribeVolumeToStringConverter"/>
+		<bean class="converters.SearchToStringConverter"/>
+		<bean class="converters.StringToSearchConverter"/>
 
 	</util:list>
 	
