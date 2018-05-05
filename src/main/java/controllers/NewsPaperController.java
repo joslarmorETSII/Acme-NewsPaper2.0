@@ -1,4 +1,3 @@
-/*
 package controllers;
 
 import domain.Actor;
@@ -147,4 +146,3 @@ public class NewsPaperController extends AbstractController {
         return result;
     }
 }
-*/
