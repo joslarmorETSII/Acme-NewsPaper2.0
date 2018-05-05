@@ -54,12 +54,19 @@
 		</display:column>
 	</security:authorize>
 
+	<security:authorize access="hasRole('ADMINISTRATOR')" >
+	<display:column>
+			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+	</display:column>
+	</security:authorize>
 
+	<security:authorize access="!hasRole('ADMINISTRATOR')" >
 		<display:column>
 			<jstl:if test="${row.newsPaper.modePrivate eq false}">
 			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
 			</jstl:if>
 		</display:column>
+	</security:authorize>
 
 
 
@@ -94,6 +101,12 @@
 	<display:column>
 		<acme:button url="article/administrator/edit.do?articleId=${row2.id}" code="article.delete" />
 	</display:column>
+
+
+		<display:column>
+			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+		</display:column>
+
 
 </display:table>
 	</fieldset>
