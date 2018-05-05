@@ -1,4 +1,3 @@
-/*
 package controllers.Administrator;
 
 import controllers.AbstractController;
@@ -58,20 +57,6 @@ public class AdvertisementAdministratorController extends AbstractController{
         return result;
     }
 
-//    // Listing -------------------------------------------------------
-//
-//
-//    @RequestMapping(value = "/list", method = RequestMethod.GET)
-//    public ModelAndView list() {
-//        ModelAndView result;
-//
-//        result = new ModelAndView("advertisement/list");
-//        result.addObject("advertisements", advertisementService.findAll());
-//
-//        result.addObject("requestURI", "user/list.do");
-//        return result;
-//
-//    }
 
 
     // Delete ------------------------------------------------------------
@@ -116,4 +101,3 @@ public class AdvertisementAdministratorController extends AbstractController{
         return result;
     }
 }
-*/

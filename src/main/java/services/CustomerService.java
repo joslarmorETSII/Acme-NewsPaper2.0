@@ -186,4 +186,13 @@ public class CustomerService {
 
         return creditCard;
     }
+
+
+    public Collection<NewsPaper> newsPapersCustomer(int customerId){
+        return customerRepository.newsPapersCustomer(customerId);
+    }
+
+    public  Collection<NewsPaper> newsPapersSubscribed(int custometId){
+        return customerRepository.newsPapersSubscribed(custometId);
+    }
 }
