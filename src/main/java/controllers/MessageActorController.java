@@ -124,8 +124,7 @@ public class MessageActorController extends AbstractController {
 
             result = new ModelAndView("redirect:/folder/actor/list.do");
         } catch (final Exception e) {
-            // TODO: Arreglar todo
-            result = new ModelAndView("redirect:/panic/misc.do");
+            result = panic(e);
         }
 
         return result;
@@ -146,9 +145,7 @@ public class MessageActorController extends AbstractController {
             result = new ModelAndView("redirect:/folder/actor/list.do");
 
         } catch (Exception e) {
-
-            result = new ModelAndView("redirect:/panic/misc.do");
-
+            result = panic(e);
         }
 
         return result;
@@ -170,9 +167,7 @@ public class MessageActorController extends AbstractController {
             result.addObject("destinyFolders", destinyFolders);
             result.addObject("formAction", "message/actor/create.do");
         } catch (final Exception e) {
-
-            result = new ModelAndView("redirect:/panic/misc.do");
-
+            result = panic(e);
         }
 
         return result;
@@ -190,8 +185,7 @@ public class MessageActorController extends AbstractController {
 
             result = new ModelAndView("redirect:/folder/actor/list.do");
         } catch (Throwable oops) {
-            //			result = new ModelAndView("redirect:/folder/actor/list.do");
-            //			result.addObject("message", "folder.commit.error");
+
             result = this.createEditModelAndView2(message, "message.commit.error.mover");
         }
 
@@ -212,9 +206,7 @@ public class MessageActorController extends AbstractController {
             result = new ModelAndView("message/details");
             result.addObject("msg", message);
         } catch (Exception e) {
-
-            result = new ModelAndView("redirect:/panic/misc.do");
-
+            result = panic(e);
         }
 
         return result;
