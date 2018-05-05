@@ -36,8 +36,10 @@
 		<acme:submit name="save" code="article.save"/>
 	</jstl:if>
 
-	<jstl:if test="${article.id != 0 or chirp.posted eq false}" >
+	<jstl:if test="${chirp.id!=0}" >
+		<jstl:if test="${article.id != 0 or chirp.posted eq false}">
 		<acme:submit name="delete" code="chirp.delete"/>
+		</jstl:if>
 	</jstl:if>
 
 	<acme:cancel code="chirp.cancel" url="chirp/user/list.do"/>
