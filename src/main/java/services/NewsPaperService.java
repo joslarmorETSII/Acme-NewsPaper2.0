@@ -120,9 +120,18 @@ public class NewsPaperService {
     public void delete(NewsPaper newsPaper){
         Assert.notNull(newsPaper);
         Assert.isTrue(checkByPrincipalAdmin(newsPaper) || checkByPrincipal(newsPaper));
-        // Todo: RemoveAll subscriptions if necessary
-        articleService.deleteAll(newsPaper.getArticles());
-        newsPaperRepository.delete(newsPaper);
+        Collection<SubscribeNewsPaper> subscriptions =newsPaper.getSubscriptions();
+        if(subscriptions.size()>0) {
+            for(SubscribeNewsPaper s : subscriptions){
+                s.setCustomer(null);
+                s.setNewsPaper(null);
+                this.subscribeNewsPaperService.delete(s);
+            }
+        }
+        this.advertisementService.deleteAll(newsPaper);
+        this.volumeService.delete(newsPaper);
+        this.articleService.deleteAll(newsPaper.getArticles());
+        this.newsPaperRepository.delete(newsPaper);
     }
 
     // Other business methods -------------------------------------------------

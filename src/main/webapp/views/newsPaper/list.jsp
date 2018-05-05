@@ -85,6 +85,11 @@
     </display:column>
     </security:authorize>
 
+    <security:authorize access="hasRole('ADMINISTRATOR')">
+        <display:column >
+            <acme:button url="newsPaper/administrator/display.do?newsPaperId=${row.id}" code="newsPaper.display"/>
+        </display:column>
+    </security:authorize>
 
     <security:authorize access="isAnonymous()||hasAnyRole('AGENT','CUSTOMER')">
     <display:column >
@@ -93,9 +98,6 @@
         </jstl:if>
     </display:column>
     </security:authorize>
-
-
-
 
     <security:authorize access="hasRole('ADMINISTRATOR')" >
         <display:column>
