@@ -1,9 +1,9 @@
-/*
+
 
 package controllers.Agent;
 
 import controllers.AbstractController;
-import controllers.Administrator.AdvertisementAdministratorController;
+
 import domain.*;
 import forms.RegisterAdvertisementForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.AdvertisementService;
 import services.AgentService;
-import services.CreditCardService;
+
 import services.NewsPaperService;
 
 import javax.validation.Valid;
@@ -34,10 +34,12 @@ public class AdvertisementAgentController extends AbstractController {
     @Autowired
     private AgentService agentService;
 
-    @Autowired
-    private CreditCardService creditCardService;
 
-    @Autowired
+
+
+
+
+@Autowired
     private NewsPaperService newsPaperService;
 
     public AdvertisementAgentController() {
@@ -78,15 +80,14 @@ public class AdvertisementAgentController extends AbstractController {
         Agent agent;
         NewsPaper newsPaper;
         try {
-            CreditCard creditCard = creditCardService.reconstruct(registerAdvertisementForm,binding);
+            CreditCard creditCard = advertisementService.reconstruct(registerAdvertisementForm,binding);
             Advertisement advertisement = agentService.reconstructRegisterAdvertisement(registerAdvertisementForm, binding);
 
 
             if (binding.hasErrors())
                 result = createEditModelAndView2(registerAdvertisementForm);
             else {
-                CreditCard saved = creditCardService.save(creditCard);
-                 advertisement.setCreditCard(saved);
+                advertisement.setCreditCard(creditCard);
                 Advertisement savedAdd = advertisementService.save(advertisement);
                 result = new ModelAndView("redirect: list.do");
                 newsPaper = savedAdd.getNewsPaper();
@@ -171,4 +172,3 @@ public class AdvertisementAgentController extends AbstractController {
 
     }
 }
-*/

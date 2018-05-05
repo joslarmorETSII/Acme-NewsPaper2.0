@@ -86,13 +86,13 @@ public class VolumeService {
 
     //Anthiliaries methodes
 
-//    public Collection<NewsPaper> findPublishedAndNotPrivateNewsPaperPerVolume(int volumeId){
-//        return volumeRepository.findPublishedAndNotPrivateNewsPaperPerVolume(volumeId);
-//    }
-//
-//    public Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId){
-//        return volumeRepository.findPublishedNewsPaperPerVolume(volumeId);
-//    }
+    public Collection<NewsPaper> findPublishedAndNotPrivateNewsPaperPerVolume(int volumeId){
+        return volumeRepository.findPublishedAndNotPrivateNewsPaperPerVolume(volumeId);
+    }
+
+    public Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId){
+        return volumeRepository.findPublishedNewsPaperPerVolume(volumeId);
+    }
 
     public boolean checkByPrincipal(Volume volume) {
         Boolean res = null;

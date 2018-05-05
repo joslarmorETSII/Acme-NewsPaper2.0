@@ -1,12 +1,9 @@
-/*
 package controllers;
 
 import domain.Actor;
-import domain.Customer;
 import domain.NewsPaper;
 import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.NewsPaperService;
-import services.UserService;
 import services.VolumeService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -147,4 +142,3 @@ public class NewsPaperController extends AbstractController {
         return result;
     }
 }
-*/
