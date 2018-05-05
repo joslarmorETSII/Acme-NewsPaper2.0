@@ -97,8 +97,6 @@ public class ArticleController extends AbstractController{
         HttpSession session = request.getSession();
         session.setAttribute("cancelUriSession", request.getRequestURI());
 
-        //TODO: Solo mostrar los que estan en final mode
-
         articles=this.articleService.findPublishArticles();
 
         result = new ModelAndView("article/list");
