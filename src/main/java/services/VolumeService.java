@@ -57,7 +57,6 @@ public class VolumeService {
 
     public Volume save (Volume volume){
         Volume res;
-        //Assert.isTrue(checkByPrincipal(volume));
 
         res= volumeRepository.save(volume);
         return res;

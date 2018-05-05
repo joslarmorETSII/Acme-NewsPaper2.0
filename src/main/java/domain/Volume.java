@@ -90,7 +90,7 @@ public class Volume extends DomainEntity {
         return newsPapersVolume;
     }
 
-    public void setNewsPapersVolume(Collection<NewsPaper> newsPapers) {
+    public void setNewsPapersVolume(Collection<NewsPaper> newsPapersVolume) {
         this.newsPapersVolume = newsPapersVolume;
     }
 }

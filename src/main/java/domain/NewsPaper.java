@@ -156,7 +156,7 @@ NewsPaper extends DomainEntity {
 
     @Valid
     @NotNull
-    @ManyToMany(mappedBy = "newsPapers")
+    @ManyToMany(mappedBy = "newsPapersVolume")
     public Collection<Volume> getVolumes() { return volumes; }
 
     public void setVolumes(Collection<Volume> volumes) {

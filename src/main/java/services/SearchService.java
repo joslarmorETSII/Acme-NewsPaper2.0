@@ -23,9 +23,6 @@ public class SearchService {
 
     // Supporting services ----------------------------------------------------
 
-    @Autowired
-    private NewsPaperService newsPaperService;
-
     // Constructors -----------------------------------------------------------
 
     public SearchService() {

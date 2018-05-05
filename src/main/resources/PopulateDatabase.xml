@@ -816,12 +816,12 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 		<property name="description" value="Description volume1"/>
 		<property name="anyo" value="2018" />
 		<property name="user" ref ="user1" />
-		<property name="subscriptions">
+		<property name="subscriptionVolumes">
 			<list>
 				<ref bean="subscribeVolume1" />
 			</list>
 		</property>
-		<property name="newsPapers">
+		<property name="newsPapersVolume">
 			<list>
 				<ref bean="newsPaper1" />
 			</list>
@@ -1178,7 +1178,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 	<!-- Search1 para anonymous-->
 	<bean id="search1" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
@@ -1193,7 +1193,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 
 	<bean id="search2" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
@@ -1207,7 +1207,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 	</bean>
 	<bean id="search3" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
@@ -1221,7 +1221,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 	</bean>
 	<bean id="search4" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
@@ -1235,7 +1235,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 	</bean>
 	<bean id="search5" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
@@ -1249,7 +1249,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 	</bean>
 	<bean id="search6" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
@@ -1263,7 +1263,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 	</bean>
 	<bean id="search7" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
@@ -1277,7 +1277,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 	</bean>
 	<bean id="search8" class="domain.Search">
 		<property name="keyword" value=""/>
-		<property name="lastUpdate" value="20/04/2018 10:00" />
+		<property name="lastUpdate" value="2018/04/20 10:00" />
 		<property name="articles" >
 			<list>
 				<null/>
