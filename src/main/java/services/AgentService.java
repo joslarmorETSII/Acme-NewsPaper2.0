@@ -45,6 +45,9 @@ public class AgentService {
     @Autowired
     private NewsPaperService newsPaperService;
 
+    @Autowired
+    private SearchService searchService;
+
 
 
     // Constructors -----------------------------------------------------------
@@ -61,7 +64,7 @@ public class AgentService {
 
         res.setAdvertisements(new ArrayList<Advertisement>());
         res.setUserAccount(userAccountService.create("AGENT"));
-        res.setSearch(new Search());
+        res.setSearch(searchService.create());
 
         return res;
     }
