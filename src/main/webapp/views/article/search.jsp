@@ -26,6 +26,7 @@
 </jstl:if>
 
 <form:form action="${requestURI}" modelAttribute="search">
+	<form:hidden path="lastUpdate" />
 	<form:hidden path="articles"/>
 	<form:hidden path="newsPapers"/>
 

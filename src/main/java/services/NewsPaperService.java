@@ -252,10 +252,11 @@ public class NewsPaperService {
         Assert.isTrue(actorService.isAdministrator());
         return this.newsPaperRepository.findNewsPaperByTabooIsTrue();
     }
+    */
 
     public Collection<NewsPaper> searchNewspapers(String keyword) {
         return newsPaperRepository.searchNewspapers(keyword,keyword);
-    }*/
+    }
 
     public void flush() {
         newsPaperRepository.flush();

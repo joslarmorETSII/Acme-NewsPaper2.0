@@ -1,4 +1,3 @@
-/*
 package controllers;
 
 import domain.*;
@@ -247,4 +246,4 @@ public class UserController extends AbstractController{
         result.addObject("search",search);
         return result;
     }
-}*/
+}
