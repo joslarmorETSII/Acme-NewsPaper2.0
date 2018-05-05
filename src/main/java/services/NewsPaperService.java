@@ -1,4 +1,3 @@
-/*
 package services;
 
 import domain.*;
@@ -56,19 +55,24 @@ public class NewsPaperService {
     @Autowired
     private VolumeService volumeService;
 
+    @Autowired
+    private SubscribeNewsPaperService subscribeNewsPaperService;
+
+    @Autowired
+    private SubscribeVolumeService subscribeVolumeService;
+
     // Constructors -----------------------------------------------------------
 
     public NewsPaperService() {
         super();
     }
 
-    // Simple CRUD methods ----------------------------------------------------
+    // Simple CRUD methods -----------------------------------------------------
 
     public NewsPaper create() {
-        NewsPaper res= null;
-        User publisher= null;
+        NewsPaper res;
+        User publisher;
         Collection<Article> articles= new ArrayList<>();
-        Collection<Customer> customers= new ArrayList<>();
         Collection<Advertisement> advertisements = new ArrayList<>();
         Collection<Volume> volumes = new ArrayList<>();
 
@@ -77,7 +81,7 @@ public class NewsPaperService {
 
         res.setPublisher(publisher);
         res.setArticles(articles);
-        res.setSubscriptions(customers);
+        res.setSubscriptions(new ArrayList<SubscribeNewsPaper>());
         res.setAdvertisements(advertisements);
         res.setVolumes(volumes);
         return res;
@@ -116,27 +120,21 @@ public class NewsPaperService {
     public void delete(NewsPaper newsPaper){
         Assert.notNull(newsPaper);
         Assert.isTrue(checkByPrincipalAdmin(newsPaper) || checkByPrincipal(newsPaper));
-        Collection<Customer> customers =newsPaper.getSubscriptions();
-        if(customers.size()>0) {
-            for(Customer c : customers){
-                c.getNewsPapers().remove(newsPaper);
-                customerService.save(c);
-            }
-        }
-        this.advertisementService.deleteAll(newsPaper);
-        this.volumeService.delete(newsPaper);
-        this.articleService.deleteAll(newsPaper.getArticles());
-        this.newsPaperRepository.delete(newsPaper);
+        // Todo: RemoveAll subscriptions if necessary
+        articleService.deleteAll(newsPaper.getArticles());
+        newsPaperRepository.delete(newsPaper);
     }
 
     // Other business methods -------------------------------------------------
 
     public void unsuscribe(NewsPaper newsPaper){
         Customer customer = this.customerService.findByPrincipal();
-        newsPaper.getSubscriptions().remove(customer);
-        customer.getNewsPapers().remove(newsPaper);
-        this.save(newsPaper);
-        this.customerService.save(customer);
+        SubscribeNewsPaper subscription = findSubscriptionNewsPaperByCustomer(customer.getId(),newsPaper.getId());
+        // TODO: unsuscribe implica delete de la SubscriptionNewspaper
+        newsPaper.getSubscriptions().remove(subscription);
+        customer.getSubscriptionsToNewspapers().remove(subscription);
+        save(newsPaper);
+        customerService.save(customer);
     }
 
     public void findOneToPublish(NewsPaper newsPaper){
@@ -308,6 +306,12 @@ public class NewsPaperService {
         return newsPaperRepository.customerOfNewsPaper(newsPaperId);
     }
 
+    public SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId,int newspaperId){
+        return newsPaperRepository.findSubscriptionNewsPaperByCustomer(customerId, newspaperId);
+    }
+
+
 
 }
-*/
+
+

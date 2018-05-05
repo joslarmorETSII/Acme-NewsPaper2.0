@@ -3,6 +3,7 @@ package repositories;
 import domain.Article;
 import domain.Customer;
 import domain.NewsPaper;
+import domain.SubscribeNewsPaper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -39,5 +40,8 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
 
     @Query("select n.subscriptions from NewsPaper n where n.id=?1")
     Collection<Customer> customerOfNewsPaper(int newsPaperId);
+
+    @Query("select s from SubscribeNewsPaper s where s.customer.id = ?1 and s.newsPaper.id=?2")
+    SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId,int newspaperId);
 
 }
