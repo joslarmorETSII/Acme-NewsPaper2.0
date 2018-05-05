@@ -152,7 +152,7 @@ public class UserServiceTest extends AbstractTest {
                         "user33", "user33", "user33", "userTestName", "userTestSurname", "+34123456789", "userTest@userTest.com", "addressUser",  null
                 },
                 // Todos los campos como null --> false
-               {
+                {
                         null, null, null, null, null, null, null, null, ConstraintViolationException.class
                 },
                 // Todos los campos completados, excepto la direccion postal -> true
@@ -163,10 +163,9 @@ public class UserServiceTest extends AbstractTest {
                 {
                         "use", "userTest3", "userTest3", "userTestName3", "userTestSurname3","+34123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
                 },
-
                 // Todos los campos completados, introduciendo un <script> en el nombre -> false
-               {
-                       "user343", "user343", "user343", "<script>", "userTestSurname43","+34123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
+                {
+                        "user343", "user343", "user343", "<script>", "userTestSurname43","+34123456789", "userTest@userTest.com", "",  ConstraintViolationException.class
                 },
 
         };

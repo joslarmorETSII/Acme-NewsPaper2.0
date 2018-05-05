@@ -1177,6 +1177,22 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 		<property name="actor" ref="following1" />
 	</bean>
 
+	<!-- Message -->
+
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="01/04/2018 11:00"/>
+		<property name="body" value="Prueba"/>
+		<property name="subject" value="Prueba"/>
+		<property name="priority" value="High"/>
+		<property name="folder" ref="spambox2"/>
+		<property name="actorSender" ref="user1"/>
+		<property name="actorReceivers" >
+			<list>
+				<null/>
+			</list>
+		</property>
+
+	</bean>
 	<!-- Search1 para anonymous-->
 	<bean id="search1" class="domain.Search">
 		<property name="keyword" value=""/>

@@ -88,7 +88,7 @@ public class ChirpServiceTest extends AbstractTest{
 
      /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a admin must be able to:
-                -.Remove an article that he or she thinks is inappropriate.
+                -.Remove an chirp that he or she thinks is inappropriate.
     */
 
 

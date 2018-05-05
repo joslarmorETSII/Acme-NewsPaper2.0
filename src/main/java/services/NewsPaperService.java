@@ -288,10 +288,12 @@ public class NewsPaperService {
     }
 
     public Collection<NewsPaper> findNewsPaperPlacedAdvertisement(int agentId) {
+        Assert.isTrue(actorService.isAgent());
         return newsPaperRepository.findNewsPaperPlacedAdvertisement(agentId);
     }
 
     public Collection<NewsPaper> newsPapersWithNoAdds(){
+        Assert.isTrue(actorService.isAgent());
         return newsPaperRepository.newsPapersWithNoAdds();
     }
 
@@ -309,6 +311,5 @@ public class NewsPaperService {
     public Collection<Customer> customerOfNewsPaper(int newsPaperId){
         return newsPaperRepository.customerOfNewsPaper(newsPaperId);
     }
-
 
 }

@@ -70,11 +70,13 @@
     </security:authorize>
 
     <security:authorize access="hasRole('CUSTOMER')">
+
         <display:column >
             <jstl:if test="${ row.modePrivate ne false}">
                 <acme:button url="newsPaper/customer/subscribe.do?newsPaperId=${row.id}" code="newsPaper.subscribe"/>
             </jstl:if>
         </display:column>
+
     </security:authorize>
 
     <security:authorize access="hasRole('USER')" >
@@ -87,7 +89,8 @@
 
 
     <security:authorize access="isAnonymous()||hasAnyRole('AGENT','CUSTOMER')">
-    <display:column >
+
+        <display:column >
         <jstl:if test="${row.modePrivate eq false}">
          <acme:button url="newsPaper/displayAnonymous.do?newsPaperId=${row.id}" code="newsPaper.display"/>
         </jstl:if>
