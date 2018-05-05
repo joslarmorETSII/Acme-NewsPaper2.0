@@ -1,4 +1,3 @@
-/*
 package controllers.User;
 
 import controllers.AbstractController;
@@ -159,4 +158,3 @@ public class ArticleUserController extends AbstractController{
         return result;
     }
 }
-*/
