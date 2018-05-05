@@ -84,7 +84,6 @@ public abstract class Actor extends DomainEntity {
     // Relationships ----------------------------------------------------------
 
     private UserAccount userAccount;
-
     private Collection<Folder> folders;
     private Search search;
 

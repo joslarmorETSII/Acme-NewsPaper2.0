@@ -247,5 +247,4 @@ public class UserController extends AbstractController{
         result.addObject("search",search);
         return result;
     }
-}
-*/
+}*/

@@ -6,6 +6,7 @@ import forms.SubscribeForm;
 import forms.SubscribeVolumeForm;
 import forms.UserForm;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.AttributeAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,8 @@ public class CustomerService {
     @Autowired
     private UserAccountService userAccountService;
 
-
+    @Autowired
+    private SearchService searchService;
 
     @Autowired
     private ActorService actorService;
@@ -59,7 +61,7 @@ public class CustomerService {
         result.setUserAccount(userAccountService.create("CUSTOMER"));
         result.setFolders(new ArrayList<Folder>());
         result.setSubscriptionsToVolumes(new ArrayList<SubscribeVolume>());
-        result.setSearch(new Search());
+        result.setSearch(searchService.create());
 
         return result;
     }

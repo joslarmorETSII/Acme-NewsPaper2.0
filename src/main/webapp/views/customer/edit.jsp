@@ -21,7 +21,8 @@
 
     <form:hidden path="id"/>
     <form:hidden path="version"/>
-    <form:hidden path="newsPapers"/>
+    <form:hidden path="subscriptionsToNewspapers"/>
+    <form:hidden path="subscriptionsToVolumes" />
 
     <acme:textbox path="name" code="customer.name"/>
     <br />
