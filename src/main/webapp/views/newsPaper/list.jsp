@@ -105,9 +105,11 @@
 
 
     <security:authorize access="hasRole('ADMINISTRATOR')" >
+        <jstl:if test="${row.taboo eq false}">
         <display:column>
             <acme:button url="newsPaper/administrator/edit.do?newsPaperId=${row.id}" code="newsPaper.delete" />
         </display:column>
+        </jstl:if>
     </security:authorize>
 
 </display:table>

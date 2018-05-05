@@ -421,7 +421,7 @@
 		<property name="publicationDate" value="01/04/2018"/>
 		<property name="description" value="Get the small business news stories and updates from Entrepreneurs"/>
 		<property name="picture" value="http://i.dailymail.co.uk/i/newpix/2018/04/24/17/4B50DB5E00000578-5635119-Nolin_Jean_Baptiste_LE_GLOBE_TERRESTRE_REPRESENT_EN_DEUX_PLANS_H-a-49_1524586336734.jpg"/>
-		<property name="published" value="false"/>
+		<property name="published" value="true"/>
 		<property name="taboo" value="false"/>
 		<property name="modePrivate" value="true"/>
 		<property name="publisher" ref="user1"/>
