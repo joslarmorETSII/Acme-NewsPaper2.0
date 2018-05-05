@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/newsPaper/customer")
@@ -50,6 +51,21 @@ public class NewsPaperCustomerController extends AbstractController{
         ModelAndView result;
         Customer customer = customerService.findByPrincipal();
         Collection<NewsPaper> newsPapers= customer.getNewsPapers();
+        Collection<NewsPaper> n2= new HashSet<>();
+
+        for(Volume v:customer.getVolumes()){
+            for(NewsPaper n:v.getNewsPapers()){
+                for(NewsPaper n1:customer.getNewsPapers()){
+                    if(n.equals(n1)){
+                        n2.add(n);
+                    }
+                    n2.add(n1);
+                }
+
+
+            }
+        }
+        newsPapers = new ArrayList<>(n2);
 
         result = new ModelAndView("newsPaper/listNewsPaperCustomer");
         result.addObject("newsPapers", newsPapers);
