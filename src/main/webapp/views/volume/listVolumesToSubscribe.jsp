@@ -1,5 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
+  User: yuzi
+  Date: 5/5/18
+  Time: 5:11 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
+<%--
+  Created by IntelliJ IDEA.
   User: Félix
   Date: 25/04/2018
   Time: 13:15
@@ -22,30 +30,13 @@
 
 <display:table id="row" name="volumes" requestURI="${requestURI}" pagesize="5">
 
-    <c:set var = "contiene" value = "false"/>
-    <jstl:forEach items="${row.customers}" var="cliente">
-        <jstl:if test="${cliente eq customer }">
-            <c:set var = "contiene" value = "true"/>
-        </jstl:if>
-    </jstl:forEach>
-
-
     <acme:column code="volume.title" value="${row.title}"/>
     <acme:column code="volume.description" value="${row.description}"/>
     <acme:column code="volume.anyo" value="${row.anyo}" />
 
 
-
     <display:column>
-        <jstl:if test="${contiene eq true }">
-            <acme:button url="volume/customer/unsubscribe.do?volumeId=${row.id}" code="newsPaper.unsubscribe"/>
-        </jstl:if>
-    </display:column>
-
-    <display:column>
-        <jstl:if test="${contiene ne true}">
             <acme:button url="volume/customer/subscribe.do?volumeId=${row.id}" code="newsPaper.subscribe"/>
-        </jstl:if>
     </display:column>
 
 

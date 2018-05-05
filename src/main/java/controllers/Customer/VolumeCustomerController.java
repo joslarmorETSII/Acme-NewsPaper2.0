@@ -51,7 +51,7 @@ public class VolumeCustomerController extends AbstractController{
         HttpSession session = request.getSession();
         session.setAttribute("cancelUriSession",request.getRequestURI());
 
-        result = new ModelAndView("volume/listVolumeCustomer");
+        result = new ModelAndView("volume/listSubscribedVolumes");
         result.addObject("volumes", volumes);
         result.addObject("customer",customerService.findByPrincipal());
         result.addObject("requestURI", "volume/customer/listVolumeCustomer.do");
@@ -65,12 +65,13 @@ public class VolumeCustomerController extends AbstractController{
         ModelAndView result;
         Customer customer = customerService.findByPrincipal();
 
-        Collection<Volume> volumes= volumeService.findNotSubscribesVolumes(customer.getId());
+        Collection<Volume> volumes = volumeService.findAll();
+        volumes.removeAll(volumeService.findVolumeByCustomer(customer.getId()));
 
         HttpSession session = request.getSession();
         session.setAttribute("cancelUriSession",request.getRequestURI());
 
-        result = new ModelAndView("volume/listVolumeCustomer");
+        result = new ModelAndView("volume/listVolumesToSubscribe");
         result.addObject("volumes", volumes);
         result.addObject("customer",customer);
         result.addObject("requestURI", "volume/customer/listAllVolumes.do");
@@ -103,8 +104,6 @@ public class VolumeCustomerController extends AbstractController{
         ModelAndView result;
         Volume volume;
         Customer principal;
-        Collection<NewsPaper> privateNewsPapers;
-
 
         volume = volumeService.findOne(volumeId);
         Assert.notNull(volume);

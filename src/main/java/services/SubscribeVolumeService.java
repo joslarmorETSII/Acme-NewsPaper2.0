@@ -1,6 +1,8 @@
 package services;
 
+import domain.Customer;
 import domain.SubscribeVolume;
+import domain.Volume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.SubscribeVolumeRepository;
@@ -54,6 +56,10 @@ public class SubscribeVolumeService {
     }
 
     public void delete(SubscribeVolume subscribeNewsPaper){
+        Customer customer = subscribeNewsPaper.getCustomer();
+        Volume volume = subscribeNewsPaper.getVolume();
+        customer.getSubscriptionsToVolumes().remove(subscribeNewsPaper);
+        volume.getSubscriptionVolumes().remove(subscribeNewsPaper);
         subscribeVolumeRepository.delete(subscribeNewsPaper);
     }
 

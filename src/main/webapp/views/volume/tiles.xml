@@ -32,8 +32,12 @@
 		<put-attribute name="title" value="Remove newsPapers" />
 		<put-attribute name="body" value="/views/volume/removeNewsPaper.jsp" />
 	</definition>
-	<definition name="volume/listVolumeCustomer" extends="master.page">
-		<put-attribute name="title" value="List of volumes" />
-		<put-attribute name="body" value="/views/volume/listVolumeCustomer.jsp" />
+	<definition name="volume/listSubscribedVolumes" extends="master.page">
+		<put-attribute name="title" value="List of subscribed volumes" />
+		<put-attribute name="body" value="/views/volume/listSubscribedVolumes.jsp" />
+	</definition>
+	<definition name="volume/listVolumesToSubscribe" extends="master.page">
+		<put-attribute name="title" value="List of volumes to subscribe" />
+		<put-attribute name="body" value="/views/volume/listVolumesToSubscribe.jsp" />
 	</definition>
 </tiles-definitions>

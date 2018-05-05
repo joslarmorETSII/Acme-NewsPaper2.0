@@ -32,8 +32,12 @@
 		<put-attribute name="title" value="Quitar revistas" />
 		<put-attribute name="body" value="/views/volume/removeNewsPaper.jsp" />
 	</definition>
-	<definition name="volume/listVolumeCustomer" extends="master.page">
-		<put-attribute name="title" value="Lista de volumenes" />
-		<put-attribute name="body" value="/views/volume/listVolumeCustomer.jsp" />
+	<definition name="volume/listSubscribedVolumes" extends="master.page">
+		<put-attribute name="title" value="Lista de volumenes suscritos" />
+		<put-attribute name="body" value="/views/volume/listSubscribedVolumes.jsp" />
+	</definition>
+	<definition name="volume/listVolumesToSubscribe" extends="master.page">
+		<put-attribute name="title" value="Lista de volumenes para suscribirse" />
+		<put-attribute name="body" value="/views/volume/listVolumesToSubscribe.jsp" />
 	</definition>
 </tiles-definitions>
