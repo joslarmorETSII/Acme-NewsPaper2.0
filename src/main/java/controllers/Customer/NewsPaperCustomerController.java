@@ -219,15 +219,13 @@ public class NewsPaperCustomerController extends AbstractController{
 
         Actor actor=actorService.findByPrincipal();
 
-        c = newsPaperService.customerOfNewsPaper(newsPaperId);
-
+        c = newsPaperService.customerOfVolume(actor.getId());
 
         Assert.isTrue(c.contains(actor) || !newsPaper.isModePrivate());
 
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelURI", "newsPaper/listAll.do");
-
 
         return result;
     }

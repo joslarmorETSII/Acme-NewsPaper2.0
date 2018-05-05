@@ -317,8 +317,8 @@ public class NewsPaperService {
     }
 
 
-    public Collection<Customer> customerOfNewsPaper(int newsPaperId){
-        return newsPaperRepository.customerOfNewsPaper(newsPaperId);
+    public Collection<Customer> customerOfVolume(int customerId){
+        return newsPaperRepository.customerOfVolume(customerId);
     }
 
     public SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId,int newspaperId){
