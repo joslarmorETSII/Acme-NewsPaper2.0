@@ -1,20 +1,18 @@
 package repositories;
 
-import domain.Article;
 import domain.Customer;
 import domain.NewsPaper;
 import domain.SubscribeNewsPaper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
 
 @Repository
 public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
 
-    /*@Query("select n from NewsPaper n where n.published =true")
+    @Query("select n from NewsPaper n where n.published =true")
     Collection<NewsPaper> findPublishedNewsPaper();
 
     @Query("select n from NewsPaper n where n.publisher.id=?1 AND n.published = FALSE")
@@ -42,6 +40,6 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
     Collection<Customer> customerOfNewsPaper(int newsPaperId);
 
     @Query("select s from SubscribeNewsPaper s where s.customer.id = ?1 and s.newsPaper.id=?2")
-    SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId,int newspaperId);*/
+    SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId,int newspaperId);
 
 }

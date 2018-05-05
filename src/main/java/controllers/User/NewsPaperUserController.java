@@ -1,4 +1,4 @@
-/*
+
 package controllers.User;
 
 import controllers.AbstractController;
@@ -11,18 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.ActorService;
 import services.NewsPaperService;
 import services.UserService;
 import services.VolumeService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 
 @Controller
 @RequestMapping("/newsPaper/user")
@@ -113,7 +109,7 @@ public class NewsPaperUserController extends AbstractController {
         user = this.userService.findByPrincipal();
 
         Volume volume =this.volumeService.findOne(volumeId);
-        newsPapers = volume.getNewsPapers();
+        newsPapers = volume.getNewsPapersVolume();
 
         HttpSession session = request.getSession();
 
@@ -236,5 +232,3 @@ public class NewsPaperUserController extends AbstractController {
         return result;
     }
 }
-
-*/
