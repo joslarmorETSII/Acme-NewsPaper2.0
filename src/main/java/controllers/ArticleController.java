@@ -1,4 +1,3 @@
-/*
 package controllers;
 
 import domain.Article;
@@ -115,4 +114,3 @@ public class ArticleController extends AbstractController{
 
 
 }
-*/
