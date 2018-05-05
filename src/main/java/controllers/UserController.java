@@ -84,8 +84,11 @@ public class UserController extends AbstractController{
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("user/list");
         result.addObject("users", userService.findAll());
@@ -96,7 +99,7 @@ public class UserController extends AbstractController{
     }
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam Integer userId) {
+    public ModelAndView display(@RequestParam Integer userId, HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<Article> articles;
@@ -108,6 +111,7 @@ public class UserController extends AbstractController{
         result.addObject("articles", articles);
         result.addObject("chirps",user.getChirps());
         result.addObject("requestURI", "user/display.do");
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
         return result;
     }

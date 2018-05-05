@@ -10,10 +10,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.*;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -75,9 +72,8 @@ public class Configuration extends DomainEntity {
         this.spanishWelcome = spanishWelcome;
     }
 
-    @NotNull
+    @NotEmpty
     @ElementCollection
-    //TODO: @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public Collection<String> getTabooWords() {
         return this.tabooWords;
     }
