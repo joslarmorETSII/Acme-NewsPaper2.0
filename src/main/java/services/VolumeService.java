@@ -154,4 +154,12 @@ public class VolumeService {
     public Collection<NewsPaper> findPrivateNewsPapersByVolume(int volumeId) {
         return volumeRepository.findPrivateNewspapersByVolumeId(volumeId);
     }
+
+    public Collection<Volume> findVolumeByCustomer(int customerId) {
+        return volumeRepository.findVolumeByCustomer(customerId);
+    }
+
+    public Collection<Volume> findNotSubscribesVolumes(int id) {
+        return volumeRepository.findNotSubscribesVolumes(id);
+    }
 }

@@ -62,6 +62,10 @@ public class SubscribeVolumeService {
         return subscribeVolumeRepository.save(subscribeNewsPaper);
     }
 
+    public SubscribeVolume findSubscriptionToAVolume(int volumeId, int customerId) {
+        return subscribeVolumeRepository.findSubscriptionToAVolume(volumeId,customerId);
+    }
+
     // Other business methods -------------------------------------------------
 
 }

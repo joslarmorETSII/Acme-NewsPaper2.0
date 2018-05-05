@@ -1,11 +1,8 @@
-/*
+
 package controllers.Customer;
 
 import controllers.AbstractController;
-import domain.CreditCard;
-import domain.Customer;
-import domain.NewsPaper;
-import domain.Volume;
+import domain.*;
 import forms.SubscribeVolumeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.CreditCardService;
 import services.CustomerService;
+import services.SubscribeVolumeService;
 import services.VolumeService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +34,7 @@ public class VolumeCustomerController extends AbstractController{
     private VolumeService volumeService;
 
     @Autowired
-    private CreditCardService creditCardService;
+    private SubscribeVolumeService subscribeVolumeService;
 
     // Listing  --------------------------------------------------------------
 
@@ -45,8 +42,11 @@ public class VolumeCustomerController extends AbstractController{
     public ModelAndView list(HttpServletRequest request) {
 
         ModelAndView result;
+        Customer customer;
+        Collection<Volume> volumes;
 
-        Collection<Volume> volumes= customerService.findByPrincipal().getVolumes();
+        customer= customerService.findByPrincipal();
+        volumes = volumeService.findVolumeByCustomer(customer.getId());
 
         HttpSession session = request.getSession();
         session.setAttribute("cancelUriSession",request.getRequestURI());
@@ -65,8 +65,7 @@ public class VolumeCustomerController extends AbstractController{
         ModelAndView result;
         Customer customer = customerService.findByPrincipal();
 
-        Collection<Volume> volumes= volumeService.findAll();
-        volumes.removeAll(customer.getVolumes());
+        Collection<Volume> volumes= volumeService.findNotSubscribesVolumes(customer.getId());
 
         HttpSession session = request.getSession();
         session.setAttribute("cancelUriSession",request.getRequestURI());
@@ -110,14 +109,8 @@ public class VolumeCustomerController extends AbstractController{
         volume = volumeService.findOne(volumeId);
         Assert.notNull(volume);
         principal = customerService.findByPrincipal();
-        principal.getVolumes().remove(volume);
-        volume.getSubscriptions().remove(principal);
-        privateNewsPapers = volumeService.findPrivateNewsPapersByVolume(volume.getId());
-        if(privateNewsPapers.size()>0){
-            principal.getNewsPapers().removeAll(privateNewsPapers);
-        }
-        customerService.save(principal);
-        volumeService.save(volume);
+        SubscribeVolume subscribeVolume = subscribeVolumeService.findSubscriptionToAVolume(volumeId,principal.getId());
+        subscribeVolumeService.delete(subscribeVolume);
 
         result = new ModelAndView("redirect: listAllVolumes.do");
 
@@ -129,7 +122,7 @@ public class VolumeCustomerController extends AbstractController{
         ModelAndView result;
         Customer customer;
         Volume volume;
-        Collection<NewsPaper> privateNewsPapers;
+        SubscribeVolume subscribeVolume;
 
         try {
             CreditCard creditCard = customerService.reconstructSubscribeVolume(subscribeVolumeForm, binding);
@@ -138,18 +131,14 @@ public class VolumeCustomerController extends AbstractController{
                 result = createEditModelAndView(subscribeVolumeForm);
             else {
                 result = new ModelAndView("redirect: listVolumeCustomer.do");
+
+                subscribeVolume = subscribeVolumeService.create();
                 customer = customerService.findByPrincipal();
                 volume = subscribeVolumeForm.getVolume();
-                volume.getSubscriptions().add(customer);
-                customer.getVolumes().add(volume);
-                CreditCard saved = creditCardService.save(creditCard);
-                customer.setCreditCard(saved);
-                privateNewsPapers = volumeService.findPrivateNewsPapersByVolume(volume.getId());
-                if(privateNewsPapers.size()>0){
-                    customer.getNewsPapers().addAll(privateNewsPapers);
-                }
-                customerService.save(customer);
-                volumeService.save(volume);
+                subscribeVolume.setCustomer(customer);
+                subscribeVolume.setVolume(volume);
+                subscribeVolume.setCreditCard(creditCard);
+                subscribeVolumeService.save(subscribeVolume);
             }
         } catch (final Throwable oops) {
             result = this.createEditModelAndView(subscribeVolumeForm, "general.commit.error");
@@ -175,4 +164,4 @@ public class VolumeCustomerController extends AbstractController{
 
 
 }
-*/
+

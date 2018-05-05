@@ -119,8 +119,8 @@ public class CustomerService {
     }
 
 
-   /* public CreditCard reconstructSubscribe(SubscribeForm subscribeForm, final BindingResult binding) {
-        CreditCard creditCard = creditCardService.create();
+    public CreditCard reconstructSubscribe(SubscribeForm subscribeForm, final BindingResult binding) {
+        CreditCard creditCard = new CreditCard();
 
         creditCard.setBrand(subscribeForm.getBrand());
         creditCard.setCvv(subscribeForm.getCvv());
@@ -130,7 +130,7 @@ public class CustomerService {
         creditCard.setNumber(subscribeForm.getNumber());
 
         return creditCard;
-    }*/
+    }
 
     public Customer reconstruct(UserForm userForm, final BindingResult binding) {
 
@@ -174,8 +174,9 @@ public class CustomerService {
         customerRepository.flush();
     }
 
-    /*public CreditCard reconstructSubscribeVolume(SubscribeVolumeForm subscribeVolumeForm, BindingResult binding) {
-        CreditCard creditCard = creditCardService.create();
+    public CreditCard reconstructSubscribeVolume(SubscribeVolumeForm subscribeVolumeForm, BindingResult binding) {
+        CreditCard creditCard = new CreditCard();
+
         creditCard.setBrand(subscribeVolumeForm.getBrand());
         creditCard.setCvv(subscribeVolumeForm.getCvv());
         creditCard.setExpirationMonth(subscribeVolumeForm.getExpirationMonth());
@@ -184,5 +185,5 @@ public class CustomerService {
         creditCard.setNumber(subscribeVolumeForm.getNumber());
 
         return creditCard;
-    }*/
+    }
 }

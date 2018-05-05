@@ -21,4 +21,10 @@ public interface VolumeRepository extends JpaRepository<Volume,Integer> {
 
     @Query("select vn from Volume v join v.newsPapersVolume vn where v.id=?1 and vn.modePrivate = true")
     Collection<NewsPaper> findPrivateNewspapersByVolumeId(int id);
+
+    @Query("select s.volume from SubscribeVolume s where s.customer.id=?1")
+    Collection<Volume> findVolumeByCustomer(int customerId);
+
+    @Query("select s.volume from SubscribeVolume s where s.customer.id <>?1")
+    Collection<Volume> findNotSubscribesVolumes(int id);
 }
