@@ -16,7 +16,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     @Query("select a from Administrator a where a.userAccount.id = ?1")
     Administrator findByUserAccountId(int userAccountId);
 
-    // ########################  QUERIES LEVEL C  ################################
+    /*// ########################  QUERIES LEVEL C  ################################
 
     // 1- The average and the standard deviation of newspapers created per user.
     @Query("select avg(u.newsPapers.size),sqrt(sum(u.newsPapers.size *u.newsPapers.size)/ count(u) - (avg(u.newsPapers.size) *avg(u.newsPapers.size))) from  User u")
@@ -116,6 +116,6 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
     //21- The ratio of subscriptions to volumes versus subscriptions to newspapers.
     @Query("select count(v1)*1.0 / (select count(n1)*1.0 from NewsPaper n1 where n1.customers.size != 0) from Volume v1 where v1.customers.size !=0")
-    Double rationSubscribedNewsVsSubscribedVolume();
+    Double rationSubscribedNewsVsSubscribedVolume();*/
 
 }

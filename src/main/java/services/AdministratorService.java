@@ -67,7 +67,7 @@ public class AdministratorService {
         return result;
     }
 
-    public Double[]  avgStdOfNewspapersPerUser(){
+    /*public Double[]  avgStdOfNewspapersPerUser(){
 
          return this.administratorRepository.avgStdOfNewspapersPerUser();
     }
@@ -172,5 +172,5 @@ public class AdministratorService {
     public Double rationSubscribedNewsVsSubscribedVolume(){
 
         return this.administratorRepository.rationSubscribedNewsVsSubscribedVolume();
-    }
+    }*/
 }

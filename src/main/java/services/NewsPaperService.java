@@ -127,7 +127,7 @@ public class NewsPaperService {
 
     // Other business methods -------------------------------------------------
 
-    public void unsuscribe(NewsPaper newsPaper){
+    /*public void unsuscribe(NewsPaper newsPaper){
         Customer customer = this.customerService.findByPrincipal();
         SubscribeNewsPaper subscription = findSubscriptionNewsPaperByCustomer(customer.getId(),newsPaper.getId());
         // TODO: unsuscribe implica delete de la SubscriptionNewspaper
@@ -135,7 +135,7 @@ public class NewsPaperService {
         customer.getSubscriptionsToNewspapers().remove(subscription);
         save(newsPaper);
         customerService.save(customer);
-    }
+    }*/
 
     public void findOneToPublish(NewsPaper newsPaper){
         Collection<Article> articles= newsPaper.getArticles();
@@ -201,7 +201,7 @@ public class NewsPaperService {
         return res;
     }
 
-    public Collection<NewsPaper> findPublishedNewsPaper(){
+/*    public Collection<NewsPaper> findPublishedNewsPaper(){
         return newsPaperRepository.findPublishedNewsPaper();
     }
 
@@ -211,7 +211,7 @@ public class NewsPaperService {
 
     public Collection<NewsPaper> findAllNewsPaperByUserAndNotPublished(int userId) {
         return this.newsPaperRepository.findAllNewsPaperByUserAndNotPublished(userId);
-    }
+    }*/
 
     private boolean isTabooNewsPaper(final NewsPaper newsPaper) {
         boolean result = false;
@@ -248,14 +248,14 @@ public class NewsPaperService {
         return result;
     }
 
-    public Collection<NewsPaper> findNewsPaperByTabooIsTrue(){
+    /*public Collection<NewsPaper> findNewsPaperByTabooIsTrue(){
         Assert.isTrue(actorService.isAdministrator());
         return this.newsPaperRepository.findNewsPaperByTabooIsTrue();
     }
 
     public Collection<NewsPaper> searchNewspapers(String keyword) {
         return newsPaperRepository.searchNewspapers(keyword,keyword);
-    }
+    }*/
 
     public void flush() {
         newsPaperRepository.flush();
@@ -279,7 +279,7 @@ public class NewsPaperService {
         return res;
     }
 
-    public Collection<NewsPaper> findPublishedAndPrivateNewsPaper(){
+   /* public Collection<NewsPaper> findPublishedAndPrivateNewsPaper(){
         return this.newsPaperRepository.findPublishedAndPrivateNewsPaper();
     }
 
@@ -289,7 +289,7 @@ public class NewsPaperService {
 
     public Collection<NewsPaper> newsPapersWithNoAdds(){
         return newsPaperRepository.newsPapersWithNoAdds();
-    }
+    }*/
 
     public Advertisement selectRandomAdd(Article article) {
         List<Advertisement> adds = new ArrayList<>(article.getNewsPaper().getAdvertisements());
@@ -302,13 +302,13 @@ public class NewsPaperService {
     }
 
 
-    public Collection<Customer> customerOfNewsPaper(int newsPaperId){
+ /*   public Collection<Customer> customerOfNewsPaper(int newsPaperId){
         return newsPaperRepository.customerOfNewsPaper(newsPaperId);
     }
 
     public SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId,int newspaperId){
         return newsPaperRepository.findSubscriptionNewsPaperByCustomer(customerId, newspaperId);
-    }
+    }*/
 
 
 
