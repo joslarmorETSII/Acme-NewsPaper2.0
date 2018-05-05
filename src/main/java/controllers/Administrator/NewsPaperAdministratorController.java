@@ -108,7 +108,7 @@ public class NewsPaperAdministratorController extends AbstractController {
 
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
-        result.addObject("cancelURI", "newsPaper/listAll.do");
+        result.addObject("cancelURI", "newsPaper/administrator/list.do");
 
 
 

@@ -17,6 +17,8 @@ import services.ArticleService;
 import services.NewsPaperService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -48,7 +50,7 @@ public class ArticleAdministratorController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<Article> articlesTaboo = articleService.findArticleByTabooIsTrue();
@@ -65,6 +67,8 @@ public class ArticleAdministratorController extends AbstractController {
 
         Administrator administrator= administratorService.findByPrincipal();
 
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("article/list");
         result.addObject("articles", articlesTaboo);
