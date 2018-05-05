@@ -61,13 +61,15 @@ public class NewsPaperAgentController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         Agent agent;
 
         result = new ModelAndView("newsPaper/listNewsPaperAdvertisement");
         agent = agentService.findByPrincipal();
 
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result.addObject("newsPapersWithAdds", newsPaperService.findNewsPaperPlacedAdvertisement(agent.getId()));
         result.addObject("newsPapersWithNoAdds",newsPaperService.newsPapersWithNoAdds());
