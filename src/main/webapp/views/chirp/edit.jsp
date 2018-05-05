@@ -36,7 +36,7 @@
 		<acme:submit name="save" code="article.save"/>
 	</jstl:if>
 
-	<jstl:if test="${article.id != 0 or chirp.posted eq false}" >
+	<jstl:if test="${chirp.id != 0 }" >
 		<acme:submit name="delete" code="chirp.delete"/>
 	</jstl:if>
 
