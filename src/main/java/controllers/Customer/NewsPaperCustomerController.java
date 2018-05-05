@@ -1,4 +1,4 @@
-/*
+
 package controllers.Customer;
 
 import controllers.AbstractController;
@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
+
 
 @Controller
 @RequestMapping("/newsPaper/customer")
@@ -35,37 +34,26 @@ public class NewsPaperCustomerController extends AbstractController{
     private NewsPaperService newsPaperService;
 
     @Autowired
-    private CreditCardService creditCardService;
-
-    @Autowired
     private VolumeService   volumeService;
 
     @Autowired
     private ActorService actorService;
 
+    @Autowired
+    private SubscribeVolumeService subscribeVolumeService;
+
+    @Autowired
+    private SubscribeNewsPaperService subscribeNewsPaperService;
+
     // Listing  --------------------------------------------------------------
     //Listado de newspaper donde estoy suscrito
     @RequestMapping(value = "/listNewsPaperCustomer", method = RequestMethod.GET)
     public ModelAndView list() {
-
         ModelAndView result;
+        Collection<NewsPaper> newsPapers;
+
         Customer customer = customerService.findByPrincipal();
-        Collection<NewsPaper> newsPapers= customer.getNewsPapers();
-        Collection<NewsPaper> n2= new HashSet<>();
-
-        for(Volume v:customer.getVolumes()){
-            for(NewsPaper n:v.getNewsPapers()){
-                for(NewsPaper n1:customer.getNewsPapers()){
-                    if(n.equals(n1)){
-                        n2.add(n);
-                    }
-                    n2.add(n1);
-                }
-
-
-            }
-        }
-        newsPapers = new ArrayList<>(n2);
+        newsPapers= customerService.newsPapersSubscribed(customer.getId());
 
         result = new ModelAndView("newsPaper/listNewsPaperCustomer");
         result.addObject("newsPapers", newsPapers);
@@ -81,7 +69,7 @@ public class NewsPaperCustomerController extends AbstractController{
         Customer customer = customerService.findByPrincipal();
 
         Collection<NewsPaper> newsPapersToSubscribe = newsPaperService.findPublishedAndPrivateNewsPaper();
-        newsPapersToSubscribe.removeAll(customer.getNewsPapers());
+        newsPapersToSubscribe.removeAll(customerService.newsPapersSubscribed(customer.getId()));
 
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapersToSubscribe);
@@ -93,8 +81,8 @@ public class NewsPaperCustomerController extends AbstractController{
     @RequestMapping(value = "/listNewsPapersPerVolume", method = RequestMethod.GET)
     public ModelAndView listNewsPapersVNP(@RequestParam int volumeId, HttpServletRequest request) {
         ModelAndView result;
-        boolean volumeContieneNewspaper = false;
-        Collection<NewsPaper> newsPapers=null;
+        boolean customerIsSuscribed = false;
+        Collection<NewsPaper> newsPapers;
         Customer customer = this.customerService.findByPrincipal();
         SimpleDateFormat formatterEs;
         SimpleDateFormat formatterEn;
@@ -107,10 +95,9 @@ public class NewsPaperCustomerController extends AbstractController{
         momentEn = formatterEn.format(new Date());
 
         newsPapers = this.volumeService.findPublishedNewsPaperPerVolume(volumeId);
-        Volume volume = this.volumeService.findOne(volumeId);
-
-        if(volume.getSubscriptions().contains(customer)){
-                volumeContieneNewspaper = true;
+        // El customer esta suscrito al volume
+        if(subscribeVolumeService.findSubscriptionToAVolume(volumeId,customer.getId())!=null){
+            customerIsSuscribed = true;
         }
 
         HttpSession session = request.getSession();
@@ -118,7 +105,7 @@ public class NewsPaperCustomerController extends AbstractController{
         result = new ModelAndView("newsPaper/listNewsPaperPerVolume");
         result.addObject("newsPapers", newsPapers);
         result.addObject("requestUri","newsPaper/listNewsPapersPerVolume.do");
-        result.addObject("volumeContieneNewspaper", volumeContieneNewspaper);
+        result.addObject("customerIsSuscribed", customerIsSuscribed);
         result.addObject("customer",customerService.findByPrincipal());
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
@@ -152,10 +139,10 @@ public class NewsPaperCustomerController extends AbstractController{
     // Save ------------------------------------------------------------------------
 
     @RequestMapping(value = "/subscribe", method = RequestMethod.POST, params = "save")
-    public ModelAndView save(@Valid final SubscribeForm subscribeForm, final BindingResult binding) {
+    public ModelAndView save(@Valid SubscribeForm subscribeForm, BindingResult binding) {
         ModelAndView result;
-        Customer customer;
         NewsPaper newsPaper;
+        SubscribeNewsPaper subscribeNewsPaper;
 
         try {
             CreditCard creditCard = customerService.reconstructSubscribe(subscribeForm, binding);
@@ -164,14 +151,11 @@ public class NewsPaperCustomerController extends AbstractController{
                 result = this.createEditModelAndView2(subscribeForm, null);
             else {
                 result = new ModelAndView("redirect:listNewsPaperCustomer.do");
-                customer = customerService.findByPrincipal();
                 newsPaper = subscribeForm.getNewsPaper();
-                newsPaper.getSubscriptions().add(customer);
-                customer.getNewsPapers().add(newsPaper);
-                CreditCard saved=creditCardService.save(creditCard);
-                customer.setCreditCard(saved);
-                this.customerService.save(customer);
-                this.newsPaperService.save(newsPaper);
+                subscribeNewsPaper = subscribeNewsPaperService.create();
+                subscribeNewsPaper.setCreditCard(creditCard);
+                subscribeNewsPaper.setNewsPaper(newsPaper);
+                subscribeNewsPaperService.save(subscribeNewsPaper);
             }
         } catch (final Throwable oops) {
             result = this.createEditModelAndView2(subscribeForm, "general.commit.error");
@@ -216,12 +200,7 @@ public class NewsPaperCustomerController extends AbstractController{
 
     protected ModelAndView createEditModelAndView2(SubscribeForm subscribeForm, final String messageCode) {
         ModelAndView result;
-        Customer customer;
-        NewsPaper newsPaper;
-        CreditCard creditCard;
 
-        customer = customerService.findByPrincipal();
-        creditCard = customer.getCreditCard();
         result = new ModelAndView("customer/subscribeForm");
         result.addObject("subscribeForm", subscribeForm);
         result.addObject("message", messageCode);
@@ -245,7 +224,7 @@ public class NewsPaperCustomerController extends AbstractController{
 
         Assert.isTrue(c.contains(actor) || !newsPaper.isModePrivate());
 
-         result = new ModelAndView("newsPaper/display");
+        result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelURI", "newsPaper/listAll.do");
 
@@ -253,4 +232,3 @@ public class NewsPaperCustomerController extends AbstractController{
         return result;
     }
 }
-*/

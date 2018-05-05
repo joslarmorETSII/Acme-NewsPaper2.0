@@ -146,11 +146,10 @@ public class NewsPaperService {
     public void unsuscribe(NewsPaper newsPaper){
         Customer customer = this.customerService.findByPrincipal();
         SubscribeNewsPaper subscription = findSubscriptionNewsPaperByCustomer(customer.getId(),newsPaper.getId());
-        // TODO: unsuscribe implica delete de la SubscriptionNewspaper
         newsPaper.getSubscriptions().remove(subscription);
         customer.getSubscriptionsToNewspapers().remove(subscription);
-        save(newsPaper);
-        customerService.save(customer);
+        subscribeNewsPaperService.delete(subscription);
+
     }
 
     public void findOneToPublish(NewsPaper newsPaper){

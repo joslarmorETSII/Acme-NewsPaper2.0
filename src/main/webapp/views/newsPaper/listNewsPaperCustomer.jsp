@@ -30,12 +30,6 @@
     <display:table id="newspaper" name="newsPapers" requestURI="${requestURI}"
                    pagesize="5">
 
-        <c:set var = "contiene" value = "false"/>
-        <jstl:forEach items="${newspaper.customers}" var="cliente">
-            <jstl:if test="${cliente eq customer }">
-                <c:set var = "contiene" value = "true"/>
-            </jstl:if>
-        </jstl:forEach>
 
         <acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
         <acme:column code="newsPaper.title" value="${newspaper.title}"/>

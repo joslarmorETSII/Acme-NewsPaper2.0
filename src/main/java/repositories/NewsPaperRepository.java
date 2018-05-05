@@ -36,7 +36,7 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
     @Query("select n from NewsPaper n where n.published= true and n.advertisements is empty  ")
     Collection<NewsPaper> newsPapersWithNoAdds();
 
-    @Query("select n.subscriptions from NewsPaper n where n.id=?1")
+    @Query("select s.customer from SubscribeNewsPaper s where s.newsPaper.id=?1")
     Collection<Customer> customerOfNewsPaper(int newsPaperId);
 
     @Query("select s from SubscribeNewsPaper s where s.customer.id = ?1 and s.newsPaper.id=?2")
