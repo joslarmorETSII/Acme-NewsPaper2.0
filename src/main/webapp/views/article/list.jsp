@@ -48,20 +48,25 @@
 	<acme:column code="article.summary" value="${row.summary}" sortable="true"/>
 	<acme:column code="article.finalMode" value="${row.finalMode}"/>
 
+	<security:authorize access="!hasRole('ADMINISTRATOR')">
+		<display:column>
+			<jstl:if test="${row.newsPaper.modePrivate eq false}">
+				<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<display:column>
+			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+		</display:column>
+	</security:authorize>
+
 	<security:authorize access="hasRole('ADMINISTRATOR')" >
 		<display:column>
 			<acme:button url="article/administrator/edit.do?articleId=${row.id}" code="article.delete" />
 		</display:column>
 	</security:authorize>
-
-
-		<display:column>
-			<jstl:if test="${row.newsPaper.modePrivate eq false}">
-			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
-			</jstl:if>
-		</display:column>
-
-
 
 	<security:authorize access="hasRole('USER')" >
 		<display:column>
@@ -90,6 +95,10 @@
 
 	<acme:column code="article.summary" value="${row2.summary}" sortable="true"/>
 	<acme:column code="article.finalMode" value="${row2.finalMode}"/>
+
+	<display:column>
+		<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+	</display:column>
 
 	<display:column>
 		<acme:button url="article/administrator/edit.do?articleId=${row2.id}" code="article.delete" />

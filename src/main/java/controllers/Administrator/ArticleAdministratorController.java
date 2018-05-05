@@ -1,6 +1,4 @@
-/*
 package controllers.Administrator;
-
 
 import controllers.AbstractController;
 import domain.Administrator;
@@ -17,7 +15,6 @@ import services.AdministratorService;
 import services.ArticleService;
 import services.NewsPaperService;
 import services.UserService;
-
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -118,4 +115,3 @@ public class ArticleAdministratorController extends AbstractController {
         return result;
     }
 }
-*/
