@@ -86,13 +86,13 @@ public class VolumeService {
 
     //Anthiliaries methodes
 
-//    public Collection<NewsPaper> findPublishedAndNotPrivateNewsPaperPerVolume(int volumeId){
-//        return volumeRepository.findPublishedAndNotPrivateNewsPaperPerVolume(volumeId);
-//    }
-//
-//    public Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId){
-//        return volumeRepository.findPublishedNewsPaperPerVolume(volumeId);
-//    }
+    public Collection<NewsPaper> findPublishedAndNotPrivateNewsPaperPerVolume(int volumeId){
+        return volumeRepository.findPublishedAndNotPrivateNewsPaperPerVolume(volumeId);
+    }
+
+    public Collection<NewsPaper> findPublishedNewsPaperPerVolume(int volumeId){
+        return volumeRepository.findPublishedNewsPaperPerVolume(volumeId);
+    }
 
     public boolean checkByPrincipal(Volume volume) {
         Boolean res = null;
@@ -151,7 +151,7 @@ public class VolumeService {
         return res;
     }
 
-   /* public Collection<NewsPaper> findPrivateNewsPapersByVolume(int volumeId) {
+    public Collection<NewsPaper> findPrivateNewsPapersByVolume(int volumeId) {
         return volumeRepository.findPrivateNewspapersByVolumeId(volumeId);
-    }*/
+    }
 }
