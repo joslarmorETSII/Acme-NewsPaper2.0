@@ -128,6 +128,13 @@ public class NewsPaperService {
                 this.subscribeNewsPaperService.delete(s);
             }
         }
+        Collection<Volume> volumes = newsPaper.getVolumes();
+        for(Volume v : volumes){
+            for(SubscribeVolume v1 : v.getSubscriptionVolumes()){
+                v.getSubscriptionVolumes().remove(newsPaper);
+                this.subscribeVolumeService.deleteCustomerVolume(v1);
+            }
+        }
         this.advertisementService.deleteAll(newsPaper);
         this.volumeService.delete(newsPaper);
         this.articleService.deleteAll(newsPaper.getArticles());

@@ -72,6 +72,10 @@ public class SubscribeVolumeService {
         return subscribeVolumeRepository.findSubscriptionToAVolume(volumeId,customerId);
     }
 
+    public void deleteCustomerVolume(SubscribeVolume subscribeVolume){
+        subscribeVolume.setCustomer(null);
+        this.subscribeVolumeRepository.delete(subscribeVolume);
+    }
     // Other business methods -------------------------------------------------
 
 }
