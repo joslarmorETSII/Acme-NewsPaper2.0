@@ -16,7 +16,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     @Query("select a from Administrator a where a.userAccount.id = ?1")
     Administrator findByUserAccountId(int userAccountId);
 
-    /*// ########################  QUERIES LEVEL C  ################################
+    // ########################  QUERIES LEVEL C  ################################
 
     // 1- The average and the standard deviation of newspapers created per user.
     @Query("select avg(u.newsPapers.size),sqrt(sum(u.newsPapers.size *u.newsPapers.size)/ count(u) - (avg(u.newsPapers.size) *avg(u.newsPapers.size))) from  User u")
@@ -91,10 +91,10 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     Double avgArticlesPerNewsPapersPublic();
 
     // 16- The ratio of subscribers per private newspaper versus the total number of customers.
-    @Query("select count(c1.newsPapers.size)*1.0 /(select count(c2)*1.0 from Customer c2) from Customer c1 where c1.newsPapers.size > 0")
+    @Query("select count(c1.subscriptionsToNewspapers.size)*1.0 /(select count(c2)*1.0 from Customer c2) from Customer c1 where c1.subscriptionsToNewspapers.size > 0")
     Double ratioPrivateNewsPapersVsCustomers();
 
-//    // 17- The ratio of users who have posted above 75% the average number of chirps per user.
+    // 17- The ratio of users who have posted above 75% the average number of chirps per user.
     @Query("select count(n1)*1.0 /(select count(n2)*1.0 from NewsPaper n2 where n2.modePrivate = false) from NewsPaper n1 where n1.modePrivate = true")
     Double ratioPrivateNewsPapersVsPublicPerPublisher();
 
@@ -111,11 +111,11 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
     // ########################  QUERIES LEVEL B  NEWSPAPER 2################################
 
     //20- The average number of newspapers per volume.
-    @Query("select avg(v.newsPapers.size) from Volume v")
+    @Query("select avg(v.newsPapersVolume.size) from Volume v where v.newsPapersVolume.size > 0")
     Double avgNewsPapersPerVolume();
 
     //21- The ratio of subscriptions to volumes versus subscriptions to newspapers.
-    @Query("select count(v1)*1.0 / (select count(n1)*1.0 from NewsPaper n1 where n1.customers.size != 0) from Volume v1 where v1.customers.size !=0")
-    Double rationSubscribedNewsVsSubscribedVolume();*/
+    @Query("select count(v1)*1.0 / (select count(n1)*1.0 from Volume n1 where n1.newsPapersVolume.size != 0) from Volume v1 where v1.subscriptionVolumes.size !=0")
+    Double rationSubscribedNewsVsSubscribedVolume();
 
 }

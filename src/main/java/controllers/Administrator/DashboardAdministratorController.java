@@ -26,7 +26,7 @@ public class DashboardAdministratorController extends AbstractController{
         super();
     }
 
-    /*// Dashboard -------------------------------------------------------------
+    // Dashboard -------------------------------------------------------------
     @RequestMapping("/dashboard")
     public ModelAndView dashboard() {
         ModelAndView result;
@@ -96,5 +96,5 @@ public class DashboardAdministratorController extends AbstractController{
         result.addObject("rationSubscribedNewsPVsSubscribedVolume",administratorService.rationSubscribedNewsVsSubscribedVolume());
 
         return result;
-    }*/
+    }
 }
