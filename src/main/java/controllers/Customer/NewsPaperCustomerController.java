@@ -210,18 +210,20 @@ public class NewsPaperCustomerController extends AbstractController{
 
     // Display ----------------------------------------------------------------
 
+    // TODO: para newspapers de un volumen y las newspapers normales/sueltas
     @RequestMapping(value = "/display", method = RequestMethod.GET)
     public ModelAndView display(@RequestParam int newsPaperId) {
         ModelAndView result;
         NewsPaper newsPaper;
-        Collection<Customer> c ;
+        Customer customer;
+
         newsPaper = this.newsPaperService.findOne(newsPaperId);
-
         Actor actor=actorService.findByPrincipal();
-
-        c = newsPaperService.customerOfVolume(actor.getId());
-
-        Assert.isTrue(c.contains(actor) || !newsPaper.isModePrivate());
+        // si el customer esta suscrito a la newspaper
+        SubscribeNewsPaper subscribeNewsPaper = newsPaperService.findSubscriptionNewsPaperByCustomer(actor.getId(),newsPaperId);
+        //
+        customer = newsPaperService.isCustomerSubscribedToNewspaperViaVolume(actor.getId(),newsPaperId);
+        Assert.isTrue(subscribeNewsPaper!=null || !newsPaper.isModePrivate()|| customer!=null);
 
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);

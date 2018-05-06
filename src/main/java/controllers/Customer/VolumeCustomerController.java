@@ -89,6 +89,8 @@ public class VolumeCustomerController extends AbstractController{
 
         volume = volumeService.findOne(volumeId);
         Assert.notNull(volume);
+        SubscribeVolume subscribeVolume = subscribeVolumeService.findSubscriptionToAVolume(volumeId,customerService.findByPrincipal().getId());
+        Assert.isTrue(subscribeVolume==null,"Already subscribed to this volume");
 
         SubscribeVolumeForm subscribeVolumeForm = new SubscribeVolumeForm();
         subscribeVolumeForm.setVolume(volume);

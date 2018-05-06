@@ -322,10 +322,16 @@ public class NewsPaperService {
     }
 
     public SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId,int newspaperId){
-        return newsPaperRepository.findSubscriptionNewsPaperByCustomer(customerId, newspaperId);
+        return newsPaperRepository.findSubscriptionToNewsPaperByCustomer(customerId, newspaperId);
     }
 
+    public Collection<Customer> customerSubscribedToNewspaper(int customerId, int newsPaperId) {
+        return newsPaperRepository.customerSubscribedToNewspaper(customerId,newsPaperId);
+    }
 
+    public Customer isCustomerSubscribedToNewspaperViaVolume(int customerId, int newsPaperId){
+        return newsPaperRepository.isCustomerSubscribedToNewspaperViaVolume(customerId,newsPaperId);
+    }
 
 }
 

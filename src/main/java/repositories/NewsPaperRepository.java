@@ -40,5 +40,11 @@ public interface NewsPaperRepository extends JpaRepository<NewsPaper,Integer> {
     Collection<Customer> customerOfVolume(int customerId);
 
     @Query("select s from SubscribeNewsPaper s where s.customer.id = ?1 and s.newsPaper.id=?2")
-    SubscribeNewsPaper findSubscriptionNewsPaperByCustomer(int customerId, int newspaperId);
+    SubscribeNewsPaper findSubscriptionToNewsPaperByCustomer(int customerId, int newspaperId);
+
+    @Query("select s.customer from SubscribeNewsPaper s where s.customer.id=?1 and s.newsPaper.id=?2")
+    Collection<Customer> customerSubscribedToNewspaper(int customerId, int newsPaperId);
+
+    @Query("select distinct s.customer from SubscribeVolume s join s.volume.newsPapersVolume vn where s.customer.id=?1 and vn.id=?2")
+    Customer isCustomerSubscribedToNewspaperViaVolume(int customerId, int newsPaperId);
 }

@@ -45,7 +45,7 @@
         <input type="submit" name="save" value="<spring:message code="customer.save"/>" />
 
         <input type="button" name="cancel" value="<spring:message code="customer.cancel" />"
-               onclick="javascript: relativeRedir('newsPaper/list.do');" />
+               onclick="javascript: relativeRedir('volume/customer/listAllVolumes.do');" />
 
         </form:form>
     </div>
