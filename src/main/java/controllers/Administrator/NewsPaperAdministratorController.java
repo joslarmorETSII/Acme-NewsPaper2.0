@@ -14,6 +14,9 @@ import services.ActorService;
 import services.AdministratorService;
 import services.NewsPaperService;
 import services.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -46,7 +49,7 @@ public class NewsPaperAdministratorController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<NewsPaper> newsPapersTaboo = newsPaperService.findNewsPaperByTabooIsTrue();
@@ -55,6 +58,9 @@ public class NewsPaperAdministratorController extends AbstractController {
         SimpleDateFormat formatterEn;
         String momentEs;
         String momentEn;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         formatterEs = new SimpleDateFormat("dd/MM/yyyy");
         momentEs = formatterEs.format(new Date());
@@ -90,24 +96,23 @@ public class NewsPaperAdministratorController extends AbstractController {
     // Display ----------------------------------------------------------------
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam int newsPaperId) {
+    public ModelAndView display(@RequestParam int newsPaperId, HttpServletRequest request) {
         ModelAndView result;
         NewsPaper newsPaper;
 
         newsPaper = this.newsPaperService.findOne(newsPaperId);
 
         Actor actor=actorService.findByPrincipal();
-
         Administrator admin = administratorService.findByPrincipal();
-
-
         Assert.isTrue(actor.equals(admin));
+
+        HttpSession session = request.getSession();
 
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
-        result.addObject("cancelURI", "newsPaper/listAll.do");
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
-
+        session.setAttribute("cancelUriSession", request.getRequestURI()+ "?newsPaperId=" + newsPaperId);
         return result;
     }
 

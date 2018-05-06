@@ -10,13 +10,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<%-- <div>
-	<jstl:if test="${message != null}">
-		<br />
-		<span class="message" style="color:red"><spring:message code="${message}" /></span>
-	</jstl:if>	
-</div> --%>
-
 <display:table name="folders" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	<spring:message code="messageFolder.name" var="headerTag" />
 	<display:column property="name" title="${headerTag}"/>
@@ -43,13 +36,15 @@
 				onclick="return confirm('<spring:message code="messageFolder.confirm.delete" />')" />&nbsp;
 			</a>
 		</jstl:if>
-	</display:column>	
+	</display:column>
 </display:table>
 
 
 <acme:button code="messageFolder.create" url="folder/actor/create.do"/>
 
 <acme:button code="message.sendAMessage" url="message/actor/create.do"/>
+
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />" onclick="javascript: relativeRedir('welcome/index.do');" />
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<acme:button code="message.notify" url="message/admin/create.do"/>

@@ -47,8 +47,8 @@
 
 	<acme:column code="article.summary" value="${row.summary}" sortable="true"/>
 	<acme:column code="article.finalMode" value="${row.finalMode}"/>
-
-	<security:authorize access="!hasRole('ADMINISTRATOR')">
+	
+	<security:authorize access="hasAnyRole('CUSTOMER','AGENT')">
 		<display:column>
 			<jstl:if test="${row.newsPaper.modePrivate eq false}">
 				<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
@@ -56,6 +56,12 @@
 		</display:column>
 	</security:authorize>
 
+	<security:authorize access="hasRole('USER')">
+		<display:column>
+				<acme:button url="article/user/display.do?articleId=${row.id}" code="article.display" />
+		</display:column>
+	</security:authorize>
+	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<display:column>
 			<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />

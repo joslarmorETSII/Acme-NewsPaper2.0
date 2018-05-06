@@ -91,6 +91,40 @@ public class ArticleUserController extends AbstractController{
 
     }
 
+    @RequestMapping(value = "/display", method = RequestMethod.GET)
+    public ModelAndView display(@RequestParam final int articleId, HttpServletRequest request) {
+        ModelAndView result;
+        Article article;
+        SimpleDateFormat formatterEs;
+        SimpleDateFormat formatterEn;
+        String momentEs;
+        String momentEn;
+        User user = userService.findByPrincipal();
+
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        momentEs = formatterEs.format(new Date());
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        momentEn = formatterEn.format(new Date());
+
+        article = this.articleService.findOne(articleId);
+        Assert.notNull(article);
+
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy");
+        momentEs = formatterEs.format(article.getMoment());
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd");
+        momentEn = formatterEn.format(article.getMoment());
+
+        result = new ModelAndView("article/display");
+        result.addObject("article", article);
+        result.addObject("user", user);
+        result.addObject("advertisement",newsPaperService.selectRandomAdd(article));
+        result.addObject("momentEs", momentEs);
+        result.addObject("momentEn", momentEn);
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
+
+        return result;
+    }
+
     //  Edition ----------------------------------------------------------------
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)

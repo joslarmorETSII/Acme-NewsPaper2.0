@@ -56,4 +56,4 @@
 </fieldset>
 <br>
 <input type="button" name="cancel" value="<spring:message code="followUp.cancel" />"
-	   onclick="javascript: relativeRedir('followUp/list.do?articleId=${followUp.article.id}');" />
+	   onclick="javascript: relativeRedir('${cancelUriSession}');" />

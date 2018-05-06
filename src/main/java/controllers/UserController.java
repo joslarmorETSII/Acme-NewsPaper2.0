@@ -84,12 +84,14 @@ public class UserController extends AbstractController{
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("user/list");
         result.addObject("users", userService.findAll());
-
         result.addObject("requestURI", "user/list.do");
         return result;
 

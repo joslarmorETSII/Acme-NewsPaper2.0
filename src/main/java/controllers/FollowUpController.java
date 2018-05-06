@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ArticleService;
 import services.FollowUpService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class FollowUpController extends AbstractController {
     // Display ----------------------------------------------------------------
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam int followUpId) {
+    public ModelAndView display(@RequestParam int followUpId, HttpServletRequest request) {
         ModelAndView result;
         FollowUp followUp;
         SimpleDateFormat formatterEs;
@@ -49,7 +50,7 @@ public class FollowUpController extends AbstractController {
 
         result = new ModelAndView("followUp/display");
         result.addObject("followUp", followUp);
-        result.addObject("cancelURI", "welcome/index.do");
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);

@@ -111,6 +111,8 @@ public class NewsPaperCustomerController extends AbstractController{
         result.addObject("momentEn", momentEn);
         result.addObject("cancelUriSession",session.getAttribute("cancelUriSession"));
 
+        session.setAttribute("cancelUriSession", request.getRequestURI()+ "?volumeId=" + volumeId);
+
         return result;
 
     }
@@ -210,12 +212,14 @@ public class NewsPaperCustomerController extends AbstractController{
 
     // Display ----------------------------------------------------------------
 
-    // TODO: para newspapers de un volumen y las newspapers normales/sueltas
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam int newsPaperId) {
+    public ModelAndView display(@RequestParam int newsPaperId, HttpServletRequest request) {
         ModelAndView result;
         NewsPaper newsPaper;
         Customer customer;
+
+        HttpSession session = request.getSession();
+
 
         newsPaper = this.newsPaperService.findOne(newsPaperId);
         Actor actor=actorService.findByPrincipal();
@@ -228,6 +232,9 @@ public class NewsPaperCustomerController extends AbstractController{
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelURI", "newsPaper/listAll.do");
+        result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
+
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         return result;
     }

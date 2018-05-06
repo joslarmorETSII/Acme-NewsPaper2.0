@@ -56,9 +56,4 @@
 
     </display:table>
 
-<input type="button" value="<spring:message code="customer.cancel" /> " onclick="goBack()">
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />" onclick="javascript: relativeRedir('${cancelUriSession}');" />

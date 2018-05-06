@@ -118,10 +118,13 @@ public class NewsPaperController extends AbstractController {
             Assert.isTrue(!newsPaper.isModePrivate());
         }
 
+        HttpSession session = request.getSession();
+
         result = new ModelAndView("newsPaper/display");
         result.addObject("newsPaper", newsPaper);
         result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
+        session.setAttribute("cancelUriSession", request.getRequestURI()+ "?newsPaperId=" + newsPaperId);
 
         return result;
     }

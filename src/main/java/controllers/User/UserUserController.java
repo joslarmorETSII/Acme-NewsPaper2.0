@@ -3,7 +3,6 @@ package controllers.User;
 import controllers.AbstractController;
 import domain.Article;
 import domain.User;
-import forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ArticleService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -93,28 +94,33 @@ public class UserUserController extends AbstractController{
 
 
     @RequestMapping(value = "/list-followers", method = RequestMethod.GET)
-    public ModelAndView listFollowers() {
+    public ModelAndView listFollowers(HttpServletRequest request) {
         ModelAndView result;
         User principal;
 
         principal = userService.findByPrincipal();
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
+
         result = new ModelAndView("user/followers");
         result.addObject("followers", principal.getFollowers());
-
         result.addObject("requestURI", "list-followers.do");
+
         return result;
 
     }
 
     @RequestMapping(value = "/list-following", method = RequestMethod.GET)
-    public ModelAndView listFollowing() {
+    public ModelAndView listFollowing(HttpServletRequest request) {
         ModelAndView result;
         User principal;
 
         principal = userService.findByPrincipal();
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
+
         result = new ModelAndView("user/following");
         result.addObject("users", principal.getFollowings());
-
         result.addObject("requestURI", "user/user/list-following.do");
         return result;
 
@@ -123,10 +129,10 @@ public class UserUserController extends AbstractController{
     //  Follow - Unfollow -----------------------------------------------------------
 
     @RequestMapping(value = "/follow", method = RequestMethod.GET)
-    public ModelAndView doFollow(@RequestParam Integer userId) {
+    public ModelAndView doFollow(@RequestParam Integer userId, HttpServletRequest request) {
         ModelAndView result;
 
-        result =listFollowing();
+        result =listFollowing(request);
         try {
             userService.follow(userId);
         }catch (Throwable oops){
@@ -138,10 +144,10 @@ public class UserUserController extends AbstractController{
 
 
     @RequestMapping(value = "/unfollow", method = RequestMethod.GET)
-    public ModelAndView doUnfollow(@RequestParam Integer userId) {
+    public ModelAndView doUnfollow(@RequestParam Integer userId, HttpServletRequest request) {
         ModelAndView result;
 
-        result = listFollowing();
+        result = listFollowing(request);
         try {
             userService.unfollow(userId);
         }catch (Throwable oops){

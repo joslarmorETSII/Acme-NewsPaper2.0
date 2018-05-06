@@ -103,5 +103,5 @@
     </jstl:if>
 </security:authorize>
 
-<input type="button" name="cancel" value="<spring:message code="general.cancel" />"
-       onclick="javascript: relativeRedir('user/list.do');" />
+<input type="button" name="cancel" value="<spring:message code="general.cancel" />" onclick="javascript: relativeRedir('${cancelUriSession}');" />
+
