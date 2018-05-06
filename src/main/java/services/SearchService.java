@@ -21,6 +21,9 @@ public class SearchService {
     @Autowired
     private SearchRepository searchRepository;
 
+    @Autowired
+    private ConfigurationService configurationService;
+
     // Supporting services ----------------------------------------------------
 
     // Constructors -----------------------------------------------------------
@@ -69,6 +72,16 @@ public class SearchService {
         search = this.findAll();
 
         return search.iterator().next();
+    }
+
+    public void checkCache(Search search) {
+        Long diference = Math.abs((new Date()).getTime()-search.getLastUpdate().getTime());
+        Long cache = (long) configurationService.getCS().getCache()*60*1000;
+        if( diference>=cache) {
+            search.setArticles(new ArrayList<Article>());
+            search.setNewsPapers(new ArrayList<NewsPaper>());
+            save(search);
+        }
     }
 }
 

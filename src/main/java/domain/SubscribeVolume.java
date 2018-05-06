@@ -10,6 +10,9 @@ import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+        @Index(columnList = "customer_id"),@Index(columnList = "volume_id")
+})
 public class SubscribeVolume extends DomainEntity{
 
     // Constructors -----------------------------------------------------------

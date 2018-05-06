@@ -14,7 +14,9 @@ import services.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/user")
@@ -36,6 +38,9 @@ public class UserController extends AbstractController{
 
     @Autowired
     private ActorService actorService;
+
+    @Autowired
+    private ConfigurationService configurationService;
 
     // Constructor -----------------------------------------
     public UserController() {
@@ -156,6 +161,7 @@ public class UserController extends AbstractController{
 
         result = new ModelAndView("article/search");
         Search search = searchService.getSearch();
+        searchService.checkCache(search);
 
         result.addObject("search", search);
         result.addObject("articles", search.getArticles());
@@ -212,6 +218,8 @@ public class UserController extends AbstractController{
         result = new ModelAndView("article/search");
         principal = actorService.findByPrincipal();
         Search search = principal.getSearch();
+        searchService.checkCache(search);
+
 
         result.addObject("search", search);
         result.addObject("articles", search.getArticles());
