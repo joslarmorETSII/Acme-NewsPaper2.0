@@ -56,8 +56,7 @@
 		<bean class="converters.StringToSubscribeVolumeConverter"/>
 		<bean class="converters.SubscribeNewsPaperToStringConverter"/>
 		<bean class="converters.SubscribeVolumeToStringConverter"/>
-		<bean class="converters.SearchToStringConverter"/>
-		<bean class="converters.StringToSearchConverter"/>
+
 
 	</util:list>
 	

@@ -31,7 +31,6 @@ public class Configuration extends DomainEntity {
     private String				englishWelcome;
     private String				spanishWelcome;
     private Collection<String>	tabooWords;
-    private int                 cache;
 
     @NotBlank
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -84,14 +83,6 @@ public class Configuration extends DomainEntity {
         this.tabooWords = tabooWords;
     }
 
-    @Range(min = 5, max = 60)
-    public int getCache() {
-        return cache;
-    }
-
-    public void setCache(int cache) {
-        this.cache = cache;
-    }
 
     // Relationships ----------------------------------------------------------
 

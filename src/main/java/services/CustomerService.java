@@ -37,8 +37,6 @@ public class CustomerService {
     @Autowired
     private UserAccountService userAccountService;
 
-    @Autowired
-    private SearchService searchService;
 
     @Autowired
     private ActorService actorService;
@@ -62,7 +60,6 @@ public class CustomerService {
         result.setUserAccount(userAccountService.create("CUSTOMER"));
         result.setFolders(new ArrayList<Folder>());
         result.setSubscriptionsToVolumes(new ArrayList<SubscribeVolume>());
-        result.setSearch(searchService.create());
 
         return result;
     }

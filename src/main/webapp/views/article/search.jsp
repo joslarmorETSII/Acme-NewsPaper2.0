@@ -25,16 +25,12 @@
 	<jstl:set value="{0,date,yyyy/MM/dd HH:mm}" var="formatDate"/>
 </jstl:if>
 
-<form:form action="${requestURI}" modelAttribute="search">
-	<form:hidden path="lastUpdate" />
-	<form:hidden path="articles"/>
-	<form:hidden path="newsPapers"/>
 
-	<form:input path="keyword"/>
-	<form:errors path="keyword" cssClass="error"/>
 
-	<acme:submit name="search" code="master.page.search"/>
-</form:form>
+<form action="/user/search.do" method="get">
+	<input type="text" name="keyword" value="${keyword}" />
+	<input type="submit" value="<spring:message code="master.page.search"/>"/>
+</form>
 <br/>
 <br/>
 <fieldset>
@@ -69,7 +65,7 @@
 <br/>
 <fieldset>
 	<legend><spring:message code="article.newsPaper"/> </legend>
-<display:table name="newsPapers" id="newspaper" pagesize="10" class="displaytag" requestURI="${requestURI}">
+<display:table name="newsPapers" id="newspaper" pagesize="5" class="displaytag" requestURI="${requestURI}">
 
 	<acme:column code="newsPaper.publisher" value="${newspaper.publisher.name} " />
 	<acme:column code="newsPaper.title" value="${newspaper.title}"/>

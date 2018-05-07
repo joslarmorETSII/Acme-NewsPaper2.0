@@ -36,8 +36,6 @@ public class UserService {
     @Autowired
     private UserAccountService userAccountService;
 
-    @Autowired
-    private SearchService   searchService;
 
     // Constructors -----------------------------------------------------------
 
@@ -56,7 +54,6 @@ public class UserService {
         result.setUserAccount(this.userAccountService.create("USER"));
         result.setVolumes(new ArrayList<Volume>());
         result.setFolders(new ArrayList<Folder>());
-        result.setSearch(searchService.create());
 
         return result;
     }
