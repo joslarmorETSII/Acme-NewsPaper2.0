@@ -1,4 +1,3 @@
-/*
 package services;
 
 import domain.*;
@@ -44,14 +43,12 @@ public class ArticleServiceTest extends AbstractTest {
 // Tests
 // ====================================================
 
- */
-/*  FUNCTIONAL REQUIREMENT:
+ /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a user must be able to:
                -. Write an article and attach it to any newspaper that has not been published, yet.
                    Note that articles may be saved in draft mode, which allows to modify them later, or
                    final model, which freezes them forever.
-    *//*
-
+    */
 
     @SuppressWarnings("deprecation")
     public void articleCreateTest(final String username, final String title, String body, String summary1, String moment1, Boolean res1, Boolean res2, final Class<?> expected) {
@@ -91,13 +88,11 @@ public class ArticleServiceTest extends AbstractTest {
     }
 
 
-      */
-/*  FUNCTIONAL REQUIREMENT:
+      /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a admin must be able to:
                 -.Remove an article that he or she thinks is inappropriate.
 
-    *//*
-
+    */
 
 
     public void deleteArticleTest(final String username, String articleBean,Boolean finalMode, final Class<?> expected) {
@@ -110,7 +105,7 @@ public class ArticleServiceTest extends AbstractTest {
             this.authenticate(username);
 
 
-                this.articleService.delete(result);
+            this.articleService.delete(result);
 
             this.unauthenticate();
 
@@ -124,12 +119,10 @@ public class ArticleServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    */
-/*  FUNCTIONAL REQUIREMENT:
+    /*  FUNCTIONAL REQUIREMENT:
        * An actor who is authenticated as an administrator must be able to:
                - List the articles that contain taboo words.
-    *//*
-
+    */
 
     public void listArticleTabooWords(final String username,final Class<?> expected){
         Class<?> caught = null;
@@ -222,4 +215,3 @@ public class ArticleServiceTest extends AbstractTest {
             this.listArticleTabooWords((String) testingData[i][0], (Class<?>) testingData[i][1]);
     }
 }
-*/

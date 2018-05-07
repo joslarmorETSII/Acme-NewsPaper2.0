@@ -1,4 +1,3 @@
-/*
 package services;
 
 
@@ -26,8 +25,7 @@ public class UseCaseEditNewspaper extends AbstractTest{
 
     // Tests ------------------------------------------------------------------
 
-    */
-/*  CASO DE USO:
+    /*  CASO DE USO:
      *
      *   Un Actor se authentifica como User, lista todos las Newspapers ,
      *   elige uno de los que creado para editar lo edita y lo guarda.
@@ -51,8 +49,7 @@ public class UseCaseEditNewspaper extends AbstractTest{
      * · Introducir un script.
      * · Introducir una url invalida para la picture.
      * ·
-     *//*
-
+     */
 
     public void newspaperEditTest( String username, String title, String description, String picture, Boolean modePrivate, String newspaperBean, Class<?> expected) {
 
@@ -104,39 +101,39 @@ public class UseCaseEditNewspaper extends AbstractTest{
                 {
                         null, "title edited", "description1", "http://www.picture.com", true, "newsPaper2", IllegalArgumentException.class
                 },
-                  // 4. Editar una newspaper sin rellenar un campo obligatorio -> false
-                  {
-                          "user1", "", "description1", null, false, "newsPaper2", ConstraintViolationException.class
-                  },
+                // 4. Editar una newspaper sin rellenar un campo obligatorio -> false
+                {
+                        "user1", "", "description1", null, false, "newsPaper2", ConstraintViolationException.class
+                },
 
-                  // 5. Editar una newspaper estando logueado como customer -> false
-                  {
-                          "customer1", "title1", "description1", null, true, "newsPaper2", IllegalArgumentException.class
-                  },
+                // 5. Editar una newspaper estando logueado como customer -> false
+                {
+                        "customer1", "title1", "description1", null, true, "newsPaper2", IllegalArgumentException.class
+                },
 
-                 // 6. Editar una newspaper de otro usuario -> false
-                  {
-                          "user3", "title2", "description1", "http://www.picture.com", false, "newsPaper2", IllegalArgumentException.class
-                  },
+                // 6. Editar una newspaper de otro usuario -> false
+                {
+                        "user3", "title2", "description1", "http://www.picture.com", false, "newsPaper2", IllegalArgumentException.class
+                },
 
-                  // 7. Editar una news paper estando logueado como customer -> false
-                  {
-                          "user3", "title2", "description1", "http://www.picture3.com", false, "newsPaper2", IllegalArgumentException.class
-                  },
+                // 7. Editar una news paper estando logueado como customer -> false
+                {
+                        "user3", "title2", "description1", "http://www.picture3.com", false, "newsPaper2", IllegalArgumentException.class
+                },
 
-                  // 8. Editar una newspaper proporcionando una url no valida de la picture-> false
-                  {
-                          "user1", "title edited", "description1", "htpt://www.picture.com",false,"newsPaper2", ConstraintViolationException.class
-                  },
+                // 8. Editar una newspaper proporcionando una url no valida de la picture-> false
+                {
+                        "user1", "title edited", "description1", "htpt://www.picture.com",false,"newsPaper2", ConstraintViolationException.class
+                },
 
-                  // 9. Editar una newspaper con un srcipt-> false
-                  {
-                          "user1", "<script>", "description1", "http://www.picture.com",false,"newsPaper2", ConstraintViolationException.class
-                  },
-                  // 10. Editar una newspaper publica y ponerla privada -> true
-                  {
-                          "user1", "Dailymail", "news paper privada", "http://www.picture.com",true,"newsPaper2", null
-                  },
+                // 9. Editar una newspaper con un srcipt-> false
+                {
+                        "user1", "<script>", "description1", "http://www.picture.com",false,"newsPaper2", ConstraintViolationException.class
+                },
+                // 10. Editar una newspaper publica y ponerla privada -> true
+                {
+                        "user1", "Dailymail", "news paper privada", "http://www.picture.com",true,"newsPaper2", null
+                },
 
 
         };
@@ -146,4 +143,3 @@ public class UseCaseEditNewspaper extends AbstractTest{
     }
 
 }
-*/

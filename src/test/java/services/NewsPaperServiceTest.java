@@ -1,7 +1,7 @@
-/*
 package services;
 
 import domain.Actor;
+import domain.Agent;
 import domain.Article;
 import domain.NewsPaper;
 import org.apache.commons.lang.StringUtils;
@@ -35,14 +35,15 @@ public class NewsPaperServiceTest extends AbstractTest {
     @Autowired
     private ActorService actorService;
 
+    @Autowired
+    private  AgentService agentService;
+
     // Tests
     // ====================================================
 
-       */
-/*  FUNCTIONAL REQUIREMENT:
+       /*  FUNCTIONAL REQUIREMENT:
        * An actor who is not authenticated must be able to:
-            -.List the newspapers that are published and browse their articles. *//*
-
+            -.List the newspapers that are published and browse their articles. */
 
     public void listOfNewsPaperTest(final String username,final Class<?> expected){
         Class<?> caught = null;
@@ -65,15 +66,13 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    */
-/*  FUNCTIONAL REQUIREMENT:
+    /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a user must be able to:
                -. Create a newspaper. A user who has created a newspaper is commonly referred to
                 as a publisher.
-    *//*
+    */
 
 
-    @SuppressWarnings("deprecation")
     public void newsPaperCreateTest(final String username, final String title,String description1,String publicationDate1,String picture1,Boolean res1,Boolean res2,Boolean res3, final Class<?> expected) {
         Class<?> caught = null;
         startTransaction();
@@ -109,13 +108,11 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    */
-/*  FUNCTIONAL REQUIREMENT:
+    /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a user must be able to:
                -. Create a newspaper. A user who has created a newspaper is commonly referred to
                 as a publisher.
-    *//*
-
+    */
 
     @SuppressWarnings("deprecation")
     public void newsPaperPublishTest(final String username, final String title,String description1,String publicationDate1,String picture1,Boolean res1,Boolean res2,Boolean res3, final Class<?> expected) {
@@ -156,13 +153,11 @@ public class NewsPaperServiceTest extends AbstractTest {
     }
 
 
-      */
-/*  FUNCTIONAL REQUIREMENT:
+      /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a admin must be able to:
                 -.Remove an article that he or she thinks is inappropriate.
 
-    *//*
-
+    */
 
 
     public void deleteNewsPaperTest(final String username, String newsPaperBean,Boolean published, final Class<?> expected) {
@@ -189,12 +184,10 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    */
-/*  FUNCTIONAL REQUIREMENT:
+    /*  FUNCTIONAL REQUIREMENT:
        * An actor who is authenticated as an administrator must be able to:
                - List the newsPaper that contain taboo words.
-    *//*
-
+    */
 
     public void listNewsPaperTabooWords(final String username,final Class<?> expected) {
         Class<?> caught = null;
@@ -214,13 +207,11 @@ public class NewsPaperServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-     */
-/*  FUNCTIONAL REQUIREMENT:
+     /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a user must be able to:
                -.Decide on whether a newspaper that he or she?s created is public or private.
 
-    *//*
-
+    */
 
     public void editNewsPaperTest(final String username, final String title,String description1,String publicationDate1,String picture1,Boolean res1,Boolean res2,Boolean res3,String newsPaperBean, final Class<?> expected) {
         Class<?> caught = null;
@@ -256,6 +247,55 @@ public class NewsPaperServiceTest extends AbstractTest {
         }
 
         this.checkExceptions(expected, caught);
+    }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as an agent must be able to:
+     *      -  List the newspapers in which they have placed an advertisement.
+     */
+
+    public void listNewsPaperAdvertisement(final String username,String agentBean,final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+        try {
+            this.authenticate(username);
+            Agent result= agentService.findOne(super.getEntityId(agentBean));
+
+            this.newsPaperService.findNewsPaperPlacedAdvertisement(result.getId());
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+
+        }
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
+    /*  FUNCTIONAL REQUIREMENT:
+     *
+     *   An actor who is authenticated as an agent must be able to:
+     *      -  List the newspapers in which they have not placed an advertisement.
+     */
+
+    public void listNewsPaperNotAdvertisement(final String username,final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+        try {
+            this.authenticate(username);
+
+            this.newsPaperService.newsPapersWithNoAdds();
+
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+
+        }
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
     }
 
     //Drivers
@@ -297,7 +337,7 @@ public class NewsPaperServiceTest extends AbstractTest {
                         "user1", "name1","description1","12/03/2020 12:00","www.picture.com",false,false,false, null
                 },
                 // Crear un rendezvous sin estar logueado --> false
-               {
+                {
                         null,"name1","description1","12/03/2020 12:00","www.picture.com",false,false,false, IllegalArgumentException.class
                 },
                 // Crear un rendezvous logueado como manager  -> false
@@ -384,7 +424,6 @@ public class NewsPaperServiceTest extends AbstractTest {
     @Test
     public void driverNewsPaperEditTest() {
 
-
         final Object testingData[][] = {
                 // Crear un newsPaper estando logueado como user -> true
                 {
@@ -405,4 +444,47 @@ public class NewsPaperServiceTest extends AbstractTest {
             this.editNewsPaperTest((String) testingData[i][0], (String) testingData[i][1],(String) testingData[i][2],(String)testingData[i][3] , (String)testingData[i][4],(Boolean) testingData[i][5],(Boolean) testingData[i][6],(Boolean) testingData[i][7],(String)testingData[i][8], (Class<?>) testingData[i][9]);
 
     }
-}*/
+
+    @Test
+    public void driverlistNewsPaperAdvertisementTest() {
+
+        final Object testingData[][] = {
+
+                // Listar sin estar logueado -> false
+                {
+                        null,"agent1", IllegalArgumentException.class
+                },
+                // Listar como agent -> true
+                {
+                        "agent1", "agent1", null
+                },
+                // Listar logueado como user -> false
+                {
+                        "user1", "user1", NullPointerException.class
+                }
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.listNewsPaperAdvertisement((String) testingData[i][0],(String) testingData[i][1], (Class<?>) testingData[i][2]);
+    }
+
+    @Test
+    public void driverlistNewsPaperNotAdvertisementTest() {
+
+        final Object testingData[][] = {
+                // Alguien sin registrar/logueado -> false
+                {
+                        null, IllegalArgumentException.class
+                },
+                // Listar logueado como user-> false
+                {
+                        "user1", IllegalArgumentException.class
+                },
+                // Listar como agente -> true
+                {
+                        "agent1", null
+                }
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.listNewsPaperNotAdvertisement((String) testingData[i][0], (Class<?>) testingData[i][1]);
+    }
+}

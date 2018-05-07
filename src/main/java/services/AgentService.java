@@ -175,4 +175,8 @@ public class AgentService {
         }
         return advertisement;
     }
+
+    public void flush() {
+        agentRepository.flush();
+    }
 }

@@ -29,8 +29,8 @@ public class ChirpServiceTest extends AbstractTest{
     @Autowired
     private UserService userService;
 
-     /*  FUNCTIONAL REQUIREMENT:
-       * Post a chirp. Chirps may not be changed or deleted once they are posted.  */
+    /*  FUNCTIONAL REQUIREMENT:
+     * Post a chirp. Chirps may not be changed or deleted once they are posted.  */
 
     public void chirpCreateTest(String username, String title, Date moment, String description,
                                 boolean posted, boolean taboo, Class<?> expected) {
@@ -88,7 +88,7 @@ public class ChirpServiceTest extends AbstractTest{
 
      /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a admin must be able to:
-                -.Remove an article that he or she thinks is inappropriate.
+                -.Remove an chirp that he or she thinks is inappropriate.
     */
 
 
