@@ -82,6 +82,7 @@ public class AdvertisementService {
 
     public void delete(Advertisement advertisement){
         Assert.notNull(advertisement);
+        Assert.isTrue(actorService.isAdministrator());
         Collection<NewsPaper> newsPapers = newsPaperService.findAll();
 
         for(NewsPaper n: newsPapers){

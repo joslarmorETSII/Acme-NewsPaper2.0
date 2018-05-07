@@ -450,17 +450,17 @@ public class NewsPaperServiceTest extends AbstractTest {
 
         final Object testingData[][] = {
 
-                // Listar sin estar logueado -> false
+                // Listar logueado como user1 -> false
                 {
-                        null,"agent1", IllegalArgumentException.class
+                        "user1","user1", NullPointerException.class
                 },
                 // Listar como agent -> true
                 {
                         "agent1", "agent1", null
                 },
-                // Listar logueado como user -> false
+                // Listar logueado como customer1 -> false
                 {
-                        "user1", "user1", NullPointerException.class
+                        "customer1", "customer1", NullPointerException.class
                 }
         };
         for (int i = 0; i < testingData.length; i++)
@@ -471,18 +471,12 @@ public class NewsPaperServiceTest extends AbstractTest {
     public void driverlistNewsPaperNotAdvertisementTest() {
 
         final Object testingData[][] = {
-                // Alguien sin registrar/logueado -> false
-                {
-                        null, IllegalArgumentException.class
-                },
-                // Listar logueado como user-> false
-                {
-                        "user1", IllegalArgumentException.class
-                },
-                // Listar como agente -> true
+                // Listar como agente1 -> true
                 {
                         "agent1", null
                 }
+                //La comprobacion del test negativo se haría desde el controlador.
+
         };
         for (int i = 0; i < testingData.length; i++)
             this.listNewsPaperNotAdvertisement((String) testingData[i][0], (Class<?>) testingData[i][1]);

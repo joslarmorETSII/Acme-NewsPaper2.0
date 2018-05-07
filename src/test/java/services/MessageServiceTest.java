@@ -62,6 +62,7 @@ public class MessageServiceTest extends AbstractTest {
      * ·
      */
 
+    //TODO: Hacer test de message
     public void manageMessage(final String username, String messageBean, Folder folder, final Class<?> expected) {
         Class<?> caught = null;
         startTransaction();

@@ -855,7 +855,9 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 		<property name="name" value="inbox" />
 		<property name="system" value="true" />
 		<property name="messages">
-			<list />
+			<list>
+				<ref bean="message1"/>
+			</list>
 		</property>
 		<property name="actor" ref="administrator" />
 	</bean>
@@ -913,6 +915,7 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 		<property name="system" value="true" />
 		<property name="messages">
 			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 		<property name="actor" ref="user1" />
@@ -1306,4 +1309,14 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 		<property name="newsPaper" ref="newsPaper2"/>
 	</bean>
 
+	<!-- Message -->
+	<bean id="message1" class="domain.Message" >
+		<property name="moment" value="2018/03/20 10:00" />
+		<property name="subject" value="Tutoria" />
+		<property name="body" value="Hola, me gustaria concertar una tutoria para la revision del ejercicio. Un saludo" />
+		<property name="priority" value="LOW" />
+		<property name="folder" ref="outbox2"/>
+		<property name="actorReceivers" ref="administrator"/>
+		<property name="actorSender" ref="user1" />
+	</bean>
 </beans>
