@@ -110,7 +110,7 @@ public class FolderActorController extends AbstractController {
             result = this.createEditModelAndView(folder);
         } catch (final Exception e) {
 
-            result = new ModelAndView("redirect:/panic/misc.do");
+            result = panic(e);
 
         }
 
@@ -149,9 +149,7 @@ public class FolderActorController extends AbstractController {
                 result = new ModelAndView("redirect:/folder/actor/list.do");
             }
         } catch (final Throwable e) {
-
-            result = new ModelAndView("redirect:/panic/misc.do");
-
+            result = this.createEditModelAndView(folder, "folder.commit.error.2");
         }
 
         return result;

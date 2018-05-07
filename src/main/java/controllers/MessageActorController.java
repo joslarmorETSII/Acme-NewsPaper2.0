@@ -62,9 +62,7 @@ public class MessageActorController extends AbstractController {
             result.addObject("messages", messages);
 
         } catch (final Exception e) {
-
-            result = new ModelAndView("redirect:/panic/misc.do");
-
+            result = panic(e);
         }
 
         return result;
