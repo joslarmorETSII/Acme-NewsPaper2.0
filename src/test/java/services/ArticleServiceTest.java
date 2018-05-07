@@ -75,7 +75,8 @@ public class ArticleServiceTest extends AbstractTest {
             NewsPaper newsPaper = newsPaperService.findAllNewsPaperByUserAndNotPublished(user.getId()).iterator().next();
             Article a = this.articleService.save(result, newsPaper);
             a = result;
-            this.unauthenticate();
+
+           this.unauthenticate();
 
         } catch (final Throwable oops) {
 
@@ -87,13 +88,11 @@ public class ArticleServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-
       /*  FUNCTIONAL REQUIREMENT:
             * An actor who is authenticated as a admin must be able to:
                 -.Remove an article that he or she thinks is inappropriate.
 
     */
-
 
     public void deleteArticleTest(final String username, String articleBean,Boolean finalMode, final Class<?> expected) {
         Class<?> caught = null;
@@ -107,6 +106,7 @@ public class ArticleServiceTest extends AbstractTest {
 
             this.articleService.delete(result);
 
+            articleService.flush();
             this.unauthenticate();
 
         } catch (final Throwable oops) {
@@ -132,6 +132,7 @@ public class ArticleServiceTest extends AbstractTest {
 
             this.articleService.findArticleByTabooIsTrue();
 
+            articleService.flush();
             this.unauthenticate();
 
         } catch (final Throwable oops) {

@@ -118,6 +118,14 @@ public class ActorService {
         return result;
     }
 
+    public boolean isAgent() {
+        boolean result;
+
+        result = this.checkRole(Authority.AGENT);
+
+        return result;
+    }
+
     public Collection<Folder> generateFolders(Actor actor){
         Collection<Folder> folders = new ArrayList<>();
 

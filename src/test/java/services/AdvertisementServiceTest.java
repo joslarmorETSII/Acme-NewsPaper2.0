@@ -1,15 +1,16 @@
 package services;
 
-import domain.Advertisement;
-import domain.Chirp;
+import domain.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import utilities.AbstractTest;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 @Transactional
 @ContextConfiguration(locations = {
@@ -24,6 +25,9 @@ public class AdvertisementServiceTest extends AbstractTest {
 
     @Autowired
     private AdvertisementService advertisementService;
+
+    @Autowired
+    private NewsPaperService newsPaperService;
 
 
     /*  FUNCTIONAL REQUIREMENT:
@@ -40,6 +44,7 @@ public class AdvertisementServiceTest extends AbstractTest {
 
             this.advertisementService.findTabooAdvertisement();
 
+            advertisementService.flush();
             this.unauthenticate();
 
         } catch (final Throwable oops) {
@@ -67,6 +72,45 @@ public class AdvertisementServiceTest extends AbstractTest {
             Advertisement result= advertisementService.findAll().iterator().next();
 
             this.advertisementService.delete(result);
+
+            advertisementService.flush();
+            this.unauthenticate();
+
+        } catch (final Throwable oops) {
+
+            caught = oops.getClass();
+
+        }
+
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
+     /*  FUNCTIONAL REQUIREMENT:
+            *  An actor who is authenticated as an agent must be able to:
+                - Register an advertisement and place it in a newspaper.
+    */
+
+    public void advertisementRegister(final String username, final String title, final String banner, final String targetPage, CreditCard creditCard, String newsPaperBean, final Class<?> expected) {
+        Class<?> caught = null;
+        startTransaction();
+
+        try {
+
+            this.authenticate(username);
+
+            final Advertisement result = this.advertisementService.create();
+            NewsPaper newsPaper = newsPaperService.findOne(getEntityId(newsPaperBean));
+
+            result.setTitle(title);
+            result.setBanner(banner);
+            result.setTargetPage(targetPage);
+
+            result.setCreditCard(creditCard);
+            result.setNewsPaper(newsPaper);
+
+            this.advertisementService.save(result);
+            advertisementService.flush();
 
             this.unauthenticate();
 
@@ -126,5 +170,39 @@ public class AdvertisementServiceTest extends AbstractTest {
         };
         for (int i = 0; i < testingData.length; i++)
             this.deleteAdvertisementInappropiate((String) testingData[i][0], (Class<?>) testingData[i][1]);
+    }
+
+    @Test
+    public void driverAdvertisementRegisterTest() {
+
+        CreditCard creditCard = new CreditCard();
+
+        creditCard.setHolder("Holder 2");
+        creditCard.setBrand("visa");
+        creditCard.setCvv(123);
+        creditCard.setExpirationMonth(12);
+        creditCard.setExpirationYear(2018);
+        creditCard.setNumber("4785530860520625");
+
+
+        final Object testingData[][] = {
+                // Registrar advertisement logueado como agent -> true
+                {
+                        "agent1", "advertisement1", "http://sprudge.com/advertise-2", "http://sprudge.com/advertise-2", creditCard, "newsPaper1", null
+                },
+                // Registar advertisement sin loguearse -> false
+                {
+                        null, "advertisement1", "http://sprudge.com/advertise-2", "http://sprudge.com/advertise-2", creditCard, "newsPaper1", IllegalArgumentException.class
+                },
+                // Registrar advertisement con creditCard a null -> false
+                {
+                        "agent1", "advertisement1", "http://sprudge.com/advertise-2", "http://sprudge.com/advertise-2", null, "newsPaper1", ConstraintViolationException.class
+                },
+
+        };
+        for (int i = 0; i < testingData.length; i++)
+            this.advertisementRegister((String) testingData[i][0], (String) testingData[i][1],
+                    (String) testingData[i][2],(String) testingData[i][3],
+                    (CreditCard) testingData[i][4], (String) testingData[i][5],(Class<?>) testingData[i][6]);
     }
 }

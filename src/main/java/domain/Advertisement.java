@@ -65,7 +65,7 @@ public class Advertisement extends DomainEntity{
         this.taboo = taboo;
     }
 
-
+    @NotNull
     public CreditCard getCreditCard() {
         return creditCard;
     }

@@ -45,8 +45,8 @@ public class Volume extends DomainEntity {
         this.description = description;
     }
 
-    @Range(min = 2018,max = 3000)
     @NotNull
+    @Range(min = 2018,max = 3000)
     public Integer getAnyo() {
         return anyo;
     }

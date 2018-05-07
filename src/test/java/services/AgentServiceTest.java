@@ -30,7 +30,7 @@ public class AgentServiceTest extends AbstractTest {
     // Tests
 // ====================================================
 
- /*  FUNCTIONAL REQUIREMENT:
+     /*  FUNCTIONAL REQUIREMENT:
             * An actor who is not authenticated must be able to:
                -. Register to the system as an agent.
     */
@@ -55,6 +55,8 @@ public class AgentServiceTest extends AbstractTest {
 
             this.agentService.save(result);
             agentService.flush();
+
+            this.unauthenticate();
 
         } catch (final Throwable oops) {
 

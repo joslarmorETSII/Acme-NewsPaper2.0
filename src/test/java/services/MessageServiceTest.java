@@ -1,5 +1,6 @@
 package services;
 
+import domain.Chirp;
 import domain.Folder;
 import domain.Message;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import utilities.AbstractTest;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 
 @Transactional
@@ -50,16 +52,16 @@ public class MessageServiceTest extends AbstractTest {
      *
      * Como caso positivo:
      *
-     * · Enviar mensaje logueado como actor.
+     * ï¿½ Enviar mensaje logueado como actor.
      *
      * Para forzar el error pueden darse varios casos negativos, como son:
      *
-     * · Intentar editar un Newspaper siendo autenticado como de customer.
+     * ï¿½ Intentar editar un Newspaper siendo autenticado como de customer.
      * . Intentar editar un Newspaper de otro user.
-     * · Introducir la descripcion y el titulo vacíos.
-     * · Introducir un script.
-     * · Introducir una url invalida para la picture.
-     * ·
+     * ï¿½ Introducir la descripcion y el titulo vacï¿½os.
+     * ï¿½ Introducir un script.
+     * ï¿½ Introducir una url invalida para la picture.
+     * ï¿½
      */
 
     //TODO: Hacer test de message
@@ -70,12 +72,10 @@ public class MessageServiceTest extends AbstractTest {
             this.authenticate(username);
 
             Message message1 = messageService.findOne(getEntityId(messageBean));
-            Message message2 = messageService.findOne(getEntityId(messageBean));
 
             messageService.moveMessage(folder, message1);
+            messageService.sendMessage(message1);
             messageService.delete(message1);
-
-            messageService.sendMessage(message2);
 
             this.unauthenticate();
 
@@ -87,15 +87,78 @@ public class MessageServiceTest extends AbstractTest {
         rollbackTransaction();
     }
 
-    @Test
-    public void driverManageMessageTest() {
+    /*  FUNCTIONAL REQUIREMENT:
+            *  An actor who is authenticated must be able to:
+                - Manage his or her message folders, except for the system folders.
+    */
 
-        final Object testingData[][] = {
 
-                // 1. Enviar mensaje logueado como actor  -> true
-                {
-                        "user1","message1", "",null
-                },
+
+
+    /*  FUNCTIONAL REQUIREMENT:
+            *  An actor who is authenticated as an administrator must be able to:
+                - Broadcast a message to the actors of the system.
+    */
+
+//    public void broadCastMessage(String username, String messageBean, Class<?> expected) {
+//        Class<?> caught=null;
+//        startTransaction();
+//        try {
+//            this.authenticate(username);
+//
+//            Message result = messageService.findOne(getEntityId(messageBean));
+//
+//            messageService.sendBroadcast(result);
+//
+//            messageService.flush();
+//            this.unauthenticate();
+//
+//        } catch (final Throwable oops) {
+//            caught = oops.getClass();
+//        }
+//        this.checkExceptions(expected, caught);
+//        rollbackTransaction();
+//    }
+
+    public void broadCastMessage(String username, Date moment, String body, String subject, String priority, Class<?> expected) {
+        Class<?> caught=null;
+        startTransaction();
+        try {
+            this.authenticate(username);
+
+            Message message = messageService.create();
+
+            message.setMoment(moment);
+            message.setSubject(subject);
+            message.setBody(body);
+            message.setPriority(priority);
+
+            messageService.sendBroadcast(message);
+
+            messageService.flush();
+
+
+        } catch (final Throwable oops) {
+            caught = oops.getClass();
+        }
+        this.checkExceptions(expected, caught);
+        rollbackTransaction();
+    }
+
+    //Drivers
+    // ===================================================
+
+//    @Test
+//    public void driverManageMessageTest() {
+//
+//
+//        Folder folder = new Folder();
+//        final Object testingData[][] = {
+//
+//                // 1. Enviar mensaje logueado como actor  -> true
+//                {
+//                        "user1","message1", folder,null
+//                },
 //                // 2. Editar una newspaper estando logueado como User sin especificar la foto -> true
 //                {
 //                        "user1", "title edited", "description1", null, false, "newsPaper2", null
@@ -137,12 +200,64 @@ public class MessageServiceTest extends AbstractTest {
 //                {
 //                        "user1", "Dailymail", "news paper privada", "http://www.picture.com",true,"newsPaper2", null
 //                },
+//
+//
+//        };
+//        for (int i = 0; i < testingData.length; i++)
+//            this.manageMessage((String) testingData[i][0],(String) testingData[i][1], (Folder) testingData[i][2]
+//                    , (Class<?>) testingData[i][3]);
+//    }
 
+//    @Test
+//    public void driverBroadcastMessageTest() {
+//
+//        final Date date = new Date();
+//
+//        final Object testingData[][] = {
+//
+//                // Intentar mandar un broadcast con mensaje a null ->false
+//                {
+//                        "administrator",null, IllegalArgumentException.class
+//                },
+//                // Intentar mandar un broadcast logueado como admin -> true
+//                {
+//                        "administrator","message1", null
+//                },
+//                // Intentar mandar un broadcast logueado como user -> false
+//                {
+//                        "user1","message1", IllegalArgumentException.class
+//                },
+//
+//        };
+//        for (int i = 0; i < testingData.length; i++)
+//            this.broadCastMessage((String) testingData[i][0],(String)testingData[i][1],(Class<?>) testingData[i][2]);
+//    }
+
+    @Test
+    public void driverBroadcastMessageTest() {
+
+        final Date date = new Date();
+
+        final Object testingData[][] = {
+
+                // Intentar mandar un broadcast logueado como admin -> true
+                {
+                        "administrator",date,"body1","subject1","neutral", null
+                },
+//                // Intentar mandar un broadcast logueado como user -> false
+//                {
+//                        "user1","body1","subject1","NEUTRAL", IllegalArgumentException.class
+//                },
+//                // Intentar mandar un broadcast con mensaje a null ->false
+//                {
+//                        "administrator","body1","subject1","NEUTRAL", IllegalArgumentException.class
+//                },
 
         };
         for (int i = 0; i < testingData.length; i++)
-            this.manageMessage((String) testingData[i][0],(String) testingData[i][1], (Folder) testingData[i][2]
-                    , (Class<?>) testingData[i][3]);
+            this.broadCastMessage((String) testingData[i][0],(Date)testingData[i][1],
+                    (String) testingData[i][2],(String) testingData[i][3],
+                    (String) testingData[i][4],(Class<?>) testingData[i][5]);
     }
 
 

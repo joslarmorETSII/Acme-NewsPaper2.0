@@ -58,7 +58,7 @@ public class CustomerServiceTest extends AbstractTest {
 
             this.customerService.save(result);
             customerService.flush();
-
+            this.unauthenticate();
 
         } catch (final Throwable oops) {
 

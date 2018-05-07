@@ -194,5 +194,8 @@ public class AdvertisementService {
         return result;
     }
 
+    public void flush() {
+        advertisementRepository.flush();
+    }
 
 }

@@ -152,6 +152,7 @@ public class MessageService {
     }
 
     public void sendBroadcast(final Message message) {
+        Assert.isTrue(actorService.isAdministrator());
         Assert.isTrue(!message.getActorReceivers().contains(message.getActorSender()));
         Folder folderOutbox;
         final Message msg = message.clone();
@@ -162,5 +163,9 @@ public class MessageService {
                 this.messageRepository.save(msg);
                 break;
             }
+    }
+
+    public void flush() {
+        messageRepository.flush();
     }
 }

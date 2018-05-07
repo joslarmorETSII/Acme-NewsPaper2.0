@@ -205,4 +205,8 @@ public class ArticleService {
         Assert.isTrue(actorService.isAdministrator());
         return articleRepository.findArticleByTabooIsTrue();
    }
+
+    public void flush() {
+        articleRepository.flush();
+    }
 }

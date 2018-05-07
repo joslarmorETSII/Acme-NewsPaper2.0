@@ -1,10 +1,12 @@
 package services;
 
+import domain.CreditCard;
 import domain.Customer;
 import domain.SubscribeVolume;
 import domain.Volume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import repositories.SubscribeVolumeRepository;
 
 import javax.transaction.Transactional;
@@ -30,6 +32,9 @@ public class SubscribeVolumeService {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ActorService actorService;
+
     // Constructors -----------------------------------------------------------
 
     public SubscribeVolumeService() {
@@ -39,6 +44,7 @@ public class SubscribeVolumeService {
     // Simple CRUD methods ----------------------------------------------------
 
     public SubscribeVolume create(){
+        Assert.isTrue(actorService.isCustomer());
         SubscribeVolume res;
 
         res = new SubscribeVolume();
@@ -78,4 +84,7 @@ public class SubscribeVolumeService {
     }
     // Other business methods -------------------------------------------------
 
+    public void flush() {
+        subscribeVolumeRepository.flush();
+    }
 }

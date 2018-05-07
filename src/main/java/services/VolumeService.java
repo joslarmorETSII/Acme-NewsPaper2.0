@@ -29,6 +29,9 @@ public class VolumeService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ActorService actorService;
+
     //Constructores -----------------------------------------------------------
 
     public VolumeService() { super();
@@ -40,6 +43,7 @@ public class VolumeService {
     //create
 
     public Volume create(){
+        Assert.isTrue(actorService.isUser());
         Volume res= null;
         User user = this.userService.findByPrincipal();
 
@@ -153,6 +157,10 @@ public class VolumeService {
 
     public Collection<NewsPaper> findPrivateNewsPapersByVolume(int volumeId) {
         return volumeRepository.findPrivateNewspapersByVolumeId(volumeId);
+    }
+
+    public void flush() {
+        volumeRepository.flush();
     }
 
     public Collection<Volume> findVolumeByCustomer(int customerId) {

@@ -51,6 +51,7 @@ public class ChirpServiceTest extends AbstractTest{
             chirpService.findOneToPublish(result);
             c = result;
 
+            chirpService.flush();
             this.unauthenticate();
 
 
@@ -74,6 +75,7 @@ public class ChirpServiceTest extends AbstractTest{
 
             this.chirpService.findTabooChirps();
 
+            chirpService.flush();
             this.unauthenticate();
 
         } catch (final Throwable oops) {
@@ -91,7 +93,6 @@ public class ChirpServiceTest extends AbstractTest{
                 -.Remove an chirp that he or she thinks is inappropriate.
     */
 
-
     public void deleteChirpInappropiateTest(final String username, final Class<?> expected) {
         Class<?> caught = null;
         startTransaction();
@@ -104,6 +105,7 @@ public class ChirpServiceTest extends AbstractTest{
 
             this.chirpService.delete(result);
 
+            chirpService.flush();
             this.unauthenticate();
 
         } catch (final Throwable oops) {
@@ -133,7 +135,8 @@ public class ChirpServiceTest extends AbstractTest{
             User user = userService.findOne(getEntityId(userBean));
             chirpService.findAllChirpsByFollowings(user.getId());
 
-            userService.flush();
+            chirpService.flush();
+            this.unauthenticate();
 
 
         } catch (final Throwable oops) {

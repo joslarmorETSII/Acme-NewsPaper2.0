@@ -187,4 +187,8 @@ public class ChirpService  {
     public Collection<Chirp> findPublishedChirps() {
         return chirpRepository.findPublishedChirps();
     }
+
+    public void flush() {
+        chirpRepository.flush();
+    }
 }
