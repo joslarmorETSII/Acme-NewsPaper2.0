@@ -1194,7 +1194,26 @@ The Osso VR team is currently focused on solving training gaps for orthopedic an
 		<property name="body" value="Hola, me gustaria concertar una tutoria para la revision del ejercicio. Un saludo" />
 		<property name="priority" value="LOW" />
 		<property name="folder" ref="outbox2"/>
-		<property name="actorReceivers" ref="administrator"/>
+		<property name="actorReceivers" >
+			<list>
+				<ref bean="administrator"/>
+			</list>
+		</property>
 		<property name="actorSender" ref="user1" />
 	</bean>
+
+	<bean id="message2" class="domain.Message" >
+		<property name="moment" value="2018/03/20 10:00" />
+		<property name="subject" value="Welcome" />
+		<property name="body" value="Welcome to Acme newspaper2.0" />
+		<property name="priority" value="LOW" />
+		<property name="folder" ref="notificationbox1"/>
+		<property name="actorReceivers" >
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+		<property name="actorSender" ref="administrator" />
+	</bean>
+
 </beans>
