@@ -48,6 +48,8 @@
 	<acme:button code="followUp.create" url="followUp/user/create.do"/>
 </security:authorize>
 
+<input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />" onclick="javascript: relativeRedir('welcome/index.do');" />
+
 
 
 
