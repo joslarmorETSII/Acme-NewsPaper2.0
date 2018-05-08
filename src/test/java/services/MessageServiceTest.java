@@ -1,5 +1,6 @@
 package services;
 
+import domain.Actor;
 import domain.Chirp;
 import domain.Folder;
 import domain.Message;
@@ -100,43 +101,18 @@ public class MessageServiceTest extends AbstractTest {
                 - Broadcast a message to the actors of the system.
     */
 
-//    public void broadCastMessage(String username, String messageBean, Class<?> expected) {
-//        Class<?> caught=null;
-//        startTransaction();
-//        try {
-//            this.authenticate(username);
-//
-//            Message result = messageService.findOne(getEntityId(messageBean));
-//
-//            messageService.sendBroadcast(result);
-//
-//            messageService.flush();
-//            this.unauthenticate();
-//
-//        } catch (final Throwable oops) {
-//            caught = oops.getClass();
-//        }
-//        this.checkExceptions(expected, caught);
-//        rollbackTransaction();
-//    }
-
-    public void broadCastMessage(String username, Date moment, String body, String subject, String priority, Class<?> expected) {
+    public void broadCastMessage(String username, String messageBean, Class<?> expected) {
         Class<?> caught=null;
         startTransaction();
         try {
             this.authenticate(username);
 
-            Message message = messageService.create();
+            Message result = messageService.findOne(getEntityId(messageBean));
 
-            message.setMoment(moment);
-            message.setSubject(subject);
-            message.setBody(body);
-            message.setPriority(priority);
-
-            messageService.sendBroadcast(message);
+            messageService.sendBroadcast(result);
 
             messageService.flush();
-
+            this.unauthenticate();
 
         } catch (final Throwable oops) {
             caught = oops.getClass();
@@ -144,6 +120,8 @@ public class MessageServiceTest extends AbstractTest {
         this.checkExceptions(expected, caught);
         rollbackTransaction();
     }
+
+
 
     //Drivers
     // ===================================================
@@ -208,31 +186,6 @@ public class MessageServiceTest extends AbstractTest {
 //                    , (Class<?>) testingData[i][3]);
 //    }
 
-//    @Test
-//    public void driverBroadcastMessageTest() {
-//
-//        final Date date = new Date();
-//
-//        final Object testingData[][] = {
-//
-//                // Intentar mandar un broadcast con mensaje a null ->false
-//                {
-//                        "administrator",null, IllegalArgumentException.class
-//                },
-//                // Intentar mandar un broadcast logueado como admin -> true
-//                {
-//                        "administrator","message1", null
-//                },
-//                // Intentar mandar un broadcast logueado como user -> false
-//                {
-//                        "user1","message1", IllegalArgumentException.class
-//                },
-//
-//        };
-//        for (int i = 0; i < testingData.length; i++)
-//            this.broadCastMessage((String) testingData[i][0],(String)testingData[i][1],(Class<?>) testingData[i][2]);
-//    }
-
     @Test
     public void driverBroadcastMessageTest() {
 
@@ -242,23 +195,23 @@ public class MessageServiceTest extends AbstractTest {
 
                 // Intentar mandar un broadcast logueado como admin -> true
                 {
-                        "administrator",date,"body1","subject1","neutral", null
+                        "administrator","message1", null
                 },
-//                // Intentar mandar un broadcast logueado como user -> false
-//                {
-//                        "user1","body1","subject1","NEUTRAL", IllegalArgumentException.class
-//                },
-//                // Intentar mandar un broadcast con mensaje a null ->false
-//                {
-//                        "administrator","body1","subject1","NEUTRAL", IllegalArgumentException.class
-//                },
+                // Intentar mandar un broadcast logueado como user -> false
+                {
+                        "user1","message1", IllegalArgumentException.class
+                },
+                //Intentar mandar un broadcast con mensaje a null ->false
+                {
+                        "administrator",null, IllegalArgumentException.class
+                },
 
         };
         for (int i = 0; i < testingData.length; i++)
-            this.broadCastMessage((String) testingData[i][0],(Date)testingData[i][1],
-                    (String) testingData[i][2],(String) testingData[i][3],
-                    (String) testingData[i][4],(Class<?>) testingData[i][5]);
+            this.broadCastMessage((String) testingData[i][0],(String)testingData[i][1],(Class<?>) testingData[i][2]);
     }
+
+
 
 
 }
