@@ -18,6 +18,8 @@ import services.ChirpService;
 import services.NewsPaperService;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -55,7 +57,7 @@ public class ChirpUserController extends AbstractController {
     // Listing -------------------------------------------------------
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list() {
+    public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
         User user;
         Collection<Chirp> chirps = null;
@@ -75,6 +77,9 @@ public class ChirpUserController extends AbstractController {
         user = userService.findByPrincipal();
         chirps = this.chirpService.findChirpsByUserId(user.getId());
         chirpsFollowing = this.chirpService.findAllChirpsByFollowings(user.getId());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("chirp/list");
         result.addObject("chirps", chirps);

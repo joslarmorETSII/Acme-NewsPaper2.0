@@ -69,7 +69,7 @@ public class UserUserController extends AbstractController{
 
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public ModelAndView display(@RequestParam Integer userId) {
+    public ModelAndView display(@RequestParam Integer userId,HttpServletRequest request) {
         ModelAndView result;
         User user;
         User principal;
@@ -78,6 +78,10 @@ public class UserUserController extends AbstractController{
         user = userService.findOne(userId);
         principal = userService.findByPrincipal();
         articles=articleService.findPublishArticlesByUserId(userId);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("cancelUriSession", request.getRequestURI()+"?userId="+userId);
+
         result = new ModelAndView("user/display");
         result.addObject("user", user);
         result.addObject("principal",principal);

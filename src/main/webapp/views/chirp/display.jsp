@@ -49,5 +49,5 @@
 
 <security:authorize access="hasRole('USER')">
 <input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
-	   onclick="javascript: relativeRedir('chirp/user/list.do');" />
+	   onclick="javascript: relativeRedir('${cancelUriSession}');" />
 </security:authorize>
