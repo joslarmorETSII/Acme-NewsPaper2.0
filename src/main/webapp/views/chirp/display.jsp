@@ -42,6 +42,12 @@
 <br/>
 
 
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
+		   onclick="javascript: relativeRedir('chirp/administrator/list.do');" />
+</security:authorize>
 
+<security:authorize access="hasRole('USER')">
 <input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
 	   onclick="javascript: relativeRedir('chirp/user/list.do');" />
+</security:authorize>
