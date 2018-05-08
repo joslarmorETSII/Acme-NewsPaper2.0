@@ -39,7 +39,7 @@ public class SubscribeNewsPaperServiceTest extends AbstractTest{
 
     // Tests
     // ====================================================
-
+        //TODO: Description del requisito
       /*  FUNCTIONAL REQUIREMENT:
         An actor who is authenticated as a customer must be able to:
             * Subscribe to a volume by providing a credit card. Note

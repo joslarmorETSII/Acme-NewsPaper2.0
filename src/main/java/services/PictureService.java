@@ -133,4 +133,7 @@ public class PictureService {
 
     }
 
+    public void flush() {
+        pictureRepository.flush();
+    }
 }

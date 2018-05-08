@@ -107,7 +107,6 @@ public class FolderService {
     }
 
     public Folder save(Folder folder) {
-        System.out.println(folder.getId());
         Assert.notNull(folder);
         Assert.isTrue(folder.getActor().getId() == this.actorService.findByPrincipal().getId());
         Folder res;
@@ -140,4 +139,7 @@ public class FolderService {
     }
 
 
+    public void flush() {
+        folderRepository.flush();
+    }
 }
