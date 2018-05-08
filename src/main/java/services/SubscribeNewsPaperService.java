@@ -2,8 +2,8 @@ package services;
 
 import domain.SubscribeNewsPaper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import repositories.SubscribeNewsPaperRepository;
 
 import javax.transaction.Transactional;
@@ -19,12 +19,6 @@ public class SubscribeNewsPaperService  {
     private SubscribeNewsPaperRepository subscribeNewsPaperRepository;
 
     // Supporting services ----------------------------------------------------
-
-    @Autowired
-    private NewsPaperService newsPaperService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private CustomerService customerService;
@@ -59,8 +53,13 @@ public class SubscribeNewsPaperService  {
     }
 
     public SubscribeNewsPaper save(SubscribeNewsPaper subscribeNewsPaper){
+        Assert.isTrue(subscribeNewsPaper.getNewsPaper().isModePrivate());
         subscribeNewsPaper.setMoment(new Date());
         return subscribeNewsPaperRepository.save(subscribeNewsPaper);
+    }
+
+    public void flush() {
+        subscribeNewsPaperRepository.flush();
     }
 
     // Other business methods -------------------------------------------------
