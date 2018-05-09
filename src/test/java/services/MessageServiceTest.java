@@ -71,8 +71,6 @@ public class MessageServiceTest extends AbstractTest {
     @Test
     public void driverBroadcastMessageTest() {
 
-        final Date date = new Date();
-
         final Object testingData[][] = {
 
                 // Intentar mandar un broadcast logueado como admin -> true

@@ -22,8 +22,6 @@ import java.util.Collection;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FollowUpServiceTest extends AbstractTest{
-    //TODO: Realizar los test.
-
     // The SUT
     // ====================================================
 
@@ -42,7 +40,7 @@ public class FollowUpServiceTest extends AbstractTest{
     // ====================================================
 
      /*  FUNCTIONAL REQUIREMENT:
-
+            . The writer of an article may write follow-ups on it.
         */
 
 

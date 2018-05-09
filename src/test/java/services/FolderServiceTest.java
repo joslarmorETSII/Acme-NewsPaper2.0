@@ -39,7 +39,7 @@ public class FolderServiceTest extends AbstractTest{
 
     // Tests
     // ====================================================
-    //TODO Descripción del requisito
+
 
      /*  FUNCTIONAL REQUIREMENT:
             *  An actor who is authenticated must be able to:

@@ -32,11 +32,13 @@
 <display:table name="articles" id="row" pagesize="5" class="displaytag" requestURI="${requestURI}">
 
 	<security:authorize access="hasRole('USER')" >
+
 		<display:column>
 		<jstl:if test="${row.finalMode eq false and allArticlesView eq true}" >
 			<acme:button url="article/user/edit.do?articleId=${row.id}" code="article.edit" />
 		</jstl:if>
 		</display:column>
+
 	</security:authorize>
 
 	<acme:column code="article.title" value="${row.title}" />
@@ -47,7 +49,13 @@
 
 	<acme:column code="article.summary" value="${row.summary}" sortable="true"/>
 	<acme:column code="article.finalMode" value="${row.finalMode}"/>
-	
+	<security:authorize access="hasRole('USER')" >
+		<display:column>
+			<jstl:if test="${allArticlesView}">
+			<acme:button url="picture/user/create.do?articleId=${row.id}" code="article.picture.add" />
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 	<security:authorize access="hasAnyRole('CUSTOMER','AGENT')">
 		<display:column>
 			<jstl:if test="${row.newsPaper.modePrivate eq false}">

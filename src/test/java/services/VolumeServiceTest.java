@@ -31,7 +31,7 @@ public class VolumeServiceTest extends AbstractTest{
 
       /*  FUNCTIONAL REQUIREMENT:
             * An actor who is not authenticated must be able to:
-               -. List the volumes in the system and browse their newspapers
+               - List the volumes in the system and browse their newspapers
                as long as they are authorised (for instance, a private newspaper
                cannot be fully displayed to unauthenticated actors).
     */

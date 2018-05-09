@@ -90,4 +90,8 @@ public class FollowUpService {
     public Collection<FollowUp> findFollowupsByUserId(int id) {
         return followUpRepository.findFollowupsByUserId(id);
     }
+
+    public void flush() {
+        followUpRepository.flush();
+    }
 }

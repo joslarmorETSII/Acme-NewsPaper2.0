@@ -39,33 +39,35 @@ import java.util.Collection;
 
         /*  CASO DE USO:
          *
-         *   An actor who is authenticated must be able to:
+         *   . An actor who is authenticated must be able to:
          *      - Exchange messages with other actors and manage them, which includes deleting and
          *        moving them from one folder to another folder.
          *
+         *   . Un actor se loguea y manda un mensaje a otro usuario, borra un mensaje y le cambia la carpeta
+         *   a otro mensaje.
          *
          *
          *
          *
-         * COMO SE VA HA HACER?
+         *   . COMO SE VA HA HACER?
          *
-         * En este caso de uso vamos a hacer tests positivos y negativos:
+         *      En este caso de uso vamos a hacer tests positivos y negativos:
          *
-         * Como caso positivo:
+         *   . Como caso positivo:
          *
-         *  · Mandar Mensaje con datos validos estando logueado, borrar uno de sus mensajes que no esta alojado en la trashbox,
-         *    finalmente cambiarlo de carpeta.
-         *
-         *
-         * Para forzar el error pueden darse varios casos negativos, como son:
+         *   · Mandar Mensaje con datos validos estando logueado, borrar uno de sus mensajes que no esta alojado en la trashbox,
+         *     finalmente cambiarlo de carpeta.
          *
          *
-         * · Dejar el subject vacíos.
-         * · Introducir un script en el subject del Message.
-         * . Introducir un script en el body del Message.
-         * · Borrar el Message de otro actor.
-         * . Mandar Message sin loguearse.
-         * · Mandar un mensaje a si mismo.
+         *   . Para forzar el error pueden darse varios casos negativos, como son:
+         *
+         *
+         *   · Dejar el subject vacíos.
+         *   · Introducir un script en el subject del Message.
+         *   . Introducir un script en el body del Message.
+         *   · Borrar el Message de otro actor.
+         *   . Mandar Message sin loguearse.
+         *   · Mandar un mensaje a si mismo.
          */
 
         public void manageMessage( String username, String subject, String body,String priority,String folder,String beanRecipient,String beanMessage,

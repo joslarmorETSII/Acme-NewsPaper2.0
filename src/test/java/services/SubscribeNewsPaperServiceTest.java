@@ -39,13 +39,10 @@ public class SubscribeNewsPaperServiceTest extends AbstractTest{
 
     // Tests
     // ====================================================
-        //TODO: Description del requisito
       /*  FUNCTIONAL REQUIREMENT:
         An actor who is authenticated as a customer must be able to:
-            * Subscribe to a volume by providing a credit card. Note
-            * that subscribing to a volume implies subscribing automatically
-            * to all of the newspapers of which it is composed, including
-            * newspapers that might be published after the subscription takes place.
+            *  An actor who is authenticated as a customer can:
+              . Subscribe to a private newspaper by providing a valid credit card.
     */
 
     public void subscribeVolume(String username, String holder, String brand, String number, Integer month, Integer year, Integer cvv
@@ -87,8 +84,6 @@ public class SubscribeNewsPaperServiceTest extends AbstractTest{
 
     @Test
     public void driverSubscribeVolumeTest() {
-
-
 
         final Object testingData[][] = {
                 // 1. Subscribirse a una newspaper privada logueado como customer1 -> true

@@ -38,10 +38,7 @@ public class SubscribeVolumeServiceTest extends AbstractTest{
 
       /*  FUNCTIONAL REQUIREMENT:
         An actor who is authenticated as a customer must be able to:
-            * Subscribe to a volume by providing a credit card. Note
-            * that subscribing to a volume implies subscribing automatically
-            * to all of the newspapers of which it is composed, including
-            * newspapers that might be published after the subscription takes place.
+            * Subscribe to a volume by providing a credit card.
     */
 
     public void subscribeVolume(String username, CreditCard creditCard, String subscribeVolumeBean, String customerBean, Class<?> expected) {

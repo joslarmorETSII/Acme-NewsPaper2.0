@@ -1,6 +1,5 @@
 package services;
 
-
 import domain.NewsPaper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,17 +37,17 @@ public class UseCaseEditNewspaper extends AbstractTest{
      *
      * Como caso positivo:
      *
-     * · Editar uno de las Newspapers que ha creado logueado como user,
+     * ï¿½ Editar uno de las Newspapers que ha creado logueado como user,
      *   proporcionando datos validos.
      *
      * Para forzar el error pueden darse varios casos negativos, como son:
      *
-     * · Intentar editar un Newspaper siendo autenticado como de customer.
+     * ï¿½ Intentar editar un Newspaper siendo autenticado como de customer.
      * . Intentar editar un Newspaper de otro user.
-     * · Introducir la descripcion y el titulo vacíos.
-     * · Introducir un script.
-     * · Introducir una url invalida para la picture.
-     * ·
+     * ï¿½ Introducir la descripcion y el titulo vacï¿½os.
+     * ï¿½ Introducir un script.
+     * ï¿½ Introducir una url invalida para la picture.
+     * ï¿½
      */
 
     public void newspaperEditTest( String username, String title, String description, String picture, Boolean modePrivate, String newspaperBean, Class<?> expected) {

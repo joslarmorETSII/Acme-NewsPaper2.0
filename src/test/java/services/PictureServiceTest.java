@@ -39,13 +39,10 @@ public class PictureServiceTest extends AbstractTest{
 
     // Tests
     // ====================================================
-        //TODO Descripción del requisito
       /*  FUNCTIONAL REQUIREMENT:
-        An actor who is authenticated as a customer must be able to:
-            * Subscribe to a volume by providing a credit card. Note
-            * that subscribing to a volume implies subscribing automatically
-            * to all of the newspapers of which it is composed, including
-            * newspapers that might be published after the subscription takes place.
+        An actor who is authenticated as a user must be able to:
+            . Write Articles, For each article, the system must store a title, the moment when it is published, a summary, a piece of text (the body),
+             and some optional PICTURES.
     */
 
     public void addPictureToArticle(String username,String url, String articleTosubscribeBean, Class<?> expected) {
@@ -99,6 +96,9 @@ public class PictureServiceTest extends AbstractTest{
             this.addPictureToArticle((String) testingData[i][0],(String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
     }
 
+    /*
+        Add Picture to FollowUps
+     */
     public void addPictureToFollowUp(String username,String url, String followUpTosubscribeBean, Class<?> expected) {
 
         Class<?> caught=null;
