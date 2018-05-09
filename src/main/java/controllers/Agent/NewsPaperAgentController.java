@@ -69,4 +69,5 @@ public class NewsPaperAgentController extends AbstractController {
         return result;
     }
 
+
 }
