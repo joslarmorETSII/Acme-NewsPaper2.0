@@ -80,7 +80,6 @@ public class UserUserController extends AbstractController{
         articles=articleService.findPublishArticlesByUserId(userId);
 
         HttpSession session = request.getSession();
-        session.setAttribute("cancelUriSession", request.getRequestURI()+"?userId="+userId);
 
         result = new ModelAndView("user/display");
         result.addObject("user", user);
