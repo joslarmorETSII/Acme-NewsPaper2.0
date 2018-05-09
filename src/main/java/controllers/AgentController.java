@@ -88,7 +88,10 @@ public class AgentController extends AbstractController {
 
             }
         } catch (final Throwable oops) {
-            result = this.createEditModelAndView2(userForm, "agent.commit.error");
+            if(oops.getCause().getCause().getMessage().contains("Duplicate entry"))
+                result = createEditModelAndView2(userForm,"user.duplicated.username");
+            else
+                result = this.createEditModelAndView2(userForm, "agent.commit.error");
         }
 
         return result;

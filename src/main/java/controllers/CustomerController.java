@@ -98,8 +98,11 @@ public class CustomerController extends AbstractController {
 
 			}
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView2(userForm, "customer.commit.error");
-		}
+			if(oops.getCause().getCause().getMessage().contains("Duplicate entry"))
+				result = createEditModelAndView2(userForm,"user.duplicated.username");
+			else
+				result = this.createEditModelAndView2(userForm, "customer.commit.error");
+			}
 
 		return result;
 	}

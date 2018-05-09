@@ -103,7 +103,7 @@
 	<acme:column code="article.finalMode" value="${row2.finalMode}"/>
 
 	<display:column>
-		<acme:button url="article/display.do?articleId=${row.id}" code="article.display" />
+		<acme:button url="article/display.do?articleId=${row2.id}" code="article.display" />
 	</display:column>
 
 	<display:column>

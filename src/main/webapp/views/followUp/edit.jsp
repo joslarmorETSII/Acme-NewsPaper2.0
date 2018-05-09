@@ -18,6 +18,8 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jstl:if test="${not empty articles}">
+
 <form:form action="${actionUri}" modelAttribute="followUp" >
 
 	<form:hidden path="id"/>
@@ -41,8 +43,11 @@
 	<acme:submit name="save" code="followUp.save"/>
 
 	<acme:cancel code="followUp.cancel" url="${cancelUriSession}"/>
-
 </form:form>
+</jstl:if>
+<jstl:if test="${ empty articles}">
+	<spring:message code="general.create.article"/>
+</jstl:if>
 
 
 

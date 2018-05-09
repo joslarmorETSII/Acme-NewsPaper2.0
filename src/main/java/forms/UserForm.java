@@ -31,7 +31,7 @@ public class UserForm {
     private boolean	check;
 
     @Column(unique = true)
-    @Size(min = 4, max = 32)
+    @Size(min = 5, max = 32)
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getUsername() {
         return this.username;
@@ -40,7 +40,7 @@ public class UserForm {
         this.username = username;
     }
 
-    @Size(min = 4, max = 32)
+    @Size(min = 5, max = 32)
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getPassword() {
         return this.password;
@@ -49,7 +49,7 @@ public class UserForm {
         this.password = password;
     }
 
-    @Size(min = 4, max = 32)
+    @Size(min = 5, max = 32)
     @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
     public String getRepeatPassword() {
         return this.repeatPassword;

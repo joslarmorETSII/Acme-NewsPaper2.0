@@ -51,7 +51,6 @@ public class ArticleAdministratorController extends AbstractController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list(HttpServletRequest request) {
         ModelAndView result;
-        User user;
         Collection<Article> articlesTaboo = articleService.findArticleByTabooIsTrue();
         Collection<Article> allArticles = articleService.findPublishArticles();
         SimpleDateFormat formatterEs;
@@ -64,15 +63,13 @@ public class ArticleAdministratorController extends AbstractController {
         formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
 
-        Administrator administrator= administratorService.findByPrincipal();
-
         HttpSession session = request.getSession();
         session.setAttribute("cancelUriSession", request.getRequestURI());
 
         result = new ModelAndView("article/list");
         result.addObject("articles", articlesTaboo);
         result.addObject("allArticles", allArticles);
-        result.addObject("requestUri","article/administrator/list.do");
+        result.addObject("requestURI","article/administrator/list.do");
 
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);

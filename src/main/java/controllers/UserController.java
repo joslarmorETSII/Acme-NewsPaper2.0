@@ -76,7 +76,10 @@ public class UserController extends AbstractController{
 
             }
         } catch (final Throwable oops) {
-            result = this.createEditModelAndView(userForm, "user.commit.error");
+            if(oops.getCause().getCause().getMessage().contains("Duplicate entry"))
+                result = createEditModelAndView(userForm,"user.duplicated.username");
+            else
+                result = this.createEditModelAndView(userForm, "user.commit.error");
         }
 
         return result;

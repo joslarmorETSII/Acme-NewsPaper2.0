@@ -33,7 +33,7 @@
     <acme:column code="user.email" value="${user.email}"/>
     <acme:column code="user.phone" value="${user.phone}"/>
     <acme:column code="user.postalAddresses" value="${user.postalAddresses}"/>
-    <acme:columnButton url="user/display.do?userId=${row.id}" codeButton="general.display"/>
+    <acme:columnButton url="user/display.do?userId=${user.id}" codeButton="general.display"/>
 
 
 </display:table>

@@ -134,7 +134,7 @@ public class UserService {
         else
             result = false;
 
-        if (!result && password.length()>=4 && passwordRepeat.length()>=4) {
+        if (!result && password.length()>=5 && passwordRepeat.length()>=5) {
             codigos = new String[1];
             codigos[0] = "user.password.mismatch";
             error = new FieldError("userForm", "repeatPassword", password, false, codigos, null, "password mismatch");

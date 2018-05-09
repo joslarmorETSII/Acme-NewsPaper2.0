@@ -85,10 +85,12 @@ public class PictureUserController extends AbstractController {
             try {
                 if(picture.getArticle() != null) {
                     this.pictureService.savePictureArticle(picture, picture.getArticle());
+                    result = new ModelAndView("redirect: ../../article/user/list.do");
+
                 }else{
                     this.pictureService.savePictureFollowUp(picture, picture.getFollowUp());
+                    result = new ModelAndView("redirect: ../../followUp/user/list.do");
                 }
-                result = new ModelAndView("redirect: ../../article/listAll.do");
             } catch (final Throwable oops) {
                 result = this.createEditModelAndView(picture, "general.commit.error",request);
             }

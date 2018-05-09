@@ -76,6 +76,7 @@ public class VolumeCustomerController extends AbstractController{
         result.addObject("volumes", volumes);
         result.addObject("customer",customer);
         result.addObject("requestURI", "volume/customer/listAllVolumes.do");
+        result.addObject("cancelUri", "welcome/index.do");
         return result;
     }
 

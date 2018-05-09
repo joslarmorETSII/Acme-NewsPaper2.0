@@ -42,6 +42,8 @@
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" />
 
 		<!-- Chirp -->
+
+		<security:intercept-url pattern="/chirp/user/display.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/chirp/user/**" access="hasAnyRole('USER','ADMINISTRATOR')" />
 		<security:intercept-url pattern="/chirp/administrator/**" access="hasRole('ADMINISTRATOR')" />
 

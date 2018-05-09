@@ -113,8 +113,22 @@ public class ChirpUserController extends AbstractController {
         Chirp chirp;
 
         chirp = this.chirpService.findOne(chirpId);
+
+        SimpleDateFormat formatterEs;
+        SimpleDateFormat formatterEn;
+        String momentEs;
+        String momentEn;
+
+        formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        momentEs = formatterEs.format(chirp.getMoment());
+        formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        momentEn = formatterEn.format(chirp.getMoment());
+
         result = new ModelAndView("chirp/display");
         result.addObject("chirp", chirp);
+        result.addObject("momentEs", momentEs);
+        result.addObject("momentEn", momentEn);
+
 
         return result;
     }

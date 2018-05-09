@@ -47,7 +47,7 @@
 		   onclick="javascript: relativeRedir('chirp/administrator/list.do');" />
 </security:authorize>
 
-<security:authorize access="hasRole('USER')">
+<security:authorize access="!hasRole('ADMINISTRATOR')">
 <input type="button" name="cancel" value="<spring:message code="newsPaper.cancel" />"
 	   onclick="javascript: relativeRedir('${cancelUriSession}');" />
 </security:authorize>

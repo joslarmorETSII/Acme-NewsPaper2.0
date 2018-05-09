@@ -86,6 +86,9 @@
 	<display:table name="chirpsFollowing" id="chirp" pagesize="5" class="displaytag" requestURI="${requestURI}">
 		<acme:column code="chirp.user" value="${chirp.user.name}" />
 		<acme:column code="chirp.title" value="${chirp.title}" />
+		<spring:message var="moment" code="chirp.moment"/>
+		<spring:message var="formatDate" code="event.format.date"/>
+		<display:column property="moment" title="${moment}" format="${formatDate}" sortable="true" />
 		<acme:column code="chirp.description" value="${chirp.description}" />
 		<display:column>
 			<acme:button url="chirp/user/display.do?chirpId=${chirp.id}" code="chirp.display" />
@@ -103,8 +106,14 @@
 		<b><spring:message code="chirp.all"/>
 		</b>
 		<display:table name="allChirps" id="chirp2" pagesize="5" class="displaytag" requestURI="${requestURI}">
+
 			<acme:column code="chirp.user" value="${chirp2.user.name}" />
 			<acme:column code="chirp.title" value="${chirp2.title}" />
+
+			<spring:message var="moment" code="chirp.moment"/>
+			<spring:message var="formatDate" code="event.format.date"/>
+			<display:column property="moment" title="${moment}" format="${formatDate}" sortable="true" />
+
 			<acme:column code="chirp.description" value="${chirp2.description}" />
 
 			<display:column>

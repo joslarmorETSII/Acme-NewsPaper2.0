@@ -40,7 +40,7 @@
         </security:authorize>
     </display:table>
 
-    <acme:button code="general.cancel" url="${cancelUriSession}"/>
+    <acme:button code="general.cancel" url="${cancelUri}"/>
 
 
 
