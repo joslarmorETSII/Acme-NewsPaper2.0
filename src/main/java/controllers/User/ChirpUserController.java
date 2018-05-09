@@ -120,9 +120,9 @@ public class ChirpUserController extends AbstractController {
         String momentEn;
 
         formatterEs = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        momentEs = formatterEs.format(chirp.getMoment());
+        momentEs = formatterEs.format(new Date());
         formatterEn = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        momentEn = formatterEn.format(chirp.getMoment());
+        momentEn = formatterEn.format(new Date());
 
         result = new ModelAndView("chirp/display");
         result.addObject("chirp", chirp);

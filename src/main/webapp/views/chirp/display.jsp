@@ -23,12 +23,12 @@
 
 <jstl:if test="${pageContext.response.locale.language == 'es'}">
 
-	<b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEs}" />
+	<b><spring:message code="chirp.moment"/>:&nbsp;</b><fmt:formatDate value="${chirp.moment}" pattern="${momentEs}"/>
 	<br/>
 </jstl:if>
 
 <jstl:if test="${pageContext.response.locale.language == 'en'}">
-	<b><spring:message code="chirp.moment"/>:&nbsp;</b><jstl:out value="${momentEn}" />
+	<b><spring:message code="chirp.moment"/>:&nbsp;</b><fmt:formatDate value="${chirp.moment}" pattern="${momentEn}"/>
 	<br/>
 </jstl:if>
 

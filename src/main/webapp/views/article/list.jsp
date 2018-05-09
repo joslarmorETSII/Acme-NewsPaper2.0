@@ -49,13 +49,7 @@
 
 	<acme:column code="article.summary" value="${row.summary}" sortable="true"/>
 	<acme:column code="article.finalMode" value="${row.finalMode}"/>
-	<security:authorize access="hasRole('USER')" >
-		<display:column>
-			<jstl:if test="${allArticlesView}">
-			<acme:button url="picture/user/create.do?articleId=${row.id}" code="article.picture.add" />
-			</jstl:if>
-		</display:column>
-	</security:authorize>
+
 	<security:authorize access="hasAnyRole('CUSTOMER','AGENT')">
 		<display:column>
 			<jstl:if test="${row.newsPaper.modePrivate eq false}">

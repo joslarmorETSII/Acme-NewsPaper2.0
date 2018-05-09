@@ -90,11 +90,11 @@ public class NewsPaperController extends AbstractController {
         formatterEn = new SimpleDateFormat("yyyy/MM/dd");
         momentEn = formatterEn.format(new Date());
 
-        newsPapers = this.volumeService.findPublishedAndNotPrivateNewsPaperPerVolume(volumeId);
+        newsPapers = this.volumeService.findPublishedNewsPaperPerVolume(volumeId);
 
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapers);
-        result.addObject("requestUri","newsPaper/listNewsPapersV.do");
+        result.addObject("requestURI","newsPaper/listNewsPapersV.do");
         result.addObject("momentEs", momentEs);
         result.addObject("momentEn", momentEn);
         result.addObject("cancelUri", "volume/list.do");

@@ -35,11 +35,7 @@ public class AdvertisementAgentController extends AbstractController {
     private AgentService agentService;
 
 
-
-
-
-
-@Autowired
+    @Autowired
     private NewsPaperService newsPaperService;
 
     public AdvertisementAgentController() {

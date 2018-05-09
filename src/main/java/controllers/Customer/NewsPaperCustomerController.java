@@ -74,7 +74,7 @@ public class NewsPaperCustomerController extends AbstractController{
         result = new ModelAndView("newsPaper/list");
         result.addObject("newsPapers", newsPapersToSubscribe);
         result.addObject("customer", customer);
-        result.addObject("requestURI", "newsPaper/customer/list.do");
+        result.addObject("requestUri", "newsPaper/customer/list.do");
         return result;
     }
     //Listado de newspaper por volume que son privadas y no privadas
@@ -104,7 +104,7 @@ public class NewsPaperCustomerController extends AbstractController{
 
         result = new ModelAndView("newsPaper/listNewsPaperPerVolume");
         result.addObject("newsPapers", newsPapers);
-        result.addObject("requestUri","newsPaper/listNewsPapersPerVolume.do");
+        result.addObject("requestUri","newsPaper/customer/listNewsPapersPerVolume.do");
         result.addObject("customerIsSuscribed", customerIsSuscribed);
         result.addObject("customer",customerService.findByPrincipal());
         result.addObject("momentEs", momentEs);
@@ -234,7 +234,7 @@ public class NewsPaperCustomerController extends AbstractController{
         result.addObject("cancelURI", "newsPaper/listAll.do");
         result.addObject("cancelUriSession", request.getSession().getAttribute("cancelUriSession"));
 
-        session.setAttribute("cancelUriSession", request.getRequestURI());
+        session.setAttribute("cancelUriSession", request.getRequestURI()+"?newsPaperId="+newsPaperId);
 
         return result;
     }

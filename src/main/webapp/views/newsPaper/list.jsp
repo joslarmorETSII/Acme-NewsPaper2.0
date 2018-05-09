@@ -31,7 +31,7 @@
     <b><spring:message code="newsPapers.allTaboo"/></b>
     </security:authorize>
 
-<display:table name="newsPapers" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
+<display:table name="newsPapers" id="row" pagesize="5" class="displaytag" requestURI="${requestUri}">
 
     <jstl:set var="forPublish" value="true" />
     <jstl:forEach var="item" items="${row.articles}" >
@@ -112,7 +112,7 @@
 <security:authorize access="hasRole('ADMINISTRATOR')">
 <fieldset>
     <b><spring:message code="newsPaper.all"/></b>
-<display:table name="allNewsPapers" id="row" pagesize="10" class="displaytag" requestURI="${requestUri}">
+<display:table name="allNewsPapers" id="row" pagesize="5" class="displaytag" requestURI="${requestUri}">
 
     <acme:column code="newsPaper.publisher" value="${row.publisher.name} " />
     <acme:column code="newsPaper.title" value="${row.title}"/>
