@@ -40,6 +40,7 @@ public class ChirpAdministratorController extends AbstractController{
 
         result.addObject("allChirps", allChirps);
         result.addObject("chirps",tabooChirps);
+        result.addObject("requestURI","chirp/administrator/list.do");
 
         return result;
     }

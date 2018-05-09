@@ -27,7 +27,7 @@
 
 
 
-<form action="/user/search.do" method="get">
+<form action="user/search.do" method="get">
 	<input type="text" name="keyword" value="${keyword}" />
 	<input type="submit" value="<spring:message code="master.page.search"/>"/>
 </form>

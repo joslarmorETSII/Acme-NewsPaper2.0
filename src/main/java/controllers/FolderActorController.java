@@ -140,8 +140,8 @@ public class FolderActorController extends AbstractController {
     public ModelAndView delete(@RequestParam final int folderId) {
         ModelAndView result;
         final Folder folder = this.folderService.findOne(folderId);
+        Assert.isTrue(folder.getActor().getId() == this.actorService.findByPrincipal().getId());
         try {
-            Assert.isTrue(folder.getActor().getId() == this.actorService.findByPrincipal().getId());
             if (!folder.getMessages().isEmpty())
                 result = new ModelAndView("redirect:/folder/actor/listError.do");
             else {
